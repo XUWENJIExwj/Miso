@@ -9,7 +9,7 @@ public class marge : MonoBehaviour
 
     void Start()
     {
-        n = n - 3;
+        n = n + 3;
     }
 
     // Update is called once per frame
