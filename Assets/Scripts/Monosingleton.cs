@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Monosingleton<T> : MonoBehaviour where T : Monosingleton<T>
 {
