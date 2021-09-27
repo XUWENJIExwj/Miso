@@ -1,5 +1,8 @@
+<<<<<<< .merge_file_a08508
 using System.Collections;
 using System.Collections.Generic;
+=======
+>>>>>>> .merge_file_a12220
 using UnityEngine;
 using UnityEngine.UI;
 

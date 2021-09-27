@@ -1,6 +1,10 @@
+<<<<<<< .merge_file_a07520
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+=======
+﻿using UnityEngine;
+>>>>>>> .merge_file_a15840
 
 public abstract class Monosingleton<T> : MonoBehaviour where T : Monosingleton<T>
 {
