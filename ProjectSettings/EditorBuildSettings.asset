@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LogIn.unity
+    guid: dc1cd795d35a25a4ab27c6666fab70e5
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: fe16611b71eb6cd4a856b18fa1068931
+  - enabled: 1
+    path: Assets/Kyo/GlobalLogic.unity
+    guid: cf53813f34b909d42939073e9869e250
+  - enabled: 1
+    path: Assets/Kyo/GameMap.unity
+    guid: baea1d7b9e24e9f4799eb24d93468874
   m_configObjects: {}
