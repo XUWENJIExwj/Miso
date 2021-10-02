@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LogicManager : Monosingleton<LogicManager>
 {
+    [SerializeField] bool onTest = true;
+
     public override void Init()
     {
-        SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
+        if(!onTest)
+        {
+            SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
+        }
     }
 }
