@@ -40,7 +40,7 @@ namespace EventSO
             title = typeDesc[(int)type];
         }
 
-        // Inspectorにある属性を編集すると実行されるコールバック
+        // Inspectorにある属性を編集するとEditorに反映してくれるコールバック
         //void OnValidate()
         //{
         //    title = typeDesc[(int)type];

@@ -17,10 +17,10 @@ public abstract class Monosingleton<T> : MonoBehaviour where T : Monosingleton<T
     private void Awake()
     {
         _instance = this as T;
-        Init();
+        InitAwake();
     }
 
-    public virtual void Init()
+    public virtual void InitAwake()
     {
         //optional to override
     }

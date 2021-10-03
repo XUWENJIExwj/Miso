@@ -18,18 +18,23 @@ public class MapScroll : Monosingleton<MapScroll>
     [SerializeField] private Image image;
     [SerializeField] private UVScrollProperty uv;
     [SerializeField] private float scrollSpeed;
+    [SerializeField] private bool onFixed = false;
 
-    public override void Init()
+    public override void InitAwake()
     {
-        // 参照画面サイズをもとに、Mapのサイズを比例的に拡大縮小
-        rectTransform.sizeDelta =
-            new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform.sizeDelta.y * rectTransform.sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
+        // 現在のScreenSizeに合わせて、Mapのサイズを比例的に拡大縮小
+        if(onFixed)
+        {
+            rectTransform.sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform.sizeDelta.y * rectTransform.sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
+        } 
 
         // 拡大縮小の初期化
         image.material.SetVector("_Tiling", uv.Tiling);
 
         // UVScrollの初期化
         image.material.SetVector("_Offset", uv.Offset);
+
+        GridScroll.instance.Init();
     }
 
     private void Update()
@@ -41,8 +46,9 @@ public class MapScroll : Monosingleton<MapScroll>
     public void OnDrag()
     {
         // UVScroll
-        uv.Offset.x -= scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse X");
-        uv.Offset.y -= scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse Y");
+        Vector2 offset = new Vector2(scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse X"), scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse Y"));
+        uv.Offset -= offset;
         image.material.SetVector("_Offset", uv.Offset);
+        GridScroll.instance.Move(offset);
     }
 }

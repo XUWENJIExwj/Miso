@@ -15,7 +15,7 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public Vector2 refScreenSize = new Vector2(1080.0f, 1920.0f); // 参照画面サイズ
     public Canvas[] canvases; // 各Canvas
 
-    public override void Init()
+    public override void InitAwake()
     {
         // CanvasType数だけメモリ確保
         canvases = new Canvas[(int)CanvasType.Max];

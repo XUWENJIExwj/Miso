@@ -7,7 +7,7 @@ public class LogicManager : Monosingleton<LogicManager>
 {
     [SerializeField] bool onTest = true;
 
-    public override void Init()
+    public override void InitAwake()
     {
         if(!onTest)
         {
