@@ -14,19 +14,15 @@ public struct UVScrollProperty
 
 public class MapScroll : Monosingleton<MapScroll>
 {
-    [SerializeField] private RectTransform rectTransform;
-    [SerializeField] private Image image;
+    [SerializeField] private RectTransform rectTransform = null;
+    [SerializeField] private Image image = null;
     [SerializeField] private UVScrollProperty uv;
-    [SerializeField] private float scrollSpeed;
-    [SerializeField] private bool onFixed = false;
+    [SerializeField] private float scrollSpeed = 2.0f;
 
     public override void InitAwake()
     {
         // åªç›ÇÃScreenSizeÇ…çáÇÌÇπÇƒÅAMapÇÃÉTÉCÉYÇî‰ó·ìIÇ…ägëÂèkè¨
-        if(onFixed)
-        {
-            rectTransform.sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform.sizeDelta.y * rectTransform.sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
-        } 
+        rectTransform.sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform.sizeDelta.y * rectTransform.sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
 
         // ägëÂèkè¨ÇÃèâä˙âª
         image.material.SetVector("_Tiling", uv.Tiling);
@@ -37,6 +33,7 @@ public class MapScroll : Monosingleton<MapScroll>
 
     private void Start()
     {
+        GlobalInfo.instance.SetMapSize(rectTransform.sizeDelta);
         EventButtonManager.instance.CreateEventButton();
     }
 
@@ -54,10 +51,6 @@ public class MapScroll : Monosingleton<MapScroll>
         image.material.SetVector("_Offset", uv.Offset);
         GridScroll.instance.Move(offset);
         EventButtonManager.instance.Move(offset);
-    }
-
-    public Vector2 GetMapSize()
-    {
-        return rectTransform.sizeDelta;
+        RouteManager.instance.DrawRoute();
     }
 }

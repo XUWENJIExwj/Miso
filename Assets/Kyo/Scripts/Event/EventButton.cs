@@ -4,39 +4,55 @@ using UnityEngine;
 
 public class EventButton : MonoBehaviour
 {
-    public void Move(Vector2 Offset, Vector2 MapSize, Vector2 HalfMapSize)
+    [SerializeField] private bool isSelected = false;
+
+    public void Move(Vector2 Offset)
     {
         transform.localPosition += new Vector3(Offset.x, Offset.y, 0.0f);
 
         // 画面外になったら、ループさせる
-        FixPostion(MapSize, HalfMapSize);
+        FixPostion();
     }
 
     // 画面外になったら、ループさせる
-    public void FixPostion(Vector2 MapSize, Vector2 HalfMapSize)
+    public void FixPostion()
     {
         Vector2 fixPos = transform.localPosition;
 
         // X軸
-        if (transform.localPosition.x < -HalfMapSize.x)
+        if (transform.localPosition.x < -GlobalInfo.instance.halfMapSize.x)
         {
-            fixPos.x = transform.localPosition.x + MapSize.x;
+            fixPos.x = transform.localPosition.x + GlobalInfo.instance.mapSize.x;
         }
-        else if (transform.localPosition.x > HalfMapSize.x)
+        else if (transform.localPosition.x > GlobalInfo.instance.halfMapSize.x)
         {
-            fixPos.x = transform.localPosition.x - MapSize.x;
+            fixPos.x = transform.localPosition.x - GlobalInfo.instance.mapSize.x;
         }
 
         // Y軸
-        if (transform.localPosition.y < -HalfMapSize.y)
+        if (transform.localPosition.y < -GlobalInfo.instance.halfMapSize.y)
         {
-            fixPos.y = transform.localPosition.y + MapSize.y;
+            fixPos.y = transform.localPosition.y + GlobalInfo.instance.mapSize.y;
         }
-        else if (transform.localPosition.y > HalfMapSize.y)
+        else if (transform.localPosition.y > GlobalInfo.instance.halfMapSize.y)
         {
-            fixPos.y = transform.localPosition.y - MapSize.y;
+            fixPos.y = transform.localPosition.y - GlobalInfo.instance.mapSize.y;
         }
 
         transform.localPosition = fixPos;
+    }
+
+    public virtual void OnClick()
+    {
+        if(!isSelected)
+        {
+            RouteManager.instance.AddRoutePoint(this);
+            isSelected = true;
+        }
+        else
+        {
+            RouteManager.instance.RemoveRoutePoint(this);
+            isSelected = false;
+        }
     }
 }

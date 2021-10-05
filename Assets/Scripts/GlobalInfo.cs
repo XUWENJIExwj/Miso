@@ -6,7 +6,8 @@ using UnityEngine.UI;
 // 各シーンにあるCanvas
 public enum CanvasType
 {
-    MainGame,
+    MainGame_Camera,
+    MainGame_Overlay,
     Max,
 }
 
@@ -14,6 +15,8 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
 {
     public Vector2 refScreenSize = new Vector2(1080.0f, 1920.0f); // 参照画面サイズ
     public Canvas[] canvases; // 各Canvas
+    public Vector2 mapSize;
+    public Vector2 halfMapSize;
 
     public override void InitAwake()
     {
@@ -37,5 +40,11 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public void SetCanvas(CanvasType Type, Canvas This)
     {
         canvases[(int)Type] = This;
+    }
+
+    public void SetMapSize(Vector2 MapSize)
+    {
+        mapSize = MapSize;
+        halfMapSize = mapSize * 0.5f;
     }
 }

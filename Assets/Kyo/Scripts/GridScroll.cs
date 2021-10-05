@@ -5,19 +5,22 @@ using UnityEngine.UI;
 
 public class GridScroll : Monosingleton<GridScroll>
 {
-    [SerializeField] private RectTransform rectTransform;
-    [SerializeField] private Image image;
+    [SerializeField] private RectTransform rectTransform = null;
+    [SerializeField] private Image image = null;
     [SerializeField] private UVScrollProperty uv;
 
     public override void InitAwake()
     {
-        //rectTransform.sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform.sizeDelta.y * rectTransform.sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
-
         // ägëÂèkè¨ÇÃèâä˙âª
         image.material.SetVector("_Tiling", uv.Tiling);
 
         // UVScrollÇÃèâä˙âª
         image.material.SetVector("_Offset", uv.Offset);
+    }
+
+    private void Start()
+    {
+        rectTransform.sizeDelta = GlobalInfo.instance.mapSize;
     }
 
     public void Move(Vector2 Offset)

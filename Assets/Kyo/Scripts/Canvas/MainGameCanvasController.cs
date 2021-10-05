@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MainGameCanvasController : BaseCanvasController
 {
+    [SerializeField] private CanvasType canvasType;
     public override void Init()
     {
         // Canvas‚Ì”z—ñ‚ÉŒ»İ‚ÌCanvas‚ğŠi”[
-        GlobalInfo.instance.SetCanvas(CanvasType.MainGame, GetComponent<Canvas>());
+        GlobalInfo.instance.SetCanvas(canvasType, GetComponent<Canvas>());
     }
 }

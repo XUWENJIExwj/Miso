@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1397077573166366846}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1397077573166366720}
+        m_TargetAssemblyTypeName: EventButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1397077573166366720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2777639584f66414f8dadc1aa624d5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelected: 0
 --- !u!1 &1397077574112206057
 GameObject:
   m_ObjectHideFlags: 0
