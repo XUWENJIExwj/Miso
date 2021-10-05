@@ -9,7 +9,7 @@ public class GridScroll : Monosingleton<GridScroll>
     [SerializeField] private Image image;
     [SerializeField] private UVScrollProperty uv;
 
-    public void Init()
+    public override void InitAwake()
     {
         //rectTransform.sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform.sizeDelta.y * rectTransform.sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
 
@@ -32,5 +32,15 @@ public class GridScroll : Monosingleton<GridScroll>
     {
         image.material.SetVector("_Tiling", uv.Tiling);
         image.material.SetVector("_Offset", uv.Offset);
+    }
+
+    public Vector2 GetUVTiling()
+    {
+        return uv.Tiling;
+    }
+
+    public Vector2 GetFixedUVOffset()
+    {
+        return uv.Offset - new Vector2(0.5f, 0.5f);
     }
 }

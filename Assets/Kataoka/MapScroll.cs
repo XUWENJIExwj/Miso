@@ -33,8 +33,11 @@ public class MapScroll : Monosingleton<MapScroll>
 
         // UVScroll‚Ì‰Šú‰»
         image.material.SetVector("_Offset", uv.Offset);
+    }
 
-        GridScroll.instance.Init();
+    private void Start()
+    {
+        EventButtonManager.instance.CreateEventButton();
     }
 
     private void Update()
@@ -50,5 +53,11 @@ public class MapScroll : Monosingleton<MapScroll>
         uv.Offset -= offset;
         image.material.SetVector("_Offset", uv.Offset);
         GridScroll.instance.Move(offset);
+        EventButtonManager.instance.Move(offset);
+    }
+
+    public Vector2 GetMapSize()
+    {
+        return rectTransform.sizeDelta;
     }
 }
