@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 189878145}
   - component: {fileID: 189878144}
   - component: {fileID: 189878147}
-  - component: {fileID: 189878146}
   m_Layer: 5
   m_Name: Map
   m_TagString: Untagged
@@ -200,17 +199,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189878142}
   m_CullTransparentMesh: 1
---- !u!210 &189878146
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189878142}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!114 &189878147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,8 +216,7 @@ MonoBehaviour:
   uv:
     Tiling: {x: 1, y: 1}
     Offset: {x: 0, y: 0}
-  scrollSpeed: 0.1
-  onFixed: 0
+  scrollSpeed: 1
 --- !u!1 &739965041
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,8 +331,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 0, g: 0.33929968, b: 1, a: 1}
+      key1: {r: 0, g: 0.33929968, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -368,7 +355,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -391,7 +378,6 @@ GameObject:
   - component: {fileID: 1018412649}
   - component: {fileID: 1018412648}
   - component: {fileID: 1018412647}
-  - component: {fileID: 1018412650}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -473,17 +459,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018412645}
   m_CullTransparentMesh: 1
---- !u!210 &1018412650
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018412645}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1 &1263193196
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +721,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1628011148
 MonoBehaviour:
@@ -790,7 +765,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1812938001}
   - component: {fileID: 1812938002}
-  - component: {fileID: 1812938003}
   m_Layer: 5
   m_Name: EventButtonManager
   m_TagString: Untagged
@@ -831,17 +805,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventPrefab: {fileID: 1397077573166366845, guid: ddb70261b6f08cb41b9a2b5c066541f6, type: 3}
   events: []
---- !u!210 &1812938003
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812938000}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
 --- !u!1 &2129511703
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +901,7 @@ RectTransform:
   - {fileID: 1018412646}
   - {fileID: 739965042}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
