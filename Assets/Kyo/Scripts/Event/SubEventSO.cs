@@ -1,49 +1,18 @@
 using UnityEngine;
-using System;
 
-namespace EventSO
+namespace EventScriptableObject
 {
-    [Serializable]
-    public struct Option
-    {
-        public string optionText;
-        public int maxPoint;
-        public int minPoint;
-    }
-
-    [Serializable]
-    public enum EventType
-    {
-        MainEvent,
-        SubEvent,
-        None,
-    }
-
     [CreateAssetMenu(fileName = "SubEvent_", menuName = "SubEvent")]
-    public class SubEventSO : ScriptableObject
+    public class SubEventSO : EventSO
     {
-        [Header("Common")]
-        public int id;
-        [ReadOnly] public EventType type = EventType.None;
-        static public string[] typeDesc = { "メインイベント", "サブイベント", "" };
-        [ReadOnly] public string title = typeDesc[(int)EventType.None];
-        [TextArea(5, 20)] public string eventText;
-
-        void Awake()
+        protected override void Init()
         {
-            InitEvent(EventType.SubEvent);
+            InitEvent(EventButtonType.SubEvent);
         }
 
-        protected void InitEvent(EventType Type)
+        public override void EventMovie()
         {
-            type = Type;
-            title = typeDesc[(int)type];
-        }
 
-        // Inspectorにある属性を編集するとEditorに反映してくれるコールバック
-        //void OnValidate()
-        //{
-        //    title = typeDesc[(int)type];
-        //}
+        }
     }
 }

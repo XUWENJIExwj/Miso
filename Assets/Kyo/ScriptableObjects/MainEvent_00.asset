@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: MainEvent_00
   m_EditorClassIdentifier: 
   id: 0
-  type: 0
+  icon: {fileID: 21300000, guid: 9e69d6a5205990741902a262e9560bf1, type: 3}
+  type: 1
   title: "\u30E1\u30A4\u30F3\u30A4\u30D9\u30F3\u30C8"
-  eventText: 
-  character: {fileID: 0}
-  talkText: 
+  eventText: "\u8239\u4E8B\u6545\u306B\u3088\u308B\u5927\u91CF\u306E\u6CB9\u304C\u6D41\u51FA\uFF01\n\u6551\u547D\u30DC\u30FC\u30C8\u767A\u898B"
+  character: {fileID: 21300000, guid: 79643520155de59478d0198eedaa827e, type: 3}
+  characterName: "\u5973\u306E\u5B50"
+  talkText: "\u5148\u306B\u79C1\u3092\u52A9\u3051\u3066\u304F\u3060\u3055\u3044"
   options:
-  - optionText: 
-    maxPoint: 0
-    minPoint: 0
-  - optionText: 
-    maxPoint: 0
-    minPoint: 0
+  - optionText: "\u6D77\u6D0B\u74B0\u5883\u304C\u512A\u5148\u30C0\uFF01"
+    nextEventText: "\u5148\u306B\u6CB9\u306E\u51E6\u7406\u306B\u5165\u308A\u307E\u3057\u305F\u3002\n\u5973\u306E\u5B50\u306F\u81EA\u529B\u3067\u6CF3\u3052\u3066\u5BB6\u306B\u623B\u308A\u307E\u3057\u305F\u3002"
+    maxPoint: 100
+    minPoint: 300
+  - optionText: "\u5973\u306E\u5B50\u304C\u512A\u5148\u30C0\uFF01"
+    nextEventText: "\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042"
+    maxPoint: 100
+    minPoint: 300

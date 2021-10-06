@@ -1,18 +1,24 @@
 using UnityEngine;
 
-namespace EventSO
+namespace EventScriptableObject
 {
     [CreateAssetMenu(fileName = "MainEvent_", menuName = "MainEvent")]
     public class MainEventSO : SubEventSO
     {
         [Header("MainEvent")]
         public Sprite character;
+        public string characterName;
         [TextArea(5, 20)] public string talkText;
         public Option[] options = new Option[2];
 
-        void Awake()
+        protected override void Init()
         {
-            InitEvent(EventType.MainEvent);
+            InitEvent(EventButtonType.MainEvent);
+        }
+
+        public override void EventMovie()
+        {
+
         }
     }
 }

@@ -34,6 +34,7 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
                     0.0f);
                 eventButton.gameObject.name = "EventButton_" + (i * gridTiling.x + j).ToString("000");
                 eventButton.FixPostion();
+                eventButton.InitEventInfo(GlobalInfo.instance.SetEventInfo(j, i));
                 events.Add(eventButton);
             }
         }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SubEvent_00
   m_EditorClassIdentifier: 
   id: 0
-  type: 1
+  icon: {fileID: 21300000, guid: 95b62ff1653ca5440aa1a9607c53d407, type: 3}
+  type: 2
   title: "\u30B5\u30D6\u30A4\u30D9\u30F3\u30C8"
-  eventText: 
+  eventText: "\u30AF\u30B8\u30E9\u306E\u4E71\u6355\u3092\u963B\u6B62\u3057\u307E\u3057\u305F"
+  totalPoint: 20

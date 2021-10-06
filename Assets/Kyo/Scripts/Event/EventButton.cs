@@ -1,10 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using EventScriptableObject;
 
 public class EventButton : MonoBehaviour
 {
+    [SerializeField] private Button button = null;
     [SerializeField] private bool isSelected = false;
+    [SerializeField] private EventSO eventSO = null;
+
+    public void InitEventInfo(EventSO Event)
+    {
+        if(Event)
+        {
+            eventSO = Event;
+            button.image.sprite = Event.icon;
+
+            // ‰¼
+            if(IsBase())
+            {
+                RouteManager.instance.SetStartPoint(this);
+            }
+        }
+    }
 
     public void Move(Vector2 Offset)
     {
@@ -44,15 +63,34 @@ public class EventButton : MonoBehaviour
 
     public virtual void OnClick()
     {
-        if(!isSelected)
+        if(IsBase())
         {
-            RouteManager.instance.AddRoutePoint(this);
-            isSelected = true;
+            RouteManager.instance.SetRouteLoop();
         }
         else
         {
-            RouteManager.instance.RemoveRoutePoint(this);
-            isSelected = false;
+            if (!isSelected)
+            {
+                RouteManager.instance.AddRoutePoint(this);
+                isSelected = true;
+            }
+            else
+            {
+                RouteManager.instance.RemoveRoutePoint(this);
+                isSelected = false;
+            }
+        }
+    }
+
+    public bool IsBase()
+    {
+        if(!eventSO)
+        {
+            return false;
+        }
+        else
+        {
+            return eventSO.type == EventButtonType.Base;
         }
     }
 }

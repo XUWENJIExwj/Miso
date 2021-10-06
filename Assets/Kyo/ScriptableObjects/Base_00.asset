@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002833ec740ec6e49932921c1b7a7632, type: 3}
-  m_Name: SubEvent_01
+  m_Script: {fileID: 11500000, guid: a89acf2e37575d145a33e37e2c821160, type: 3}
+  m_Name: Base_00
   m_EditorClassIdentifier: 
   id: 0
-  type: 1
-  title: "\u30B5\u30D6\u30A4\u30D9\u30F3\u30C8"
+  icon: {fileID: 21300000, guid: 299ff6c270a4ae7438d632bb1a232e23, type: 3}
+  type: 0
+  title: "\u30D9\u30FC\u30B9"
   eventText: 

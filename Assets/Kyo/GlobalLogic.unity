@@ -154,6 +154,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   refScreenSize: {x: 1080, y: 1920}
   canvases: []
+  mapSize: {x: 2560, y: 1920}
+  halfMapSize: {x: 1280, y: 960}
+  baseList:
+  - {fileID: 11400000, guid: 1317dda028b41434fb42e0a857f49880, type: 2}
+  mainEventList:
+  - {fileID: 11400000, guid: 4f8e1fa14760e6548a076f6f886b1399, type: 2}
+  subEventList:
+  - {fileID: 11400000, guid: e0b50603f3e1bac4b98ccf5e5666f12d, type: 2}
+  eventRatio:
+  - 0.2
+  - 0.3
+  - 0.5
 --- !u!4 &784785529
 Transform:
   m_ObjectHideFlags: 0
@@ -197,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d6437653c83c944bb9789b03b93faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testFirstScene: 1
   onTest: 1
 --- !u!4 &1312915223
 Transform:
