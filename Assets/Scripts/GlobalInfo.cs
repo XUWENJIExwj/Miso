@@ -24,7 +24,7 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public Canvas[] canvases = null; // 各Canvas
     public Vector2 mapSize = new Vector2(2560.0f, 1920.0f);
     public Vector2 halfMapSize = new Vector2(1280.0f, 960.0f);
-    public List<EventSO> baseList = null;
+    public List<BaseSO> baseList = null;
     public List<MainEventSO> mainEventList = null;
     public List<SubEventSO> subEventList = null;
     public float[] eventRatio = new float[] { 0.2f, 0.3f, 0.5f };
@@ -59,15 +59,16 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
         halfMapSize = mapSize * 0.5f;
     }
 
-
     // EventButtonにEventの情報を与える
     public EventSO SetEventInfo(int X, int Y)
     {
         // 特定の座標であれば、Baseを返す
-        Vector2 pos = GridScroll.instance.GetUVTiling() * 0.5f;
-        if (X == (int)pos.x && Y == (int)pos.y)
+        for (int i = 0; i < baseList.Count; ++i)
         {
-            return baseList[0];
+            if (X == baseList[i].pos.x && Y == baseList[i].pos.y)
+            {
+                return baseList[i];
+            }
         }
 
         // その他の座標であれば、Eventを返す

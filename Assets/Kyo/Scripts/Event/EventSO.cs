@@ -25,7 +25,7 @@ namespace EventScriptableObject
     }
 
     [CreateAssetMenu(fileName = "Base_", menuName = "Base")]
-    public class EventSO : ScriptableObject
+    public abstract class EventSO : ScriptableObject
     {
         [Header("Common")]
         public int id;
@@ -41,10 +41,7 @@ namespace EventScriptableObject
             Init();
         }
 
-        protected virtual void Init()
-        {
-            InitEvent(EventButtonType.Base);
-        }
+        protected abstract void Init();
 
         protected void InitEvent(EventButtonType Type)
         {

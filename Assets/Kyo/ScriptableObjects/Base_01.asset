@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28012044ae5738d4996d810d8da67c57, type: 3}
-  m_Name: Base_00
+  m_Name: Base_01
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   icon: {fileID: 21300000, guid: 299ff6c270a4ae7438d632bb1a232e23, type: 3}
   type: 3
   title: "\u30D9\u30FC\u30B9"
-  eventText: "\u5317\u6975\u30D9\u30FC\u30B9"
+  eventText: "\u30B8\u30D6\u30E9\u30EB\u30BF\u30EB\u30D9\u30FC\u30B9"
   totalPoint: 0
-  pos: {x: 0, y: 6}
+  pos: {x: 14, y: 10}
