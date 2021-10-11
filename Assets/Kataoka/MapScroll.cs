@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using System;
 
 [Serializable]
@@ -18,6 +17,7 @@ public class MapScroll : Monosingleton<MapScroll>
     [SerializeField] private Image image = null;
     [SerializeField] private UVScrollProperty uv;
     [SerializeField] private float scrollSpeed = 2.0f;
+    [SerializeField] private bool onDrag = true;
 
     public override void InitAwake()
     {
@@ -39,18 +39,25 @@ public class MapScroll : Monosingleton<MapScroll>
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
-            OnDrag();
+        OnDrag();       
     }
 
     public void OnDrag()
     {
-        // UVScroll
-        Vector2 offset = new Vector2(scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse X"), scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse Y"));
-        uv.Offset -= offset;
-        image.material.SetVector("_Offset", uv.Offset);
-        GridScroll.instance.Move(offset);
-        EventButtonManager.instance.Move(offset);
-        RouteManager.instance.DrawRoute();
+        if (Input.GetMouseButton(0) && onDrag)
+        {
+            // UVScroll
+            Vector2 offset = new Vector2(scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse X"), scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse Y"));
+            uv.Offset -= offset;
+            image.material.SetVector("_Offset", uv.Offset);
+            GridScroll.instance.Move(offset);
+            EventButtonManager.instance.Move(offset);
+            RouteManager.instance.DrawRoute();
+        }
+    }
+
+    public void SetOnDrag(bool OnDrag)
+    {
+        onDrag = OnDrag;
     }
 }

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using EventScriptableObject;
 
-public class EventButton : MonoBehaviour
+public class EventButton : Button
 {
-    [SerializeField] private Button button = null;
     [SerializeField] private bool isSelected = false;
     [SerializeField] private EventSO eventSO = null;
 
@@ -15,7 +15,7 @@ public class EventButton : MonoBehaviour
         if(Event)
         {
             eventSO = Event;
-            button.image.sprite = Event.icon;
+            image.sprite = Event.icon;
 
             // ‰¼
             if(IsBase())
@@ -92,5 +92,15 @@ public class EventButton : MonoBehaviour
         {
             return eventSO.type == EventButtonType.Base;
         }
+    }
+
+    public override void OnPointerDown(PointerEventData E)
+    {
+        MapScroll.instance.SetOnDrag(false);
+    }
+
+    public override void OnPointerUp(PointerEventData E)
+    {
+        MapScroll.instance.SetOnDrag(true);
     }
 }

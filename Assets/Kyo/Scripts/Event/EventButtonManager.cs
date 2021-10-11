@@ -48,5 +48,7 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
         {
             eventButton.Move(offset);
         }
+
+        RouteManager.instance.SetPlayerPostion(offset);
     }
 }
