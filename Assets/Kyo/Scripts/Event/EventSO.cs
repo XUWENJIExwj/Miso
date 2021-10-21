@@ -32,8 +32,8 @@ namespace EventScriptableObject
         public Sprite icon;
         [ReadOnly] public EventButtonType type = EventButtonType.None;
         static public string[] typeDesc = { "メインイベント", "サブイベント", "ランダムイベント", "ベース", "" };
-        [ReadOnly] public string title = typeDesc[(int)EventButtonType.None];
-        [TextArea(5, 20)] public string eventText;
+        [ReadOnly] public string typeText = typeDesc[(int)EventButtonType.None];
+        public string eventTitle;
         public int totalPoint;
 
         void Awake()
@@ -46,7 +46,7 @@ namespace EventScriptableObject
         protected void InitEvent(EventButtonType Type)
         {
             type = Type;
-            title = typeDesc[(int)type];
+            typeText = typeDesc[(int)type];
         }
 
         public virtual void EventMovie()
