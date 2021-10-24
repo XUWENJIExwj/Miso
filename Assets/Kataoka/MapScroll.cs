@@ -34,6 +34,8 @@ public class MapScroll : Monosingleton<MapScroll>
     private void Start()
     {
         GlobalInfo.instance.SetMapSize(rectTransform.sizeDelta);
+        GridScroll.instance.Init();
+        EventUIManager.instance.Init();
         EventButtonManager.instance.CreateEventButton();
     }
 

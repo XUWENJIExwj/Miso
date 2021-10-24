@@ -49,9 +49,13 @@ namespace EventScriptableObject
             typeText = typeDesc[(int)type];
         }
 
-        public virtual void EventMovie()
-        {
+        public abstract void EventStart();
 
+        public abstract void EventPlay();
+
+        public EventButtonType GetEventType()
+        {
+            return type;
         }
 
         // Inspectorにある属性を編集するとEditorに反映してくれるコールバック
@@ -59,5 +63,7 @@ namespace EventScriptableObject
         //{
         //    title = typeDesc[(int)type];
         //}
+
+        public abstract void ResetEventSO();
     }
 }

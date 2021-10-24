@@ -13,5 +13,20 @@ namespace EventScriptableObject
         {
             InitEvent(EventButtonType.Base);
         }
+        public override void EventStart()
+        {
+            
+        }
+
+        public override void EventPlay()
+        {
+            // ‰¼
+            RouteManager.instance.MovePath();
+        }
+
+        public override void ResetEventSO()
+        {
+
+        }
     }
 }

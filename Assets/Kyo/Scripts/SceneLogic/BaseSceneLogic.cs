@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseSceneLogic : Monosingleton<BaseSceneLogic>
+public abstract class BaseSceneLogic : MonoBehaviour
 {
     public abstract void UpdateScene();
 

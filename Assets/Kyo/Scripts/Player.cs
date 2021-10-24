@@ -49,9 +49,23 @@ public class Player : MonoBehaviour
 
         if (nextPoint)
         {
+            MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+            logic.SetNextSate(MainGameState.RouteMove);
+
             tweener = transform.DOLocalMove(nextPoint.transform.localPosition, 1.0f);
             tweener.SetEase(Ease.Linear);
-            tweener.OnComplete(() => { MovePath(); });
+            tweener.OnComplete(() =>
+            {
+                if (!nextPoint.IsBase())
+                {
+                    nextPoint.DoScaleDown();
+                }
+                
+                logic.SetCurrentEvent(nextPoint);
+                logic.SetNextSate(MainGameState.EventPlayPre);
+            });
         }
+
+        EventUIManager.instance.ResetEventInfo();
     }
 }

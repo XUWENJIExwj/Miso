@@ -84,7 +84,7 @@ public class EventButton : Button
         RouteManager.instance.SetStartPoint(this);
 
         // èkè¨
-        DoScaleDown();
+        //DoScaleDown();
 
         image.color = Color.red;
 
@@ -136,9 +136,20 @@ public class EventButton : Button
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
 
         // BaseSelectÇÃéûÅABaseÇÃSizeÇägëÂÇ∑ÇÈ
-        if (IsBase() && logic.isBaseSelect())
+        if (logic.isBaseSelect())
         {
-            DoScaleUp();
+            if (IsBase())
+            {
+                DoScaleUp();
+            }
+        }
+        // RouteSelectÇÃéûÅAEventButtonÇÃSizeÇägëÂÇ∑ÇÈ
+        else if (logic.isRouteSelect())
+        {
+            if (!IsBase())
+            {
+                DoScaleUp();
+            }
         }
     }
 
@@ -148,25 +159,48 @@ public class EventButton : Button
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
 
         // BaseSelectÇÃéûÅABaseÇÃSizeÇèkè¨Ç∑ÇÈ
-        if (IsBase() && logic.isBaseSelect())
+        if (logic.isBaseSelect())
         {
-            DoScaleDown();
+            if (IsBase())
+            {
+                DoScaleDown();
+            }
+        }
+        // RouteSelectÇÃéûÅAëIëÇ≥ÇÍÇ»Ç©Ç¡ÇΩèÍçáÅAEventButtonÇÃSizeÇèkè¨Ç∑ÇÈ
+        else if (logic.isRouteSelect())
+        {
+            if (!IsBase() && !isSelected)
+            {
+                DoScaleDown();
+            }
         }
     }
 
     // ägëÂ
-    public void DoScaleUp()
+    public void DoScaleUp(float MaxScale = 1.5f, float Time = 0.5f)
     {
-        float maxScale = 1.5f;
-        float time = 0.5f;
-        transform.DOScale(maxScale, time);
+        transform.DOScale(MaxScale, Time);
     }
 
     // èkè¨
-    public void DoScaleDown()
+    public void DoScaleDown(float MinScale = 1.0f, float Time = 0.5f)
     {
-        float minScale = 1.0f;
-        float time = 0.5f;
-        transform.DOScale(minScale, time);
+        transform.DOScale(MinScale, Time);
+    }
+
+    public T GetEventSO<T>()
+    {
+        if (eventSO.GetType() == typeof(T))
+        {
+            return (T)(object)eventSO;
+        }
+
+        Debug.Log("éÊìæÇµÇÊÇ§Ç∆Ç∑ÇÈå^Ç∆à·Ç§!");
+        return (T)(object)null;
+    }
+
+    public EventButtonType GetEventType()
+    {
+        return eventSO.GetEventType();
     }
 }

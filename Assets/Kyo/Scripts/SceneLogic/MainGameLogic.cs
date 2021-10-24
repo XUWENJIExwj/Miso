@@ -8,12 +8,14 @@ public enum MainGameState
     RouteSelectPre,
     RouteSelect,
     RouteMove,
+    EventPlayPre,
     EventPlay,
 }
 
 public class MainGameLogic : BaseSceneLogic
 {
     [SerializeField] private MainGameState state = MainGameState.BaseSelect;
+    [SerializeField] private EventButton currentEvent = null;
 
     public override void UpdateScene()
     {
@@ -30,6 +32,9 @@ public class MainGameLogic : BaseSceneLogic
                 break;
             case MainGameState.RouteMove:
                 RouteMove();
+                break;
+            case MainGameState.EventPlayPre:
+                EventPlayPre();
                 break;
             case MainGameState.EventPlay:
                 EventPlay();
@@ -57,12 +62,18 @@ public class MainGameLogic : BaseSceneLogic
 
     void RouteMove()
     {
-        MapController();
+        //MapController();
     }
-    
+
+    void EventPlayPre()
+    {
+        EventUIManager.instance.InitEventInfo(currentEvent);
+        SetNextSate(MainGameState.EventPlay);
+    }
+
     void EventPlay()
     {
-
+        EventUIManager.instance.EventPlay();
     }
 
     void MapController()
@@ -89,5 +100,10 @@ public class MainGameLogic : BaseSceneLogic
     public void SetNextSate(MainGameState State)
     {
         state = State;
+    }
+
+    public void SetCurrentEvent(EventButton Event)
+    {
+        currentEvent = Event;
     }
 }

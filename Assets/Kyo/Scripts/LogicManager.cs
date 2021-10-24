@@ -36,7 +36,7 @@ public class LogicManager : Monosingleton<LogicManager>
 
     private void Test()
     {
-        if(!onTest)
+        if (!onTest)
         {
             switch(scene)
             {

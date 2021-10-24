@@ -18,7 +18,7 @@ public class GridScroll : Monosingleton<GridScroll>
         image.material.SetVector("_Offset", uv.Offset);
     }
 
-    private void Start()
+    public void Init()
     {
         rectTransform.sizeDelta = GlobalInfo.instance.mapSize;
     }

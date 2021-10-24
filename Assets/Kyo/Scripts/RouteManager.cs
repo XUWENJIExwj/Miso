@@ -14,14 +14,13 @@ public class RouteManager : Monosingleton<RouteManager>
     public override void InitAwake()
     {
         routePoints = new List<EventButton>();
-        routeLine.positionCount = 1;
         routeLine.startWidth = lineWidth;
         routeLine.endWidth = lineWidth;
     }
 
     // Player‚ÌBase‚ğStartPoint‚É“o˜^
     public void SetStartPoint(EventButton Point)
-    {
+    {  
         basePoint = Point;
 
         if (routePoints.Count == 0)
@@ -34,6 +33,7 @@ public class RouteManager : Monosingleton<RouteManager>
         }
 
         // LineRenderer‚ÉStartPoint‚ğ“o˜^
+        routeLine.positionCount = 1;
         routeLine.SetPosition(0, routePoints[0].transform.localPosition);
 
         // Player‚Ì‰ŠúˆÊ’u
@@ -43,12 +43,14 @@ public class RouteManager : Monosingleton<RouteManager>
 
     public void AddRoutePoint(EventButton Point)
     {
+        Point.DoScaleUp();
         routePoints.Add(Point);
         DrawRoute();
     }
 
     public void RemoveRoutePoint(EventButton Point)
     {
+        Point.DoScaleDown();
         routePoints.Remove(Point);
         DrawRoute();
     }
@@ -91,21 +93,29 @@ public class RouteManager : Monosingleton<RouteManager>
         }
     }
 
+    // Route‚Ì‘¾‚³
     public void SetLineWidthWithMapScale(float Scale)
     {
         routeLine.startWidth = lineWidth * Scale;
         routeLine.endWidth = routeLine.startWidth;
     }
 
-    public void MovePath()
+    // Routeã‚ÌˆÚ“®ŠJn
+    public void StartMovePath()
     {
-        if(routeLine.loop)
+        if (routeLine.loop)
         {
             routePoints.Add(routePoints[0]);
             routePoints.RemoveAt(0);
 
-            player.MovePath();
+            MovePath();
         }
+    }
+
+    // Routeã‚ÌˆÚ“®
+    public void MovePath()
+    {
+        player.MovePath();
     }
 
     public void SetPlayerPostion(Vector3 Offset)
@@ -115,7 +125,7 @@ public class RouteManager : Monosingleton<RouteManager>
 
     public EventButton GetNextRoutePoint()
     {
-        if(routePoints.Count > 0)
+        if (routePoints.Count > 0)
         {
             EventButton eventButton = routePoints[0];
 
@@ -135,5 +145,9 @@ public class RouteManager : Monosingleton<RouteManager>
         routeLine.positionCount = 1;
         routePoints.Add(basePoint);
         routeLine.SetPosition(0, routePoints[0].transform.localPosition);
+
+        // ‰¼
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+        logic.SetNextSate(MainGameState.RouteSelect);
     }
 }

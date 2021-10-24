@@ -12,7 +12,18 @@ namespace EventScriptableObject
             InitEvent(EventButtonType.SubEvent);
         }
 
-        public override void EventMovie()
+        public override void EventStart()
+        {
+
+        }
+
+        public override void EventPlay()
+        {
+            // ‰¼
+            RouteManager.instance.MovePath();
+        }
+
+        public override void ResetEventSO()
         {
 
         }
