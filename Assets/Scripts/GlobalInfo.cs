@@ -27,6 +27,7 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public List<BaseSO> baseList = null;
     public List<MainEventSO> mainEventList = null;
     public List<SubEventSO> subEventList = null;
+    public List<RandomEventSO> randomEventList = null;
     public float[] eventRatio = new float[] { 0.2f, 0.3f, 0.5f };
 
     public override void InitAwake()
@@ -81,7 +82,9 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
         {
             return subEventList[Random.Range(0, subEventList.Count)];
         }
-
-        return null;
+        else
+        {
+            return randomEventList[Random.Range(0, randomEventList.Count)];
+        }
     }
 }

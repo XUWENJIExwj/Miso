@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using EventScriptableObject;
+using UnityEditor;
+using DG.Tweening;
 
 public class EventButton : Button
 {
@@ -12,17 +14,9 @@ public class EventButton : Button
 
     public void InitEventInfo(EventSO Event)
     {
-        if(Event)
-        {
-            eventSO = Event;
-            image.sprite = Event.icon;
-
-            // 仮
-            if(IsBase())
-            {
-                RouteManager.instance.SetStartPoint(this);
-            }
-        }
+        eventSO = Event;
+        image.sprite = Event.icon;
+        gameObject.SetActive(IsBase());
     }
 
     public void Move(Vector2 Offset)
@@ -61,9 +55,48 @@ public class EventButton : Button
         transform.localPosition = fixPos;
     }
 
+    // クリック時の処理
     public virtual void OnClick()
     {
-        if(IsBase())
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+
+        // Stateごとの処理
+        if (logic.isBaseSelect())
+        {
+            OnBaseSelect();
+        }
+        else if (logic.isRouteSelect())
+        {
+            OnRouteSelect();
+        }
+    }
+
+    public bool IsBase()
+    {
+        return eventSO.type == EventButtonType.Base;
+    }
+
+    // Stateごとの処理
+    // BaseSelect
+    public void OnBaseSelect()
+    {
+        // Base基地の選択
+        RouteManager.instance.SetStartPoint(this);
+
+        // 縮小
+        DoScaleDown();
+
+        image.color = Color.red;
+
+        // 仮
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+        logic.SetNextSate(MainGameState.RouteSelectPre);
+    }
+
+    // RouteSelect
+    public void OnRouteSelect()
+    {
+        if (IsBase())
         {
             RouteManager.instance.SetRouteLoop();
         }
@@ -82,25 +115,58 @@ public class EventButton : Button
         }
     }
 
-    public bool IsBase()
-    {
-        if(!eventSO)
-        {
-            return false;
-        }
-        else
-        {
-            return eventSO.type == EventButtonType.Base;
-        }
-    }
-
+    // Buttonを操作する時の処理
+    // Buttonを押す時
     public override void OnPointerDown(PointerEventData E)
     {
+        // Mapの移動を不可にする
         MapScroll.instance.SetOnDrag(false);
     }
 
+    // Buttonを離す時
     public override void OnPointerUp(PointerEventData E)
     {
+        // Mapの移動を可にする
         MapScroll.instance.SetOnDrag(true);
+    }
+
+    // MouseがButtonの上に入る時
+    public override void OnPointerEnter(PointerEventData E)
+    {
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+
+        // BaseSelectの時、BaseのSizeを拡大する
+        if (IsBase() && logic.isBaseSelect())
+        {
+            DoScaleUp();
+        }
+    }
+
+    // MouseがButtonの上から離れる時
+    public override void OnPointerExit(PointerEventData E)
+    {
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+
+        // BaseSelectの時、BaseのSizeを縮小する
+        if (IsBase() && logic.isBaseSelect())
+        {
+            DoScaleDown();
+        }
+    }
+
+    // 拡大
+    public void DoScaleUp()
+    {
+        float maxScale = 1.5f;
+        float time = 0.5f;
+        transform.DOScale(maxScale, time);
+    }
+
+    // 縮小
+    public void DoScaleDown()
+    {
+        float minScale = 1.0f;
+        float time = 0.5f;
+        transform.DOScale(minScale, time);
     }
 }

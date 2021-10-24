@@ -43,12 +43,15 @@ public class Player : MonoBehaviour
         transform.localPosition = fixPos;
     }
 
-    public void MovePath(Vector3[] Points)
+    public void MovePath()
     {
-        if(!tweener.IsActive())
+        EventButton nextPoint = RouteManager.instance.GetNextRoutePoint();
+
+        if (nextPoint)
         {
-            tweener = transform.DOLocalPath(Points, Points.Length, PathType.Linear, PathMode.Ignore).SetEase(Ease.Linear);
-            tweener.OnComplete(() => { tweener = transform.DOLocalPath(Points, Points.Length, PathType.Linear, PathMode.Ignore).SetEase(Ease.Linear); });
+            tweener = transform.DOLocalMove(nextPoint.transform.localPosition, 1.0f);
+            tweener.SetEase(Ease.Linear);
+            tweener.OnComplete(() => { MovePath(); });
         }
     }
 }

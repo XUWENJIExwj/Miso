@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class RouteManager : Monosingleton<RouteManager>
 {
@@ -10,11 +9,12 @@ public class RouteManager : Monosingleton<RouteManager>
     [SerializeField] private float lineWidth = 0.035f;
     [SerializeField] private bool routePlanned = false;
     [SerializeField] private Player player = null;
+    [SerializeField] private EventButton basePoint = null;
 
     public override void InitAwake()
     {
         routePoints = new List<EventButton>();
-        routeLine.positionCount = routePoints.Count;
+        routeLine.positionCount = 1;
         routeLine.startWidth = lineWidth;
         routeLine.endWidth = lineWidth;
     }
@@ -22,18 +22,23 @@ public class RouteManager : Monosingleton<RouteManager>
     // PlayerÇÃBaseÇStartPointÇ…ìoò^
     public void SetStartPoint(EventButton Point)
     {
+        basePoint = Point;
+
         if (routePoints.Count == 0)
         {
-            routePoints.Add(Point);
+            routePoints.Add(basePoint);
         }
         else
         {
-            routePoints[0] = Point;
+            routePoints[0] = basePoint;
         }
+
+        // LineRendererÇ…StartPointÇìoò^
+        routeLine.SetPosition(0, routePoints[0].transform.localPosition);
 
         // PlayerÇÃèâä˙à íu
         player.gameObject.SetActive(true);
-        player.transform.localPosition = Point.transform.localPosition;
+        player.transform.localPosition = basePoint.transform.localPosition;
     }
 
     public void AddRoutePoint(EventButton Point)
@@ -92,22 +97,43 @@ public class RouteManager : Monosingleton<RouteManager>
         routeLine.endWidth = routeLine.startWidth;
     }
 
-    public void Go()
+    public void MovePath()
     {
         if(routeLine.loop)
         {
-            Vector3[] points = new Vector3[routePoints.Count + 1];
-            for (int i = 0; i < routePoints.Count; ++i)
-            {
-                points[i] = routePoints[i].transform.localPosition;
-            }
-            points[routePoints.Count] = points[0];
-            player.MovePath(points);
+            routePoints.Add(routePoints[0]);
+            routePoints.RemoveAt(0);
+
+            player.MovePath();
         }
     }
 
     public void SetPlayerPostion(Vector3 Offset)
     {
         player.SetPosition(Offset);
+    }
+
+    public EventButton GetNextRoutePoint()
+    {
+        if(routePoints.Count > 0)
+        {
+            EventButton eventButton = routePoints[0];
+
+            routePoints.RemoveAt(0);
+
+            return eventButton;
+        }
+
+        ResetRoute();
+        return null;
+    }
+
+    public void ResetRoute()
+    {
+        routePlanned = false;
+        routeLine.loop = false;
+        routeLine.positionCount = 1;
+        routePoints.Add(basePoint);
+        routeLine.SetPosition(0, routePoints[0].transform.localPosition);
     }
 }

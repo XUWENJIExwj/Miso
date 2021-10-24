@@ -9,12 +9,7 @@ public class MapScaler : Monosingleton<MapScaler>
     [SerializeField] private float minScale = 1.0f;
     [SerializeField] private float maxScale = 2.0f;
 
-    private void Update()
-    {
-        Zoom();
-    }
-
-    void Zoom()
+    public void Zoom()
     {
         float val = Input.GetAxis("Mouse ScrollWheel");
 

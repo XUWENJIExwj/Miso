@@ -51,4 +51,12 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
 
         RouteManager.instance.SetPlayerPostion(offset);
     }
+
+    public void DisplayEventButton()
+    {
+        foreach (EventButton eventButton in events)
+        {
+            eventButton.gameObject.SetActive(true);
+        }
+    }
 }

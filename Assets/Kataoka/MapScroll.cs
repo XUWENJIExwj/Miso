@@ -37,11 +37,6 @@ public class MapScroll : Monosingleton<MapScroll>
         EventButtonManager.instance.CreateEventButton();
     }
 
-    private void Update()
-    {
-        OnDrag();       
-    }
-
     public void OnDrag()
     {
         if (Input.GetMouseButton(0) && onDrag)
