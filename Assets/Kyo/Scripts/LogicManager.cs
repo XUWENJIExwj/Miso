@@ -18,7 +18,13 @@ public class LogicManager : Monosingleton<LogicManager>
 
     public override void InitAwake()
     {
-        Test();
+        // Test();
+        //SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
+    }
+
+    public void Start()
+    {
+        SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
     }
 
     void Update()
