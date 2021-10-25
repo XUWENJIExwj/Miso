@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseCanvasController : MonoBehaviour
 {
-    public void Awake()
+    public void Start()
     {
         Init();
     }
