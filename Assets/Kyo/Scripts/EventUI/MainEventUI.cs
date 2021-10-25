@@ -21,9 +21,14 @@ public struct MainEventUIElement
 }
 
 public class MainEventUI : EventUI
-{
+{ 
     [SerializeField] private MainEventSO eventSO = null;
     [SerializeField] private MainEventUIElement ui;
+
+    public void Start()
+    {
+        
+    }
 
     public override void EventPlay()
     {
