@@ -79,7 +79,7 @@ public class LogInManager : MonoBehaviour
 
         // currentPlayerを毎フレーム監視し、ログインが完了したら
         if (FindObjectOfType<UserAuth>().currentPlayer() != null)
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("GlobalLogic");
 
     }
 

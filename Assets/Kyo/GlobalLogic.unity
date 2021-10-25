@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d6437653c83c944bb9789b03b93faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 1
-  onTest: 1
+  scene: 2
+  onTest: 0
   sceneLogic: {fileID: 0}
 --- !u!4 &1312915223
 Transform:
