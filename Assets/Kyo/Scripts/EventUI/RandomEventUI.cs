@@ -9,9 +9,9 @@ public class RandomEventUI : EventUI
 
     public override void InitEventInfo(EventButton Event)
     {
-        eventSO = Event.GetEventSO<RandomEventSO>();
-
         gameObject.SetActive(true);
+        eventSO = Event.GetEventSO<RandomEventSO>();
+        eventSO.EventStart();
     }
 
     public override void EventPlay()

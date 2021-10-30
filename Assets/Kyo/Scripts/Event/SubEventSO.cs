@@ -14,7 +14,7 @@ namespace EventScriptableObject
     public class SubEventSO : EventSO
     {
         [TextArea(5, 20)] public string eventSummary;
-        public SubEventPhase phase = SubEventPhase.Phase_None;
+        public SubEventPhase subEventPhase = SubEventPhase.Phase_None;
         private Tweener tweener = null;
 
         protected override void Init()
@@ -46,7 +46,7 @@ namespace EventScriptableObject
 
         public override void EventPlay()
         {
-            switch (phase)
+            switch (subEventPhase)
             {
                 case SubEventPhase.Phase_ReportPre:
                     break;
@@ -66,10 +66,10 @@ namespace EventScriptableObject
 
         public void SetNextPhase(SubEventPhase Phase)
         {
-            phase = Phase;
+            subEventPhase = Phase;
         }
 
-        public void Report()
+        public virtual void Report()
         {
             // ‰¼
             if (Input.GetMouseButtonDown(0))

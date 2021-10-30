@@ -27,9 +27,9 @@ public class MainEventUI : EventUI
 
     public override void InitEventInfo(EventButton Event)
     {
+        gameObject.SetActive(true);
         eventSO = Event.GetEventSO<MainEventSO>();
         eventSO.EventStart();
-        gameObject.SetActive(true);
     }
 
     public override void EventPlay()
@@ -46,11 +46,28 @@ public class MainEventUI : EventUI
     {
         ui.TitleFrame.color = HelperFunction.ChangeAlpha(ui.TitleFrame.color, 0.0f);
         ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, 0.0f);
+        ui.Title.text = "";
         ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 0.0f);
+        ui.Summary.text = "";
         ui.Character.color = HelperFunction.ChangeAlpha(ui.Character.color, 0.0f);
         ui.TalkFrame.color = HelperFunction.ChangeAlpha(ui.TalkFrame.color, 0.0f);
         ui.Name.color = HelperFunction.ChangeAlpha(ui.Name.color, 0.0f);
+        ui.Name.text = "";
         ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, 0.0f);
+        ui.Talk.text = "";
         ui.OptionParent.SetActive(false);
+    }
+
+    // Coroutine関連のメソッドはMonoBehaviourにあり、ScriptableObjectにはないので、ここから呼び出す
+    public void StartPrintText(string TargetText, MainEventPhase Phase)
+    {
+        StartCoroutine(eventSO.StartPrintText(TargetText, Phase));
+    }
+
+    public void StopPrintText(string TargetText, MainEventPhase Phase)
+    {
+        StopAllCoroutines();
+
+        eventSO.StopPrintText(TargetText, Phase);
     }
 }

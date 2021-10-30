@@ -21,9 +21,9 @@ public class SubEventUI : EventUI
 
     public override void InitEventInfo(EventButton Event)
     {
+        gameObject.SetActive(true);
         eventSO = Event.GetEventSO<SubEventSO>();
         eventSO.EventStart();
-        gameObject.SetActive(true);
     }
 
     public override void EventPlay()
@@ -40,6 +40,8 @@ public class SubEventUI : EventUI
     {
         ui.TitleFrame.color = HelperFunction.ChangeAlpha(ui.TitleFrame.color, 0.0f);
         ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, 0.0f);
+        ui.Title.text = "";
         ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 0.0f);
+        ui.Summary.text = "";
     }
 }

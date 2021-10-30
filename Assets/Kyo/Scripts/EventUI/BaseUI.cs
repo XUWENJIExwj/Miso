@@ -9,9 +9,9 @@ public class BaseUI : EventUI
 
     public override void InitEventInfo(EventButton Event)
     {
-        eventSO = Event.GetEventSO<BaseSO>();
-
         gameObject.SetActive(true);
+        eventSO = Event.GetEventSO<BaseSO>();
+        eventSO.EventStart();
     }
 
     public override void EventPlay()
