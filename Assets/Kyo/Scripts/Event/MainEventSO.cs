@@ -101,6 +101,8 @@ namespace EventScriptableObject
 
         public override void EventStart()
         {
+            // 動的にOnClickのイベントを変更できるように
+            // 必要なイベントを予め設定しておく
             if (onClickFirst == null)
             {
                 onClickFirst = new UnityAction[2];
@@ -116,7 +118,7 @@ namespace EventScriptableObject
             }
 
             ResetProgress();
-            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Title.text = eventTitle;
             ui.Summary.text = eventSummary;
             ui.Character.sprite = report.sprite;
@@ -180,6 +182,21 @@ namespace EventScriptableObject
             }
         }
 
+        public override void ResetEventSO()
+        {
+            SetNextPhase(MainEventPhase.Phase_None);
+            ResetProgress();
+
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
+            ui.Options[0].onClick.RemoveAllListeners();
+            ui.Options[1].onClick.RemoveAllListeners();
+        }
+
+        public void SetNextPhase(MainEventPhase Phase)
+        {
+            phase = Phase;
+        }
+
         public void Report()
         {
             if (Input.GetMouseButtonDown(0))
@@ -187,7 +204,7 @@ namespace EventScriptableObject
                 // 最後のセリフではない場合
                 if (progress.textIndex < report.texts.Length)
                 {
-                    MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+                    MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
 
                     ChangeCharacterImage(ref ui.Character, report.sprite);
 
@@ -206,7 +223,7 @@ namespace EventScriptableObject
 
         public void OptionFirstPre()
         {
-            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.OptionParent.SetActive(true);
             ui.Options[0].onClick.AddListener(onClickFirst[0]);
             ui.Options[0].gameObject.GetComponentInChildren<TMP_Text>().text = optionFirst[0].optionText;
@@ -231,7 +248,7 @@ namespace EventScriptableObject
             progress.characterIndex = 0;
             progress.textIndex = 0;
 
-            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
 
             ChangeCharacterImage(ref ui.Character, optionNext[progress.optionRouteFirst].character[progress.characterIndex].sprite);
 
@@ -255,7 +272,7 @@ namespace EventScriptableObject
 
         public void OptionSecondPre()
         {
-            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.OptionParent.SetActive(true);
             ui.Options[0].onClick.RemoveListener(onClickFirst[0]);
             ui.Options[0].onClick.AddListener(onClickSecond[0]);
@@ -279,7 +296,7 @@ namespace EventScriptableObject
 
         public void EndingPre()
         {
-            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Summary.text = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].type.ToString();
             ui.Talk.text = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].endingText;
             SetNextPhase(MainEventPhase.Phase_Ending);
@@ -294,16 +311,11 @@ namespace EventScriptableObject
             }
         }
 
-        public void SetNextPhase(MainEventPhase Phase)
-        {
-            phase = Phase;
-        }
-
         public void UpdateText(CharacterText[] Texts)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+                MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
 
                 // 最後のCharacterではない場合
                 if (progress.characterIndex < Texts.Length - 1)
@@ -371,7 +383,7 @@ namespace EventScriptableObject
             progress.characterIndex = 0;
             progress.textIndex = 0;
 
-            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.OptionParent.SetActive(false);
 
             ChangeCharacterImage(ref ui.Character, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].sprite);
@@ -388,7 +400,7 @@ namespace EventScriptableObject
             progress.characterIndex = 0;
             progress.textIndex = 0;
 
-            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.OptionParent.SetActive(false);
 
             ChangeCharacterImage(ref ui.Character, optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex].sprite);
@@ -419,15 +431,6 @@ namespace EventScriptableObject
             }
 
             CharacterImage.sprite = CharacterSprite;
-        }
-
-        public override void ResetEventSO()
-        {
-            ResetProgress();
-
-            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetMainEventUIElement();
-            ui.Options[0].onClick.RemoveAllListeners();
-            ui.Options[1].onClick.RemoveAllListeners();
         }
     }
 }

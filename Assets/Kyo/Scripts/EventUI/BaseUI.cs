@@ -7,15 +7,15 @@ public class BaseUI : EventUI
 {
     [SerializeField] private BaseSO eventSO = null;
 
-    public override void EventPlay()
-    {
-        eventSO.EventPlay();
-    }
-
     public override void InitEventInfo(EventButton Event)
     {
         eventSO = Event.GetEventSO<BaseSO>();
 
         gameObject.SetActive(true);
+    }
+
+    public override void EventPlay()
+    {
+        eventSO.EventPlay();
     }
 }

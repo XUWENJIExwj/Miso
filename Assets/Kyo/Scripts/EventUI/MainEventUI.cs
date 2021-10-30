@@ -25,16 +25,6 @@ public class MainEventUI : EventUI
     [SerializeField] private MainEventSO eventSO = null;
     [SerializeField] private MainEventUIElement ui;
 
-    public void Start()
-    {
-        
-    }
-
-    public override void EventPlay()
-    {
-        eventSO.EventPlay();
-    }
-
     public override void InitEventInfo(EventButton Event)
     {
         eventSO = Event.GetEventSO<MainEventSO>();
@@ -42,7 +32,12 @@ public class MainEventUI : EventUI
         gameObject.SetActive(true);
     }
 
-    public MainEventUIElement GetMainEventUIElement()
+    public override void EventPlay()
+    {
+        eventSO.EventPlay();
+    }
+
+    public MainEventUIElement GetEventUIElement()
     {
         return ui;
     }
