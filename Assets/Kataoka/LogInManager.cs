@@ -29,6 +29,8 @@ public class LogInManager : MonoBehaviour
     public string pw;
     public string mail;
 
+    public bool sceneLoaded = false;
+
     void Start()
     {
 
@@ -78,9 +80,16 @@ public class LogInManager : MonoBehaviour
         }
 
         // currentPlayerを毎フレーム監視し、ログインが完了したら
+        // Loginを押したらなぜかこのif文が二回動くので、
+        // 一回しかSceneをLoadしないようにした
         if (FindObjectOfType<UserAuth>().currentPlayer() != null)
-            SceneManager.LoadScene("GlobalLogic");
-
+        {
+            if (!sceneLoaded)
+            {
+                SceneManager.LoadScene("GlobalLogic");
+                sceneLoaded = true;
+            }
+        }
     }
 
     private void drawLogInMenu()
