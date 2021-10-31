@@ -6,13 +6,14 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace EventScriptableObject
 {
-    public enum CharacterType
+    public enum CharacterTypes
     {
         Player,
-        AMA,
+        AMA_Higashi,
         NPC,
         Aside,
         None,
@@ -28,7 +29,7 @@ namespace EventScriptableObject
     [Serializable]
     public struct CharacterText
     {
-        public CharacterType type;
+        public CharacterTypes type;
         public Sprite sprite;
         public string name;
         [TextArea(5, 20)] public string[] texts;
@@ -149,11 +150,12 @@ namespace EventScriptableObject
                         ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, ui.TalkFrame.color.a);
                         ui.Name.text = reports[progress.characterIndex].name;
 
-                        StartCoroutinePrintText(reports[progress.characterIndex].texts[progress.textIndex], MainEventPhase.Phase_Report);
+                        SetNextPhase(MainEventPhase.Phase_Report);
+                        StartCoroutinePrintCharacterText(reports[progress.characterIndex], mainEventPhase);
                     });
                 });
             });
-
+            
             SetNextPhase(MainEventPhase.Phase_ReportPre);
         }
 
@@ -216,14 +218,14 @@ namespace EventScriptableObject
                 ui.Name.text = reports[progress.characterIndex].name;
 
                 SetNextPhase(MainEventPhase.Phase_Report);
-                StartCoroutinePrintText(reports[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
-                StopAllCoroutinePrintText(reports[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
+                StartCoroutinePrintCharacterText(reports[progress.characterIndex], mainEventPhase);
+                StopAllCoroutinePrintCharacterText(reports[progress.characterIndex], mainEventPhase);
             }
         }
 
         public override void Report()
         {
-            UpdateText(reports);
+            UpdateCharacterText(reports);
         }
 
         public void OptionFirstPre()
@@ -245,7 +247,7 @@ namespace EventScriptableObject
                 return;
             }
 
-            UpdateText(optionFirst[progress.optionRouteFirst].character);
+            UpdateCharacterText(optionFirst[progress.optionRouteFirst].character);
         }
 
         public void OptionNextPre()
@@ -258,7 +260,7 @@ namespace EventScriptableObject
             ui.Name.text = optionNext[progress.optionRouteFirst].character[progress.characterIndex].name;
             
             SetNextPhase(MainEventPhase.Phase_OptionNext);
-            StartCoroutinePrintText(optionNext[progress.optionRouteFirst].character[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
+            StartCoroutinePrintCharacterText(optionNext[progress.optionRouteFirst].character[progress.characterIndex], mainEventPhase);
         }
 
         public void OptionNext()
@@ -268,7 +270,7 @@ namespace EventScriptableObject
                 return;
             }
 
-            UpdateText(optionNext[progress.optionRouteFirst].character);
+            UpdateCharacterText(optionNext[progress.optionRouteFirst].character);
         }
 
         public void OptionSecondPre()
@@ -292,7 +294,7 @@ namespace EventScriptableObject
                 return;
             }
 
-            UpdateText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character);
+            UpdateCharacterText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character);
         }
 
         public void EndingPre()
@@ -322,25 +324,25 @@ namespace EventScriptableObject
             }
         }
 
-        public void UpdateText(CharacterText[] Texts)
+        public void UpdateCharacterText(CharacterText[] Characters)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 if (onPrint)
                 {
-                    StopAllCoroutinePrintText(Texts[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
+                    StopAllCoroutinePrintCharacterText(Characters[progress.characterIndex], mainEventPhase);
                 }
                 else
                 {
                     MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
 
                     // 最後のCharacterではない場合
-                    if (progress.characterIndex < Texts.Length - 1)
+                    if (progress.characterIndex < Characters.Length - 1)
                     {
                         // 現在のCharacterのセリフが最後ではない場合
-                        if (progress.textIndex < Texts[progress.characterIndex].texts.Length)
+                        if (progress.textIndex < Characters[progress.characterIndex].texts.Length)
                         {
-                            StartCoroutinePrintText(Texts[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
+                            StartCoroutinePrintCharacterText(Characters[progress.characterIndex], mainEventPhase);
                         }
                         // 現在のCharacterのセリフが最後の場合
                         else
@@ -348,19 +350,19 @@ namespace EventScriptableObject
                             ++progress.characterIndex;
                             progress.textIndex = 0;
 
-                            ChangeCharacterImage(ref ui.Character, Texts[progress.characterIndex].sprite);
-                            ui.Name.text = Texts[progress.characterIndex].name;
+                            ChangeCharacterImage(ref ui.Character, Characters[progress.characterIndex].sprite);
+                            ui.Name.text = Characters[progress.characterIndex].name;
 
-                            StartCoroutinePrintText(Texts[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
+                            StartCoroutinePrintCharacterText(Characters[progress.characterIndex], mainEventPhase);
                         }
                     }
                     // 最後のCharacterの場合
                     else
                     {
                         // 最後のセリフではない場合
-                        if (progress.textIndex < Texts[progress.characterIndex].texts.Length)
+                        if (progress.textIndex < Characters[progress.characterIndex].texts.Length)
                         {
-                            StartCoroutinePrintText(Texts[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
+                            StartCoroutinePrintCharacterText(Characters[progress.characterIndex], mainEventPhase);
                         }
                         // 最後のセリフの場合
                         else
@@ -404,7 +406,7 @@ namespace EventScriptableObject
             ChangeCharacterImage(ref ui.Character, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].sprite);
             ui.Name.text = optionFirst[progress.optionRouteFirst].character[progress.characterIndex].name;
 
-            StartCoroutinePrintText(optionFirst[progress.optionRouteFirst].character[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
+            StartCoroutinePrintCharacterText(optionFirst[progress.optionRouteFirst].character[progress.characterIndex], mainEventPhase);
         }
 
         public void OnClickSecond(int OptionRoute)
@@ -418,7 +420,7 @@ namespace EventScriptableObject
             ChangeCharacterImage(ref ui.Character, optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex].sprite);
             ui.Name.text = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex].name;
 
-            StartCoroutinePrintText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex].texts[progress.textIndex], mainEventPhase);
+            StartCoroutinePrintCharacterText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex], mainEventPhase);
         }
 
         public void ResetProgress(int OptionRouteFirst = -1, int OptionRouteSecond = -1, int CharacterIndex = 0, int TextIndex = 0)
@@ -443,23 +445,56 @@ namespace EventScriptableObject
             CharacterImage.sprite = CharacterSprite;
         }
 
-        public void StartCoroutinePrintText(string TargetText, MainEventPhase Phase)
+        public void StartCoroutinePrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
-            EventUIManager.instance.GetCurrentEventUI<MainEventUI>().StartPrintText(TargetText, Phase);
+            EventUIManager.instance.StartCoroutine(StartPrintCharacterText(Character, Phase));
         }
 
-        public void StopAllCoroutinePrintText(string TargetText, MainEventPhase Phase)
+        public void StartCoroutinePrintText(string Text, MainEventPhase Phase)
         {
-            EventUIManager.instance.GetCurrentEventUI<MainEventUI>().StopPrintText(TargetText, Phase);
+            EventUIManager.instance.StartCoroutine(StartPrintText(Text, Phase));
         }
 
-        public IEnumerator StartPrintText(string TargetText, MainEventPhase Phase)
+        public void StopAllCoroutinePrintCharacterText(CharacterText Character, MainEventPhase Phase)
+        {
+            EventUIManager.instance.StopAllCoroutines();
+            StopPrintCharacterText(Character, Phase);
+        }
+
+        public void StopAllCoroutinePrintText(string Text, MainEventPhase Phase)
+        {
+            EventUIManager.instance.StopAllCoroutines();
+            StopPrintText(Text, Phase);
+        }
+
+        public IEnumerator StartPrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
             onPrint = true;
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Talk.text = "";
-            foreach (var item in TargetText)
+
+            for (int i = 0; i < Character.texts[progress.textIndex].Length; ++i)
+            {
+                i = CheckNewExpression(Character, i);
+
+                ui.Talk.text += Character.texts[progress.textIndex][i];
+                yield return new WaitForSeconds(printInterval);
+            }
+
+            onPrint = false;
+            ++progress.textIndex;
+            SetNextPhase(Phase);
+        }
+
+        public IEnumerator StartPrintText(string Text, MainEventPhase Phase)
+        {
+            onPrint = true;
+
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
+            ui.Talk.text = "";
+
+            foreach (var item in Text)
             {
                 ui.Talk.text += item;
                 yield return new WaitForSeconds(printInterval);
@@ -470,15 +505,62 @@ namespace EventScriptableObject
             SetNextPhase(Phase);
         }
 
-        public void StopPrintText(string TargetText, MainEventPhase Phase)
+        public void StopPrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
-            ui.Talk.text = TargetText;
+            ui.Talk.text = "";
+
+            for (int i = 0; i < Character.texts[progress.textIndex].Length; ++i)
+            {
+                i = CheckNewExpression(Character, i);
+
+                ui.Talk.text += Character.texts[progress.textIndex][i];
+            }
 
             onPrint = false;
             ++progress.textIndex;
 
             SetNextPhase(Phase);
+        }
+
+        public void StopPrintText(string Text, MainEventPhase Phase)
+        {
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
+            ui.Talk.text = Text;
+
+            onPrint = false;
+            ++progress.textIndex;
+
+            SetNextPhase(Phase);
+        }
+
+        public int CheckNewExpression(CharacterText Character, int TextIndex)
+        {
+            string expressionType = "";
+            string symbol = "（）";
+            int textIndex = TextIndex;
+
+            if (Character.texts[progress.textIndex][TextIndex] == symbol[0])
+            {
+                expressionType += Character.texts[progress.textIndex][TextIndex];
+                while (Character.texts[progress.textIndex][TextIndex] != symbol[1])
+                {
+                    ++TextIndex;
+                    expressionType += Character.texts[progress.textIndex][TextIndex];
+                }
+
+                Sprite expression = IllustrationDictionary.instance.GetTargetIllustration(Character.type, expressionType);
+                if (expression)
+                {
+                    MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
+                    ui.Character.sprite = expression;
+                    expressionType = "";
+                    ++TextIndex;
+                    textIndex = TextIndex;
+                }
+            }
+
+            return textIndex;
         }
     }
 }

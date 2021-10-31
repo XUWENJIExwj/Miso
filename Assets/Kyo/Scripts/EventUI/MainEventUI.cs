@@ -57,17 +57,4 @@ public class MainEventUI : EventUI
         ui.Talk.text = "";
         ui.OptionParent.SetActive(false);
     }
-
-    // Coroutine関連のメソッドはMonoBehaviourにあり、ScriptableObjectにはないので、ここから呼び出す
-    public void StartPrintText(string TargetText, MainEventPhase Phase)
-    {
-        StartCoroutine(eventSO.StartPrintText(TargetText, Phase));
-    }
-
-    public void StopPrintText(string TargetText, MainEventPhase Phase)
-    {
-        StopAllCoroutines();
-
-        eventSO.StopPrintText(TargetText, Phase);
-    }
 }
