@@ -340,7 +340,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Login
 --- !u!222 &265498076
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -994,6 +994,7 @@ GameObject:
   - component: {fileID: 849361024}
   - component: {fileID: 849361023}
   - component: {fileID: 849361022}
+  - component: {fileID: 849361025}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -1019,8 +1020,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 53, y: 294}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 53, y: 170}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &849361022
 MonoBehaviour:
@@ -1125,6 +1126,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849361020}
   m_CullTransparentMesh: 1
+--- !u!114 &849361025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849361020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc33a39070010f94fb1c2dd721c1286d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showHtmlElement: 0
 --- !u!1 &1076778529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,7 +1855,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: ID
 --- !u!222 &1391630913
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1998,6 +2012,7 @@ GameObject:
   - component: {fileID: 1565500517}
   - component: {fileID: 1565500516}
   - component: {fileID: 1565500515}
+  - component: {fileID: 1565500518}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -2023,8 +2038,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 53, y: -66.3}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 53, y: -35}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1565500515
 MonoBehaviour:
@@ -2069,8 +2084,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1565500516}
   m_TextComponent: {fileID: 1981806348}
   m_Placeholder: {fileID: 1678470023}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -2129,6 +2144,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565500513}
   m_CullTransparentMesh: 1
+--- !u!114 &1565500518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565500513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc33a39070010f94fb1c2dd721c1286d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showHtmlElement: 0
 --- !u!1 &1574823582
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,7 +2540,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -82, y: -225}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657836806
 MonoBehaviour:
@@ -2678,7 +2706,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: password
 --- !u!222 &1678470024
 CanvasRenderer:
   m_ObjectHideFlags: 0
