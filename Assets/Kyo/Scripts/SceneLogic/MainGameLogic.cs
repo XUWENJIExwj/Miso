@@ -67,7 +67,7 @@ public class MainGameLogic : BaseSceneLogic
 
     void EventPlayPre()
     {
-        EventUIManager.instance.InitEventInfo(currentEvent);
+        EventUIManager.instance.EventPlayPre(currentEvent);
         SetNextSate(MainGameState.EventPlay);
     }
 

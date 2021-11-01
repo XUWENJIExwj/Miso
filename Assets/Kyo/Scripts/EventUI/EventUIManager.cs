@@ -6,7 +6,7 @@ using EventScriptableObject;
 public class EventUIManager : Monosingleton<EventUIManager>
 {
     [SerializeField] private EventUI[] eventUIs = null;
-    [SerializeField] private EventButtonType currentEventType = EventButtonType.None;
+    [SerializeField] private EventSOType currentEventType = EventSOType.None;
 
     public void Init()
     {
@@ -16,10 +16,10 @@ public class EventUIManager : Monosingleton<EventUIManager>
         }
     }
 
-    public void InitEventInfo(EventButton Event)
+    public void EventPlayPre(EventButton Event)
     {
         currentEventType = Event.GetEventType();
-        eventUIs[(int)currentEventType].InitEventInfo(Event);
+        eventUIs[(int)currentEventType].EventPlayPre(Event);
     }
 
     public void EventPlay()
@@ -29,7 +29,7 @@ public class EventUIManager : Monosingleton<EventUIManager>
 
     public void ResetEventInfo()
     {
-        if (currentEventType != EventButtonType.None)
+        if (currentEventType != EventSOType.None)
         {
             eventUIs[(int)currentEventType].gameObject.SetActive(false);
         }
@@ -44,5 +44,11 @@ public class EventUIManager : Monosingleton<EventUIManager>
 
         Debug.Log("Žæ“¾‚µ‚æ‚¤‚Æ‚·‚éŒ^‚Æˆá‚¤!");
         return (T)(object)null;
+    }
+
+    public void AddResult(EventSO Event)
+    {
+        BaseEventUI eventUI = (BaseEventUI)eventUIs[(int)EventSOType.Base];
+        eventUI.AddResult(Event);
     }
 }

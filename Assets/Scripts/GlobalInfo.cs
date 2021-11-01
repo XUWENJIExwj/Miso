@@ -24,7 +24,7 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public Canvas[] canvases = null; // äeCanvas
     public Vector2 mapSize = new Vector2(2560.0f, 1920.0f);
     public Vector2 halfMapSize = new Vector2(1280.0f, 960.0f);
-    public List<BaseSO> baseList = null;
+    public List<BaseEventSO> baseList = null;
     public List<MainEventSO> mainEventList = null;
     public List<SubEventSO> subEventList = null;
     public List<RandomEventSO> randomEventList = null;
@@ -74,11 +74,11 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
 
         // ÇªÇÃëºÇÃç¿ïWÇ≈Ç†ÇÍÇŒÅAEventÇï‘Ç∑
         float ratio = Random.Range(0.0f, 1.0f);
-        if (ratio < eventRatio[(int)EventButtonType.MainEvent])
+        if (ratio < eventRatio[(int)EventSOType.MainEvent])
         {
             return mainEventList[Random.Range(0, mainEventList.Count)];
         }
-        else if (ratio < eventRatio[(int)EventButtonType.MainEvent] + eventRatio[(int)EventButtonType.SubEvent])
+        else if (ratio < eventRatio[(int)EventSOType.MainEvent] + eventRatio[(int)EventSOType.SubEvent])
         {
             return subEventList[Random.Range(0, subEventList.Count)];
         }

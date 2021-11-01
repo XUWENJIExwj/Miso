@@ -19,7 +19,7 @@ public class SubEventUI : EventUI
     [SerializeField] private SubEventSO eventSO = null;
     [SerializeField] private SubEventUIElement ui;
 
-    public override void InitEventInfo(EventButton Event)
+    public override void EventPlayPre(EventButton Event)
     {
         gameObject.SetActive(true);
         eventSO = Event.GetEventSO<SubEventSO>();

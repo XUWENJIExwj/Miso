@@ -73,7 +73,7 @@ public class EventButton : Button
 
     public bool IsBase()
     {
-        return eventSO.type == EventButtonType.Base;
+        return eventSO.type == EventSOType.Base;
     }
 
     // State‚²‚Æ‚Ìˆ—
@@ -199,7 +199,7 @@ public class EventButton : Button
         return (T)(object)null;
     }
 
-    public EventButtonType GetEventType()
+    public EventSOType GetEventType()
     {
         return eventSO.GetEventType();
     }

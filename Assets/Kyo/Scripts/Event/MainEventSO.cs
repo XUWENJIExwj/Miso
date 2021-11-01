@@ -101,7 +101,7 @@ namespace EventScriptableObject
 
         protected override void Init()
         {
-            InitEvent(EventButtonType.MainEvent);
+            InitEvent(EventSOType.MainEvent);
         }
 
         public override void EventStart()
@@ -124,6 +124,7 @@ namespace EventScriptableObject
 
             ResetProgress();
 
+            // MainEventの各要素の出現のアニメーション
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Title.text = eventTitle;
             ui.Summary.text = eventSummary;
@@ -196,13 +197,20 @@ namespace EventScriptableObject
             ui.Options[1].onClick.RemoveAllListeners();
         }
 
+        public override void AddResult()
+        {
+            EventUIManager.instance.AddResult(this);
+        }
+
         public void SetNextPhase(MainEventPhase Phase)
         {
             mainEventPhase = Phase;
         }
 
+        // Phase_Reportの前処理
         public void ReportPre()
         {
+            // MainEventの各要素の出現のアニメーションを止めて、Phase_Reportへ突入
             if (Input.GetMouseButtonDown(0) && tweener.IsActive())
             {
                 tweener.Kill();
@@ -223,11 +231,13 @@ namespace EventScriptableObject
             }
         }
 
+        // Phase_Report
         public override void Report()
         {
             UpdateCharacterText(reports);
         }
 
+        // Phase_OptionFirstの前処理
         public void OptionFirstPre()
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
@@ -240,6 +250,7 @@ namespace EventScriptableObject
             SetNextPhase(MainEventPhase.Phase_OptionFirst);
         }
 
+        // Phase_OptionFirst
         public void OptionFirst()
         {
             if(progress.optionRouteFirst < 0)
@@ -250,6 +261,7 @@ namespace EventScriptableObject
             UpdateCharacterText(optionFirst[progress.optionRouteFirst].character);
         }
 
+        // Phase_OptionNextの前処理
         public void OptionNextPre()
         {
             progress.characterIndex = 0;
@@ -263,6 +275,7 @@ namespace EventScriptableObject
             StartCoroutinePrintCharacterText(optionNext[progress.optionRouteFirst].character[progress.characterIndex], mainEventPhase);
         }
 
+        // Phase_OptionNext
         public void OptionNext()
         {
             if (progress.optionRouteFirst < 0)
@@ -273,6 +286,7 @@ namespace EventScriptableObject
             UpdateCharacterText(optionNext[progress.optionRouteFirst].character);
         }
 
+        // Phase_OptionSecondの前処理
         public void OptionSecondPre()
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
@@ -287,6 +301,7 @@ namespace EventScriptableObject
             SetNextPhase(MainEventPhase.Phase_OptionSecond);
         }
 
+        // Phase_OptionSecond
         public void OptionSecond()
         {
             if (progress.optionRouteSecond < 0)
@@ -297,6 +312,7 @@ namespace EventScriptableObject
             UpdateCharacterText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character);
         }
 
+        // Phase_Endingの前処理
         public void EndingPre()
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
@@ -308,6 +324,7 @@ namespace EventScriptableObject
             StartCoroutinePrintText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].endingText, mainEventPhase);
         }
 
+        // Phase_Ending
         public void Ending()
         {
             if (Input.GetMouseButtonDown(0))
@@ -318,12 +335,14 @@ namespace EventScriptableObject
                 }
                 else
                 {
+                    AddResult();
                     ResetEventSO();
                     RouteManager.instance.MovePath();
                 }
             }
         }
 
+        // MainEventの会話の進行処理
         public void UpdateCharacterText(CharacterText[] Characters)
         {
             if (Input.GetMouseButtonDown(0))
@@ -374,6 +393,7 @@ namespace EventScriptableObject
             }
         }
 
+        // 前処理突入
         public void NextPhase()
         {
             switch(mainEventPhase)
@@ -395,6 +415,7 @@ namespace EventScriptableObject
             }
         }
 
+        // 一番目の選択処理
         public void OnClickFirst(int OptionRoute)
         {
             progress.optionRouteFirst = OptionRoute;
@@ -409,6 +430,7 @@ namespace EventScriptableObject
             StartCoroutinePrintCharacterText(optionFirst[progress.optionRouteFirst].character[progress.characterIndex], mainEventPhase);
         }
 
+        // 二番目の選択処理
         public void OnClickSecond(int OptionRoute)
         {
             progress.optionRouteSecond = OptionRoute;
@@ -423,6 +445,7 @@ namespace EventScriptableObject
             StartCoroutinePrintCharacterText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex], mainEventPhase);
         }
 
+        // MainEventの会話の進捗
         public void ResetProgress(int OptionRouteFirst = -1, int OptionRouteSecond = -1, int CharacterIndex = 0, int TextIndex = 0)
         {
             progress.optionRouteFirst = OptionRouteFirst;
@@ -431,6 +454,7 @@ namespace EventScriptableObject
             progress.textIndex = TextIndex;
         }
 
+        // イラストを切り替える処理
         public void ChangeCharacterImage(ref Image CharacterImage, Sprite CharacterSprite)
         {
             if (CharacterSprite)
@@ -445,28 +469,33 @@ namespace EventScriptableObject
             CharacterImage.sprite = CharacterSprite;
         }
 
+        // CharacterTextの文字送りアニメーションのCoroutineをスタート
         public void StartCoroutinePrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
             EventUIManager.instance.StartCoroutine(StartPrintCharacterText(Character, Phase));
         }
 
+        // Textの文字送りアニメーションのCoroutineをスタート
         public void StartCoroutinePrintText(string Text, MainEventPhase Phase)
         {
             EventUIManager.instance.StartCoroutine(StartPrintText(Text, Phase));
         }
 
+        // CharacterTextの文字送りアニメーションのCoroutineをストップ
         public void StopAllCoroutinePrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
             EventUIManager.instance.StopAllCoroutines();
             StopPrintCharacterText(Character, Phase);
         }
 
+        // Textの文字送りアニメーションのCoroutineをストップ
         public void StopAllCoroutinePrintText(string Text, MainEventPhase Phase)
         {
             EventUIManager.instance.StopAllCoroutines();
             StopPrintText(Text, Phase);
         }
 
+        // CharacterTextの文字送りアニメーションのCoroutine
         public IEnumerator StartPrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
             onPrint = true;
@@ -487,6 +516,7 @@ namespace EventScriptableObject
             SetNextPhase(Phase);
         }
 
+        // Textの文字送りアニメーションのCoroutine
         public IEnumerator StartPrintText(string Text, MainEventPhase Phase)
         {
             onPrint = true;
@@ -505,6 +535,7 @@ namespace EventScriptableObject
             SetNextPhase(Phase);
         }
 
+        // CharacterTextの文字送りアニメーションのCoroutineの中止処理
         public void StopPrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
@@ -523,6 +554,7 @@ namespace EventScriptableObject
             SetNextPhase(Phase);
         }
 
+        // Textの文字送りアニメーションのCoroutineの中止処理
         public void StopPrintText(string Text, MainEventPhase Phase)
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
@@ -534,19 +566,20 @@ namespace EventScriptableObject
             SetNextPhase(Phase);
         }
 
-        public int CheckNewExpression(CharacterText Character, int TextIndex)
+        // MainEventの会話中のCharacterの表情文字列の検索処理
+        public int CheckNewExpression(CharacterText Character, int CharIndex)
         {
             string expressionType = "";
             string symbol = "（）";
-            int textIndex = TextIndex;
+            int charIndex = CharIndex;
 
-            if (Character.texts[progress.textIndex][TextIndex] == symbol[0])
+            if (Character.texts[progress.textIndex][CharIndex] == symbol[0])
             {
-                expressionType += Character.texts[progress.textIndex][TextIndex];
-                while (Character.texts[progress.textIndex][TextIndex] != symbol[1])
+                expressionType += Character.texts[progress.textIndex][CharIndex];
+                while (Character.texts[progress.textIndex][CharIndex] != symbol[1])
                 {
-                    ++TextIndex;
-                    expressionType += Character.texts[progress.textIndex][TextIndex];
+                    ++CharIndex;
+                    expressionType += Character.texts[progress.textIndex][CharIndex];
                 }
 
                 Sprite expression = IllustrationDictionary.instance.GetTargetIllustration(Character.type, expressionType);
@@ -555,12 +588,17 @@ namespace EventScriptableObject
                     MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
                     ui.Character.sprite = expression;
                     expressionType = "";
-                    ++TextIndex;
-                    textIndex = TextIndex;
+                    ++CharIndex;
+                    charIndex = CharIndex;
                 }
             }
 
-            return textIndex;
+            return charIndex;
+        }
+
+        public string GetEnding()
+        {
+            return optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].endingText;
         }
     }
 }

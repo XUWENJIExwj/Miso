@@ -9,7 +9,7 @@ namespace EventScriptableObject
     {
         protected override void Init()
         {
-            InitEvent(EventButtonType.RandomEvent);
+            InitEvent(EventSOType.RandomEvent);
         }
 
         public override void EventStart()
@@ -26,6 +26,11 @@ namespace EventScriptableObject
         public override void ResetEventSO()
         {
 
+        }
+
+        public override void AddResult()
+        {
+            EventUIManager.instance.AddResult(this);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace EventScriptableObject
     }
 
     [Serializable]
-    public enum EventButtonType
+    public enum EventSOType
     {
         MainEvent,
         SubEvent,
@@ -30,9 +30,9 @@ namespace EventScriptableObject
         [Header("Common")]
         public int id;
         public Sprite icon;
-        [ReadOnly] public EventButtonType type = EventButtonType.None;
+        [ReadOnly] public EventSOType type = EventSOType.None;
         static public string[] typeDesc = { "メインイベント", "サブイベント", "ランダムイベント", "ベース", "" };
-        [ReadOnly] public string typeText = typeDesc[(int)EventButtonType.None];
+        [ReadOnly] public string typeText = typeDesc[(int)EventSOType.None];
         public string eventTitle;
         public int totalPoint;
 
@@ -43,7 +43,7 @@ namespace EventScriptableObject
 
         protected abstract void Init();
 
-        protected void InitEvent(EventButtonType Type)
+        protected void InitEvent(EventSOType Type)
         {
             type = Type;
             typeText = typeDesc[(int)type];
@@ -53,7 +53,7 @@ namespace EventScriptableObject
 
         public abstract void EventPlay();
 
-        public EventButtonType GetEventType()
+        public EventSOType GetEventType()
         {
             return type;
         }
@@ -65,5 +65,10 @@ namespace EventScriptableObject
         //}
 
         public abstract void ResetEventSO();
+
+        public virtual void AddResult()
+        {
+
+        }
     }
 }

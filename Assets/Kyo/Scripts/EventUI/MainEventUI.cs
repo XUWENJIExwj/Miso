@@ -25,7 +25,7 @@ public class MainEventUI : EventUI
     [SerializeField] private MainEventSO eventSO = null;
     [SerializeField] private MainEventUIElement ui;
 
-    public override void InitEventInfo(EventButton Event)
+    public override void EventPlayPre(EventButton Event)
     {
         gameObject.SetActive(true);
         eventSO = Event.GetEventSO<MainEventSO>();

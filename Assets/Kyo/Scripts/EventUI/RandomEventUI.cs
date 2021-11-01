@@ -7,7 +7,7 @@ public class RandomEventUI : EventUI
 {
     [SerializeField] private RandomEventSO eventSO = null;
 
-    public override void InitEventInfo(EventButton Event)
+    public override void EventPlayPre(EventButton Event)
     {
         gameObject.SetActive(true);
         eventSO = Event.GetEventSO<RandomEventSO>();

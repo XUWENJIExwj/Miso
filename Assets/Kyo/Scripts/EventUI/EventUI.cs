@@ -15,7 +15,7 @@ public abstract class EventUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public abstract void InitEventInfo(EventButton Event);
+    public abstract void EventPlayPre(EventButton Event);
 
     public abstract void EventPlay();
 }

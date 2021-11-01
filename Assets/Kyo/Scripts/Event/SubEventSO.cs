@@ -19,7 +19,7 @@ namespace EventScriptableObject
 
         protected override void Init()
         {
-            InitEvent(EventButtonType.SubEvent);
+            InitEvent(EventSOType.SubEvent);
         }
 
         public override void EventStart()
@@ -61,7 +61,11 @@ namespace EventScriptableObject
         public override void ResetEventSO()
         {
             SetNextPhase(SubEventPhase.Phase_None);
-            //SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<SubEventUI>().GetEventUIElement();
+        }
+
+        public override void AddResult()
+        {
+            EventUIManager.instance.AddResult(this);
         }
 
         public void SetNextPhase(SubEventPhase Phase)
@@ -74,6 +78,7 @@ namespace EventScriptableObject
             // ‰¼
             if (Input.GetMouseButtonDown(0))
             {
+                AddResult();
                 ResetEventSO();
                 RouteManager.instance.MovePath();
             }
