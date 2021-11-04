@@ -167,12 +167,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f8e1fa14760e6548a076f6f886b1399, type: 2}
   subEventList:
   - {fileID: 11400000, guid: e0b50603f3e1bac4b98ccf5e5666f12d, type: 2}
+  - {fileID: 11400000, guid: 3721343f119cb9948946e0be953efd07, type: 2}
+  - {fileID: 11400000, guid: f2d70fce95b2ea04fa7d87fcf59fb735, type: 2}
   randomEventList:
   - {fileID: 11400000, guid: 519a72b39cef5dd41badd7d99ceb5e33, type: 2}
   eventRatio:
   - 0.1
   - 0.2
   - 0.7
+  playerData:
+    playerBase: {fileID: 0}
+    totalPoint: 0
+    currentPoint: 0
 --- !u!4 &784785529
 Transform:
   m_ObjectHideFlags: 0

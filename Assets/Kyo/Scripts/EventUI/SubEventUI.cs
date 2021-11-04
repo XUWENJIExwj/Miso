@@ -12,6 +12,9 @@ public struct SubEventUIElement
     public Image TitleFrame;
     public TMP_Text Title;
     public TMP_Text Summary;
+    public Image ReportFrame;
+    public TMP_Text Report;
+    public TMP_Text Point;
 }
 
 public class SubEventUI : EventUI
@@ -43,5 +46,10 @@ public class SubEventUI : EventUI
         ui.Title.text = "";
         ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 0.0f);
         ui.Summary.text = "";
+        ui.ReportFrame.color = HelperFunction.ChangeAlpha(ui.ReportFrame.color, 0.0f);
+        ui.Report.color = HelperFunction.ChangeAlpha(ui.Report.color, 0.0f);
+        ui.Report.text = "";
+        ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 0.0f);
+        ui.Point.text = "";
     }
 }

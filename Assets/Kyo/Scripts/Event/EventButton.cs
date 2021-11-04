@@ -104,13 +104,13 @@ public class EventButton : Button
         {
             if (!isSelected)
             {
-                RouteManager.instance.AddRoutePoint(this);
                 isSelected = true;
+                RouteManager.instance.AddRoutePoint(this);
             }
             else
             {
-                RouteManager.instance.RemoveRoutePoint(this);
                 isSelected = false;
+                RouteManager.instance.RemoveRoutePoint(this);
             }
         }
     }
@@ -185,7 +185,7 @@ public class EventButton : Button
     // k¬
     public void DoScaleDown(float MinScale = 1.0f, float Time = 0.5f)
     {
-        transform.DOScale(MinScale, Time).OnComplete(()=> { isSelected = false; });
+        transform.DOScale(MinScale, Time);
     }
 
     public T GetEventSO<T>()

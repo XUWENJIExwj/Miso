@@ -70,12 +70,17 @@ namespace EventScriptableObject
 
         }
 
-        public virtual void SetPoint()
+        public void SetPoint()
         {
-            point = UnityEngine.Random.Range(pointRange.min, pointRange.max);
+            ComputePoint();
             SetPointText();
 
             GlobalInfo.instance.playerData.AddPoint(point);
+        }
+
+        public virtual void ComputePoint()
+        {
+            point = UnityEngine.Random.Range(pointRange.min, pointRange.max);
         }
 
         public virtual void SetPointText()

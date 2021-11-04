@@ -93,7 +93,6 @@ namespace EventScriptableObject
         public MainEventOptionEx[] optionSecond;
         public MainEventPhase mainEventPhase = MainEventPhase.Phase_None;
         public MainEventProgress progress;
-        public float frameFadeTime = 0.8f;
         public float printInterval = 0.1f;
         public bool onPrint = false;
         private Tweener tweener = null;
@@ -205,11 +204,11 @@ namespace EventScriptableObject
             EventUIManager.instance.AddResult(this);
         }
 
-        public override void SetPoint()
+        public override void ComputePoint()
         {
             pointRange.min = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].point.min;
             pointRange.max = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].point.max;
-            base.SetPoint();
+            base.ComputePoint();
         }
 
         public override void SetPointText()
@@ -224,10 +223,10 @@ namespace EventScriptableObject
         }
 
         // Phase_Reportの前処理
-        public void ReportPre()
+        public override void ReportPre()
         {
             // MainEventの各要素の出現のアニメーションを止めて、Phase_Reportへ突入
-            if (Input.GetMouseButtonDown(0) && tweener.IsActive())
+            if (Input.GetMouseButtonDown(0))
             {
                 tweener.Kill();
 
@@ -329,7 +328,7 @@ namespace EventScriptableObject
         }
 
         // Phase_Endingの前処理
-        public void EndingPre()
+        public override void EndingPre()
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Summary.text = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].type.ToString();
@@ -342,7 +341,7 @@ namespace EventScriptableObject
         }
 
         // Phase_Ending
-        public void Ending()
+        public override void Ending()
         {
             if (Input.GetMouseButtonDown(0))
             {

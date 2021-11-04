@@ -103,7 +103,9 @@ public class RouteManager : Monosingleton<RouteManager>
     // Routeã‚ÌˆÚ“®ŠJn
     public void StartMovePath()
     {
-        if (routeLine.loop)
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+
+        if (routeLine.loop && logic.isRouteSelect())
         {
             routePoints.Add(routePoints[0]);
             routePoints.RemoveAt(0);

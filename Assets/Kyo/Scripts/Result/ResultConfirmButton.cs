@@ -24,4 +24,9 @@ public class ResultConfirmButton : Button
     {
         return pointerEnter;
     }
+
+    protected override void OnDisable()
+    {
+        pointerEnter = false;
+    }
 }

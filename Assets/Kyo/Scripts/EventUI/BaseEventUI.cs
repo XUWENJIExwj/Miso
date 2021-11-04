@@ -13,6 +13,7 @@ public class BaseEventUI : EventUI
     [SerializeField] private Result[] prefabs = null;
     [SerializeField] private Queue<Result> results = null;
     [SerializeField] private Result currentResult = null;
+    [SerializeField] private int resultCount = 0;
     [SerializeField] private TMP_Text pointText = null;
     [SerializeField] private int currentPoint = 0;
     [SerializeField] private float fadeTime = 0.5f;
@@ -39,6 +40,9 @@ public class BaseEventUI : EventUI
         Result result = Instantiate(prefabs[(int)Event.type], resultView.content);
         result.Init(Event);
         results.Enqueue(result);
+
+        resultView.verticalScrollbar.value = 1.0f;
+        resultCount = results.Count;
     }
 
     // Resultの出現（アニメーション付き）
@@ -46,6 +50,10 @@ public class BaseEventUI : EventUI
     {
         if (results.Count > 0)
         {
+            if (resultCount - results.Count >= 4)
+            {
+                resultView.verticalScrollbar.value -= 1.0f / (resultCount - 4);
+            }
             currentResult = results.Dequeue();
             currentResult.Appear();
 
@@ -74,6 +82,7 @@ public class BaseEventUI : EventUI
         }
         results.Clear();
 
+        resultView.verticalScrollbar.value = 0.0f;
         pointText.text = "Point: " + GlobalInfo.instance.playerData.GetCurrentPoint().ToString();
     }
 
@@ -85,6 +94,7 @@ public class BaseEventUI : EventUI
             return;
         }
 
+        resultCount = 0;
         currentPoint = 0;
 
         GlobalInfo.instance.playerData.ResetCurrentPoint();
@@ -102,16 +112,24 @@ public class BaseEventUI : EventUI
         return Result.TweenerActive();
     }
 
-    public IEnumerator AddPoint(int TargetPoint, float Time)
+    public IEnumerator AddPoint(int TargetPoint, float Time, int Step = 20)
     {
-        float interval = Time / (TargetPoint - currentPoint);
+        float interval = Time / Step;
+        int step = (TargetPoint - currentPoint) / Step;
+
         while(currentPoint < TargetPoint)
         {
-            ++currentPoint;
+            currentPoint += step;
+
+            if(currentPoint >= TargetPoint)
+            {
+                currentPoint = TargetPoint;
+                pointText.text = "Point: " + currentPoint.ToString();
+                yield break;
+            }
+
             pointText.text = "Point: " + currentPoint.ToString();
             yield return new WaitForSeconds(interval);
         }
-
-        pointText.text = "Point: " + currentPoint.ToString();
     }
 }
