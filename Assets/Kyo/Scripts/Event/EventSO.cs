@@ -6,12 +6,10 @@ using System;
 namespace EventScriptableObject
 {
     [Serializable]
-    public struct Option
+    public struct PointRange
     {
-        public string optionText;
-        [TextArea(5, 20)] public string nextEventText;
-        public int maxPoint;
-        public int minPoint;
+        public int min;
+        public int max;
     }
 
     [Serializable]
@@ -34,7 +32,8 @@ namespace EventScriptableObject
         static public string[] typeDesc = { "メインイベント", "サブイベント", "ランダムイベント", "ベース", "" };
         [ReadOnly] public string typeText = typeDesc[(int)EventSOType.None];
         public string eventTitle;
-        public int totalPoint;
+        public PointRange pointRange;
+        public int point = 0;
 
         void Awake()
         {
@@ -69,6 +68,19 @@ namespace EventScriptableObject
         public virtual void AddResult()
         {
 
+        }
+
+        public virtual void SetPoint()
+        {
+            point = UnityEngine.Random.Range(pointRange.min, pointRange.max);
+            SetPointText();
+
+            GlobalInfo.instance.playerData.AddPoint(point);
+        }
+
+        public virtual void SetPointText()
+        {
+            
         }
     }
 }

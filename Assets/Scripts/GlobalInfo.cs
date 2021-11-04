@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using EventScriptableObject;
+using System;
 
 // 各シーンにあるCanvas
 public enum CanvasType
@@ -12,10 +13,51 @@ public enum CanvasType
     Max,
 }
 
-public struct PlayerData
+[Serializable]
+public class PlayerData
 {
-    EventButton playerBase;
-    int score;
+    [SerializeField] private EventButton playerBase = null;
+    [SerializeField] private int totalPoint = 0;
+    [SerializeField] private int currentPoint = 0;
+
+    public void Init()
+    {
+        // 仮
+        playerBase = null;
+        totalPoint = 0;
+        currentPoint = 0;
+    }
+
+    public void SetPlayerBase(EventButton Base)
+    {
+        playerBase = Base;
+    }
+
+    public void AddTotalPoint(int Point)
+    {
+        totalPoint += Point;
+    }
+
+    public void AddCurrentPoint(int Point)
+    {
+        currentPoint += Point;
+    }
+
+    public void ResetCurrentPoint()
+    {
+        currentPoint = 0;
+    }
+
+    public void AddPoint(int Point)
+    {
+        AddTotalPoint(Point);
+        AddCurrentPoint(Point);
+    }
+
+    public int GetCurrentPoint()
+    {
+        return currentPoint;
+    }
 }
 
 public class GlobalInfo : Monosingleton<GlobalInfo>
@@ -29,11 +71,15 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public List<SubEventSO> subEventList = null;
     public List<RandomEventSO> randomEventList = null;
     public float[] eventRatio = new float[] { 0.2f, 0.3f, 0.5f };
+    public PlayerData playerData;
 
     public override void InitAwake()
     {
         // CanvasType数だけメモリ確保
         canvases = new Canvas[(int)CanvasType.Max];
+
+        // 仮
+        playerData.Init();
     }
 
     // 参照画面サイズのアスペクト比の取得
@@ -73,18 +119,18 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
         }
 
         // その他の座標であれば、Eventを返す
-        float ratio = Random.Range(0.0f, 1.0f);
+        float ratio = UnityEngine.Random.Range(0.0f, 1.0f);
         if (ratio < eventRatio[(int)EventSOType.MainEvent])
         {
-            return mainEventList[Random.Range(0, mainEventList.Count)];
+            return mainEventList[UnityEngine.Random.Range(0, mainEventList.Count)];
         }
         else if (ratio < eventRatio[(int)EventSOType.MainEvent] + eventRatio[(int)EventSOType.SubEvent])
         {
-            return subEventList[Random.Range(0, subEventList.Count)];
+            return subEventList[UnityEngine.Random.Range(0, subEventList.Count)];
         }
         else
         {
-            return randomEventList[Random.Range(0, randomEventList.Count)];
+            return randomEventList[UnityEngine.Random.Range(0, randomEventList.Count)];
         }
     }
 }

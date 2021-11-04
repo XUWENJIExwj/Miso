@@ -12,6 +12,8 @@ public class RandomResult : Result
     {
         RandomEventSO eventSO = (RandomEventSO)Event;
         result.eventName.text = eventSO.eventTitle;
+
+        point = eventSO.point;
     }
 
     public override void Appear()

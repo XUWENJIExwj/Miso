@@ -24,6 +24,8 @@ public class SubResult : Result
         result.eventName.text = eventSO.eventTitle;
         result.resultFrame.color = HelperFunction.ChangeAlpha(result.resultFrame.color, 0.0f);
         result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, 0.0f);
+
+        point = eventSO.point;
     }
 
     public override void Appear()

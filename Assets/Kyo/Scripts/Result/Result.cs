@@ -9,6 +9,7 @@ using DG.Tweening;
 
 public abstract class Result : MonoBehaviour
 {
+    [SerializeField] protected int point = 0;
     static protected Tweener tweener = null;
     protected float fadeTime = 0.8f;
 
@@ -40,5 +41,15 @@ public abstract class Result : MonoBehaviour
     static public bool TweenerActive()
     {
         return tweener.IsActive();
+    }
+
+    public void AddPoint(int Point)
+    {
+        point = Point;
+    }
+
+    public int GetPoint()
+    {
+        return point;
     }
 }
