@@ -6,8 +6,12 @@ using UnityEngine.UI;
 
 public class LogInManager : MonoBehaviour
 {
-    public GameObject inputFieldzObj1;
-    public GameObject inputField2Obj2;
+    public GameObject Bottun1;
+    public GameObject Bottun2;
+
+    public GameObject Bottun3;
+    public GameObject Bottun4;
+
 
     public InputField inputField1;
     public InputField inputField2;
@@ -19,10 +23,10 @@ public class LogInManager : MonoBehaviour
     private bool isLogIn;
 
     // ボタンが押されると対応する変数がtrueになる
-    bool logInButton;
-    bool signUpMenuButton;
-    bool signUpButton;
-    bool backButton;
+    public bool logInButton;
+    public bool signUpMenuButton;
+    public bool signUpButton;
+    public bool backButton;
 
     // テキストボックスで入力される文字列を格納
     public string id;
@@ -43,8 +47,11 @@ public class LogInManager : MonoBehaviour
         isLogIn = true;
         guiTextSignUp.SetActive(false);
         guiTextLogIn.SetActive(true);
+        Bottun1.SetActive(true);
+        Bottun2.SetActive(true);
+        Bottun3.SetActive(false);
+        Bottun1.SetActive(false);
 
-        
 
     }
 
@@ -53,15 +60,16 @@ public class LogInManager : MonoBehaviour
         IdReflect();
         PassReflect();
 
-        if (logInButton)
-            FindObjectOfType<UserAuth>().logIn(id, pw);
-
         // ログイン画面
         if (isLogIn)
         {
-            // ログインボタンが押されたら
-            if (logInButton)
-                FindObjectOfType<UserAuth>().logIn(id, pw);
+            Bottun1.SetActive(true);
+            Bottun2.SetActive(true);
+            Bottun3.SetActive(false);
+            Bottun4.SetActive(false);
+            //// ログインボタンが押されたら
+            //if (logInButton)
+            //    FindObjectOfType<UserAuth>().logIn(id, pw);
 
             // 新規登録画面に移動するボタンが押されたら
             if (signUpMenuButton)
@@ -72,8 +80,10 @@ public class LogInManager : MonoBehaviour
         else
         {
 
-            drawSignUpMenu();
-
+            Bottun1.SetActive(false);
+            Bottun2.SetActive(false);
+            Bottun3.SetActive(true);
+            Bottun4.SetActive(true);
             // 新規登録ボタンが押されたら
             if (signUpButton)
                 FindObjectOfType<UserAuth>().signUp(id, pw);
@@ -164,26 +174,26 @@ public class LogInManager : MonoBehaviour
 
     //}
 
-    private void drawSignUpMenu()
-    {
-        // テキスト切り替え
-        guiTextLogIn.SetActive(false);
-        guiTextSignUp.SetActive(true);
+    //private void drawSignUpMenu()
+    //{
+    //    // テキスト切り替え
+    //    guiTextLogIn.SetActive(false);
+    //    guiTextSignUp.SetActive(true);
 
-        // テキストボックスの設置と入力値の取得
-        int txtW = 150, txtH = 35;
-        GUI.skin.textField.fontSize = 20;
+    //    // テキストボックスの設置と入力値の取得
+    //    int txtW = 150, txtH = 35;
+    //    GUI.skin.textField.fontSize = 20;
         
-        id = GUI.TextField(new Rect(Screen.width * 1 / 2, Screen.height * 1 / 4 - txtH * 1 / 2, txtW, txtH), id);
-        pw = GUI.PasswordField(new Rect(Screen.width * 1 / 2, Screen.height * 2 / 5 - txtH * 1 / 2, txtW, txtH), pw, '*');
-        //mail = GUI.TextField(new Rect(Screen.width * 1 / 2, Screen.height * 11 / 20 - txtH * 1 / 2, txtW, txtH), mail);
+    //    id = GUI.TextField(new Rect(Screen.width * 1 / 2, Screen.height * 1 / 4 - txtH * 1 / 2, txtW, txtH), id);
+    //    pw = GUI.PasswordField(new Rect(Screen.width * 1 / 2, Screen.height * 2 / 5 - txtH * 1 / 2, txtW, txtH), pw, '*');
+    //    //mail = GUI.TextField(new Rect(Screen.width * 1 / 2, Screen.height * 11 / 20 - txtH * 1 / 2, txtW, txtH), mail);
 
-        // ボタンの設置
-        int btnW = 180, btnH = 50;
-        GUI.skin.button.fontSize = 20;
-        signUpButton = GUI.Button(new Rect(Screen.width * 1 / 4 - btnW * 1 / 2, Screen.height * 3 / 4 - btnH * 1 / 2, btnW, btnH), "Sign Up");
-        backButton = GUI.Button(new Rect(Screen.width * 3 / 4 - btnW * 1 / 2, Screen.height * 3 / 4 - btnH * 1 / 2, btnW, btnH), "Back");
-    }
+    //    // ボタンの設置
+    //    int btnW = 180, btnH = 50;
+    //    GUI.skin.button.fontSize = 20;
+    //    signUpButton = GUI.Button(new Rect(Screen.width * 1 / 4 - btnW * 1 / 2, Screen.height * 3 / 4 - btnH * 1 / 2, btnW, btnH), "Sign Up");
+    //    backButton = GUI.Button(new Rect(Screen.width * 3 / 4 - btnW * 1 / 2, Screen.height * 3 / 4 - btnH * 1 / 2, btnW, btnH), "Back");
+    //}
 
     public void IdReflect()
     {
@@ -196,9 +206,22 @@ public class LogInManager : MonoBehaviour
 
     }
 
-    public void Login()
+    public void LogIn()
     {
         FindObjectOfType<UserAuth>().logIn(id, pw);
+    }
+    public void GO_SignUp()
+    {
+        isLogIn = false;
+
+    }
+    public void SingUp()
+    {
+        FindObjectOfType<UserAuth>().signUp(id, pw);
+    }
+    public void Back_Login()
+    {
+        isLogIn = true;
     }
 
 }
