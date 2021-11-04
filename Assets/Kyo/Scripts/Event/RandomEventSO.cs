@@ -25,7 +25,7 @@ namespace EventScriptableObject
 
         public override void ResetEventSO()
         {
-
+            point = 0;
         }
 
         public override void AddResult()

@@ -17,5 +17,9 @@ MonoBehaviour:
   type: 1
   typeText: "\u30B5\u30D6\u30A4\u30D9\u30F3\u30C8"
   eventTitle: "\u30AF\u30B8\u30E9\u306E\u4E71\u6355\u3092\u963B\u6B62\u3057\u307E\u3057\u305F\uFF01"
-  totalPoint: 20
+  pointRange:
+    min: 10
+    max: 20
+  point: 0
   eventSummary: 
+  subEventPhase: 2

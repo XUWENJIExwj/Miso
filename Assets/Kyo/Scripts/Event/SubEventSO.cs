@@ -60,6 +60,8 @@ namespace EventScriptableObject
 
         public override void ResetEventSO()
         {
+            point = 0;
+
             SetNextPhase(SubEventPhase.Phase_None);
         }
 

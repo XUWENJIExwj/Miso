@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 2
-  onTest: 0
+  onTest: 1
   sceneLogic: {fileID: 0}
 --- !u!4 &1312915223
 Transform:

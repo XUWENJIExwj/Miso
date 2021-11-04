@@ -40,6 +40,7 @@ namespace EventScriptableObject
     {
         public CompletedType type;
         [TextArea(5, 20)] public string endingText;
+        public PointRange point;
     }
 
     [Serializable]
@@ -189,6 +190,8 @@ namespace EventScriptableObject
 
         public override void ResetEventSO()
         {
+            point = 0;
+
             SetNextPhase(MainEventPhase.Phase_None);
             ResetProgress();
 
@@ -200,6 +203,19 @@ namespace EventScriptableObject
         public override void AddResult()
         {
             EventUIManager.instance.AddResult(this);
+        }
+
+        public override void SetPoint()
+        {
+            pointRange.min = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].point.min;
+            pointRange.max = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].point.max;
+            base.SetPoint();
+        }
+
+        public override void SetPointText()
+        {
+            MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
+            ui.Point.text = "Point: " + point.ToString("+#;-#;0");
         }
 
         public void SetNextPhase(MainEventPhase Phase)
@@ -319,9 +335,10 @@ namespace EventScriptableObject
             ui.Summary.text = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].type.ToString();
             ChangeCharacterImage(ref ui.Character, null);
             ui.Name.text = "";
-            
+
+            SetPoint();
             SetNextPhase(MainEventPhase.Phase_Ending);
-            StartCoroutinePrintText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].endingText, mainEventPhase);
+            StartCoroutinePrintEndingText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].endingText, mainEventPhase);
         }
 
         // Phase_Ending
@@ -331,7 +348,7 @@ namespace EventScriptableObject
             {
                 if (onPrint)
                 {
-                    StopAllCoroutinePrintText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].endingText, mainEventPhase);
+                    StopAllCoroutinePrintEndingText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].endingText, mainEventPhase);
                 }
                 else
                 {
@@ -476,9 +493,9 @@ namespace EventScriptableObject
         }
 
         // Textの文字送りアニメーションのCoroutineをスタート
-        public void StartCoroutinePrintText(string Text, MainEventPhase Phase)
+        public void StartCoroutinePrintEndingText(string Text, MainEventPhase Phase)
         {
-            EventUIManager.instance.StartCoroutine(StartPrintText(Text, Phase));
+            EventUIManager.instance.StartCoroutine(StartPrintEndingText(Text, Phase));
         }
 
         // CharacterTextの文字送りアニメーションのCoroutineをストップ
@@ -489,10 +506,10 @@ namespace EventScriptableObject
         }
 
         // Textの文字送りアニメーションのCoroutineをストップ
-        public void StopAllCoroutinePrintText(string Text, MainEventPhase Phase)
+        public void StopAllCoroutinePrintEndingText(string Text, MainEventPhase Phase)
         {
             EventUIManager.instance.StopAllCoroutines();
-            StopPrintText(Text, Phase);
+            StopPrintEndingText(Text, Phase);
         }
 
         // CharacterTextの文字送りアニメーションのCoroutine
@@ -517,7 +534,7 @@ namespace EventScriptableObject
         }
 
         // Textの文字送りアニメーションのCoroutine
-        public IEnumerator StartPrintText(string Text, MainEventPhase Phase)
+        public IEnumerator StartPrintEndingText(string Text, MainEventPhase Phase)
         {
             onPrint = true;
 
@@ -530,9 +547,13 @@ namespace EventScriptableObject
                 yield return new WaitForSeconds(printInterval);
             }
 
-            onPrint = false;
-            ++progress.textIndex;
-            SetNextPhase(Phase);
+            tweener = ui.Point.DOFade(1.0f, frameFadeTime);
+            tweener.OnComplete(() => 
+            {
+                onPrint = false;
+                ++progress.textIndex;
+                SetNextPhase(Phase);
+            });
         }
 
         // CharacterTextの文字送りアニメーションのCoroutineの中止処理
@@ -555,10 +576,16 @@ namespace EventScriptableObject
         }
 
         // Textの文字送りアニメーションのCoroutineの中止処理
-        public void StopPrintText(string Text, MainEventPhase Phase)
+        public void StopPrintEndingText(string Text, MainEventPhase Phase)
         {
+            if (tweener.IsActive())
+            {
+                tweener.Kill();
+            }
+
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Talk.text = Text;
+            ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 1.0f);
 
             onPrint = false;
             ++progress.textIndex;

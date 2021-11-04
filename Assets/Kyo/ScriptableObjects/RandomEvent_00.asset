@@ -17,5 +17,9 @@ MonoBehaviour:
   type: 2
   typeText: "\u30E9\u30F3\u30C0\u30E0\u30A4\u30D9\u30F3\u30C8"
   eventTitle: RandomEvent
-  totalPoint: 0
+  pointRange:
+    min: 10
+    max: 20
+  point: 0
   eventSummary: 
+  subEventPhase: 2
