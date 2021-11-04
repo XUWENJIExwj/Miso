@@ -13,53 +13,6 @@ public enum CanvasType
     Max,
 }
 
-[Serializable]
-public class PlayerData
-{
-    [SerializeField] private EventButton playerBase = null;
-    [SerializeField] private int totalPoint = 0;
-    [SerializeField] private int currentPoint = 0;
-
-    public void Init()
-    {
-        // 仮
-        playerBase = null;
-        totalPoint = 0;
-        currentPoint = 0;
-    }
-
-    public void SetPlayerBase(EventButton Base)
-    {
-        playerBase = Base;
-    }
-
-    public void AddTotalPoint(int Point)
-    {
-        totalPoint += Point;
-    }
-
-    public void AddCurrentPoint(int Point)
-    {
-        currentPoint += Point;
-    }
-
-    public void ResetCurrentPoint()
-    {
-        currentPoint = 0;
-    }
-
-    public void AddPoint(int Point)
-    {
-        AddTotalPoint(Point);
-        AddCurrentPoint(Point);
-    }
-
-    public int GetCurrentPoint()
-    {
-        return currentPoint;
-    }
-}
-
 public class GlobalInfo : Monosingleton<GlobalInfo>
 {
     public Vector2 refScreenSize = new Vector2(1080.0f, 1920.0f); // 参照画面サイズ
@@ -71,15 +24,12 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public List<SubEventSO> subEventList = null;
     public List<RandomEventSO> randomEventList = null;
     public float[] eventRatio = new float[] { 0.2f, 0.3f, 0.5f };
-    public PlayerData playerData;
+    public PlayerData playerData; // Editorで確認用、あとで削除
 
     public override void InitAwake()
     {
         // CanvasType数だけメモリ確保
         canvases = new Canvas[(int)CanvasType.Max];
-
-        // 仮
-        playerData.Init();
     }
 
     // 参照画面サイズのアスペクト比の取得

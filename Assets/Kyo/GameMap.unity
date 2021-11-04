@@ -1697,7 +1697,7 @@ MonoBehaviour:
   routeLine: {fileID: 739965044}
   lineWidth: 0.035
   routePlanned: 0
-  player: {fileID: 1018336824}
+  goToNewBase: 0
   basePoint: {fileID: 0}
 --- !u!120 &739965044
 LineRenderer:
@@ -2307,7 +2307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1018336821
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2377,6 +2377,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b2ca57db1f6204180449dfcd7bdfdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBase: {fileID: 0}
+  totalPoint: 0
+  currentPoint: 0
 --- !u!1 &1018412645
 GameObject:
   m_ObjectHideFlags: 0

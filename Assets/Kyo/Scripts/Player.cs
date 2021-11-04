@@ -2,11 +2,84 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
-public class Player : MonoBehaviour
+[Serializable]
+public struct PlayerData
 {
-    [SerializeField] private Tween tweener = null;
+    public EventButton basePoint;
+    public int totalPoint;
+    public int currentPoint;
+}
 
+[Serializable]
+public class Player : Monosingleton<Player>
+{
+    [SerializeField] private PlayerData playerData;
+    private Tween tweener = null;
+
+    public override void InitAwake()
+    {
+        // ‰¼
+        Init();
+    }
+
+    // PlayerData
+    public void Init()
+    {
+        // ‰¼
+        playerData.basePoint = null;
+        playerData.totalPoint = 0;
+        playerData.currentPoint = 0;
+
+        gameObject.SetActive(false);
+    }
+
+    public void SetPlayerBase(EventButton Base)
+    {
+        gameObject.SetActive(true);
+        playerData.basePoint = Base;
+        transform.localPosition = playerData.basePoint.transform.localPosition;
+
+        // ‰¼
+        GlobalInfo.instance.playerData = playerData;
+    }
+
+    public Vector3 CurrentBasePosition()
+    {
+        return playerData.basePoint.transform.localPosition;
+    }
+
+    public void AddTotalPoint(int Point)
+    {
+        playerData.totalPoint += Point;
+    }
+
+    public void AddCurrentPoint(int Point)
+    {
+        playerData.currentPoint += Point;
+    }
+
+    public void ResetCurrentPoint()
+    {
+        playerData.currentPoint = 0;
+    }
+
+    public void AddPoint(int Point)
+    {
+        AddTotalPoint(Point);
+        AddCurrentPoint(Point);
+
+        // ‰¼
+        GlobalInfo.instance.playerData = playerData;
+    }
+
+    public int GetCurrentPoint()
+    {
+        return playerData.currentPoint;
+    }
+
+    // PlayerMove
     public void SetPosition(Vector2 Offset)
     {
         transform.localPosition += new Vector3(Offset.x, Offset.y, 0.0f);

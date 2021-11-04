@@ -8,7 +8,7 @@ public class RouteManager : Monosingleton<RouteManager>
     [SerializeField] private LineRenderer routeLine = null;
     [SerializeField] private float lineWidth = 0.035f;
     [SerializeField] private bool routePlanned = false;
-    [SerializeField] private Player player = null;
+    [SerializeField] private bool goToNewBase = false;
     [SerializeField] private EventButton basePoint = null;
 
     public override void InitAwake()
@@ -19,7 +19,7 @@ public class RouteManager : Monosingleton<RouteManager>
     }
 
     // PlayerのBaseをStartPointに登録
-    public void SetStartPoint(EventButton Point)
+    public void SetBasePoint(EventButton Point)
     {  
         basePoint = Point;
 
@@ -32,13 +32,17 @@ public class RouteManager : Monosingleton<RouteManager>
             routePoints[0] = basePoint;
         }
 
+        // Playerの初期位置
+        Player.instance.SetPlayerBase(Point);
+
+        SetStartPoint();
+    }
+
+    public void SetStartPoint()
+    {
         // LineRendererにStartPointを登録
         routeLine.positionCount = 1;
-        routeLine.SetPosition(0, routePoints[0].transform.localPosition);
-
-        // Playerの初期位置
-        player.gameObject.SetActive(true);
-        player.transform.localPosition = basePoint.transform.localPosition;
+        routeLine.SetPosition(0, Player.instance.CurrentBasePosition());
     }
 
     public void AddRoutePoint(EventButton Point)
@@ -80,6 +84,16 @@ public class RouteManager : Monosingleton<RouteManager>
         }
     }
 
+    public bool RoutePlanned()
+    {
+        return routePoints.Count > 1 && routePoints[0].IsBase() && routePoints[routePoints.Count - 1].IsBase();
+    }
+
+    public bool GoToNewBase()
+    {
+        return routePoints[0] != routePoints[routePoints.Count - 1].IsBase();
+    }
+
     // Baseをタップするとき、常に道のループ状態をチェックする
     public void SetRouteLoop()
     {
@@ -117,12 +131,12 @@ public class RouteManager : Monosingleton<RouteManager>
     // Route上の移動
     public void MovePath()
     {
-        player.MovePath();
+        Player.instance.MovePath();
     }
 
     public void SetPlayerPostion(Vector3 Offset)
     {
-        player.SetPosition(Offset);
+        Player.instance.SetPosition(Offset);
     }
 
     public EventButton GetNextRoutePoint()

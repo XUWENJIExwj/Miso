@@ -75,7 +75,7 @@ namespace EventScriptableObject
             ComputePoint();
             SetPointText();
 
-            GlobalInfo.instance.playerData.AddPoint(point);
+            Player.instance.AddPoint(point);
         }
 
         public virtual void ComputePoint()

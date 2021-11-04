@@ -81,7 +81,7 @@ public class EventButton : Button
     public void OnBaseSelect()
     {
         // BaseŠî’n‚Ì‘I‘ğ
-        RouteManager.instance.SetStartPoint(this);
+        RouteManager.instance.SetBasePoint(this);
 
         // k¬
         //DoScaleDown();

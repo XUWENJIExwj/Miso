@@ -16,7 +16,7 @@ public class BaseEventUI : EventUI
     [SerializeField] private int resultCount = 0;
     [SerializeField] private TMP_Text pointText = null;
     [SerializeField] private int currentPoint = 0;
-    [SerializeField] private float fadeTime = 0.5f;
+    [SerializeField] private float fadeTime = 0.3f;
 
     public void Awake()
     {
@@ -83,7 +83,7 @@ public class BaseEventUI : EventUI
         results.Clear();
 
         resultView.verticalScrollbar.value = 0.0f;
-        pointText.text = "Point: " + GlobalInfo.instance.playerData.GetCurrentPoint().ToString();
+        pointText.text = "Point: " + Player.instance.GetCurrentPoint().ToString();
     }
 
     public void OnClick()
@@ -97,7 +97,7 @@ public class BaseEventUI : EventUI
         resultCount = 0;
         currentPoint = 0;
 
-        GlobalInfo.instance.playerData.ResetCurrentPoint();
+        Player.instance.ResetCurrentPoint();
 
         eventSO.SetNextPhase(BaseEventPhase.Phase_End);
     }
