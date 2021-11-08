@@ -7,7 +7,7 @@ public class Score : MonoBehaviour
 {
 
     private int score;
-    private NCMB.HighScore highScore;
+    private NCMB.HighScore highScore = null;
     private bool isNewRecord;
 
 
@@ -16,10 +16,15 @@ public class Score : MonoBehaviour
     {
         Initialize();
 
-        // ハイスコアを取得する。保存されてなければ0点。
-        string name = FindObjectOfType<UserAuth>().currentPlayer();
-        highScore = new NCMB.HighScore(0, name);
-        highScore.fetch();
+        // ログイン画面経由せず、MainGameに入ると、UserAuthが見つからないので
+        UserAuth userAuth = FindObjectOfType<UserAuth>();
+        if (userAuth)
+        {
+            // ハイスコアを取得する。保存されてなければ0点。
+            string name = userAuth.currentPlayer();
+            highScore = new NCMB.HighScore(0, name);
+            highScore.fetch();
+        }
     }
 
     private void Initialize()
@@ -34,23 +39,35 @@ public class Score : MonoBehaviour
     void Update()
 
     {
-        
-        score = Player.instance.GetTotalPoint();
-        if (highScore.score < score)
-        {
-            isNewRecord = true; // フラグを立てる
-            highScore.score = score;
-        }
+        // Updateでフレームごと取得する必要がないと思うので
+        // Save()が呼び出された時点で実行すればいい
+        // フラグを立てる必要もなくなる
+        //score = Player.instance.GetTotalPoint();
+        //if (highScore.score < score)
+        //{
+        //    isNewRecord = true; // フラグを立てる
+        //    highScore.score = score;
+        //}
     }
 
     public void Save()
     {
-        // ハイスコアを保存する（ただし記録の更新があったときだけ）
-        if (isNewRecord)
-            highScore.save();
+        // ログイン画面経由せず、MainGameに入ると、highScoreがnullのままなので
+        if (highScore != null)
+        {
+            score = Player.instance.GetTotalPoint();
+            if (highScore.score < score)
+            {
+                highScore.score = score;
+                highScore.save();
+            }
+            // ハイスコアを保存する（ただし記録の更新があったときだけ）
+            //if (isNewRecord)
+            //    highScore.save();
 
-        // ゲーム開始前の状態に戻す
-        Initialize();
-        Debug.Log(score);
+            // ゲーム開始前の状態に戻す
+            Initialize();
+            Debug.Log(score);
+        }
     }
 }
