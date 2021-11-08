@@ -6,16 +6,10 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
 
-    // スコアを格納する Text コンポーネント
-    public Text scoreGUIText;
-    // ハイスコアを格納する Text コンポーネント 
-    public Text highScoreGUIText;
-
     private int score;
     private NCMB.HighScore highScore;
     private bool isNewRecord;
 
-    public NumberDisplay numberDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -40,18 +34,13 @@ public class Score : MonoBehaviour
     void Update()
 
     {
-        score = FindObjectOfType<Count>().count;
+        
+        score = Player.instance.GetTotalPoint();
         if (highScore.score < score)
         {
             isNewRecord = true; // フラグを立てる
             highScore.score = score;
         }
-
-        //// スコア・ハイスコアを表示する
-        //scoreGUIText.text = score.ToString();
-        //highScoreGUIText.text = "HighScore : " + highScore.score.ToString();
-
-        numberDisplay.SetValue(score);
     }
 
     public void Save()
@@ -62,5 +51,6 @@ public class Score : MonoBehaviour
 
         // ゲーム開始前の状態に戻す
         Initialize();
+        Debug.Log(score);
     }
 }
