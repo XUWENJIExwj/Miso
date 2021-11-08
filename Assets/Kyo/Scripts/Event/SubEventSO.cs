@@ -3,14 +3,6 @@ using DG.Tweening;
 
 namespace EventScriptableObject
 {
-    public enum EventCompatibility // ‘Š«
-    {
-        Type_Transport, // ‰^”À
-        Type_Cleanup,   // ò‰»
-        Type_Mobility,  // ‹@“®
-        Type_None,
-    }
-
     public enum SubEventPhase
     {
         Phase_ReportPre,
@@ -25,7 +17,7 @@ namespace EventScriptableObject
     {
         [TextArea(5, 20)] public string eventSummary;
         [TextArea(5, 20)] public string eventReport;
-        public EventCompatibility compatibility = EventCompatibility.Type_None;
+        public AMAType compatibility = AMAType.Type_None;
         public float[] bonusRatio = new float[] { 1.0f, 1.2f }; // ‘Š«F•’ÊA—Ç‚¢
         public SubEventPhase subEventPhase = SubEventPhase.Phase_None;
         public float frameFadeTime = 0.8f;

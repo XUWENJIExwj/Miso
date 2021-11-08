@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2ce73f37e4beb42a42cbe52368daa2, type: 3}
+  m_Name: AMA_04_Panama
+  m_EditorClassIdentifier: 
+  name: "\u30D1\u30CA\u30DE"
+  nature: 
+  type: 2
+  feature: "\u8DB3\u306F\u3084\u3044"
+  timePerGrid: 25
+  energy: 24

@@ -17,5 +17,10 @@ MonoBehaviour:
   type: 3
   typeText: "\u30D9\u30FC\u30B9"
   eventTitle: "\u30B1\u30FC\u30D7\u30BF\u30A6\u30F3\u30D9\u30FC\u30B9"
-  totalPoint: 0
+  pointRange:
+    min: 0
+    max: 0
+  point: 0
+  ama: 3
   pos: {x: 17, y: 16}
+  baseEventPhase: 2

@@ -32,9 +32,6 @@ public class RouteManager : Monosingleton<RouteManager>
             routePoints[0] = basePoint;
         }
 
-        // Playerの初期位置
-        Player.instance.SetPlayerBase(Point);
-
         SetStartPoint();
     }
 
@@ -68,6 +65,16 @@ public class RouteManager : Monosingleton<RouteManager>
         }
 
         CheckRoutePlanned();
+    }
+
+    public void SetRoutePlanned()
+    {
+
+    }
+
+    public bool RouteCouldBePlanned()
+    {
+        return routePoints.Count >= 3;
     }
 
     // ループする経路になるには、少なくても点が三つ必要

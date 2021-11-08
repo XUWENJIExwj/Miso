@@ -156,6 +156,13 @@ MonoBehaviour:
   canvases: []
   mapSize: {x: 2560, y: 1920}
   halfMapSize: {x: 1280, y: 960}
+  amaList:
+  - {fileID: 11400000, guid: 075e986ef8f26d648a6c90b02a975a32, type: 2}
+  - {fileID: 11400000, guid: 3560d3f76d658be4694b8258d08d9309, type: 2}
+  - {fileID: 11400000, guid: c6b17adeed9945c4bab51c760746aa67, type: 2}
+  - {fileID: 11400000, guid: 232b0c133cdb1864c8920fbb410fca6e, type: 2}
+  - {fileID: 11400000, guid: 577ad266a24ee124c8423c9c676aab90, type: 2}
+  - {fileID: 11400000, guid: 79a5f33df470d4547a71789d0c6f5deb, type: 2}
   baseList:
   - {fileID: 11400000, guid: 1317dda028b41434fb42e0a857f49880, type: 2}
   - {fileID: 11400000, guid: 1b9d6eadcf6a9764da4075849a00e9e3, type: 2}
@@ -176,7 +183,7 @@ MonoBehaviour:
   - 0.2
   - 0.7
   playerData:
-    playerBase: {fileID: 0}
+    basePoint: {fileID: 0}
     totalPoint: 0
     currentPoint: 0
 --- !u!4 &784785529

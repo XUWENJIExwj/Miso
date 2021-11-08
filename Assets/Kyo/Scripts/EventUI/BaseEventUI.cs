@@ -100,6 +100,9 @@ public class BaseEventUI : EventUI
         Player.instance.ResetCurrentPoint();
 
         eventSO.SetNextPhase(BaseEventPhase.Phase_End);
+
+        // DataBase“o˜^
+        // Player.instance.GetTotalPoint();
     }
 
     public bool ConfirmButtonPointerEnter()

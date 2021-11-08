@@ -22,7 +22,6 @@ namespace EventScriptableObject
         None,
     }
 
-    [CreateAssetMenu(fileName = "Base_", menuName = "Base")]
     public abstract class EventSO : ScriptableObject
     {
         [Header("Common")]
@@ -56,12 +55,6 @@ namespace EventScriptableObject
         {
             return type;
         }
-
-        // Inspectorにある属性を編集するとEditorに反映してくれるコールバック
-        //void OnValidate()
-        //{
-        //    title = typeDesc[(int)type];
-        //}
 
         public abstract void ResetEventSO();
 

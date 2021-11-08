@@ -76,10 +76,19 @@ public class EventButton : Button
         return eventSO.type == EventSOType.Base;
     }
 
+    public bool IsCurrentBase()
+    {
+        return Player.instance.GetCurrentBase() == this;
+    }
+
     // State‚²‚Æ‚Ìˆ—
     // BaseSelect
     public void OnBaseSelect()
     {
+        // Player‚Ì‰ŠúˆÊ’u
+        Player.instance.SetPlayerBase(this);
+        Player.instance.AddAMA(((BaseEventSO)eventSO).ama);
+
         // BaseŠî’n‚Ì‘I‘ğ
         RouteManager.instance.SetBasePoint(this);
 
@@ -98,6 +107,10 @@ public class EventButton : Button
     {
         if (IsBase())
         {
+            if (IsCurrentBase())
+            {
+
+            }
             RouteManager.instance.SetRouteLoop();
         }
         else

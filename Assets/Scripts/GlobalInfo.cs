@@ -19,6 +19,7 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public Canvas[] canvases = null; // ŠeCanvas
     public Vector2 mapSize = new Vector2(2560.0f, 1920.0f);
     public Vector2 halfMapSize = new Vector2(1280.0f, 960.0f);
+    public List<AMASO> amaList = null;
     public List<BaseEventSO> baseList = null;
     public List<MainEventSO> mainEventList = null;
     public List<SubEventSO> subEventList = null;

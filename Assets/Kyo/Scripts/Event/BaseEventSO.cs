@@ -14,6 +14,7 @@ namespace EventScriptableObject
     [CreateAssetMenu(fileName = "Base_", menuName = "Base")]
     public class BaseEventSO : EventSO
     {
+        public AMAs ama = AMAs.Max;
         public Vector2Int pos;
         public BaseEventPhase baseEventPhase = BaseEventPhase.Phase_None;
 

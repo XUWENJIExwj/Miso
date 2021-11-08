@@ -7,6 +7,8 @@ using System;
 [Serializable]
 public struct PlayerData
 {
+    public AMASO[] amas;
+    public AMAs ama;
     public EventButton basePoint;
     public int totalPoint;
     public int currentPoint;
@@ -28,11 +30,25 @@ public class Player : Monosingleton<Player>
     public void Init()
     {
         // ‰¼
+        playerData.amas = new AMASO[(int)AMAs.Max];
+        playerData.ama = AMAs.Higashi;
         playerData.basePoint = null;
         playerData.totalPoint = 0;
         playerData.currentPoint = 0;
 
+        GlobalInfo.instance.playerData = playerData;
+
         gameObject.SetActive(false);
+    }
+
+    public void AddAMA(AMAs AMA)
+    {
+        if (playerData.amas[(int)AMA]) return;
+
+        playerData.amas[(int)AMA] = GlobalInfo.instance.amaList[(int)AMA];
+
+        // ‰¼
+        GlobalInfo.instance.playerData = playerData;
     }
 
     public void SetPlayerBase(EventButton Base)
@@ -63,6 +79,9 @@ public class Player : Monosingleton<Player>
     public void ResetCurrentPoint()
     {
         playerData.currentPoint = 0;
+
+        // ‰¼
+        GlobalInfo.instance.playerData = playerData;
     }
 
     public void AddPoint(int Point)
@@ -140,5 +159,15 @@ public class Player : Monosingleton<Player>
         }
 
         EventUIManager.instance.ResetEventInfo();
+    }
+
+    public EventButton GetCurrentBase()
+    {
+        return playerData.basePoint;
+    }
+
+    public int GetTotalPoint()
+    {
+        return playerData.totalPoint;
     }
 }
