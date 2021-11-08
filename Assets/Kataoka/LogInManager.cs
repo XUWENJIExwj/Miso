@@ -16,6 +16,8 @@ public class LogInManager : MonoBehaviour
     public InputField inputField1;
     public InputField inputField2;
 
+    public GameObject login_check = null;
+
     private GameObject guiTextLogIn;   // ログインテキスト
     private GameObject guiTextSignUp;  // 新規登録テキスト
 
@@ -215,6 +217,8 @@ public class LogInManager : MonoBehaviour
         isLogIn = false;
         inputField1.text = "";
         inputField2.text = "";
+        Text error_text = login_check.GetComponent<Text>();
+        error_text.text = "";
 
     }
     public void SingUp()
@@ -226,6 +230,8 @@ public class LogInManager : MonoBehaviour
         isLogIn = true;
         inputField1.text = "";
         inputField2.text = "";
+        Text error_text = login_check.GetComponent<Text>();
+        error_text.text = "";
     }
 
 }
