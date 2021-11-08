@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections;
 using NCMB;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UserAuth : MonoBehaviour
 {
 
     private string currentPlayerName;
+    public GameObject login_check = null;
 
     // mobile backendに接続してログイン ------------------------
 
@@ -19,6 +21,13 @@ public class UserAuth : MonoBehaviour
             {
                 currentPlayerName = id;
             }
+            else
+            {
+                Text score_text = login_check.GetComponent<Text>();
+                // テキストの表示を入れ替える
+                score_text.text = "ログインに失敗しました。\nIDとパスワードをご確認ください。";
+            }
+
         });
     }
 
@@ -37,6 +46,14 @@ public class UserAuth : MonoBehaviour
             {
                 currentPlayerName = id;
             }
+            
+            else
+            {
+                Text score_text = login_check.GetComponent<Text>();
+                // テキストの表示を入れ替える
+                score_text.text = "このIDは既に存在します。\n別の名前を入力してください。";
+            }
+
         });
     }
 

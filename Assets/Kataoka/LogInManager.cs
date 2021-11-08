@@ -213,6 +213,8 @@ public class LogInManager : MonoBehaviour
     public void GO_SignUp()
     {
         isLogIn = false;
+        inputField1.text = "";
+        inputField2.text = "";
 
     }
     public void SingUp()
@@ -222,6 +224,8 @@ public class LogInManager : MonoBehaviour
     public void Back_Login()
     {
         isLogIn = true;
+        inputField1.text = "";
+        inputField2.text = "";
     }
 
 }
