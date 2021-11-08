@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventScriptableObject;
 
 public class EventButtonManager : Monosingleton<EventButtonManager>
 {
-    [SerializeField] private GameObject eventPrefab = null;
+    [SerializeField] private GameObject[] eventPrefabs = null;
     [SerializeField] private List<EventButton> events = null;
 
     public override void InitAwake()
@@ -27,14 +28,18 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
         {
             for (int j = 0; j < gridTiling.x; ++j)
             {
-                EventButton eventButton = Instantiate(eventPrefab, transform).GetComponent<EventButton>();
+                EventSO eventSO = GlobalInfo.instance.CreateEventSO(j, i);
+
+                // (int)eventSO.type / (int)EventSOType.Base = 0 (EventButton)
+                // (int)eventSO.type / (int)EventSOType.Base = 1 (BaseButton)
+                EventButton eventButton = Instantiate(eventPrefabs[(int)eventSO.type / (int)EventSOType.Base], transform).GetComponent<EventButton>();
                 eventButton.transform.localPosition = new Vector3(
                     -GlobalInfo.instance.halfMapSize.x + j * interval.x - gridOffset.x * interval.x,
                     GlobalInfo.instance.halfMapSize.y - i * interval.y - gridOffset.y * interval.y,
                     0.0f);
                 eventButton.gameObject.name = "EventButton_" + (i * gridTiling.x + j).ToString("000");
                 eventButton.FixPostion();
-                eventButton.InitEventInfo(GlobalInfo.instance.SetEventInfo(j, i));
+                eventButton.Init(eventSO, j, i);
                 events.Add(eventButton);
             }
         }

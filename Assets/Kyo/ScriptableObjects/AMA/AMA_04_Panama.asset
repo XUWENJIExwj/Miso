@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ce73f37e4beb42a42cbe52368daa2, type: 3}
   m_Name: AMA_04_Panama
   m_EditorClassIdentifier: 
-  name: "\u30D1\u30CA\u30DE"
+  ama: "\u30D1\u30CA\u30DE"
   nature: 
   type: 2
   feature: "\u8DB3\u306F\u3084\u3044"

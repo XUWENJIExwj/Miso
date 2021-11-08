@@ -58,7 +58,7 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     }
 
     // EventButton‚ÉEvent‚Ìî•ñ‚ğ—^‚¦‚é
-    public EventSO SetEventInfo(int X, int Y)
+    public EventSO CreateEventSO(int X, int Y)
     {
         // “Á’è‚ÌÀ•W‚Å‚ ‚ê‚ÎABase‚ğ•Ô‚·
         for (int i = 0; i < baseList.Count; ++i)

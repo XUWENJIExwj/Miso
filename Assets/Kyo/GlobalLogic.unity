@@ -183,6 +183,8 @@ MonoBehaviour:
   - 0.2
   - 0.7
   playerData:
+    amas: []
+    ama: 0
     basePoint: {fileID: 0}
     totalPoint: 0
     currentPoint: 0
@@ -230,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 2
-  onTest: 0
+  onTest: 1
   sceneLogic: {fileID: 0}
 --- !u!4 &1312915223
 Transform:

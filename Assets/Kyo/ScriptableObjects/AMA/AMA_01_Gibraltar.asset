@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ce73f37e4beb42a42cbe52368daa2, type: 3}
   m_Name: AMA_01_Gibraltar
   m_EditorClassIdentifier: 
-  name: "\u30B8\u30D6\u30E9\u30EB\u30BF\u30EB"
+  ama: "\u30B8\u30D6\u30E9\u30EB\u30BF\u30EB"
   nature: 
   type: 0
   feature: "\u3067\u304D\u308B\u4E8B\u304C\u591A\u3044"

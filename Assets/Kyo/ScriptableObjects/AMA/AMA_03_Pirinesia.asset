@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ce73f37e4beb42a42cbe52368daa2, type: 3}
   m_Name: AMA_03_Pirinesia
   m_EditorClassIdentifier: 
-  name: "\u30D4\u30EA\u30CD\u30B7\u30A2"
+  ama: "\u30D4\u30EA\u30CD\u30B7\u30A2"
   nature: 
   type: 1
   feature: "\u6C5A\u67D3\u6D44\u5316"

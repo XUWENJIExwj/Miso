@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ce73f37e4beb42a42cbe52368daa2, type: 3}
   m_Name: AMA_05_Mozambique
   m_EditorClassIdentifier: 
-  name: "\u30E2\u30B6\u30F3\u30D3\u30FC\u30AF"
+  ama: "\u30E2\u30B6\u30F3\u30D3\u30FC\u30AF"
   nature: 
   type: 2
   feature: "\u8DB3\u306F\u3084\u3044"

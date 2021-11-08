@@ -2377,9 +2377,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b2ca57db1f6204180449dfcd7bdfdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBase: {fileID: 0}
-  totalPoint: 0
-  currentPoint: 0
+  playerData:
+    amas: []
+    ama: 0
+    basePoint: {fileID: 0}
+    totalPoint: 0
+    currentPoint: 0
 --- !u!1 &1018412645
 GameObject:
   m_ObjectHideFlags: 0
@@ -4628,7 +4631,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7374dde0b78ac9c40b4e8699a366dd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventPrefab: {fileID: 2952955706619968566, guid: ddb70261b6f08cb41b9a2b5c066541f6, type: 3}
+  eventPrefabs:
+  - {fileID: 2952955706619968566, guid: ddb70261b6f08cb41b9a2b5c066541f6, type: 3}
+  - {fileID: 6207556791783099555, guid: b5b861a9e5add224e832b67351a2688b, type: 3}
   events: []
 --- !u!1 &1816318954
 GameObject:

@@ -51,11 +51,22 @@ public class Player : Monosingleton<Player>
         GlobalInfo.instance.playerData = playerData;
     }
 
-    public void SetPlayerBase(EventButton Base)
+    public void SetFirstBase(EventButton Base)
     {
         gameObject.SetActive(true);
         playerData.basePoint = Base;
+        playerData.basePoint.SetEventButtonColor(Color.red);
         transform.localPosition = playerData.basePoint.transform.localPosition;
+
+        // ‰¼
+        GlobalInfo.instance.playerData = playerData;
+    }
+
+    public void SetNewBase(EventButton Base)
+    {
+        playerData.basePoint.SetEventButtonColor(Color.white);
+        playerData.basePoint = Base;
+        playerData.basePoint.SetEventButtonColor(Color.red);
 
         // ‰¼
         GlobalInfo.instance.playerData = playerData;
@@ -148,7 +159,8 @@ public class Player : Monosingleton<Player>
             tweener.SetEase(Ease.Linear);
             tweener.OnComplete(() =>
             {
-                if (!nextPoint.IsBase())
+                nextPoint.SetSelected(false);
+                if (!nextPoint.IsCurrentBase())
                 {
                     nextPoint.DoScaleDown();
                 }

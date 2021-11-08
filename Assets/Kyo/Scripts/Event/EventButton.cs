@@ -9,11 +9,14 @@ using DG.Tweening;
 
 public class EventButton : Button
 {
-    [SerializeField] private bool isSelected = false;
-    [SerializeField] private EventSO eventSO = null;
+    [SerializeField] protected Vector2Int gridPos = Vector2Int.zero;
+    [SerializeField] protected bool isSelected = false;
+    [SerializeField] protected EventSO eventSO = null;
 
-    public void InitEventInfo(EventSO Event)
+    public void Init(EventSO Event, int X, int Y)
     {
+        gridPos.x = X;
+        gridPos.y = Y;
         eventSO = Event;
         image.sprite = Event.icon;
         gameObject.SetActive(IsBase());
@@ -55,139 +58,6 @@ public class EventButton : Button
         transform.localPosition = fixPos;
     }
 
-    // クリック時の処理
-    public virtual void OnClick()
-    {
-        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
-
-        // Stateごとの処理
-        if (logic.isBaseSelect())
-        {
-            OnBaseSelect();
-        }
-        else if (logic.isRouteSelect())
-        {
-            OnRouteSelect();
-        }
-    }
-
-    public bool IsBase()
-    {
-        return eventSO.type == EventSOType.Base;
-    }
-
-    public bool IsCurrentBase()
-    {
-        return Player.instance.GetCurrentBase() == this;
-    }
-
-    // Stateごとの処理
-    // BaseSelect
-    public void OnBaseSelect()
-    {
-        // Playerの初期位置
-        Player.instance.SetPlayerBase(this);
-        Player.instance.AddAMA(((BaseEventSO)eventSO).ama);
-
-        // Base基地の選択
-        RouteManager.instance.SetBasePoint(this);
-
-        // 縮小
-        //DoScaleDown();
-
-        image.color = Color.red;
-
-        // 仮
-        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
-        logic.SetNextSate(MainGameState.RouteSelectPre);
-    }
-
-    // RouteSelect
-    public void OnRouteSelect()
-    {
-        if (IsBase())
-        {
-            if (IsCurrentBase())
-            {
-
-            }
-            RouteManager.instance.SetRouteLoop();
-        }
-        else
-        {
-            if (!isSelected)
-            {
-                isSelected = true;
-                RouteManager.instance.AddRoutePoint(this);
-            }
-            else
-            {
-                isSelected = false;
-                RouteManager.instance.RemoveRoutePoint(this);
-            }
-        }
-    }
-
-    // Buttonを操作する時の処理
-    // Buttonを押す時
-    public override void OnPointerDown(PointerEventData E)
-    {
-        // Mapの移動を不可にする
-        MapScroll.instance.SetOnDrag(false);
-    }
-
-    // Buttonを離す時
-    public override void OnPointerUp(PointerEventData E)
-    {
-        // Mapの移動を可にする
-        MapScroll.instance.SetOnDrag(true);
-    }
-
-    // MouseがButtonの上に入る時
-    public override void OnPointerEnter(PointerEventData E)
-    {
-        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
-
-        // BaseSelectの時、BaseのSizeを拡大する
-        if (logic.isBaseSelect())
-        {
-            if (IsBase())
-            {
-                DoScaleUp();
-            }
-        }
-        // RouteSelectの時、EventButtonのSizeを拡大する
-        else if (logic.isRouteSelect())
-        {
-            if (!IsBase())
-            {
-                DoScaleUp();
-            }
-        }
-    }
-
-    // MouseがButtonの上から離れる時
-    public override void OnPointerExit(PointerEventData E)
-    {
-        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
-
-        // BaseSelectの時、BaseのSizeを縮小する
-        if (logic.isBaseSelect())
-        {
-            if (IsBase())
-            {
-                DoScaleDown();
-            }
-        }
-        // RouteSelectの時、選択されなかった場合、EventButtonのSizeを縮小する
-        else if (logic.isRouteSelect())
-        {
-            if (!IsBase() && !isSelected)
-            {
-                DoScaleDown();
-            }
-        }
-    }
 
     // 拡大
     public void DoScaleUp(float MaxScale = 1.5f, float Time = 0.5f)
@@ -215,5 +85,82 @@ public class EventButton : Button
     public EventSOType GetEventType()
     {
         return eventSO.GetEventType();
+    }
+
+    // クリック時の処理
+    public virtual void OnClick()
+    {
+        OnRouteSelect();
+    }
+
+    public bool IsBase()
+    {
+        return eventSO.type == EventSOType.Base;
+    }
+
+    public bool IsCurrentBase()
+    {
+        return Player.instance.GetCurrentBase() == this;
+    }
+
+    public void SetEventButtonColor(Color ButtonColor)
+    {
+        image.color = ButtonColor;
+    }
+
+    public void SetSelected(bool Selected)
+    {
+        isSelected = Selected;
+    }
+
+    // Stateごとの処理
+    // RouteSelect
+    public virtual void OnRouteSelect()
+    {
+        if (!isSelected)
+        {
+            SetSelected(true);
+            RouteManager.instance.AddRoutePoint(this);
+        }
+        else
+        {
+            SetSelected(false);
+            RouteManager.instance.RemoveRoutePoint(this);
+        }
+    }
+
+    // Buttonを操作する時の処理
+    // Buttonを押す時
+    public override void OnPointerDown(PointerEventData E)
+    {
+        // Mapの移動を不可にする
+        MapScroll.instance.SetOnDrag(false);
+    }
+
+    // Buttonを離す時
+    public override void OnPointerUp(PointerEventData E)
+    {
+        // Mapの移動を可にする
+        MapScroll.instance.SetOnDrag(true);
+    }
+
+    // MouseがButtonの上に入る時
+    public override void OnPointerEnter(PointerEventData E)
+    {
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+        if (logic.isRouteSelect() && !isSelected)
+        {
+            DoScaleUp();
+        }
+    }
+
+    // MouseがButtonの上から離れる時
+    public override void OnPointerExit(PointerEventData E)
+    {
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+        if (logic.isRouteSelect() && !isSelected)
+        {
+            DoScaleDown();
+        }
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ce73f37e4beb42a42cbe52368daa2, type: 3}
   m_Name: AMA_00_Higashi
   m_EditorClassIdentifier: 
-  name: "\u6771\u30B7\u30CA"
+  ama: "\u6771\u30B7\u30CA"
   nature: "\u53F8\u4EE4\u5B98\u306B\u5C0A\u656C\uFF08\u656C\u8A9E\uFF09\u3001\u6575\u306B\u5BB9\u8D66\u3057\u306A\u3044\uFF08\u9069\u5F53\u306A\u8A00\u8449\uFF09"
   type: 0
   feature: "\u3067\u304D\u308B\u4E8B\u304C\u591A\u3044"

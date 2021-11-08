@@ -8,8 +8,6 @@ public class RouteManager : Monosingleton<RouteManager>
     [SerializeField] private LineRenderer routeLine = null;
     [SerializeField] private float lineWidth = 0.035f;
     [SerializeField] private bool routePlanned = false;
-    [SerializeField] private bool goToNewBase = false;
-    [SerializeField] private EventButton basePoint = null;
 
     public override void InitAwake()
     {
@@ -19,27 +17,10 @@ public class RouteManager : Monosingleton<RouteManager>
     }
 
     // PlayerのBaseをStartPointに登録
-    public void SetBasePoint(EventButton Point)
-    {  
-        basePoint = Point;
-
-        if (routePoints.Count == 0)
-        {
-            routePoints.Add(basePoint);
-        }
-        else
-        {
-            routePoints[0] = basePoint;
-        }
-
-        SetStartPoint();
-    }
-
     public void SetStartPoint()
     {
-        // LineRendererにStartPointを登録
-        routeLine.positionCount = 1;
-        routeLine.SetPosition(0, Player.instance.CurrentBasePosition());
+        AddRoutePoint(Player.instance.GetCurrentBase());
+        DrawRoute();
     }
 
     public void AddRoutePoint(EventButton Point)
@@ -63,13 +44,6 @@ public class RouteManager : Monosingleton<RouteManager>
         {
             routeLine.SetPosition(i, routePoints[i].transform.localPosition);
         }
-
-        CheckRoutePlanned();
-    }
-
-    public void SetRoutePlanned()
-    {
-
     }
 
     public bool RouteCouldBePlanned()
@@ -77,41 +51,10 @@ public class RouteManager : Monosingleton<RouteManager>
         return routePoints.Count >= 3;
     }
 
-    // ループする経路になるには、少なくても点が三つ必要
-    private void CheckRoutePlanned()
-    {
-        if (routePoints.Count >= 3)
-        {
-            routePlanned = true;
-        }
-        else
-        {
-            routePlanned = false;
-            routeLine.loop = false;
-        }
-    }
 
-    public bool RoutePlanned()
+    public void SetRoutePlanned(bool Planned)
     {
-        return routePoints.Count > 1 && routePoints[0].IsBase() && routePoints[routePoints.Count - 1].IsBase();
-    }
-
-    public bool GoToNewBase()
-    {
-        return routePoints[0] != routePoints[routePoints.Count - 1].IsBase();
-    }
-
-    // Baseをタップするとき、常に道のループ状態をチェックする
-    public void SetRouteLoop()
-    {
-        if (routePlanned)
-        {
-            routeLine.loop = !routeLine.loop;
-        }
-        else
-        {
-            routeLine.loop = false;
-        }
+        routePlanned = Planned;
     }
 
     // Routeの太さ
@@ -126,11 +69,14 @@ public class RouteManager : Monosingleton<RouteManager>
     {
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
 
-        if (routeLine.loop && logic.isRouteSelect())
+        if (routePlanned && logic.isRouteSelect())
         {
-            routePoints.Add(routePoints[0]);
+            Player.instance.SetNewBase(routePoints[routePoints.Count - 1]);
+            if (!routePoints[0].IsCurrentBase())
+            {
+                routePoints[0].DoScaleDown();
+            }
             routePoints.RemoveAt(0);
-
             MovePath();
         }
     }
@@ -164,10 +110,7 @@ public class RouteManager : Monosingleton<RouteManager>
     public void ResetRoute()
     {
         routePlanned = false;
-        routeLine.loop = false;
-        routeLine.positionCount = 1;
-        routePoints.Add(basePoint);
-        routeLine.SetPosition(0, routePoints[0].transform.localPosition);
+        SetStartPoint();
 
         // 仮
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

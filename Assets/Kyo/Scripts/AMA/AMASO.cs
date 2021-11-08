@@ -24,7 +24,7 @@ public enum AMAs
 [CreateAssetMenu(fileName = "AMA_", menuName = "AMA")]
 public class AMASO : ScriptableObject
 {
-    public string name;
+    public string ama;
     [TextArea(5, 20)] public string nature;
     public AMAType type = AMAType.Type_None;
     static public string[] features = { "‚Å‚«‚é–‚ª‘½‚¢", "‰˜õò‰»", "‘«‚Í‚â‚¢", "" };
