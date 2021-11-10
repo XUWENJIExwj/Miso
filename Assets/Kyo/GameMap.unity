@@ -1740,8 +1740,6 @@ MonoBehaviour:
   routeLine: {fileID: 739965044}
   lineWidth: 0.035
   routePlanned: 0
-  goToNewBase: 0
-  basePoint: {fileID: 0}
 --- !u!120 &739965044
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2728,7 +2726,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058467094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 411.54837, y: 1147.9099, z: -241.15959}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2746,23 +2744,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8daffa6c281f3b646b7aec32798663bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stringToExpressionTypes:
+  - expressionString: "\uFF08\u666E\u6BB5\uFF09"
+    expressionType: 0
+  - expressionString: "\uFF08\u7591\uFF09"
+    expressionType: 1
+  - expressionString: "\uFF08\u9A5A\uFF09"
+    expressionType: 2
+  - expressionString: "\uFF08\u56F0\uFF09"
+    expressionType: 3
+  - expressionString: "\uFF08\u7B11\uFF09"
+    expressionType: 4
+  - expressionString: "\uFF08\u6012\uFF09"
+    expressionType: 5
+  - expressionString: "\uFF08\u60AA\uFF09"
+    expressionType: 6
   characters:
+  - type: 0
+    expressions: []
   - type: 1
+    expressions: []
+  - type: 2
+    expressions: []
+  - type: 3
     expressions:
-    - type: "\uFF08\u666E\u6BB5\uFF09"
+    - type: 0
       sprite: {fileID: 21300000, guid: 96ec0a8f1f5eaf54fb1ff97586bbf628, type: 3}
-    - type: "\uFF08\u7591\uFF09"
+    - type: 1
       sprite: {fileID: 21300000, guid: 3a7fd81cb3fbeb24c951d626ac4cf4ba, type: 3}
-    - type: "\uFF08\u9A5A\uFF09"
+    - type: 2
       sprite: {fileID: 21300000, guid: 500c79488d434a147b7925130711d0de, type: 3}
-    - type: "\uFF08\u56F0\uFF09"
+    - type: 3
       sprite: {fileID: 21300000, guid: 0f9d27fa6bb2e9d4ca2488f7c5f40b86, type: 3}
-    - type: "\uFF08\u7B11\uFF09"
+    - type: 4
       sprite: {fileID: 21300000, guid: a64b11b95a1e3d1499a4a89a5329dcb6, type: 3}
-    - type: "\uFF08\u6012\uFF09"
+    - type: 5
       sprite: {fileID: 21300000, guid: ba940d28ee98a5742aae29c1f32c8feb, type: 3}
-    - type: "\uFF08\u60AA\uFF09"
+    - type: 6
       sprite: {fileID: 21300000, guid: abf81bd2cc2cbe7408d4f04e930f5519, type: 3}
+  - type: 4
+    expressions: []
+  - type: 5
+    expressions: []
+  - type: 6
+    expressions: []
+  - type: 7
+    expressions: []
+  - type: 8
+    expressions: []
+  - type: 9
+    expressions: []
 --- !u!1 &1058802415
 GameObject:
   m_ObjectHideFlags: 0

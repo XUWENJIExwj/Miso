@@ -86,4 +86,9 @@ public class BaseButton : EventButton
             }
         }
     }
+
+    public AMAs GetAMA()
+    {
+        return ((BaseEventSO)eventSO).ama;
+    }
 }

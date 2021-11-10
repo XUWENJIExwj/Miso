@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AMA_01_Gibraltar
   m_EditorClassIdentifier: 
   ama: "\u30B8\u30D6\u30E9\u30EB\u30BF\u30EB"
-  nature: 
+  nature: "\u30A8\u30EB\u30C0\u30FC\u3001\u5C11\u3057\u5805\u82E6\u3057\u3044\u30A4\u30E1\u30FC\u30B8\u3001\u53E4\u8A9E\u4F7F\u3046"
   type: 0
   feature: "\u3067\u304D\u308B\u4E8B\u304C\u591A\u3044"
   timePerGrid: 30

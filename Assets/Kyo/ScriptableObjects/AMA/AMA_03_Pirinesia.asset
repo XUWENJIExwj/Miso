@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AMA_03_Pirinesia
   m_EditorClassIdentifier: 
   ama: "\u30D4\u30EA\u30CD\u30B7\u30A2"
-  nature: 
+  nature: "\u5143\u6C17\u3044\u3063\u3071\u3044\u3001\u7121\u90AA\u6C17\u306A\u5C11\u5E74\u3001\u6C96\u7E04\u5F01"
   type: 1
   feature: "\u6C5A\u67D3\u6D44\u5316"
   timePerGrid: 30

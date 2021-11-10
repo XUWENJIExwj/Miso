@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using EventScriptableObject;
 
 [Serializable]
 public struct PlayerData
@@ -31,7 +32,7 @@ public class Player : Monosingleton<Player>
     {
         // ‰¼
         playerData.amas = new AMASO[(int)AMAs.Max];
-        playerData.ama = AMAs.Higashi;
+        playerData.ama = AMAs.Max;
         playerData.basePoint = null;
         playerData.totalPoint = 0;
         playerData.currentPoint = 0;
@@ -51,12 +52,29 @@ public class Player : Monosingleton<Player>
         GlobalInfo.instance.playerData = playerData;
     }
 
-    public void SetFirstBase(EventButton Base)
+    public void SetCurrentAMA(AMAs AMA)
+    {
+        playerData.ama = AMA;
+    }
+
+    public AMAs GetCurrentAMAType()
+    {
+        return playerData.ama;
+    }
+
+    public AMASO GetCurrentAMASO()
+    {
+        return playerData.amas[(int)GetCurrentAMAType()];
+    }
+
+    public void SetFirstBase(BaseButton Base)
     {
         gameObject.SetActive(true);
         playerData.basePoint = Base;
         playerData.basePoint.SetEventButtonColor(Color.red);
         transform.localPosition = playerData.basePoint.transform.localPosition;
+
+        SetCurrentAMA(Base.GetAMA());
 
         // ‰¼
         GlobalInfo.instance.playerData = playerData;

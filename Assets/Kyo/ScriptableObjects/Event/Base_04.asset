@@ -21,6 +21,6 @@ MonoBehaviour:
     min: 0
     max: 0
   point: 0
-  ama: 3
+  ama: 0
   pos: {x: 17, y: 16}
   baseEventPhase: 2

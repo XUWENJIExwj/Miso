@@ -10,6 +10,7 @@ public enum AMAType // 相性
     Type_None,
 }
 
+// 辞書で表情参照時、Stringとして扱われる
 public enum AMAs
 {
     Higashi,    // 東シナ

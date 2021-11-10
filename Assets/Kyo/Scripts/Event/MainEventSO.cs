@@ -10,12 +10,12 @@ using System.Text.RegularExpressions;
 
 namespace EventScriptableObject
 {
-    public enum CharacterTypes
+    public enum MainEventCharacterTypes
     {
         Player,
-        AMA_Higashi,
         NPC,
         Aside,
+        AMA,
         None,
     }
 
@@ -29,8 +29,8 @@ namespace EventScriptableObject
     [Serializable]
     public struct CharacterText
     {
-        public CharacterTypes type;
-        public Sprite sprite;
+        public MainEventCharacterTypes type;
+        public ExpressionTypes expression;
         public string name;
         [TextArea(5, 20)] public string[] texts;
     }
@@ -128,7 +128,8 @@ namespace EventScriptableObject
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Title.text = eventTitle;
             ui.Summary.text = eventSummary;
-            ui.Character.sprite = reports[progress.characterIndex].sprite;
+            ChangeCharacterSpriteFromDictionary(ref ui.Character, reports[progress.characterIndex].type, reports[progress.characterIndex].expression);
+            ui.Character.color = HelperFunction.ChangeAlpha(ui.Character.color, 0.0f);
 
             tweener = ui.TitleFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
             {
@@ -149,7 +150,7 @@ namespace EventScriptableObject
                     {
                         ui.Name.color = HelperFunction.ChangeAlpha(ui.Name.color, ui.TalkFrame.color.a);
                         ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, ui.TalkFrame.color.a);
-                        ui.Name.text = reports[progress.characterIndex].name;
+                        ui.Name.text = ChangeCharacterName(reports[progress.characterIndex]);
 
                         SetNextPhase(MainEventPhase.Phase_Report);
                         StartCoroutinePrintCharacterText(reports[progress.characterIndex], mainEventPhase);
@@ -234,11 +235,11 @@ namespace EventScriptableObject
                 ui.TitleFrame.color = HelperFunction.ChangeAlpha(ui.TitleFrame.color, 1.0f);
                 ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, 1.0f);
                 ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 1.0f);
-                ChangeCharacterImage(ref ui.Character, reports[progress.characterIndex].sprite);
+                ChangeCharacterSpriteFromDictionary(ref ui.Character, reports[progress.characterIndex].type, reports[progress.characterIndex].expression);
                 ui.TalkFrame.color = HelperFunction.ChangeAlpha(ui.TalkFrame.color, 1.0f);
                 ui.Name.color = HelperFunction.ChangeAlpha(ui.Name.color, 1.0f);
                 ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, 1.0f);
-                ui.Name.text = reports[progress.characterIndex].name;
+                ui.Name.text = ChangeCharacterName(reports[progress.characterIndex]);
 
                 SetNextPhase(MainEventPhase.Phase_Report);
                 StartCoroutinePrintCharacterText(reports[progress.characterIndex], mainEventPhase);
@@ -283,9 +284,9 @@ namespace EventScriptableObject
             progress.textIndex = 0;
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
-            ChangeCharacterImage(ref ui.Character, optionNext[progress.optionRouteFirst].character[progress.characterIndex].sprite);
-            ui.Name.text = optionNext[progress.optionRouteFirst].character[progress.characterIndex].name;
-            
+            ChangeCharacterSpriteFromDictionary(ref ui.Character, optionNext[progress.optionRouteFirst].character[progress.characterIndex].type, optionNext[progress.optionRouteFirst].character[progress.characterIndex].expression);
+            ui.Name.text = ChangeCharacterName(optionNext[progress.optionRouteFirst].character[progress.characterIndex]);
+
             SetNextPhase(MainEventPhase.Phase_OptionNext);
             StartCoroutinePrintCharacterText(optionNext[progress.optionRouteFirst].character[progress.characterIndex], mainEventPhase);
         }
@@ -332,7 +333,7 @@ namespace EventScriptableObject
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Summary.text = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].type.ToString();
-            ChangeCharacterImage(ref ui.Character, null);
+            ChangeCharacterSpriteFromDictionary(ref ui.Character, MainEventCharacterTypes.None, ExpressionTypes.None);
             ui.Name.text = "";
 
             SetPoint();
@@ -385,8 +386,8 @@ namespace EventScriptableObject
                             ++progress.characterIndex;
                             progress.textIndex = 0;
 
-                            ChangeCharacterImage(ref ui.Character, Characters[progress.characterIndex].sprite);
-                            ui.Name.text = Characters[progress.characterIndex].name;
+                            ChangeCharacterSpriteFromDictionary(ref ui.Character, Characters[progress.characterIndex].type, Characters[progress.characterIndex].expression);
+                            ui.Name.text = ChangeCharacterName(Characters[progress.characterIndex]);
 
                             StartCoroutinePrintCharacterText(Characters[progress.characterIndex], mainEventPhase);
                         }
@@ -440,8 +441,8 @@ namespace EventScriptableObject
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.OptionParent.SetActive(false);
-            ChangeCharacterImage(ref ui.Character, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].sprite);
-            ui.Name.text = optionFirst[progress.optionRouteFirst].character[progress.characterIndex].name;
+            ChangeCharacterSpriteFromDictionary(ref ui.Character, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].type, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].expression);
+            ui.Name.text = ChangeCharacterName(optionFirst[progress.optionRouteFirst].character[progress.characterIndex]);
 
             StartCoroutinePrintCharacterText(optionFirst[progress.optionRouteFirst].character[progress.characterIndex], mainEventPhase);
         }
@@ -455,8 +456,8 @@ namespace EventScriptableObject
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.OptionParent.SetActive(false);
-            ChangeCharacterImage(ref ui.Character, optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex].sprite);
-            ui.Name.text = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex].name;
+            ChangeCharacterSpriteFromDictionary(ref ui.Character, optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex].type, optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex].expression);
+            ui.Name.text = ChangeCharacterName(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex]);
 
             StartCoroutinePrintCharacterText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].character[progress.characterIndex], mainEventPhase);
         }
@@ -470,10 +471,21 @@ namespace EventScriptableObject
             progress.textIndex = TextIndex;
         }
 
-        // イラストを切り替える処理
-        public void ChangeCharacterImage(ref Image CharacterImage, Sprite CharacterSprite)
+        // CharacterNameを切り替える処理
+        public string ChangeCharacterName(CharacterText Character)
         {
-            if (CharacterSprite)
+            if (Character.type == MainEventCharacterTypes.AMA)
+            {
+                return Player.instance.GetCurrentAMASO().ama;
+            }
+            return Character.name;
+        }
+
+        // イラストを切り替える処理
+        public void ChangeCharacterSpriteFromDictionary(ref Image CharacterImage, MainEventCharacterTypes CharacterType, ExpressionTypes ExpressionType)
+        {
+            CharacterImage.sprite = IllustrationDictionary.instance.GetTargetIllustration(CharacterType, ExpressionType);
+            if (CharacterImage.sprite)
             {
                 CharacterImage.color = HelperFunction.ChangeAlpha(CharacterImage.color, 1.0f);
             }
@@ -481,8 +493,6 @@ namespace EventScriptableObject
             {
                 CharacterImage.color = HelperFunction.ChangeAlpha(CharacterImage.color, 0.0f);
             }
-
-            CharacterImage.sprite = CharacterSprite;
         }
 
         // CharacterTextの文字送りアニメーションのCoroutineをスタート
@@ -518,6 +528,12 @@ namespace EventScriptableObject
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Talk.text = "";
+
+            Sprite expression = IllustrationDictionary.instance.GetTargetIllustration(Character.type, Character.expression);
+            if (expression)
+            {
+                ui.Character.sprite = expression;
+            }
 
             for (int i = 0; i < Character.texts[progress.textIndex].Length; ++i)
             {
