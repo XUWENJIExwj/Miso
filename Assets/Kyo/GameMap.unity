@@ -2424,6 +2424,7 @@ MonoBehaviour:
     basePoint: {fileID: 0}
     totalPoint: 0
     currentPoint: 0
+  currentEvent: {fileID: 0}
 --- !u!1 &1018412645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,7 +2713,7 @@ GameObject:
   - component: {fileID: 1058467095}
   - component: {fileID: 1058467096}
   m_Layer: 0
-  m_Name: IllustrationDictionary
+  m_Name: DictionaryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2728,7 +2729,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1801393276}
+  - {fileID: 1930240587}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2741,59 +2744,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058467094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8daffa6c281f3b646b7aec32798663bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f41c90aba0ad84468da38a6ac4e0de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stringToExpressionTypes:
-  - expressionString: "\uFF08\u666E\u6BB5\uFF09"
-    expressionType: 0
-  - expressionString: "\uFF08\u7591\uFF09"
-    expressionType: 1
-  - expressionString: "\uFF08\u9A5A\uFF09"
-    expressionType: 2
-  - expressionString: "\uFF08\u56F0\uFF09"
-    expressionType: 3
-  - expressionString: "\uFF08\u7B11\uFF09"
-    expressionType: 4
-  - expressionString: "\uFF08\u6012\uFF09"
-    expressionType: 5
-  - expressionString: "\uFF08\u60AA\uFF09"
-    expressionType: 6
-  characters:
-  - type: 0
-    expressions: []
-  - type: 1
-    expressions: []
-  - type: 2
-    expressions: []
-  - type: 3
-    expressions:
-    - type: 0
-      sprite: {fileID: 21300000, guid: 96ec0a8f1f5eaf54fb1ff97586bbf628, type: 3}
-    - type: 1
-      sprite: {fileID: 21300000, guid: 3a7fd81cb3fbeb24c951d626ac4cf4ba, type: 3}
-    - type: 2
-      sprite: {fileID: 21300000, guid: 500c79488d434a147b7925130711d0de, type: 3}
-    - type: 3
-      sprite: {fileID: 21300000, guid: 0f9d27fa6bb2e9d4ca2488f7c5f40b86, type: 3}
-    - type: 4
-      sprite: {fileID: 21300000, guid: a64b11b95a1e3d1499a4a89a5329dcb6, type: 3}
-    - type: 5
-      sprite: {fileID: 21300000, guid: ba940d28ee98a5742aae29c1f32c8feb, type: 3}
-    - type: 6
-      sprite: {fileID: 21300000, guid: abf81bd2cc2cbe7408d4f04e930f5519, type: 3}
-  - type: 4
-    expressions: []
-  - type: 5
-    expressions: []
-  - type: 6
-    expressions: []
-  - type: 7
-    expressions: []
-  - type: 8
-    expressions: []
-  - type: 9
-    expressions: []
+  illustrationDictionary: {fileID: 1801393275}
+  amaTypeDictionary: {fileID: 1930240588}
 --- !u!1 &1058802415
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,7 +3195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Point: 1000'
+  m_text: 'Point: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af35d300380990e47811c3dc4d483b3a, type: 2}
   m_sharedMaterial: {fileID: -2910930920086402768, guid: af35d300380990e47811c3dc4d483b3a, type: 2}
@@ -4656,6 +4611,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774469299}
   m_CullTransparentMesh: 1
+--- !u!1 &1801393274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1801393276}
+  - component: {fileID: 1801393275}
+  m_Layer: 0
+  m_Name: IllustrationDictionary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1801393275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801393274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8daffa6c281f3b646b7aec32798663bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stringToExpressionTypes:
+  - expressionString: "\uFF08\u666E\u6BB5\uFF09"
+    expressionType: 0
+  - expressionString: "\uFF08\u7591\uFF09"
+    expressionType: 1
+  - expressionString: "\uFF08\u9A5A\uFF09"
+    expressionType: 2
+  - expressionString: "\uFF08\u56F0\uFF09"
+    expressionType: 3
+  - expressionString: "\uFF08\u7B11\uFF09"
+    expressionType: 4
+  - expressionString: "\uFF08\u6012\uFF09"
+    expressionType: 5
+  - expressionString: "\uFF08\u60AA\uFF09"
+    expressionType: 6
+  characters:
+  - type: 0
+    expressions: []
+  - type: 1
+    expressions: []
+  - type: 2
+    expressions: []
+  - type: 3
+    expressions:
+    - type: 0
+      sprite: {fileID: 21300000, guid: 96ec0a8f1f5eaf54fb1ff97586bbf628, type: 3}
+    - type: 1
+      sprite: {fileID: 21300000, guid: 3a7fd81cb3fbeb24c951d626ac4cf4ba, type: 3}
+    - type: 2
+      sprite: {fileID: 21300000, guid: 500c79488d434a147b7925130711d0de, type: 3}
+    - type: 3
+      sprite: {fileID: 21300000, guid: 0f9d27fa6bb2e9d4ca2488f7c5f40b86, type: 3}
+    - type: 4
+      sprite: {fileID: 21300000, guid: a64b11b95a1e3d1499a4a89a5329dcb6, type: 3}
+    - type: 5
+      sprite: {fileID: 21300000, guid: ba940d28ee98a5742aae29c1f32c8feb, type: 3}
+    - type: 6
+      sprite: {fileID: 21300000, guid: abf81bd2cc2cbe7408d4f04e930f5519, type: 3}
+  - type: 4
+    expressions: []
+  - type: 5
+    expressions: []
+  - type: 6
+    expressions: []
+  - type: 7
+    expressions: []
+  - type: 8
+    expressions: []
+  - type: 9
+    expressions: []
+--- !u!4 &1801393276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801393274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1058467095}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1812938000
 GameObject:
   m_ObjectHideFlags: 0
@@ -4873,7 +4921,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  currentEvent: {fileID: 0}
 --- !u!4 &1816889666
 Transform:
   m_ObjectHideFlags: 0
@@ -5392,6 +5439,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904442023}
   m_CullTransparentMesh: 1
+--- !u!1 &1930240586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1930240587}
+  - component: {fileID: 1930240588}
+  m_Layer: 0
+  m_Name: AMATypeDictionary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1930240587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930240586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1058467095}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1930240588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930240586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61538ebaa1e84e943ba16fb214c9f460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amaTypes:
+  - type: 0
+    typeString: "\u904B\u8F38\u578B"
+  - type: 1
+    typeString: "\u6D44\u5316\u578B"
+  - type: 2
+    typeString: "\u6A5F\u52D5\u578B"
+  - type: 3
+    typeString: "\u306A\u3057"
 --- !u!1 &1951880982
 GameObject:
   m_ObjectHideFlags: 0

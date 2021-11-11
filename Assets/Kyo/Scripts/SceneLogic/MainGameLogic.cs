@@ -15,7 +15,6 @@ public enum MainGameState
 public class MainGameLogic : BaseSceneLogic
 {
     [SerializeField] private MainGameState state = MainGameState.BaseSelect;
-    [SerializeField] private EventButton currentEvent = null;
 
     public override void UpdateScene()
     {
@@ -67,7 +66,7 @@ public class MainGameLogic : BaseSceneLogic
 
     void EventPlayPre()
     {
-        EventUIManager.instance.EventPlayPre(currentEvent);
+        EventUIManager.instance.EventPlayPre(Player.instance.GetCurrentEvent());
         SetNextSate(MainGameState.EventPlay);
     }
 
@@ -100,10 +99,5 @@ public class MainGameLogic : BaseSceneLogic
     public void SetNextSate(MainGameState State)
     {
         state = State;
-    }
-
-    public void SetCurrentEvent(EventButton Event)
-    {
-        currentEvent = Event;
     }
 }

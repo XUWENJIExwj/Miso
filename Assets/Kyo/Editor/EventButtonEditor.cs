@@ -5,9 +5,10 @@ using UnityEditor.UI;
 [CanEditMultipleObjects]
 public class EventButtonEditor : ButtonEditor
 {
-    private SerializedProperty gridPos;
-    private SerializedProperty isSelected;
-    private SerializedProperty eventSO;
+    protected SerializedProperty gridPos;
+    protected SerializedProperty isSelected;
+    protected SerializedProperty eventSO;
+    protected SerializedProperty eventButtonUI;
 
     protected override void OnEnable()
     {
@@ -15,6 +16,12 @@ public class EventButtonEditor : ButtonEditor
         gridPos = serializedObject.FindProperty("gridPos");
         isSelected = serializedObject.FindProperty("isSelected");
         eventSO = serializedObject.FindProperty("eventSO");
+        FindButtonUIProperty();
+    }
+
+    public virtual void FindButtonUIProperty()
+    {
+        eventButtonUI = serializedObject.FindProperty("eventButtonUI");
     }
 
     public override void OnInspectorGUI()
@@ -25,6 +32,7 @@ public class EventButtonEditor : ButtonEditor
         EditorGUILayout.PropertyField(gridPos);
         EditorGUILayout.PropertyField(isSelected);
         EditorGUILayout.PropertyField(eventSO);
+        EditorGUILayout.PropertyField(eventButtonUI);
         serializedObject.ApplyModifiedProperties();
     }
 }

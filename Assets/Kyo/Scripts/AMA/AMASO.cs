@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AMAType // ‘Š«
+public enum AMATypes // ‘Š«
 {
     Type_Transport, // ‰^”À
     Type_Cleanup,   // ò‰»
@@ -27,9 +27,9 @@ public class AMASO : ScriptableObject
 {
     public string ama;
     [TextArea(5, 20)] public string nature;
-    public AMAType type = AMAType.Type_None;
+    public AMATypes type = AMATypes.Type_None;
     static public string[] features = { "‚Å‚«‚é–‚ª‘½‚¢", "‰˜õò‰»", "‘«‚Í‚â‚¢", "" };
-    [ReadOnly] public string feature = features[(int)AMAType.Type_None];
+    [ReadOnly] public string feature = features[(int)AMATypes.Type_None];
     public float timePerGrid;
     public int energy;
 

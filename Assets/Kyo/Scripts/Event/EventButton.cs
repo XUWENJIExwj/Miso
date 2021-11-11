@@ -4,14 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using EventScriptableObject;
-using UnityEditor;
+using TMPro;
 using DG.Tweening;
+using System;
+
+[Serializable]
+public struct EventButtonUIElement
+{
+    public Image frame;
+    public TMP_Text eventDesc;
+    public TMP_Text moveability;
+    public TMP_Text amaType;
+    public TMP_Text pointRange;
+}
 
 public class EventButton : Button
 {
     [SerializeField] protected Vector2Int gridPos = Vector2Int.zero;
     [SerializeField] protected bool isSelected = false;
     [SerializeField] protected EventSO eventSO = null;
+    [SerializeField] private EventButtonUIElement eventButtonUI;
+    static protected Vector2 size = new Vector2(30.0f, 30.0f);
 
     public void Init(EventSO Event, int X, int Y)
     {
@@ -62,13 +75,15 @@ public class EventButton : Button
     // 拡大
     public void DoScaleUp(float MaxScale = 1.5f, float Time = 0.5f)
     {
-        transform.DOScale(MaxScale, Time);
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.DOSizeDelta(size * MaxScale, Time);
     }
 
     // 縮小
     public void DoScaleDown(float MinScale = 1.0f, float Time = 0.5f)
     {
-        transform.DOScale(MinScale, Time);
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.DOSizeDelta(size * MinScale, Time);
     }
 
     public T GetEventSO<T>()
@@ -113,19 +128,85 @@ public class EventButton : Button
         isSelected = Selected;
     }
 
+    public bool GetSelected()
+    {
+        return isSelected;
+    }
+
+    public Vector2Int GetGridPos()
+    {
+        return gridPos;
+    }
+
+    public bool CheckDistance(EventButton Event)
+    {
+        Vector2Int distance = gridPos - Event.GetGridPos();
+        return Mathf.Abs(distance.x) > 1 || Mathf.Abs(distance.y) > 1;
+    }
+
+    public virtual void ShowEventPreview()
+    {
+        eventButtonUI.moveability.text = "移動: ";
+
+        if (eventSO.IsRandomEvent())
+        {
+            eventButtonUI.eventDesc.text = "何か起こるかも";
+            eventButtonUI.amaType.gameObject.SetActive(false);
+            eventButtonUI.pointRange.gameObject.SetActive(false);
+        }
+        else
+        {
+            eventButtonUI.eventDesc.text = eventSO.eventTitle;
+            eventButtonUI.amaType.text = "有利タイプ: " + DictionaryManager.instance.GetAMAType(eventSO.amaType);
+            eventButtonUI.amaType.gameObject.SetActive(true);
+            eventSO.MakePointRange();
+            eventButtonUI.pointRange.text = "Point: " + eventSO.pointRange.min.ToString() + "～" + eventSO.pointRange.max.ToString();
+            eventButtonUI.pointRange.gameObject.SetActive(true);
+        }
+
+        if (isSelected)
+        {
+            eventButtonUI.moveability.text += "選択中";
+        }
+        else
+        {
+            DoScaleUp();
+
+            if (CheckDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned())
+            {
+                eventButtonUI.moveability.text += "不";
+            }
+            eventButtonUI.moveability.text += "可";
+        }
+        eventButtonUI.frame.gameObject.SetActive(true);
+    }
+
+    public virtual void EndEventPreview()
+    {
+        if (!isSelected)
+        {
+            DoScaleDown();
+        }
+        eventButtonUI.frame.gameObject.SetActive(false);
+    }
+
     // Stateごとの処理
     // RouteSelect
     public virtual void OnRouteSelect()
     {
         if (!isSelected)
         {
+            if (CheckDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned()) return;
+
             SetSelected(true);
             RouteManager.instance.AddRoutePoint(this);
+            eventButtonUI.moveability.text = "移動: 選択中";
         }
         else
         {
             SetSelected(false);
-            RouteManager.instance.RemoveRoutePoint(this);
+            RouteManager.instance.RemoveRoutePoints(this);
+            eventButtonUI.moveability.text = "移動: 可";
         }
     }
 
@@ -148,9 +229,9 @@ public class EventButton : Button
     public override void OnPointerEnter(PointerEventData E)
     {
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
-        if (logic.isRouteSelect() && !isSelected)
+        if (logic.isRouteSelect())
         {
-            DoScaleUp();
+            ShowEventPreview();
         }
     }
 
@@ -158,9 +239,14 @@ public class EventButton : Button
     public override void OnPointerExit(PointerEventData E)
     {
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
-        if (logic.isRouteSelect() && !isSelected)
+        if (logic.isRouteSelect())
         {
-            DoScaleDown();
+            EndEventPreview();
         }
+    }
+
+    public EventButtonUIElement GetEventButtonUIElement()
+    {
+        return eventButtonUI;
     }
 }

@@ -104,6 +104,25 @@ namespace EventScriptableObject
             InitEvent(EventSOType.MainEvent);
         }
 
+        public override void MakePointRange()
+        {
+
+            int[] minPoints = new int[]
+            {
+                optionSecond[0].options[0].ending[0].point.min, optionSecond[0].options[1].ending[0].point.min,
+                optionSecond[1].options[0].ending[0].point.min, optionSecond[1].options[1].ending[0].point.min,
+            };
+
+            int[] maxPoints = new int[]
+            {
+                optionSecond[0].options[0].ending[0].point.max, optionSecond[0].options[1].ending[0].point.max,
+                optionSecond[1].options[0].ending[0].point.max, optionSecond[1].options[1].ending[0].point.max,
+            };
+
+            pointRange.min = Mathf.Min(minPoints);
+            pointRange.max = Mathf.Max(maxPoints);
+        }
+
         public override void EventStart()
         {
             // 動的にOnClickのイベントを変更できるように
@@ -484,7 +503,7 @@ namespace EventScriptableObject
         // イラストを切り替える処理
         public void ChangeCharacterSpriteFromDictionary(ref Image CharacterImage, MainEventCharacterTypes CharacterType, ExpressionTypes ExpressionType)
         {
-            CharacterImage.sprite = IllustrationDictionary.instance.GetTargetIllustration(CharacterType, ExpressionType);
+            CharacterImage.sprite = DictionaryManager.instance.GetTargetIllustration(CharacterType, ExpressionType);
             if (CharacterImage.sprite)
             {
                 CharacterImage.color = HelperFunction.ChangeAlpha(CharacterImage.color, 1.0f);
@@ -529,7 +548,7 @@ namespace EventScriptableObject
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Talk.text = "";
 
-            Sprite expression = IllustrationDictionary.instance.GetTargetIllustration(Character.type, Character.expression);
+            Sprite expression = DictionaryManager.instance.GetTargetIllustration(Character.type, Character.expression);
             if (expression)
             {
                 ui.Character.sprite = expression;
@@ -624,7 +643,7 @@ namespace EventScriptableObject
                     expressionType += Character.texts[progress.textIndex][CharIndex];
                 }
 
-                Sprite expression = IllustrationDictionary.instance.GetTargetIllustration(Character.type, expressionType);
+                Sprite expression = DictionaryManager.instance.GetTargetIllustration(Character.type, expressionType);
                 if (expression)
                 {
                     MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();

@@ -31,6 +31,7 @@ namespace EventScriptableObject
         static public string[] typeDesc = { "メインイベント", "サブイベント", "ランダムイベント", "ベース", "" };
         [ReadOnly] public string typeText = typeDesc[(int)EventSOType.None];
         public string eventTitle;
+        public AMATypes amaType = AMATypes.Type_None;
         public PointRange pointRange;
         public int point = 0;
 
@@ -41,7 +42,7 @@ namespace EventScriptableObject
 
         protected abstract void Init();
 
-        protected void InitEvent(EventSOType Type)
+        protected virtual void InitEvent(EventSOType Type)
         {
             type = Type;
             typeText = typeDesc[(int)type];
@@ -79,6 +80,16 @@ namespace EventScriptableObject
         public virtual void SetPointText()
         {
             
+        }
+
+        public bool IsRandomEvent()
+        {
+            return type == EventSOType.RandomEvent;
+        }
+
+        public virtual void MakePointRange()
+        {
+
         }
     }
 }

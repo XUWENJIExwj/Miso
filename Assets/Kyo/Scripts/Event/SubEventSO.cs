@@ -17,7 +17,6 @@ namespace EventScriptableObject
     {
         [TextArea(5, 20)] public string eventSummary;
         [TextArea(5, 20)] public string eventReport;
-        public AMAType compatibility = AMAType.Type_None;
         public float[] bonusRatio = new float[] { 1.0f, 1.2f }; // ëäê´ÅFïÅí ÅAó«Ç¢
         public SubEventPhase subEventPhase = SubEventPhase.Phase_None;
         public float frameFadeTime = 0.8f;
@@ -86,7 +85,6 @@ namespace EventScriptableObject
             SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<SubEventUI>().GetEventUIElement();
             ui.Point.text = "Point: " + point.ToString();
         }
-
 
         public void SetNextPhase(SubEventPhase Phase)
         {

@@ -51,7 +51,7 @@ public struct CharacterDictionaryRef
     public ExpressionDictionaryRef[] expressions;
 }
 
-public class IllustrationDictionary : Monosingleton<IllustrationDictionary>
+public class IllustrationDictionary : MonoBehaviour
 {
     [SerializeField] private StringToExpressionType[] stringToExpressionTypes;
     [SerializeField] private CharacterDictionaryRef[] characters;
@@ -59,12 +59,7 @@ public class IllustrationDictionary : Monosingleton<IllustrationDictionary>
     [SerializeField] private Dictionary<ExpressionTypes, Sprite> expressionDictionary;
     [SerializeField] private Dictionary<CharacterTypes, Dictionary<ExpressionTypes, Sprite>> characterDictionary;
 
-    public override void InitAwake()
-    {
-        MakeDictionary();
-    }
-
-    private void MakeDictionary()
+    public void MakeDictionary()
     {
         stringToExpressionDictionary = new Dictionary<string, ExpressionTypes>();
         foreach (StringToExpressionType stringToExpressionType in stringToExpressionTypes)

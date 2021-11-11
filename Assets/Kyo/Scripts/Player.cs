@@ -19,6 +19,7 @@ public struct PlayerData
 public class Player : Monosingleton<Player>
 {
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private EventButton currentEvent = null;
     private Tween tweener = null;
 
     public override void InitAwake()
@@ -62,9 +63,25 @@ public class Player : Monosingleton<Player>
         return playerData.ama;
     }
 
+
+    public bool CheckUnlockedAMAs(AMAs AMA)
+    {
+        return playerData.amas[(int)AMA] != null;
+    }
+
     public AMASO GetCurrentAMASO()
     {
         return playerData.amas[(int)GetCurrentAMAType()];
+    }
+
+    public void SetCurrentEvent(EventButton Event)
+    {
+        currentEvent = Event;
+    }
+
+    public EventButton GetCurrentEvent()
+    {
+        return currentEvent;
     }
 
     public void SetFirstBase(BaseButton Base)
@@ -183,7 +200,7 @@ public class Player : Monosingleton<Player>
                     nextPoint.DoScaleDown();
                 }
                 
-                logic.SetCurrentEvent(nextPoint);
+                SetCurrentEvent(nextPoint);
                 logic.SetNextSate(MainGameState.EventPlayPre);
             });
         }

@@ -25,15 +25,20 @@ public class RouteManager : Monosingleton<RouteManager>
 
     public void AddRoutePoint(EventButton Point)
     {
-        Point.DoScaleUp();
         routePoints.Add(Point);
         DrawRoute();
     }
 
-    public void RemoveRoutePoint(EventButton Point)
+    public void RemoveRoutePoints(EventButton Point)
     {
-        Point.DoScaleDown();
-        routePoints.Remove(Point);
+        int index = routePoints.FindIndex(1, routePoints.Count - 1, (EventButton routePoint) => routePoint == Point);
+
+        for (int i = index + 1; i < routePoints.Count; ++i)
+        {
+            routePoints[i].DoScaleDown();
+            routePoints[i].SetSelected(false);
+        }
+        routePoints.RemoveRange(index, routePoints.Count - index);
         DrawRoute();
     }
 
@@ -49,6 +54,11 @@ public class RouteManager : Monosingleton<RouteManager>
     public bool RouteCouldBePlanned()
     {
         return routePoints.Count >= 3;
+    }
+
+    public bool RoutePlanned()
+    {
+        return routePlanned;
     }
 
 
@@ -90,6 +100,11 @@ public class RouteManager : Monosingleton<RouteManager>
     public void SetPlayerPostion(Vector3 Offset)
     {
         Player.instance.SetPosition(Offset);
+    }
+
+    public EventButton GetPreviousRoutePoint()
+    {
+        return routePoints[routePoints.Count - 1];
     }
 
     public EventButton GetNextRoutePoint()

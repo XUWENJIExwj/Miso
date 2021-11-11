@@ -17,13 +17,13 @@ MonoBehaviour:
   type: 1
   typeText: "\u30B5\u30D6\u30A4\u30D9\u30F3\u30C8"
   eventTitle: "\u6F01\u8239\u6551\u52A9\u4FE1\u53F7\u767A\u751F"
+  amaType: 0
   pointRange:
     min: 900
     max: 1100
   point: 0
   eventSummary: "\u6F01\u8239\u306E\u6551\u52A9\u4FE1\u53F7\u767A\u751F\u3002\u5BFE\u51E6\u3092\u304A\u9858\u3044\u3057\u307E\u3059\u3002"
   eventReport: "\u6551\u52A9\u5B8C\u4E86\u3057\u307E\u3057\u305F\uFF01"
-  compatibility: 0
   bonusRatio:
   - 0.8
   - 1

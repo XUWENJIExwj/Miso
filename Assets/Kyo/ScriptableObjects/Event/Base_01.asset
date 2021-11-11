@@ -17,6 +17,7 @@ MonoBehaviour:
   type: 3
   typeText: "\u30D9\u30FC\u30B9"
   eventTitle: "\u30B8\u30D6\u30E9\u30EB\u30BF\u30EB\u30D9\u30FC\u30B9"
+  amaType: 0
   pointRange:
     min: 0
     max: 0
