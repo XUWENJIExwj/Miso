@@ -5,7 +5,7 @@ using EventScriptableObject;
 
 public class DictionaryManager : Monosingleton<DictionaryManager>
 {
-    [SerializeField] private IllustrationDictionary illustrationDictionary = null;
+    [SerializeField] private AllCharactersExpressionsDictionary illustrationDictionary = null;
     [SerializeField] private AMATypeDictionary amaTypeDictionary = null;
 
     public override void InitAwake()
@@ -17,12 +17,12 @@ public class DictionaryManager : Monosingleton<DictionaryManager>
     // IllustrationDictionary
     public Sprite GetTargetIllustration(MainEventCharacterTypes CharacterType, ExpressionTypes ExpressionType)
     {
-        return illustrationDictionary.GetTargetIllustration(CharacterType, ExpressionType);
+        return illustrationDictionary.GetTargetSprite(CharacterType, ExpressionType);
     }
 
     public Sprite GetTargetIllustration(MainEventCharacterTypes CharacterType, string ExpressionType)
     {
-        return illustrationDictionary.GetTargetIllustration(CharacterType, ExpressionType);
+        return illustrationDictionary.GetTargetSprite(CharacterType, ExpressionType);
     }
 
     // AMATypeDictionary
