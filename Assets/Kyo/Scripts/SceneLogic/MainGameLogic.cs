@@ -16,6 +16,16 @@ public class MainGameLogic : BaseSceneLogic
 {
     [SerializeField] private MainGameState state = MainGameState.BaseSelect;
 
+    void Start()
+    {
+        MapScroll.instance.Init();
+        GridScroll.instance.Init();
+        EventButtonManager.instance.Init();
+        Player.instance.Init();
+        EventUIManager.instance.Init();
+        FuelGauge.instance.Init();
+    }
+
     public override void UpdateScene()
     {
         switch (state)
@@ -50,7 +60,8 @@ public class MainGameLogic : BaseSceneLogic
 
     void RouteSelectPre()
     {
-        EventButtonManager.instance.DisplayEventButton();
+        EventButtonManager.instance.ActiveEventButton();
+        FuelGauge.instance.ActiveFuelGauge();
         SetNextSate(MainGameState.RouteSelect);
     }
 

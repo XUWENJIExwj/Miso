@@ -22,12 +22,6 @@ public class Player : Monosingleton<Player>
     [SerializeField] private EventButton currentEvent = null;
     private Tween tweener = null;
 
-    public override void InitAwake()
-    {
-        // ‰¼
-        Init();
-    }
-
     // PlayerData
     public void Init()
     {
@@ -58,7 +52,7 @@ public class Player : Monosingleton<Player>
         playerData.ama = AMA;
     }
 
-    public AMAs GetCurrentAMAType()
+    public AMAs GetCurrentAMA()
     {
         return playerData.ama;
     }
@@ -71,7 +65,7 @@ public class Player : Monosingleton<Player>
 
     public AMASO GetCurrentAMASO()
     {
-        return playerData.amas[(int)GetCurrentAMAType()];
+        return playerData.amas[(int)GetCurrentAMA()];
     }
 
     public void SetCurrentEvent(EventButton Event)
@@ -190,7 +184,7 @@ public class Player : Monosingleton<Player>
             MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
             logic.SetNextSate(MainGameState.RouteMove);
 
-            tweener = transform.DOLocalMove(nextPoint.transform.localPosition, 1.0f);
+            tweener = transform.DOLocalMove(nextPoint.transform.localPosition, 1.0f); // GetCurrentAMASO().timePerGrid
             tweener.SetEase(Ease.Linear);
             tweener.OnComplete(() =>
             {
@@ -201,6 +195,7 @@ public class Player : Monosingleton<Player>
                 }
                 
                 SetCurrentEvent(nextPoint);
+                FuelGauge.instance.HideFuelGauge();
                 logic.SetNextSate(MainGameState.EventPlayPre);
             });
         }

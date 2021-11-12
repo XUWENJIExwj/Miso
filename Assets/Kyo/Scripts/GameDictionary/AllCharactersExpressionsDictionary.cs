@@ -81,7 +81,7 @@ public class AllCharactersExpressionsDictionary : MonoBehaviour
     {
         if (CharacterType == MainEventCharacterTypes.AMA)
         {
-            return (int)Player.instance.GetCurrentAMAType() + CharacterTypes.AMA_Higashi;
+            return (int)Player.instance.GetCurrentAMA() + CharacterTypes.AMA_Higashi;
         }
         else if (CharacterType == MainEventCharacterTypes.None)
         {

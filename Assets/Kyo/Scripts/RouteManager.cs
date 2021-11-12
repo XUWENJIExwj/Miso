@@ -19,7 +19,7 @@ public class RouteManager : Monosingleton<RouteManager>
     // PlayerÇÃBaseÇStartPointÇ…ìoò^
     public void SetStartPoint()
     {
-        AddRoutePoint(Player.instance.GetCurrentBase());
+        routePoints.Add(Player.instance.GetCurrentBase());
         DrawRoute();
     }
 
@@ -27,19 +27,28 @@ public class RouteManager : Monosingleton<RouteManager>
     {
         routePoints.Add(Point);
         DrawRoute();
+        FuelGauge.instance.ReduceValueOnRouteSelect();
     }
 
     public void RemoveRoutePoints(EventButton Point)
     {
         int index = routePoints.FindIndex(1, routePoints.Count - 1, (EventButton routePoint) => routePoint == Point);
-
         for (int i = index + 1; i < routePoints.Count; ++i)
         {
-            routePoints[i].DoScaleDown();
+            if (!routePlanned || i < routePoints.Count - 1)
+            {
+                routePoints[i].DoScaleDown();
+            }
+
             routePoints[i].SetSelected(false);
         }
-        routePoints.RemoveRange(index, routePoints.Count - index);
+
+        int count = routePoints.Count - index;
+        routePoints.RemoveRange(index, count);
+        FuelGauge.instance.AddValueOnRouteSelect(count);
         DrawRoute();
+
+        routePlanned = false;
     }
 
     public void DrawRoute()
@@ -81,6 +90,7 @@ public class RouteManager : Monosingleton<RouteManager>
 
         if (routePlanned && logic.isRouteSelect())
         {
+            FuelGauge.instance.ResetValuesWithAnimation();
             Player.instance.SetNewBase(routePoints[routePoints.Count - 1]);
             if (!routePoints[0].IsCurrentBase())
             {
@@ -94,6 +104,8 @@ public class RouteManager : Monosingleton<RouteManager>
     // Routeè„ÇÃà⁄ìÆ
     public void MovePath()
     {
+        FuelGauge.instance.ShowFuelGauge();
+        FuelGauge.instance.ReduceValueOnMove();
         Player.instance.MovePath();
     }
 
@@ -126,6 +138,8 @@ public class RouteManager : Monosingleton<RouteManager>
     {
         routePlanned = false;
         SetStartPoint();
+
+        FuelGauge.instance.ResetValuesWithAnimation();
 
         // âº
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

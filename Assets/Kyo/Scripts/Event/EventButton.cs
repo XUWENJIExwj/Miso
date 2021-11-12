@@ -138,7 +138,7 @@ public class EventButton : Button
         return gridPos;
     }
 
-    public bool CheckDistance(EventButton Event)
+    public bool ImmovableDistance(EventButton Event)
     {
         Vector2Int distance = gridPos - Event.GetGridPos();
         return Mathf.Abs(distance.x) > 1 || Mathf.Abs(distance.y) > 1;
@@ -172,7 +172,7 @@ public class EventButton : Button
         {
             DoScaleUp();
 
-            if (CheckDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned())
+            if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned())
             {
                 eventButtonUI.moveability.text += "•s";
             }
@@ -196,7 +196,8 @@ public class EventButton : Button
     {
         if (!isSelected)
         {
-            if (CheckDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned()) return;
+            if (FuelGauge.instance.NoMoreFuel()) return;
+            if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned()) return;
 
             SetSelected(true);
             RouteManager.instance.AddRoutePoint(this);

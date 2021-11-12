@@ -60,7 +60,7 @@ public class BaseButton : EventButton
                 DoScaleUp();
             }
 
-            if (CheckDistance(RouteManager.instance.GetPreviousRoutePoint()) || !RouteManager.instance.RouteCouldBePlanned())
+            if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || !RouteManager.instance.RouteCouldBePlanned())
             {
                 baseButtonUI.moveability.text += "•s";
             }
@@ -87,7 +87,8 @@ public class BaseButton : EventButton
         {
             if (!isSelected)
             {
-                if (CheckDistance(RouteManager.instance.GetPreviousRoutePoint())) return;
+                if (FuelGauge.instance.NoMoreFuel()) return;
+                if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint())) return;
 
                 SetSelected(true);
                 RouteManager.instance.AddRoutePoint(this);
@@ -112,6 +113,8 @@ public class BaseButton : EventButton
 
         // Player‚ÌBase‚ðStartPoint‚É“o˜^
         RouteManager.instance.SetStartPoint();
+
+        //FuelGauge.instance.ResetMaxValue();
 
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

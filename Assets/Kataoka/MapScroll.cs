@@ -31,12 +31,9 @@ public class MapScroll : Monosingleton<MapScroll>
         image.material.SetVector("_Offset", uv.Offset);
     }
 
-    private void Start()
+    public void Init()
     {
         GlobalInfo.instance.SetMapSize(rectTransform.sizeDelta);
-        GridScroll.instance.Init();
-        EventUIManager.instance.Init();
-        EventButtonManager.instance.CreateEventButton();
     }
 
     public void OnDrag()
