@@ -5752,12 +5752,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300d4b7ba98c7254482be05b3dc28780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bg: {fileID: 1836521755}
   gauge: {fileID: 1923806737}
   valueText: {fileID: 978171461}
   currentValue: 0
   targetValue: 0
-  valueInterval: 2
-  fadeTime: 0.3
+  valueInterval: 0.02
+  fadeTime: 0.4
 --- !u!1001 &1856076436
 PrefabInstance:
   m_ObjectHideFlags: 0
