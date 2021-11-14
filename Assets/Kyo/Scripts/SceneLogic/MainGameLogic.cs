@@ -24,6 +24,7 @@ public class MainGameLogic : BaseSceneLogic
         Player.instance.Init();
         EventUIManager.instance.Init();
         FuelGauge.instance.Init();
+        Timer.instance.Init();
     }
 
     public override void UpdateScene()
@@ -61,7 +62,8 @@ public class MainGameLogic : BaseSceneLogic
     void RouteSelectPre()
     {
         EventButtonManager.instance.ActiveEventButton();
-        FuelGauge.instance.ActiveFuelGauge();
+        FuelGauge.instance.ActiveFuelGauge(Player.instance.GetCurrentAMAEnergy());
+        Timer.instance.ActiveTimer(Player.instance.GetCurrentAMATimePerGrid());
         SetNextSate(MainGameState.RouteSelect);
     }
 

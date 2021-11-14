@@ -23,23 +23,23 @@ public class FuelGauge : Monosingleton<FuelGauge>
         gameObject.SetActive(false);
     }
 
-    public void ActiveFuelGauge()
+    public void ActiveFuelGauge(int Value)
     {
         gameObject.SetActive(true);
-        ResetValues();
+        ResetValues(Value);
     }
 
-    public void ResetValues()
+    public void ResetValues(int Value)
     {
-        targetValue = Player.instance.GetCurrentAMASO().energy;
-        currentValue = targetValue;
+        targetValue = Value;
+        currentValue = Value;
         UpdateFuelGauge();
         KillTweener();
     }
 
-    public void ResetValuesWithAnimation()
+    public void ResetValuesWithAnimation(int Value)
     {
-        targetValue = Player.instance.GetCurrentAMASO().energy;
+        targetValue = Value;
         UpdateValues(0);
     }
 
@@ -99,17 +99,17 @@ public class FuelGauge : Monosingleton<FuelGauge>
 
     public void UpdateCurrentValue()
     {
-        valueText.text = currentValue.ToString() + "/" + Player.instance.GetCurrentAMASO().energy.ToString();
+        valueText.text = currentValue.ToString() + "/" + Player.instance.GetCurrentAMAEnergy().ToString();
     }
 
     public void UpdateFillAmount()
     {
-        gauge.fillAmount = (float)currentValue / Player.instance.GetCurrentAMASO().energy;
+        gauge.fillAmount = (float)currentValue / Player.instance.GetCurrentAMAEnergy();
     }
 
     public bool IsMaxGauge()
     {
-        return currentValue == Player.instance.GetCurrentAMASO().energy;
+        return currentValue == Player.instance.GetCurrentAMAEnergy();
     }
 
     public void KillTweener()
@@ -147,17 +147,17 @@ public class FuelGauge : Monosingleton<FuelGauge>
         return false;
     }
 
-    public void HideFuelGauge()
-    {
-        bg.color = HelperFunction.ChangeAlpha(bg.color, 0.0f);
-        gauge.color = HelperFunction.ChangeAlpha(gauge.color, 0.0f);
-        valueText.color = HelperFunction.ChangeAlpha(valueText.color, 0.0f);
-    }
-
     public void ShowFuelGauge()
     {
         bg.color = HelperFunction.ChangeAlpha(bg.color, 1.0f);
         gauge.color = HelperFunction.ChangeAlpha(gauge.color, 1.0f);
         valueText.color = HelperFunction.ChangeAlpha(valueText.color, 1.0f);
+    }
+
+    public void HideFuelGauge()
+    {
+        bg.color = HelperFunction.ChangeAlpha(bg.color, 0.0f);
+        gauge.color = HelperFunction.ChangeAlpha(gauge.color, 0.0f);
+        valueText.color = HelperFunction.ChangeAlpha(valueText.color, 0.0f);
     }
 }

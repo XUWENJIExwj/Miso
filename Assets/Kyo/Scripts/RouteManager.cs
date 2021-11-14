@@ -90,7 +90,7 @@ public class RouteManager : Monosingleton<RouteManager>
 
         if (routePlanned && logic.isRouteSelect())
         {
-            FuelGauge.instance.ResetValuesWithAnimation();
+            FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
             Player.instance.SetNewBase(routePoints[routePoints.Count - 1]);
             if (!routePoints[0].IsCurrentBase())
             {
@@ -139,7 +139,8 @@ public class RouteManager : Monosingleton<RouteManager>
         routePlanned = false;
         SetStartPoint();
 
-        FuelGauge.instance.ResetValuesWithAnimation();
+        FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
+        Timer.instance.ResetTimer(Player.instance.GetCurrentAMATimePerGrid());
 
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

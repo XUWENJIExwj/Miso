@@ -68,6 +68,16 @@ public class Player : Monosingleton<Player>
         return playerData.amas[(int)GetCurrentAMA()];
     }
 
+    public int GetCurrentAMAEnergy()
+    {
+        return playerData.amas[(int)GetCurrentAMA()].energy;
+    }
+
+    public int GetCurrentAMATimePerGrid()
+    {
+        return (int)playerData.amas[(int)GetCurrentAMA()].timePerGrid;
+    }
+
     public void SetCurrentEvent(EventButton Event)
     {
         currentEvent = Event;
@@ -184,8 +194,14 @@ public class Player : Monosingleton<Player>
             MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
             logic.SetNextSate(MainGameState.RouteMove);
 
-            tweener = transform.DOLocalMove(nextPoint.transform.localPosition, 1.0f); // GetCurrentAMASO().timePerGrid
+            //tweener = transform.DOLocalMove(nextPoint.transform.localPosition, 1.0f);
+            tweener = transform.DOLocalMove(nextPoint.transform.localPosition, GetCurrentAMATimePerGrid());
             tweener.SetEase(Ease.Linear);
+            tweener.OnStart(() =>
+            {
+                Timer.instance.ShowTimer();
+                Timer.instance.StartTimer(GetCurrentAMATimePerGrid());
+            });
             tweener.OnComplete(() =>
             {
                 nextPoint.SetSelected(false);
@@ -196,6 +212,7 @@ public class Player : Monosingleton<Player>
                 
                 SetCurrentEvent(nextPoint);
                 FuelGauge.instance.HideFuelGauge();
+                Timer.instance.HideTimer();
                 logic.SetNextSate(MainGameState.EventPlayPre);
             });
         }
