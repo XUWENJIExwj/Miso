@@ -63,7 +63,7 @@ public class MainGameLogic : BaseSceneLogic
     {
         EventButtonManager.instance.ActiveEventButton();
         FuelGauge.instance.ActiveFuelGauge(Player.instance.GetCurrentAMAEnergy());
-        Timer.instance.ActiveTimer(Player.instance.GetCurrentAMATimePerGrid());
+        Timer.instance.ActiveTimer();
         SetNextSate(MainGameState.RouteSelect);
     }
 

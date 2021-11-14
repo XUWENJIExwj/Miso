@@ -14,10 +14,10 @@ public class Timer : Monosingleton<Timer>
         gameObject.SetActive(false);
     }
 
-    public void ActiveTimer(int Time)
+    public void ActiveTimer()
     {
         gameObject.SetActive(true);
-        numberDisplay.SetValue(Time);
+        numberDisplay.SetValue(0);
     }
 
     public void ResetTimer(int Time)
@@ -32,7 +32,7 @@ public class Timer : Monosingleton<Timer>
 
     private IEnumerator CountDown(int Time)
     {
-        for (int time = Time - 1; time >= 0; --time)
+        for (int time = Time; time > 0; --time)
         {
             numberDisplay.SetValue(time);
             yield return new WaitForSeconds(1.0f);

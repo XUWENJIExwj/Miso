@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
-using EventScriptableObject;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 [Serializable]
 public struct PlayerData
@@ -34,6 +35,7 @@ public class Player : Monosingleton<Player>
 
         GlobalInfo.instance.playerData = playerData;
 
+        transform.SetAsLastSibling();
         gameObject.SetActive(false);
     }
 
@@ -56,7 +58,6 @@ public class Player : Monosingleton<Player>
     {
         return playerData.ama;
     }
-
 
     public bool CheckUnlockedAMAs(AMAs AMA)
     {
@@ -111,6 +112,11 @@ public class Player : Monosingleton<Player>
         GlobalInfo.instance.playerData = playerData;
     }
 
+    public EventButton GetCurrentBase()
+    {
+        return playerData.basePoint;
+    }
+
     public Vector3 CurrentBasePosition()
     {
         return playerData.basePoint.transform.localPosition;
@@ -141,6 +147,11 @@ public class Player : Monosingleton<Player>
 
         // ‰¼
         GlobalInfo.instance.playerData = playerData;
+    }
+
+    public int GetTotalPoint()
+    {
+        return playerData.totalPoint;
     }
 
     public int GetCurrentPoint()
@@ -194,14 +205,9 @@ public class Player : Monosingleton<Player>
             MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
             logic.SetNextSate(MainGameState.RouteMove);
 
-            //tweener = transform.DOLocalMove(nextPoint.transform.localPosition, 1.0f);
             tweener = transform.DOLocalMove(nextPoint.transform.localPosition, GetCurrentAMATimePerGrid());
             tweener.SetEase(Ease.Linear);
-            tweener.OnStart(() =>
-            {
-                Timer.instance.ShowTimer();
-                Timer.instance.StartTimer(GetCurrentAMATimePerGrid());
-            });
+            tweener.OnStart(() => { Timer.instance.StartTimer(GetCurrentAMATimePerGrid()); });
             tweener.OnComplete(() =>
             {
                 nextPoint.SetSelected(false);
@@ -218,15 +224,5 @@ public class Player : Monosingleton<Player>
         }
 
         EventUIManager.instance.ResetEventInfo();
-    }
-
-    public EventButton GetCurrentBase()
-    {
-        return playerData.basePoint;
-    }
-
-    public int GetTotalPoint()
-    {
-        return playerData.totalPoint;
     }
 }

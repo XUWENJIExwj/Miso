@@ -106,6 +106,7 @@ public class RouteManager : Monosingleton<RouteManager>
     {
         FuelGauge.instance.ShowFuelGauge();
         FuelGauge.instance.ReduceValueOnMove();
+        Timer.instance.ShowTimer();
         Player.instance.MovePath();
     }
 
@@ -140,7 +141,7 @@ public class RouteManager : Monosingleton<RouteManager>
         SetStartPoint();
 
         FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
-        Timer.instance.ResetTimer(Player.instance.GetCurrentAMATimePerGrid());
+        Timer.instance.ResetTimer(0);
 
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

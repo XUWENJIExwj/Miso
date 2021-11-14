@@ -71,7 +71,6 @@ public class EventButton : Button
         transform.localPosition = fixPos;
     }
 
-
     // 拡大
     public void DoScaleUp(float MaxScale = 1.5f, float Time = 0.5f)
     {
@@ -105,7 +104,12 @@ public class EventButton : Button
     // クリック時の処理
     public virtual void OnClick()
     {
-        OnRouteSelect();
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+
+        if (logic.isRouteSelect())
+        {
+            OnRouteSelect();
+        }
     }
 
     public bool IsBase()
@@ -172,11 +176,18 @@ public class EventButton : Button
         {
             DoScaleUp();
 
-            if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned())
+            if (FuelGauge.instance.NoMoreFuel())
             {
-                eventButtonUI.moveability.text += "不";
+                eventButtonUI.moveability.text += "燃料不足";
             }
-            eventButtonUI.moveability.text += "可";
+            else
+            {
+                if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned())
+                {
+                    eventButtonUI.moveability.text += "不";
+                }
+                eventButtonUI.moveability.text += "可";
+            }
         }
         eventButtonUI.frame.gameObject.SetActive(true);
     }

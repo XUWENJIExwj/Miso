@@ -60,11 +60,18 @@ public class BaseButton : EventButton
                 DoScaleUp();
             }
 
-            if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || !RouteManager.instance.RouteCouldBePlanned())
+            if (FuelGauge.instance.NoMoreFuel())
             {
-                baseButtonUI.moveability.text += "•s";
+                baseButtonUI.moveability.text += "”R—¿•s‘«";
             }
-            baseButtonUI.moveability.text += "‰Â";
+            else
+            {
+                if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || !RouteManager.instance.RouteCouldBePlanned())
+                {
+                    baseButtonUI.moveability.text += "•s";
+                }
+                baseButtonUI.moveability.text += "‰Â";
+            }
         }
 
         baseButtonUI.frame.gameObject.SetActive(true);
