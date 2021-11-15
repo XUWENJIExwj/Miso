@@ -176,6 +176,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e0b50603f3e1bac4b98ccf5e5666f12d, type: 2}
   - {fileID: 11400000, guid: 3721343f119cb9948946e0be953efd07, type: 2}
   - {fileID: 11400000, guid: f2d70fce95b2ea04fa7d87fcf59fb735, type: 2}
+  - {fileID: 11400000, guid: 8d9566656232e274b9cb04c17d43a319, type: 2}
+  - {fileID: 11400000, guid: 8dca1382a8a9bb747acb4dff84510a03, type: 2}
   randomEventList:
   - {fileID: 11400000, guid: 519a72b39cef5dd41badd7d99ceb5e33, type: 2}
   eventRatio:
@@ -232,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 2
-  onTest: 1
+  onTest: 0
   sceneLogic: {fileID: 0}
 --- !u!4 &1312915223
 Transform:
