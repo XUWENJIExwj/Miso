@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002833ec740ec6e49932921c1b7a7632, type: 3}
   m_Name: SubEvent_01
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   icon: {fileID: 21300000, guid: 95b62ff1653ca5440aa1a9607c53d407, type: 3}
   type: 1
   typeText: "\u30B5\u30D6\u30A4\u30D9\u30F3\u30C8"

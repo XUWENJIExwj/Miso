@@ -91,7 +91,7 @@ namespace EventScriptableObject
         public MainEventOption[] optionFirst;
         public MainEventOptionNext[] optionNext;
         public MainEventOptionEx[] optionSecond;
-        public MainEventPhase mainEventPhase = MainEventPhase.Phase_None;
+        [SerializeField] private MainEventPhase mainEventPhase = MainEventPhase.Phase_None;
         public MainEventProgress progress;
         public float printInterval = 0.1f;
         public bool onPrint = false;

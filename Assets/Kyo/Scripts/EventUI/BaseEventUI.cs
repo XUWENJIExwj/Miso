@@ -121,15 +121,27 @@ public class BaseEventUI : EventUI
         float interval = Time / Step;
         int step = (TargetPoint - currentPoint) / Step;
 
-        while(currentPoint < TargetPoint)
+        while (currentPoint != TargetPoint)
         {
             currentPoint += step;
 
-            if(currentPoint >= TargetPoint)
+            if (step > 0)
             {
-                currentPoint = TargetPoint;
-                pointText.text = "Point: " + currentPoint.ToString();
-                yield break;
+                if (currentPoint >= TargetPoint)
+                {
+                    currentPoint = TargetPoint;
+                    pointText.text = "Point: " + currentPoint.ToString();
+                    yield break;
+                }
+            }
+            else
+            {
+                if (currentPoint <= TargetPoint)
+                {
+                    currentPoint = TargetPoint;
+                    pointText.text = "Point: " + currentPoint.ToString();
+                    yield break;
+                }
             }
 
             pointText.text = "Point: " + currentPoint.ToString();

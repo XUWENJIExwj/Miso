@@ -18,7 +18,7 @@ namespace EventScriptableObject
         [TextArea(5, 20)] public string eventSummary;
         [TextArea(5, 20)] public string eventReport;
         public float[] bonusRatio = new float[] { 1.0f, 1.2f }; // ‘Š«F•’ÊA—Ç‚¢
-        public SubEventPhase subEventPhase = SubEventPhase.Phase_None;
+        [SerializeField] private SubEventPhase subEventPhase = SubEventPhase.Phase_None;
         public float frameFadeTime = 0.8f;
         private Tweener tweener = null;
 

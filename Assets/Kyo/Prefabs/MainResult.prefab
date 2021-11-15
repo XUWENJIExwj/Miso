@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ce023575f68b64c997c8268055f21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 0
   result:
     resultFrame: {fileID: 6076435730430640844}
     eventName: {fileID: 6076435731233441884}

@@ -92,11 +92,13 @@ public class RouteManager : Monosingleton<RouteManager>
         {
             FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
             Player.instance.SetNewBase(routePoints[routePoints.Count - 1]);
+            Player.instance.ResetEncounter();
             if (!routePoints[0].IsCurrentBase())
             {
                 routePoints[0].DoScaleDown();
             }
             routePoints.RemoveAt(0);
+
             MovePath();
         }
     }

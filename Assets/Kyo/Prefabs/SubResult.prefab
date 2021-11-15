@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b569cd99ef70e1b46900ecdb03852506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 0
   result:
     resultFrame: {fileID: 5242067058858928872}
     eventName: {fileID: 5242067057434453407}

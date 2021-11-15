@@ -16,10 +16,16 @@ MonoBehaviour:
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 2
   typeText: "\u30E9\u30F3\u30C0\u30E0\u30A4\u30D9\u30F3\u30C8"
-  eventTitle: RandomEvent
+  eventTitle: "\u7ADC\u5DFB\u304C\u906D\u9047"
+  amaType: 3
   pointRange:
-    min: 10
-    max: 20
+    min: -400
+    max: -400
   point: 0
-  eventSummary: 
+  eventSummary: "\u5F37\u3044\u7ADC\u5DFB\u304C\u906D\u9047\u3057\u307E\u3057\u305F\uFF01"
+  eventReport: "\u8CC7\u6E90\u306E\u640D\u5BB3\u304C\u767A\u751F\uFF01"
+  bonusRatio:
+  - 1
+  - 1.2
   subEventPhase: 2
+  frameFadeTime: 0.8

@@ -14,6 +14,8 @@ public struct PlayerData
     public EventButton basePoint;
     public int totalPoint;
     public int currentPoint;
+    public int encounter;
+    public int encounterRatio;
 }
 
 [Serializable]
@@ -32,6 +34,8 @@ public class Player : Monosingleton<Player>
         playerData.basePoint = null;
         playerData.totalPoint = 0;
         playerData.currentPoint = 0;
+        playerData.encounter = 2;
+        playerData.encounterRatio = 2;
 
         GlobalInfo.instance.playerData = playerData;
 
@@ -157,6 +161,28 @@ public class Player : Monosingleton<Player>
     public int GetCurrentPoint()
     {
         return playerData.currentPoint;
+    }
+
+    public void ResetEncounter()
+    {
+        playerData.encounter = 2;
+
+        // ‰¼
+        GlobalInfo.instance.playerData = playerData;
+    }
+
+    public bool Encounter()
+    {
+        if (UnityEngine.Random.Range(0, 10) <= playerData.encounter)
+        {
+            ResetEncounter();
+            return true;
+        }
+        playerData.encounter += playerData.encounterRatio;
+
+        // ‰¼
+        GlobalInfo.instance.playerData = playerData;
+        return false;
     }
 
     // PlayerMove
