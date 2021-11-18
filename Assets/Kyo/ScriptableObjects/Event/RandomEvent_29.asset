@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40ddcc2d01c80e4cb0b5fa41407b20c, type: 3}
-  m_Name: RandomEvent_00
+  m_Name: RandomEvent_29
   m_EditorClassIdentifier: 
-  id: 0
+  id: 29
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 2
   typeText: "\u30E9\u30F3\u30C0\u30E0\u30A4\u30D9\u30F3\u30C8"
-  eventTitle: "\u7ADC\u5DFB\u3068\u906D\u9047"
+  eventTitle: "\u98DB\u884C\u6A5F\u304C\u589C\u843D\u3057\u305F"
   amaType: 3
   pointRange:
-    min: -400
-    max: -400
+    min: 200
+    max: 200
   point: 0
-  eventSummary: "\u5F37\u3044\u7ADC\u5DFB\u304C\u906D\u9047\u3057\u307E\u3057\u305F\uFF01"
-  eventReport: "\u8CC7\u6E90\u306E\u640D\u5BB3\u304C\u767A\u751F\uFF01"
+  eventSummary: "\u99C6\u3051\u3064\u3051\u3066\u307F\u305F"
+  eventReport: "\u6B8B\u9AB8\u304C\u6563\u3089\u3070\u3063\u3066\u3044\u305F"
   bonusRatio:
   - 1
   - 1.2
-  subEventPhase: 2
+  subEventPhase: 4
   frameFadeTime: 0.8
   randomEventPhase: 4

@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 002833ec740ec6e49932921c1b7a7632, type: 3}
-  m_Name: SubEvent_04
+  m_Name: SubEvent_14
   m_EditorClassIdentifier: 
-  id: 4
+  id: 14
   icon: {fileID: 21300000, guid: 95b62ff1653ca5440aa1a9607c53d407, type: 3}
   type: 1
   typeText: "\u30B5\u30D6\u30A4\u30D9\u30F3\u30C8"
-  eventTitle: "\u6D77\u5E95\u306B\u6C88\u3093\u3060\u8239\u3092\u767A\u898B"
-  amaType: 1
+  eventTitle: "\u4E0D\u5BE9\u8239\u306E\u884C\u65B9"
+  amaType: 2
   pointRange:
     min: 900
-    max: 1200
+    max: 1100
   point: 0
-  eventSummary: "\u6D77\u5E95\u306B\u6C88\u3093\u3060\u8239\u3092\u767A\u898B,\u5BFE\u51E6\u3092\u304A\u9858\u3044\u3057\u307E\u3059\u3002"
-  eventReport: "\u8CC7\u6E90\u767A\u898B\u3057\u307E\u3057\u305F\uFF01"
+  eventSummary: "\u4E0D\u5BE9\u8239\u3092\u8FFD\u8DE1\u3057\u5BC6\u8F38\u7D44\u7E54\u3092\u898B\u3064\u3051\u3066\u901A\u5831\u3057\u305F"
+  eventReport: "\u4EFB\u52D9\u5B8C\u4E86\u3057\u307E\u3057\u305F\uFF01"
   bonusRatio:
   - 1
   - 1.2

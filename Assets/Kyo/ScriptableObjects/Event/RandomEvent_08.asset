@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40ddcc2d01c80e4cb0b5fa41407b20c, type: 3}
-  m_Name: RandomEvent_00
+  m_Name: RandomEvent_08
   m_EditorClassIdentifier: 
-  id: 0
+  id: 8
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   type: 2
   typeText: "\u30E9\u30F3\u30C0\u30E0\u30A4\u30D9\u30F3\u30C8"
-  eventTitle: "\u7ADC\u5DFB\u3068\u906D\u9047"
+  eventTitle: "\u30AF\u30B8\u30E9\u306E\u7FA4\u308C\u306B\u906D\u9047"
   amaType: 3
   pointRange:
     min: -400
     max: -400
   point: 0
-  eventSummary: "\u5F37\u3044\u7ADC\u5DFB\u304C\u906D\u9047\u3057\u307E\u3057\u305F\uFF01"
-  eventReport: "\u8CC7\u6E90\u306E\u640D\u5BB3\u304C\u767A\u751F\uFF01"
+  eventSummary: "\u8DDD\u96E2\u3092\u4FDD\u3064\u305F\u3081\u306B\u822A\u8DEF\u3092\u5C11\u3057\u5909\u3048\u305F"
+  eventReport: "\u8CC7\u6E90\u306E\u4F59\u5206\u306A\u6D88\u8CBB"
   bonusRatio:
   - 1
   - 1.2
