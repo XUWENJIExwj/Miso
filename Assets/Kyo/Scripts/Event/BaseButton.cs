@@ -7,20 +7,14 @@ using System;
 using TMPro;
 using UnityEngine.UI;
 
-[Serializable]
-public struct BaseButtonUIElement
-{
-    public Image frame;
-    public TMP_Text eventDesc;
-    public TMP_Text moveability;
-    public Image ama;
-    public TMP_Text amaType;
-    public TMP_Text got;
-}
-
 public class BaseButton : EventButton
 {
-    [SerializeField] private BaseButtonUIElement baseButtonUI;
+    [SerializeField] private BaseIndex baseIndex = BaseIndex.None;
+
+    public override void CreateEvent()
+    {
+        eventSO = GlobalInfo.instance.CreateEventSO(baseIndex);
+    }
 
     public override void OnClick()
     {
@@ -39,19 +33,23 @@ public class BaseButton : EventButton
 
     public override void ShowEventPreview()
     {
-        baseButtonUI.eventDesc.text = eventSO.eventTitle;
-        baseButtonUI.moveability.text = "移動: ";
-        //baseButtonUI.ama.sprite = Base用のAMASprite辞書を用意する
-        baseButtonUI.amaType.text = DictionaryManager.instance.GetAMAType(eventSO.amaType);
-        baseButtonUI.got.text = "未獲得";
+        BaseEventPreview eventPreview = EventButtonManager.instance.GetBaseEventPreview();
+        eventPreview.gameObject.SetActive(true);
+        eventPreview.ResetPreview();
+        eventPreview.SetPosition(transform.localPosition);
+        eventPreview.SetEventDesc(eventSO.eventTitle);
+        eventPreview.SetMoveability("移動: ");
+        //eventPreview.SetAMASprite(Sprite AMA) Base用のAMASprite辞書を用意する
+        eventPreview.SetAMAType(DictionaryManager.instance.GetAMAType(eventSO.amaType));
+        eventPreview.SetGot("未獲得");
         if (Player.instance.CheckUnlockedAMAs(((BaseEventSO)eventSO).ama))
         {
-            baseButtonUI.got.text = "獲得済み";
+            eventPreview.SetGot("獲得済み");
         }
 
         if (isSelected)
         {
-            baseButtonUI.moveability.text += "選択中";
+            eventPreview.AddMoveability("選択中");
         }
         else
         {
@@ -62,19 +60,17 @@ public class BaseButton : EventButton
 
             if (FuelGauge.instance.NoMoreFuel())
             {
-                baseButtonUI.moveability.text += "燃料不足";
+                eventPreview.AddMoveability("燃料不足");
             }
             else
             {
                 if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || !RouteManager.instance.RouteCouldBePlanned())
                 {
-                    baseButtonUI.moveability.text += "不";
+                    eventPreview.AddMoveability("不");
                 }
-                baseButtonUI.moveability.text += "可";
+                eventPreview.AddMoveability("可");
             }
         }
-
-        baseButtonUI.frame.gameObject.SetActive(true);
     }
 
     public override void EndEventPreview()
@@ -83,13 +79,15 @@ public class BaseButton : EventButton
         {
             DoScaleDown();
         }
-        baseButtonUI.frame.gameObject.SetActive(false);
+        BaseEventPreview eventPreview = EventButtonManager.instance.GetBaseEventPreview();
+        eventPreview.gameObject.SetActive(false);
     }
 
     // Stateごとの処理
     // RouteSelect
     public override void OnRouteSelect()
     {
+        BaseEventPreview eventPreview = EventButtonManager.instance.GetBaseEventPreview();
         if (RouteManager.instance.RouteCouldBePlanned())
         {
             if (!isSelected)
@@ -99,13 +97,13 @@ public class BaseButton : EventButton
 
                 SetSelected(true);
                 RouteManager.instance.AddRoutePoint(this);
-                baseButtonUI.moveability.text = "移動: 選択中";
+                eventPreview.SetMoveability("移動: 選択中");
             }
             else
             {
                 SetSelected(false);
                 RouteManager.instance.RemoveRoutePoints(this);
-                baseButtonUI.moveability.text = "移動: 可";
+                eventPreview.SetMoveability("移動: 可");
             }
             RouteManager.instance.SetRoutePlanned(isSelected);
         }
@@ -165,10 +163,5 @@ public class BaseButton : EventButton
     public AMAs GetAMA()
     {
         return ((BaseEventSO)eventSO).ama;
-    }
-
-    public new BaseButtonUIElement GetEventButtonUIElement()
-    {
-        return baseButtonUI;
     }
 }

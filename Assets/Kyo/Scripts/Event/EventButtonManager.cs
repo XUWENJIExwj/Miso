@@ -5,56 +5,45 @@ using EventScriptableObject;
 
 public class EventButtonManager : Monosingleton<EventButtonManager>
 {
-    [SerializeField] private GameObject[] eventPrefabs = null;
+    [SerializeField] private EventPreview eventPreview = null;
+    [SerializeField] private BaseEventPreview baseEventPreview = null;
+    [SerializeField] private OceanEventButtons[] oceanEventButtons = null;
     [SerializeField] private List<EventButton> events = null;
 
     public override void InitAwake()
     {
+        oceanEventButtons = GetComponentsInChildren<OceanEventButtons>();
         events = new List<EventButton>();
     }
 
     public void Init()
     {
-        CreateEventButton();
+        eventPreview.Init();
+        baseEventPreview.Init();
+
+        foreach (OceanEventButtons oceanEventButton in oceanEventButtons)
+        {
+            oceanEventButton.Init();
+            events.AddRange(oceanEventButton.GetEventButtons());
+        }
     }
 
-    public void CreateEventButton()
+    public EventPreview GetEventPreview()
     {
-        Vector2 gridTiling = GridScroll.instance.GetUVTiling();
-        Vector2 gridOffset = GridScroll.instance.GetFixedUVOffset();
-        Vector2 interval = GlobalInfo.instance.mapSize / gridTiling;
+        return eventPreview;
+    }
 
-        for (int i = 0; i < gridTiling.y; ++i)
-        {
-            for (int j = 0; j < gridTiling.x; ++j)
-            {
-                EventSO eventSO = GlobalInfo.instance.CreateEventSO(j, i);
-
-                // (int)eventSO.type / (int)EventSOType.Base = 0 (EventButton)
-                // (int)eventSO.type / (int)EventSOType.Base = 1 (BaseButton)
-                EventButton eventButton = Instantiate(eventPrefabs[(int)eventSO.type / (int)EventSOType.Base], transform).GetComponent<EventButton>();
-                eventButton.transform.localPosition = new Vector3(
-                    -GlobalInfo.instance.halfMapSize.x + j * interval.x - gridOffset.x * interval.x,
-                    GlobalInfo.instance.halfMapSize.y - i * interval.y - gridOffset.y * interval.y,
-                    0.0f);
-                eventButton.gameObject.name = "EventButton_" + (i * gridTiling.x + j).ToString("000");
-                eventButton.FixPostion();
-                eventButton.Init(eventSO, j, i);
-                events.Add(eventButton);
-            }
-        }
+    public BaseEventPreview GetBaseEventPreview()
+    {
+        return baseEventPreview;
     }
 
     public void Move(Vector2 Offset)
     {
-        Vector2 offset = Offset * GlobalInfo.instance.mapSize;
-
         foreach (EventButton eventButton in events)
         {
-            eventButton.Move(offset);
+            eventButton.Move(Offset);
         }
-
-        RouteManager.instance.SetPlayerPostion(offset);
     }
 
     public void ActiveEventButton()

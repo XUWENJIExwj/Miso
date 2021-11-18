@@ -168,8 +168,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b9d6eadcf6a9764da4075849a00e9e3, type: 2}
   - {fileID: 11400000, guid: a1bcaea477ffdec40af459fa9b2e6ff4, type: 2}
   - {fileID: 11400000, guid: ab413e70fb61c3f4580eea8be6d30a6d, type: 2}
-  - {fileID: 11400000, guid: b93bfdaa5626e3a4fb9b6360d065014d, type: 2}
   - {fileID: 11400000, guid: 873d44253998e874daea572797d1f24d, type: 2}
+  - {fileID: 11400000, guid: b93bfdaa5626e3a4fb9b6360d065014d, type: 2}
   mainEventList:
   - {fileID: 11400000, guid: 4f8e1fa14760e6548a076f6f886b1399, type: 2}
   subEventList:
@@ -190,6 +190,8 @@ MonoBehaviour:
     basePoint: {fileID: 0}
     totalPoint: 0
     currentPoint: 0
+    encounter: 0
+    encounterRatio: 0
 --- !u!4 &784785529
 Transform:
   m_ObjectHideFlags: 0

@@ -6,33 +6,33 @@ using UnityEngine.EventSystems;
 using EventScriptableObject;
 using TMPro;
 using DG.Tweening;
-using System;
-
-[Serializable]
-public struct EventButtonUIElement
-{
-    public Image frame;
-    public TMP_Text eventDesc;
-    public TMP_Text moveability;
-    public TMP_Text amaType;
-    public TMP_Text pointRange;
-}
 
 public class EventButton : Button
 {
     [SerializeField] protected Vector2Int gridPos = Vector2Int.zero;
     [SerializeField] protected bool isSelected = false;
     [SerializeField] protected EventSO eventSO = null;
-    [SerializeField] private EventButtonUIElement eventButtonUI;
+    [SerializeField] protected Oceans ocean = Oceans.None;
+    [SerializeField] protected OceanAreas oceanArea = OceanAreas.None;
     static protected Vector2 size = new Vector2(30.0f, 30.0f);
 
-    public void Init(EventSO Event, int X, int Y)
+    public void Init(Oceans Ocean, OceanAreas OceanArea)
     {
-        gridPos.x = X;
-        gridPos.y = Y;
-        eventSO = Event;
-        image.sprite = Event.icon;
-        gameObject.SetActive(IsBase());
+        SetOceanInfo(Ocean, OceanArea);
+        CreateEvent();
+    }
+
+    public void SetOceanInfo(Oceans Ocean, OceanAreas OceanArea)
+    {
+        ocean = Ocean;
+        oceanArea = OceanArea;
+    }
+
+    public virtual void CreateEvent()
+    {
+        eventSO = GlobalInfo.instance.CreateEventSO();
+        image.sprite = eventSO.icon;
+        gameObject.SetActive(false);
     }
 
     public void Move(Vector2 Offset)
@@ -56,16 +56,6 @@ public class EventButton : Button
         else if (transform.localPosition.x > GlobalInfo.instance.halfMapSize.x)
         {
             fixPos.x = transform.localPosition.x - GlobalInfo.instance.mapSize.x;
-        }
-
-        // Y軸
-        if (transform.localPosition.y < -GlobalInfo.instance.halfMapSize.y)
-        {
-            fixPos.y = transform.localPosition.y + GlobalInfo.instance.mapSize.y;
-        }
-        else if (transform.localPosition.y > GlobalInfo.instance.halfMapSize.y)
-        {
-            fixPos.y = transform.localPosition.y - GlobalInfo.instance.mapSize.y;
         }
 
         transform.localPosition = fixPos;
@@ -150,27 +140,32 @@ public class EventButton : Button
 
     public virtual void ShowEventPreview()
     {
-        eventButtonUI.moveability.text = "移動: ";
+        EventPreview eventPreview = EventButtonManager.instance.GetEventPreview();
+        eventPreview.gameObject.SetActive(true);
+        eventPreview.ResetPreview();
+        eventPreview.SetPosition(transform.localPosition);
+        eventPreview.SetMoveability("移動: ");
 
         if (eventSO.IsRandomEvent())
         {
-            eventButtonUI.eventDesc.text = "何か起こるかも";
-            eventButtonUI.amaType.gameObject.SetActive(false);
-            eventButtonUI.pointRange.gameObject.SetActive(false);
+            eventPreview.FixPosition();
+            eventPreview.SetEventDesc("何か起こるかも");
+            eventPreview.SetAMATypeActive(false);
+            eventPreview.SetPointRangeActive(false);
         }
         else
         {
-            eventButtonUI.eventDesc.text = eventSO.eventTitle;
-            eventButtonUI.amaType.text = "有利タイプ: " + DictionaryManager.instance.GetAMAType(eventSO.amaType);
-            eventButtonUI.amaType.gameObject.SetActive(true);
+            eventPreview.SetEventDesc(eventSO.eventTitle);
+            eventPreview.SetAMAType("有利タイプ: " + DictionaryManager.instance.GetAMAType(eventSO.amaType));
+            eventPreview.SetAMATypeActive(true);
             eventSO.MakePointRange();
-            eventButtonUI.pointRange.text = "Point: " + eventSO.pointRange.min.ToString() + "～" + eventSO.pointRange.max.ToString();
-            eventButtonUI.pointRange.gameObject.SetActive(true);
+            eventPreview.SetPointRange("Point: " + eventSO.pointRange.min.ToString() + "～" + eventSO.pointRange.max.ToString());
+            eventPreview.SetPointRangeActive(true);
         }
 
         if (isSelected)
         {
-            eventButtonUI.moveability.text += "選択中";
+            eventPreview.AddMoveability("選択中");
         }
         else
         {
@@ -178,18 +173,17 @@ public class EventButton : Button
 
             if (FuelGauge.instance.NoMoreFuel())
             {
-                eventButtonUI.moveability.text += "燃料不足";
+                eventPreview.AddMoveability("燃料不足");
             }
             else
             {
                 if (ImmovableDistance(RouteManager.instance.GetPreviousRoutePoint()) || RouteManager.instance.RoutePlanned())
                 {
-                    eventButtonUI.moveability.text += "不";
+                    eventPreview.AddMoveability("不");
                 }
-                eventButtonUI.moveability.text += "可";
+                eventPreview.AddMoveability("可");
             }
         }
-        eventButtonUI.frame.gameObject.SetActive(true);
     }
 
     public virtual void EndEventPreview()
@@ -198,13 +192,15 @@ public class EventButton : Button
         {
             DoScaleDown();
         }
-        eventButtonUI.frame.gameObject.SetActive(false);
+        EventPreview eventPreview = EventButtonManager.instance.GetEventPreview();
+        eventPreview.gameObject.SetActive(false);
     }
 
     // Stateごとの処理
     // RouteSelect
     public virtual void OnRouteSelect()
     {
+        EventPreview eventPreview = EventButtonManager.instance.GetEventPreview();
         if (!isSelected)
         {
             if (FuelGauge.instance.NoMoreFuel()) return;
@@ -212,13 +208,13 @@ public class EventButton : Button
 
             SetSelected(true);
             RouteManager.instance.AddRoutePoint(this);
-            eventButtonUI.moveability.text = "移動: 選択中";
+            eventPreview.SetMoveability("移動: 選択中");
         }
         else
         {
             SetSelected(false);
             RouteManager.instance.RemoveRoutePoints(this);
-            eventButtonUI.moveability.text = "移動: 可";
+            eventPreview.SetMoveability("移動: 可");
         }
     }
 
@@ -255,10 +251,5 @@ public class EventButton : Button
         {
             EndEventPreview();
         }
-    }
-
-    public EventButtonUIElement GetEventButtonUIElement()
-    {
-        return eventButtonUI;
     }
 }

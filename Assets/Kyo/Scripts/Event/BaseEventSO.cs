@@ -4,6 +4,17 @@ using UnityEngine;
 
 namespace EventScriptableObject
 {
+    public enum BaseIndex
+    {
+        AR_02_Base,
+        AT_01_Base,
+        PC_01_Base,
+        PC_05_Base,
+        PC_07_Base,
+        IN_02_Base,
+        None,
+    }
+
     public enum BaseEventPhase
     {
         Phase_Result,
@@ -15,7 +26,6 @@ namespace EventScriptableObject
     public class BaseEventSO : EventSO
     {
         public AMAs ama = AMAs.Max;
-        public Vector2Int pos;
         public BaseEventPhase baseEventPhase = BaseEventPhase.Phase_None;
 
         protected override void Init()

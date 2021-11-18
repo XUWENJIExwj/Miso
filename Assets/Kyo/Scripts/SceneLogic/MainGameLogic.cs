@@ -20,6 +20,7 @@ public class MainGameLogic : BaseSceneLogic
     {
         MapScroll.instance.Init();
         GridScroll.instance.Init();
+        PollutionMap.instance.Init();
         EventButtonManager.instance.Init();
         Player.instance.Init();
         EventUIManager.instance.Init();

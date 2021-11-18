@@ -58,18 +58,13 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     }
 
     // EventButtonにEventの情報を与える
-    public EventSO CreateEventSO(int X, int Y)
+    public EventSO CreateEventSO(BaseIndex Index)
     {
-        // 特定の座標であれば、Baseを返す
-        for (int i = 0; i < baseList.Count; ++i)
-        {
-            if (X == baseList[i].pos.x && Y == baseList[i].pos.y)
-            {
-                return baseList[i];
-            }
-        }
+        return baseList[(int)Index];
+    }
 
-        // その他の座標であれば、Eventを返す
+    public EventSO CreateEventSO()
+    {
         float ratio = UnityEngine.Random.Range(0.0f, 1.0f);
         if (ratio < eventRatio[(int)EventSOType.MainEvent])
         {

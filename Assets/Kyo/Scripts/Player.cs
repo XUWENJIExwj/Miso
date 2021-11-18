@@ -39,7 +39,6 @@ public class Player : Monosingleton<Player>
 
         GlobalInfo.instance.playerData = playerData;
 
-        transform.SetAsLastSibling();
         gameObject.SetActive(false);
     }
 
@@ -186,7 +185,7 @@ public class Player : Monosingleton<Player>
     }
 
     // PlayerMove
-    public void SetPosition(Vector2 Offset)
+    public void Move(Vector2 Offset)
     {
         transform.localPosition += new Vector3(Offset.x, Offset.y, 0.0f);
 
@@ -207,16 +206,6 @@ public class Player : Monosingleton<Player>
         else if (transform.localPosition.x > GlobalInfo.instance.halfMapSize.x)
         {
             fixPos.x = transform.localPosition.x - GlobalInfo.instance.mapSize.x;
-        }
-
-        // YŽ²
-        if (transform.localPosition.y < -GlobalInfo.instance.halfMapSize.y)
-        {
-            fixPos.y = transform.localPosition.y + GlobalInfo.instance.mapSize.y;
-        }
-        else if (transform.localPosition.y > GlobalInfo.instance.halfMapSize.y)
-        {
-            fixPos.y = transform.localPosition.y - GlobalInfo.instance.mapSize.y;
         }
 
         transform.localPosition = fixPos;

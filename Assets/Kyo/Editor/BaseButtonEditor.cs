@@ -5,8 +5,15 @@ using UnityEditor.UI;
 [CanEditMultipleObjects]
 public class BaseButtonEditor : EventButtonEditor
 {
-    public override void FindButtonUIProperty()
+    private SerializedProperty baseIndex;
+
+    public override void FindEventButtonProperty()
     {
-        eventButtonUI = serializedObject.FindProperty("baseButtonUI");
+        baseIndex = serializedObject.FindProperty("baseIndex");
+    }
+
+    public override void AddEventButtonPropertyField()
+    {
+        EditorGUILayout.PropertyField(baseIndex);
     }
 }

@@ -112,11 +112,6 @@ public class RouteManager : Monosingleton<RouteManager>
         Player.instance.MovePath();
     }
 
-    public void SetPlayerPostion(Vector3 Offset)
-    {
-        Player.instance.SetPosition(Offset);
-    }
-
     public EventButton GetPreviousRoutePoint()
     {
         return routePoints[routePoints.Count - 1];

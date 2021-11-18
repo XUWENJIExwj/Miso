@@ -13,27 +13,30 @@ public struct UVScrollProperty
 
 public class MapScroll : Monosingleton<MapScroll>
 {
-    [SerializeField] private RectTransform rectTransform = null;
-    [SerializeField] private Image image = null;
+    [SerializeField] private RectTransform[] rectTransform = null;
+    [SerializeField] private Image[] image = null;
     [SerializeField] private UVScrollProperty uv;
     [SerializeField] private float scrollSpeed = 2.0f;
     [SerializeField] private bool onDrag = true;
 
     public override void InitAwake()
     {
-        // åªç›ÇÃScreenSizeÇ…çáÇÌÇπÇƒÅAMapÇÃÉTÉCÉYÇî‰ó·ìIÇ…ägëÂèkè¨
-        rectTransform.sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform.sizeDelta.y * rectTransform.sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
+        for (int i = 0; i < rectTransform.Length; ++i)
+        {
+            // åªç›ÇÃScreenSizeÇ…çáÇÌÇπÇƒÅAMapÇÃÉTÉCÉYÇî‰ó·ìIÇ…ägëÂèkè¨
+            rectTransform[i].sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform[i].sizeDelta.y * rectTransform[i].sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
 
-        // ägëÂèkè¨ÇÃèâä˙âª
-        image.material.SetVector("_Tiling", uv.Tiling);
+            // ägëÂèkè¨ÇÃèâä˙âª
+            image[i].material.SetVector("_Tiling", uv.Tiling);
 
-        // UVScrollÇÃèâä˙âª
-        image.material.SetVector("_Offset", uv.Offset);
+            // UVScrollÇÃèâä˙âª
+            image[i].material.SetVector("_Offset", uv.Offset);
+        }
     }
 
     public void Init()
     {
-        GlobalInfo.instance.SetMapSize(rectTransform.sizeDelta);
+        GlobalInfo.instance.SetMapSize(rectTransform[0].sizeDelta);
     }
 
     public void OnDrag()
@@ -41,11 +44,16 @@ public class MapScroll : Monosingleton<MapScroll>
         if (Input.GetMouseButton(0) && onDrag)
         {
             // UVScroll
-            Vector2 offset = new Vector2(scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse X"), scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse Y"));
+            Vector2 offset = new Vector2(scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse X"), 0.0f);
             uv.Offset -= offset;
-            image.material.SetVector("_Offset", uv.Offset);
+            image[0].material.SetVector("_Offset", uv.Offset);
+            image[1].material.SetVector("_Offset", uv.Offset);
             GridScroll.instance.Move(offset);
+
+            offset *= GlobalInfo.instance.mapSize;
+            PollutionMap.instance.Move(offset);
             EventButtonManager.instance.Move(offset);
+            Player.instance.Move(offset);
             RouteManager.instance.DrawRoute();
         }
     }

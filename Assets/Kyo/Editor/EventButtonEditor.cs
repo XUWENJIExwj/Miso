@@ -8,7 +8,8 @@ public class EventButtonEditor : ButtonEditor
     protected SerializedProperty gridPos;
     protected SerializedProperty isSelected;
     protected SerializedProperty eventSO;
-    protected SerializedProperty eventButtonUI;
+    private SerializedProperty ocean;
+    private SerializedProperty oceanArea;
 
     protected override void OnEnable()
     {
@@ -16,12 +17,13 @@ public class EventButtonEditor : ButtonEditor
         gridPos = serializedObject.FindProperty("gridPos");
         isSelected = serializedObject.FindProperty("isSelected");
         eventSO = serializedObject.FindProperty("eventSO");
-        FindButtonUIProperty();
+        FindEventButtonProperty();
     }
 
-    public virtual void FindButtonUIProperty()
+    public virtual void FindEventButtonProperty()
     {
-        eventButtonUI = serializedObject.FindProperty("eventButtonUI");
+        ocean = serializedObject.FindProperty("ocean");
+        oceanArea = serializedObject.FindProperty("oceanArea");
     }
 
     public override void OnInspectorGUI()
@@ -32,7 +34,13 @@ public class EventButtonEditor : ButtonEditor
         EditorGUILayout.PropertyField(gridPos);
         EditorGUILayout.PropertyField(isSelected);
         EditorGUILayout.PropertyField(eventSO);
-        EditorGUILayout.PropertyField(eventButtonUI);
+        AddEventButtonPropertyField();
         serializedObject.ApplyModifiedProperties();
+    }
+
+    public virtual void AddEventButtonPropertyField()
+    {
+        EditorGUILayout.PropertyField(ocean);
+        EditorGUILayout.PropertyField(oceanArea);
     }
 }
