@@ -16,7 +16,7 @@ public enum AMAs
     Higashi,    // 東シナ
     Gibraltar,  // ジブラルタル
     Arctic,     // 北極
-    Pirinesia,  // ピリネシア Polynesia
+    Polynesia,  // ポリネシア
     Panama,     // パナマ
     Mozambique, // モザンビーク
     Max,

@@ -37,6 +37,11 @@ public class GridScroll : Monosingleton<GridScroll>
         image.material.SetVector("_Offset", uv.Offset);
     }
 
+    public Vector2 GetGridInterval()
+    {
+        return rectTransform.sizeDelta / uv.Tiling;
+    }
+
     public Vector2 GetUVTiling()
     {
         return uv.Tiling;

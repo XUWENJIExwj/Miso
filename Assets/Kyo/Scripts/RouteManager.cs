@@ -5,15 +5,28 @@ using UnityEngine;
 public class RouteManager : Monosingleton<RouteManager>
 {
     [SerializeField] private List<EventButton> routePoints = null;
-    [SerializeField] private LineRenderer routeLine = null;
+    [SerializeField] private LineRenderer prefab = null;
+    [SerializeField] private List<LineRenderer> routes = null;
     [SerializeField] private float lineWidth = 0.035f;
     [SerializeField] private bool routePlanned = false;
 
     public override void InitAwake()
     {
         routePoints = new List<EventButton>();
-        routeLine.startWidth = lineWidth;
-        routeLine.endWidth = lineWidth;
+        routes = new List<LineRenderer>();
+        AddRoute();
+    }
+
+    public void AddRoute()
+    {
+        for (int i = 0; i < GlobalInfo.instance.GetMaxAMAEnegry(); ++i)
+        {
+            LineRenderer route = Instantiate(prefab, transform);
+            route.startWidth = lineWidth;
+            route.endWidth = lineWidth;
+            route.positionCount = 2;
+            routes.Add(route);
+        }
     }
 
     // PlayerÇÃBaseÇStartPointÇ…ìoò^
@@ -53,11 +66,32 @@ public class RouteManager : Monosingleton<RouteManager>
 
     public void DrawRoute()
     {
-        routeLine.positionCount = routePoints.Count;
-        for (int i = 0; i < routePoints.Count; ++i)
+        int i;
+        for (i = 0; i < routePoints.Count - 1; ++i)
         {
-            routeLine.SetPosition(i, routePoints[i].transform.localPosition);
+            if (CheckRoutePointsInterval(routePoints[i].transform.localPosition.x, routePoints[i + 1].transform.localPosition.x))
+            {
+                routes[i].SetPosition(0, routePoints[i].transform.localPosition);
+                routes[i].SetPosition(1, routePoints[i + 1].transform.localPosition);
+                routes[i].gameObject.SetActive(true);
+            }
         }
+
+        for(; i < routes.Count; ++i)
+        {
+            routes[i].gameObject.SetActive(false);
+        }
+
+        //routes[0].positionCount = routePoints.Count;
+        //for (int i = 0; i < routePoints.Count; ++i)
+        //{
+        //    routes[0].SetPosition(i, routePoints[i].transform.localPosition);
+        //}
+    }
+
+    public bool CheckRoutePointsInterval(float A, float B)
+    {
+        return Mathf.Abs(A - B) <= GridScroll.instance.GetGridInterval().x + EventButton.GetMaxSize().x;
     }
 
     public bool RouteCouldBePlanned()
@@ -79,8 +113,11 @@ public class RouteManager : Monosingleton<RouteManager>
     // RouteÇÃëæÇ≥
     public void SetLineWidthWithMapScale(float Scale)
     {
-        routeLine.startWidth = lineWidth * Scale;
-        routeLine.endWidth = routeLine.startWidth;
+        foreach (LineRenderer route in routes)
+        {
+            route.startWidth = lineWidth * Scale;
+            route.endWidth = route.startWidth;
+        }
     }
 
     // Routeè„ÇÃà⁄ìÆäJén

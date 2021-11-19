@@ -15,11 +15,21 @@ public class EventButton : Button
     [SerializeField] protected Oceans ocean = Oceans.None;
     [SerializeField] protected OceanAreas oceanArea = OceanAreas.None;
     static protected Vector2 size = new Vector2(30.0f, 30.0f);
+    static Vector2 maxSize = Vector2.zero;
 
     public void Init(Oceans Ocean, OceanAreas OceanArea)
     {
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        maxSize.x = Mathf.Max(maxSize.x, rectTransform.sizeDelta.x);
+        maxSize.y = Mathf.Max(maxSize.y, rectTransform.sizeDelta.y);
+
         SetOceanInfo(Ocean, OceanArea);
         CreateEvent();
+    }
+
+    static public Vector2 GetMaxSize()
+    {
+        return maxSize;
     }
 
     public void SetOceanInfo(Oceans Ocean, OceanAreas OceanArea)
