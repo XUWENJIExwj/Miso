@@ -213,6 +213,7 @@ public class Player : Monosingleton<Player>
 
     public void MovePath()
     {
+        EventUIManager.instance.ResetEventInfo();
         EventButton nextPoint = RouteManager.instance.GetNextRoutePoint();
 
         if (nextPoint)
@@ -220,9 +221,20 @@ public class Player : Monosingleton<Player>
             MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
             logic.SetNextSate(MainGameState.RouteMove);
 
-            tweener = transform.DOLocalMove(nextPoint.transform.localPosition, GetCurrentAMATimePerGrid());
+            float time = GetCurrentAMATimePerGrid();
+            Vector2 offset = new Vector2(nextPoint.transform.localPosition.x - transform.localPosition.x, 0.0f);
+
+            PollutionMap.instance.MovePath(offset, time);
+            EventButtonManager.instance.MovePath(offset, time);
+
+            offset.x /= GlobalInfo.instance.mapSize.x;
+            MapScroll.instance.MovePath(offset, time);
+            GridScroll.instance.MovePath(offset, time);
+
+            tweener = transform.DOLocalMoveY(nextPoint.transform.localPosition.y, GetCurrentAMATimePerGrid());
             tweener.SetEase(Ease.Linear);
             tweener.OnStart(() => { Timer.instance.StartTimer(GetCurrentAMATimePerGrid()); });
+            tweener.OnUpdate(() => { RouteManager.instance.DrawRoute(); });
             tweener.OnComplete(() =>
             {
                 nextPoint.SetSelected(false);
@@ -237,7 +249,28 @@ public class Player : Monosingleton<Player>
                 logic.SetNextSate(MainGameState.EventPlayPre);
             });
         }
-
-        EventUIManager.instance.ResetEventInfo();
     }
+
+    //public void MovePath()
+    //{
+    //    MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+    //    logic.SetNextSate(MainGameState.RouteMove);
+
+    //    tweener = transform.DOLocalMove(nextPoint.transform.localPosition, GetCurrentAMATimePerGrid());
+    //    tweener.SetEase(Ease.Linear);
+    //    tweener.OnStart(() => { Timer.instance.StartTimer(GetCurrentAMATimePerGrid()); });
+    //    tweener.OnComplete(() =>
+    //    {
+    //        NextPoint.SetSelected(false);
+    //        if (!NextPoint.IsCurrentBase())
+    //        {
+    //            NextPoint.DoScaleDown();
+    //        }
+
+    //        SetCurrentEvent(NextPoint);
+    //        FuelGauge.instance.HideFuelGauge();
+    //        Timer.instance.HideTimer();
+    //        logic.SetNextSate(MainGameState.EventPlayPre);
+    //    });
+    //}
 }

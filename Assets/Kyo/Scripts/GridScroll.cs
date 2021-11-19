@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GridScroll : Monosingleton<GridScroll>
 {
@@ -29,7 +30,13 @@ public class GridScroll : Monosingleton<GridScroll>
         uv.Offset -= offset;
         image.material.SetVector("_Offset", uv.Offset);
     }
-    
+
+    public void MovePath(Vector2 Offset, float Time)
+    {
+        uv.Offset += Offset;
+        image.material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
+    }
+
     // Inspectorにある属性を編集するとEditorに反映してくれるコールバック
     void OnValidate()
     {

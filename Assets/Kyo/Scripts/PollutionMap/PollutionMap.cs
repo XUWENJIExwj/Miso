@@ -36,4 +36,12 @@ public class PollutionMap : Monosingleton<PollutionMap>
             part.Move(Offset);
         }
     }
+
+    public void MovePath(Vector2 Offset, float Time)
+    {
+        foreach (OceanParts part in parts)
+        {
+            part.MovePath(Offset, Time);
+        }
+    }
 }

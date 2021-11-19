@@ -5,6 +5,7 @@ using UnityEngine;
 public class RouteManager : Monosingleton<RouteManager>
 {
     [SerializeField] private List<EventButton> routePoints = null;
+    [SerializeField] private int next = 1;
     [SerializeField] private LineRenderer prefab = null;
     [SerializeField] private List<LineRenderer> routes = null;
     [SerializeField] private float lineWidth = 0.035f;
@@ -14,6 +15,7 @@ public class RouteManager : Monosingleton<RouteManager>
     {
         routePoints = new List<EventButton>();
         routes = new List<LineRenderer>();
+        next = 1;
         AddRoute();
     }
 
@@ -81,12 +83,6 @@ public class RouteManager : Monosingleton<RouteManager>
         {
             routes[i].gameObject.SetActive(false);
         }
-
-        //routes[0].positionCount = routePoints.Count;
-        //for (int i = 0; i < routePoints.Count; ++i)
-        //{
-        //    routes[0].SetPosition(i, routePoints[i].transform.localPosition);
-        //}
     }
 
     public bool CheckRoutePointsInterval(float A, float B)
@@ -134,7 +130,7 @@ public class RouteManager : Monosingleton<RouteManager>
             {
                 routePoints[0].DoScaleDown();
             }
-            routePoints.RemoveAt(0);
+            //routePoints.RemoveAt(0);
 
             MovePath();
         }
@@ -156,12 +152,10 @@ public class RouteManager : Monosingleton<RouteManager>
 
     public EventButton GetNextRoutePoint()
     {
-        if (routePoints.Count > 0)
+        if (next < routePoints.Count)
         {
-            EventButton eventButton = routePoints[0];
-
-            routePoints.RemoveAt(0);
-
+            EventButton eventButton = routePoints[next];
+            ++next;
             return eventButton;
         }
 
@@ -171,6 +165,8 @@ public class RouteManager : Monosingleton<RouteManager>
 
     public void ResetRoute()
     {
+        next = 1;
+        routePoints.Clear();
         routePlanned = false;
         SetStartPoint();
 

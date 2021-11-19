@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public enum OceanAreas
 {
@@ -19,39 +20,26 @@ public enum OceanAreas
 
 public class OceanParts : MonoBehaviour
 {
-    [SerializeField] protected Image[] parts = null;
+    [SerializeField] protected OceanPart[] parts = null;
 
     public void Init()
     {
-        parts = GetComponentsInChildren<Image>();
+        parts = GetComponentsInChildren<OceanPart>();
     }
 
     public void Move(Vector2 Offset)
     {
         for (int i = 0; i < parts.Length; ++i)
         {
-            parts[i].transform.localPosition += new Vector3(Offset.x, Offset.y, 0.0f);
-
-            // 画面外になったら、ループさせる
-            FixPostion(i);
+            parts[i].Move(Offset);
         }
     }
 
-    // 画面外になったら、ループさせる
-    public void FixPostion(int Index)
+    public void MovePath(Vector2 Offset, float Time)
     {
-        Vector2 fixPos = parts[Index].transform.localPosition;
-
-        // X軸
-        if (parts[Index].transform.localPosition.x < -GlobalInfo.instance.halfMapSize.x)
+        for (int i = 0; i < parts.Length; ++i)
         {
-            fixPos.x = parts[Index].transform.localPosition.x + GlobalInfo.instance.mapSize.x;
+            parts[i].MovePath(Offset, Time);
         }
-        else if (parts[Index].transform.localPosition.x > GlobalInfo.instance.halfMapSize.x)
-        {
-            fixPos.x = parts[Index].transform.localPosition.x - GlobalInfo.instance.mapSize.x;
-        }
-
-        parts[Index].transform.localPosition = fixPos;
     }
 }

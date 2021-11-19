@@ -46,6 +46,14 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
         }
     }
 
+    public void MovePath(Vector2 Offset, float Time)
+    {
+        foreach (EventButton eventButton in events)
+        {
+            eventButton.MovePath(Offset, Time);
+        }
+    }
+
     public void ActiveEventButton()
     {
         foreach (EventButton eventButton in events)

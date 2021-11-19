@@ -53,6 +53,13 @@ public class EventButton : Button
         FixPostion();
     }
 
+    public void MovePath(Vector2 Offset, float Time)
+    {
+        Tweener tweener = transform.DOLocalMoveX(transform.localPosition.x - Offset.x, Time);
+        tweener.SetEase(Ease.Linear);
+        tweener.OnComplete(() => { FixPostion(); });
+    }
+
     // 画面外になったら、ループさせる
     public void FixPostion()
     {

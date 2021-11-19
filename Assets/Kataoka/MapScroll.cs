@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using DG.Tweening;
 
 [Serializable]
 public struct UVScrollProperty
@@ -45,9 +46,7 @@ public class MapScroll : Monosingleton<MapScroll>
         {
             // UVScroll
             Vector2 offset = new Vector2(scrollSpeed * Time.deltaTime * Input.GetAxis("Mouse X"), 0.0f);
-            uv.Offset -= offset;
-            image[0].material.SetVector("_Offset", uv.Offset);
-            image[1].material.SetVector("_Offset", uv.Offset);
+            Move(offset);
             GridScroll.instance.Move(offset);
 
             offset *= GlobalInfo.instance.mapSize;
@@ -56,6 +55,20 @@ public class MapScroll : Monosingleton<MapScroll>
             Player.instance.Move(offset);
             RouteManager.instance.DrawRoute();
         }
+    }
+
+    public void Move(Vector2 Offset)
+    {
+        uv.Offset -= Offset;
+        image[0].material.SetVector("_Offset", uv.Offset);
+        image[1].material.SetVector("_Offset", uv.Offset);
+    }
+
+    public void MovePath(Vector2 Offset, float Time)
+    {
+        uv.Offset += Offset;
+        image[0].material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
+        image[1].material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
     }
 
     public void SetOnDrag(bool OnDrag)

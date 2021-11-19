@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public enum MainGameState
 {
@@ -18,6 +19,7 @@ public class MainGameLogic : BaseSceneLogic
 
     void Start()
     {
+        DOTween.SetTweensCapacity(350, 50);
         MapScroll.instance.Init();
         GridScroll.instance.Init();
         PollutionMap.instance.Init();
