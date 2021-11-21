@@ -25,6 +25,16 @@ public class OceanParts : MonoBehaviour
     public void Init()
     {
         parts = GetComponentsInChildren<OceanPart>();
+
+        foreach (OceanPart part in parts)
+        {
+            part.Init();
+        }
+    }
+
+    public virtual void SetPollutionLevel(OceanAreas Area, EventButton Event)
+    {
+        parts[(int)Area].SetPollutionLevel(Event);
     }
 
     public void Move(Vector2 Offset)

@@ -38,6 +38,11 @@ public class EventButton : Button
         oceanArea = OceanArea;
     }
 
+    public virtual void SetPollutionLevel()
+    {
+        PollutionMap.instance.SetPollutionLevel(ocean, oceanArea, this);
+    }
+
     public virtual void CreateEvent()
     {
         eventSO = GlobalInfo.instance.CreateEventSO();
@@ -151,8 +156,12 @@ public class EventButton : Button
 
     public bool ImmovableDistance(EventButton Event)
     {
-        Vector2Int distance = gridPos - Event.GetGridPos();
-        return Mathf.Abs(distance.x) > 1 || Mathf.Abs(distance.y) > 1;
+        Vector2 interval = GridScroll.instance.GetGridInterval();
+        interval = HelperFunction.CeilVector2(interval);
+        float length2 = HelperFunction.Length2(interval);
+        float distance2 = HelperFunction.Distance2(transform.localPosition, Event.transform.localPosition);
+
+        return distance2 > length2;
     }
 
     public virtual void ShowEventPreview()

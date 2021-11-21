@@ -25,6 +25,7 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public List<SubEventSO> subEventList = null;
     public List<RandomEventSO> randomEventList = null;
     public float[] eventRatio = new float[] { 0.2f, 0.3f, 0.5f };
+    public PollutionLevelInfo[] pollutionInfos;
     public PlayerData playerData; // Editorで確認用、あとで削除
 
     public override void InitAwake()

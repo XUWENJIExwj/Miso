@@ -79,6 +79,11 @@ namespace EventScriptableObject
             EventUIManager.instance.AddResult(this);
         }
 
+        public override void CheckBouns()
+        {
+
+        }
+
         public override void SetPointText()
         {
             SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();

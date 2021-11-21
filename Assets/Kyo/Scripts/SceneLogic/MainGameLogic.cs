@@ -19,7 +19,7 @@ public class MainGameLogic : BaseSceneLogic
 
     void Start()
     {
-        DOTween.SetTweensCapacity(350, 50);
+        DOTween.SetTweensCapacity(400, 50);
         MapScroll.instance.Init();
         GridScroll.instance.Init();
         PollutionMap.instance.Init();

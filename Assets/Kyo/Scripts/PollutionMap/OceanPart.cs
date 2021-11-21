@@ -6,7 +6,44 @@ using DG.Tweening;
 
 public class OceanPart : MonoBehaviour
 {
-    [SerializeField] Image image = null;
+    [SerializeField] protected Image image = null;
+    [SerializeField] protected PollutionLevel level = PollutionLevel.Level_05;
+    [SerializeField] protected float fadeTime = 0.5f;
+    [SerializeField] protected CleanupView prefab = null;
+
+    public virtual void Init()
+    {
+        image.color = GlobalInfo.instance.pollutionInfos[(int)level].color;
+    }
+
+    public void SetPollutionLevel(EventButton Event)
+    {
+        if (level > PollutionLevel.Level_00)
+        {
+            level -= 1;
+
+            SetPollutionColor();
+            AddCleanupPoint(Event);
+        }
+    }
+
+    public void SetPollutionColor()
+    {
+        image.DOColor(GlobalInfo.instance.pollutionInfos[(int)level].color, fadeTime);
+    }
+
+    public virtual void AddCleanupPoint(EventButton Event)
+    {
+        int point = HelperFunction.RandomPointRange(GlobalInfo.instance.pollutionInfos[(int)level].pointRange);
+        ShowCleanupView(point, Event);
+        Player.instance.AddPoint(point);
+    }
+
+    public void ShowCleanupView(int Point, EventButton Event)
+    {
+        CleanupView view = Instantiate(prefab, EventButtonManager.instance.transform);
+        view.ShowCleanupView(Point, Event);
+    }
 
     public void Move(Vector2 Offset)
     {

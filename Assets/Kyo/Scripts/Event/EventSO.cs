@@ -6,13 +6,6 @@ using System;
 namespace EventScriptableObject
 {
     [Serializable]
-    public struct PointRange
-    {
-        public int min;
-        public int max;
-    }
-
-    [Serializable]
     public enum EventSOType
     {
         MainEvent,
@@ -67,6 +60,7 @@ namespace EventScriptableObject
         public void SetPoint()
         {
             ComputePoint();
+            CheckBouns();
             SetPointText();
 
             Player.instance.AddPoint(point);
@@ -74,7 +68,12 @@ namespace EventScriptableObject
 
         public virtual void ComputePoint()
         {
-            point = UnityEngine.Random.Range(pointRange.min, pointRange.max);
+            point = HelperFunction.RandomPointRange(pointRange);
+        }
+
+        public virtual void CheckBouns()
+        {
+
         }
 
         public virtual void SetPointText()

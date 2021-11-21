@@ -49,6 +49,11 @@ public class GridScroll : Monosingleton<GridScroll>
         return rectTransform.sizeDelta / uv.Tiling;
     }
 
+    public float GetIntervalLength2()
+    {
+        return HelperFunction.Length2(GetGridInterval());
+    }
+
     public Vector2 GetUVTiling()
     {
         return uv.Tiling;

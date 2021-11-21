@@ -80,6 +80,14 @@ namespace EventScriptableObject
             EventUIManager.instance.AddResult(this);
         }
 
+        public override void CheckBouns()
+        {
+            if (Player.instance.GetCurrentAMAType() == amaType)
+            {
+                point = (int)(point * bonusRatio[1]);
+            }
+        }
+
         public override void SetPointText()
         {
             SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<SubEventUI>().GetEventUIElement();

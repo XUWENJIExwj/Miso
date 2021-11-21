@@ -106,6 +106,11 @@ public class RouteManager : Monosingleton<RouteManager>
         routePlanned = Planned;
     }
 
+    public EventButton GetPreviousRoutePoint()
+    {
+        return routePoints[routePoints.Count - 1];
+    }
+
     // Route‚Ì‘¾‚³
     public void SetLineWidthWithMapScale(float Scale)
     {
@@ -130,7 +135,7 @@ public class RouteManager : Monosingleton<RouteManager>
             {
                 routePoints[0].DoScaleDown();
             }
-            //routePoints.RemoveAt(0);
+            Player.instance.SetCurrentEvent(routePoints[0]);
 
             MovePath();
         }
@@ -143,11 +148,6 @@ public class RouteManager : Monosingleton<RouteManager>
         FuelGauge.instance.ReduceValueOnMove();
         Timer.instance.ShowTimer();
         Player.instance.MovePath();
-    }
-
-    public EventButton GetPreviousRoutePoint()
-    {
-        return routePoints[routePoints.Count - 1];
     }
 
     public EventButton GetNextRoutePoint()

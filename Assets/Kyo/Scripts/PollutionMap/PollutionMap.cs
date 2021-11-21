@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using EventScriptableObject;
 
 public enum Oceans
 {
@@ -10,6 +12,24 @@ public enum Oceans
     AtlanticOcean,
     IndianOcean,
     None,
+}
+
+public enum PollutionLevel
+{
+    Level_00,
+    Level_01,
+    Level_02,
+    Level_03,
+    Level_04,
+    Level_05,
+    None,
+}
+
+[Serializable]
+public struct PollutionLevelInfo
+{
+    public Color color;
+    public PointRange pointRange;
 }
 
 public class PollutionMap : Monosingleton<PollutionMap>
@@ -27,6 +47,11 @@ public class PollutionMap : Monosingleton<PollutionMap>
         {
             part.Init();
         }
+    }
+
+    public void SetPollutionLevel(Oceans Ocean, OceanAreas Area, EventButton Event)
+    {
+        parts[(int)Ocean].SetPollutionLevel(Area, Event);
     }
 
     public void Move(Vector2 Offset)

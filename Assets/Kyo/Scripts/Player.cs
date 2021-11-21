@@ -72,6 +72,11 @@ public class Player : Monosingleton<Player>
         return playerData.amas[(int)GetCurrentAMA()];
     }
 
+    public AMATypes GetCurrentAMAType()
+    {
+        return playerData.amas[(int)GetCurrentAMA()].type;
+    }
+
     public int GetCurrentAMAEnergy()
     {
         return playerData.amas[(int)GetCurrentAMA()].energy;
@@ -218,6 +223,11 @@ public class Player : Monosingleton<Player>
 
         if (nextPoint)
         {
+            if (!currentEvent.IsBase())
+            {
+                currentEvent.SetPollutionLevel();
+            }
+
             MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
             logic.SetNextSate(MainGameState.RouteMove);
 

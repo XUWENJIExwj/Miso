@@ -225,6 +225,31 @@ MonoBehaviour:
   - 0.1
   - 0.2
   - 0.7
+  pollutionInfos:
+  - color: {r: 0.5, g: 0, b: 1, a: 0}
+    pointRange:
+      min: 0
+      max: 0
+  - color: {r: 0.5, g: 0, b: 1, a: 0.101960786}
+    pointRange:
+      min: 11
+      max: 14
+  - color: {r: 0.5, g: 0, b: 1, a: 0.2}
+    pointRange:
+      min: 22
+      max: 28
+  - color: {r: 0.5, g: 0, b: 1, a: 0.34901962}
+    pointRange:
+      min: 45
+      max: 55
+  - color: {r: 0.5, g: 0, b: 1, a: 0.54901963}
+    pointRange:
+      min: 90
+      max: 110
+  - color: {r: 0.5, g: 0, b: 1, a: 0.8}
+    pointRange:
+      min: 180
+      max: 220
   playerData:
     amas: []
     ama: 0

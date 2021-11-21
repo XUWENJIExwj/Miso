@@ -11,6 +11,11 @@ public class BaseButton : EventButton
 {
     [SerializeField] private BaseIndex baseIndex = BaseIndex.None;
 
+    public override void SetPollutionLevel()
+    {
+        
+    }
+
     public override void CreateEvent()
     {
         eventSO = GlobalInfo.instance.CreateEventSO(baseIndex);
