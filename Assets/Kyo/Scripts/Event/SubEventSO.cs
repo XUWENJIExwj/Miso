@@ -36,10 +36,12 @@ namespace EventScriptableObject
             tweener = ui.TitleFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
             {
                 ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, ui.TitleFrame.color.a);
+                ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, ui.TitleFrame.color.a);
                 ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, ui.TitleFrame.color.a);
             }).OnComplete(() =>
             {
                 ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, ui.TitleFrame.color.a);
+                ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, ui.TitleFrame.color.a);
                 ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, ui.TitleFrame.color.a);
                 SetNextPhase(SubEventPhase.Phase_Report);
             });
@@ -91,7 +93,7 @@ namespace EventScriptableObject
         public override void SetPointText()
         {
             SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<SubEventUI>().GetEventUIElement();
-            ui.Point.text = "Point: " + point.ToString();
+            ui.Point.text = point.ToString("+#;-#;0");
         }
 
         public void SetNextPhase(SubEventPhase Phase)
@@ -108,6 +110,7 @@ namespace EventScriptableObject
                 SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<SubEventUI>().GetEventUIElement();
                 ui.TitleFrame.color = HelperFunction.ChangeAlpha(ui.TitleFrame.color, 1.0f);
                 ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, 1.0f);
+                ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, 1.0f);
                 ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 1.0f);
                 SetNextPhase(SubEventPhase.Phase_Report);
             }
@@ -123,10 +126,12 @@ namespace EventScriptableObject
             tweener = ui.ReportFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
             {
                 ui.Report.color = HelperFunction.ChangeAlpha(ui.Report.color, ui.ReportFrame.color.a);
+                ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, ui.ReportFrame.color.a);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.ReportFrame.color.a);
             }).OnComplete(() =>
             {
                 ui.Report.color = HelperFunction.ChangeAlpha(ui.Report.color, ui.ReportFrame.color.a);
+                ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, ui.ReportFrame.color.a);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.ReportFrame.color.a);
 
                 SetNextPhase(SubEventPhase.Phase_Ending);
@@ -144,6 +149,7 @@ namespace EventScriptableObject
                 SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<SubEventUI>().GetEventUIElement();
                 ui.ReportFrame.color = HelperFunction.ChangeAlpha(ui.ReportFrame.color, 1.0f);
                 ui.Report.color = HelperFunction.ChangeAlpha(ui.Report.color, 1.0f);
+                ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, 1.0f);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 1.0f);
 
                 SetNextPhase(SubEventPhase.Phase_Ending);
