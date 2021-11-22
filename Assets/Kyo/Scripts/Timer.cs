@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class Timer : Monosingleton<Timer>
 {
-    [SerializeField] private TMP_Text timeText = null;
+    [SerializeField] private Image timeText = null;
     [SerializeField] private NumberDisplay numberDisplay = null;
 
     public void Init()
