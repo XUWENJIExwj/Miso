@@ -237,7 +237,7 @@ public class Player : Monosingleton<Player>
             PollutionMap.instance.MovePath(offset, time);
             EventButtonManager.instance.MovePath(offset, time);
 
-            offset.x /= GlobalInfo.instance.mapSize.x;
+            offset /= GlobalInfo.instance.mapSize;
             MapScroll.instance.MovePath(offset, time);
             GridScroll.instance.MovePath(offset, time);
 

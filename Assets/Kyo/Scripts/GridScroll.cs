@@ -33,7 +33,8 @@ public class GridScroll : Monosingleton<GridScroll>
 
     public void MovePath(Vector2 Offset, float Time)
     {
-        uv.Offset += Offset;
+        Vector2 offset = Offset * uv.Tiling;
+        uv.Offset += offset;
         image.material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
     }
 
