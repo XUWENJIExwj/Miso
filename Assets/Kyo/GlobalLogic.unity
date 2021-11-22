@@ -173,6 +173,7 @@ MonoBehaviour:
   mainEventList:
   - {fileID: 11400000, guid: 4f8e1fa14760e6548a076f6f886b1399, type: 2}
   - {fileID: 11400000, guid: 7e458b31b52674246ab233935feab544, type: 2}
+  - {fileID: 11400000, guid: 8b94e9854b1a61642b4cd33935661c61, type: 2}
   subEventList:
   - {fileID: 11400000, guid: e0b50603f3e1bac4b98ccf5e5666f12d, type: 2}
   - {fileID: 11400000, guid: 3721343f119cb9948946e0be953efd07, type: 2}
