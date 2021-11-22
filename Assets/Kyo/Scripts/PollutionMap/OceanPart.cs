@@ -20,15 +20,14 @@ public class OceanPart : MonoBehaviour
     {
         if (level > PollutionLevel.Level_00)
         {
-            level -= 1;
-
-            SetPollutionColor();
             AddCleanupPoint(Event);
+            SetPollutionColor();
         }
     }
 
     public void SetPollutionColor()
     {
+        level -= 1;
         image.DOColor(GlobalInfo.instance.pollutionInfos[(int)level].color, fadeTime);
     }
 
