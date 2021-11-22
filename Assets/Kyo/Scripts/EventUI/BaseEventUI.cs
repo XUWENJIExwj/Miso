@@ -83,7 +83,7 @@ public class BaseEventUI : EventUI
         results.Clear();
 
         resultView.verticalScrollbar.value = 0.0f;
-        pointText.text = "Point: " + Player.instance.GetCurrentPoint().ToString();
+        pointText.text = Player.instance.GetCurrentPoint().ToString();
     }
 
     public void OnClick()
@@ -130,7 +130,7 @@ public class BaseEventUI : EventUI
                 if (currentPoint >= TargetPoint)
                 {
                     currentPoint = TargetPoint;
-                    pointText.text = "Point: " + currentPoint.ToString();
+                    pointText.text = currentPoint.ToString();
                     yield break;
                 }
             }
@@ -139,12 +139,12 @@ public class BaseEventUI : EventUI
                 if (currentPoint <= TargetPoint)
                 {
                     currentPoint = TargetPoint;
-                    pointText.text = "Point: " + currentPoint.ToString();
+                    pointText.text = currentPoint.ToString();
                     yield break;
                 }
             }
 
-            pointText.text = "Point: " + currentPoint.ToString();
+            pointText.text = currentPoint.ToString();
             yield return new WaitForSeconds(interval);
         }
     }
