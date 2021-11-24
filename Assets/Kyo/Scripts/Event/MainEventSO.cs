@@ -19,7 +19,7 @@ namespace EventScriptableObject
         None,
     }
 
-    public enum CompletedType
+    public enum JudgementType
     {
         Failed,
         Succeeded,
@@ -38,7 +38,7 @@ namespace EventScriptableObject
     [Serializable]
     public struct EndingObject
     {
-        public CompletedType type;
+        public JudgementType type;
         [TextArea(5, 20)] public string endingText;
         public PointRange point;
     }
@@ -655,6 +655,11 @@ namespace EventScriptableObject
             }
 
             return charIndex;
+        }
+
+        public JudgementType GetJudgement()
+        {
+            return optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].type;
         }
 
         public string GetEnding()

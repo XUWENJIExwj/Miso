@@ -51,4 +51,10 @@ public class EventUIManager : Monosingleton<EventUIManager>
         BaseEventUI eventUI = (BaseEventUI)eventUIs[(int)EventSOType.Base];
         eventUI.AddResult(Event);
     }
+
+    public void AddResult(CleanupObserver Observer)
+    {
+        BaseEventUI eventUI = (BaseEventUI)eventUIs[(int)EventSOType.Base];
+        eventUI.AddResult(Observer);
+    }
 }

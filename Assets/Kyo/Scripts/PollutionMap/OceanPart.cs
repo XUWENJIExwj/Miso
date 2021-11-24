@@ -4,38 +4,55 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+[RequireComponent(typeof(CleanupObserver))]
 public class OceanPart : MonoBehaviour
 {
     [SerializeField] protected Image image = null;
     [SerializeField] protected PollutionLevel level = PollutionLevel.Level_05;
     [SerializeField] protected float fadeTime = 0.5f;
     [SerializeField] protected CleanupView prefab = null;
+    [SerializeField] protected CleanupObserver observer = null;
 
-    public virtual void Init()
+    public virtual void Init(Oceans Ocean, OceanAreas Area)
     {
         image.color = GlobalInfo.instance.pollutionInfos[(int)level].color;
+        observer.Init(Ocean, Area);
     }
 
     public void SetPollutionLevel(EventButton Event)
     {
         if (level > PollutionLevel.Level_00)
         {
-            AddCleanupPoint(Event);
-            SetPollutionColor();
+            int point = AddCleanupPoint(Event);
+            UpdatePollutionLevel(point);
         }
+    }
+
+    public virtual void AddResult()
+    {
+        observer.AddResult();
+        observer.ResetObserver();
+    }
+
+    public void UpdatePollutionLevel(int Point)
+    {
+        level -= 1;
+        observer.ListenCleanup(level, Point);
+        SetPollutionColor();
     }
 
     public void SetPollutionColor()
     {
-        level -= 1;
         image.DOColor(GlobalInfo.instance.pollutionInfos[(int)level].color, fadeTime);
     }
 
-    public virtual void AddCleanupPoint(EventButton Event)
+    public virtual int AddCleanupPoint(EventButton Event)
     {
         int point = HelperFunction.RandomPointRange(GlobalInfo.instance.pollutionInfos[(int)level].pointRange);
         ShowCleanupView(point, Event);
         Player.instance.AddPoint(point);
+
+        return point;
     }
 
     public void ShowCleanupView(int Point, EventButton Event)

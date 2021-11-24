@@ -22,13 +22,13 @@ public class OceanParts : MonoBehaviour
 {
     [SerializeField] protected OceanPart[] parts = null;
 
-    public void Init()
+    public void Init(Oceans Ocean)
     {
         parts = GetComponentsInChildren<OceanPart>();
 
-        foreach (OceanPart part in parts)
+        for (int i = 0; i < parts.Length; ++i)
         {
-            part.Init();
+            parts[i].Init(Ocean, (OceanAreas)i);
         }
     }
 
@@ -37,19 +37,27 @@ public class OceanParts : MonoBehaviour
         parts[(int)Area].SetPollutionLevel(Event);
     }
 
+    public void AddResult()
+    {
+        foreach (OceanPart part in parts)
+        {
+            part.AddResult();
+        }
+    }
+
     public void Move(Vector2 Offset)
     {
-        for (int i = 0; i < parts.Length; ++i)
+        foreach (OceanPart part in parts)
         {
-            parts[i].Move(Offset);
+            part.Move(Offset);
         }
     }
 
     public void MovePath(Vector2 Offset, float Time)
     {
-        for (int i = 0; i < parts.Length; ++i)
+        foreach (OceanPart part in parts)
         {
-            parts[i].MovePath(Offset, Time);
+            part.MovePath(Offset, Time);
         }
     }
 }

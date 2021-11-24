@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5411304761902749246}
   - component: {fileID: 5411304761902749247}
   - component: {fileID: 5411304761902749245}
+  - component: {fileID: 8349375476036781108}
   m_Layer: 5
   m_Name: OceanPart
   m_TagString: Untagged
@@ -92,3 +93,16 @@ MonoBehaviour:
   level: 5
   fadeTime: 0.5
   prefab: {fileID: 1829751166083137698, guid: 740eb98ff61ed734babd66ffe716d1ba, type: 3}
+  observer: {fileID: 8349375476036781108}
+--- !u!114 &8349375476036781108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411304761902749241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da7f019181f2714894685c06f1acff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -47,9 +47,9 @@ public struct CharacterRef
 public class AllCharactersExpressionsDictionary : MonoBehaviour
 {
     [SerializeField] private StringToExpressionType[] stringToExpressionTypes;
-    [SerializeField] private Dictionary<string, ExpressionTypes> stringToExpressionDictionary;
+    [SerializeField] private Dictionary<string, ExpressionTypes> stringToExpressionDictionary = null;
     [SerializeField] private CharacterRef[] characters = null;
-    [SerializeField] private Dictionary<CharacterTypes, CharacterExpressionsDictionary> characterDictionary;
+    [SerializeField] private Dictionary<CharacterTypes, CharacterExpressionsDictionary> characterDictionary = null;
 
     public void MakeDictionary()
     {

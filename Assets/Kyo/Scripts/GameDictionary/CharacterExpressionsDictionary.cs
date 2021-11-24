@@ -13,7 +13,7 @@ public struct ExpressionDictionaryRef
 public class CharacterExpressionsDictionary : MonoBehaviour
 {
     [SerializeField] private ExpressionDictionaryRef[] expressions;
-    [SerializeField] private Dictionary<ExpressionTypes, Sprite> expressionDictionary;
+    [SerializeField] private Dictionary<ExpressionTypes, Sprite> expressionDictionary = null;
 
     public void MakeDictionnary()
     {

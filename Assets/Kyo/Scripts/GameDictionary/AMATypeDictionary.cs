@@ -13,7 +13,7 @@ public struct AMATypeDictionaryRef
 public class AMATypeDictionary : MonoBehaviour
 {
     [SerializeField] private AMATypeDictionaryRef[] amaTypes;
-    [SerializeField] private Dictionary<AMATypes, string> amaTypeDictionary;
+    [SerializeField] private Dictionary<AMATypes, string> amaTypeDictionary = null;
 
     public void MakeDictionary()
     {

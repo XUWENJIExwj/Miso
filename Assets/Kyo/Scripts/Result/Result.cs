@@ -13,7 +13,15 @@ public abstract class Result : MonoBehaviour
     static protected Tweener tweener = null;
     protected float fadeTime = 0.8f;
 
-    public abstract void Init(EventSO Event);
+    public virtual void Init(EventSO Event)
+    {
+
+    }
+
+    public virtual void Init(CleanupObserver Observer)
+    {
+
+    }
 
     public abstract void Appear();
 
@@ -41,11 +49,6 @@ public abstract class Result : MonoBehaviour
     static public bool TweenerActive()
     {
         return tweener.IsActive();
-    }
-
-    public void AddPoint(int Point)
-    {
-        point = Point;
     }
 
     public int GetPoint()

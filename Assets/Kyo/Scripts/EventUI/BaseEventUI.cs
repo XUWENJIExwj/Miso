@@ -45,6 +45,16 @@ public class BaseEventUI : EventUI
         resultCount = results.Count;
     }
 
+    public void AddResult(CleanupObserver Observer)
+    {
+        Result result = Instantiate(prefabs[prefabs.Length - 1], resultView.content);
+        result.Init(Observer);
+        results.Enqueue(result);
+
+        resultView.verticalScrollbar.value = 1.0f;
+        resultCount = results.Count;
+    }
+
     // Resultの出現（アニメーション付き）
     public void AppearResult()
     {

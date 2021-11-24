@@ -21,7 +21,7 @@ public class MainResult : Result
     public override void Init(EventSO Event)
     {
         MainEventSO eventSO = (MainEventSO)Event;
-        result.eventName.text = eventSO.eventTitle;
+        result.eventName.text = eventSO.eventTitle + DictionaryManager.instance.GetJudgement(eventSO.GetJudgement());
         result.endingText.text = eventSO.GetEnding();
         result.resultFrame.color = HelperFunction.ChangeAlpha(result.resultFrame.color, 0.0f);
         result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, 0.0f);

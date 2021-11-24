@@ -35,6 +35,8 @@ namespace EventScriptableObject
 
         public override void EventStart()
         {
+            PollutionMap.instance.AddResult();
+
             BaseEventUI eventUI = EventUIManager.instance.GetCurrentEventUI<BaseEventUI>();
             eventUI.AppearResult();
             SetNextPhase(BaseEventPhase.Phase_Result);

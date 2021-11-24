@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2380695890520656127}
   - component: {fileID: 2380695890520656126}
   - component: {fileID: 7870805728666588080}
+  - component: {fileID: 7385778269067217405}
   m_Layer: 5
   m_Name: SplitOceanPart
   m_TagString: Untagged
@@ -92,3 +93,16 @@ MonoBehaviour:
   level: 5
   fadeTime: 0.5
   prefab: {fileID: 1829751166083137698, guid: 740eb98ff61ed734babd66ffe716d1ba, type: 3}
+  observer: {fileID: 7385778269067217405}
+--- !u!114 &7385778269067217405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380695890520656120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da7f019181f2714894685c06f1acff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

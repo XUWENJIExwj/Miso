@@ -43,15 +43,23 @@ public class PollutionMap : Monosingleton<PollutionMap>
 
     public void Init()
     {
-        foreach (OceanParts part in parts)
+        for (int i = 0; i < parts.Length; ++i)
         {
-            part.Init();
+            parts[i].Init((Oceans)i);
         }
     }
 
     public void SetPollutionLevel(Oceans Ocean, OceanAreas Area, EventButton Event)
     {
         parts[(int)Ocean].SetPollutionLevel(Area, Event);
+    }
+
+    public void AddResult()
+    {
+        foreach (OceanParts part in parts)
+        {
+            part.AddResult();
+        }
     }
 
     public void Move(Vector2 Offset)
