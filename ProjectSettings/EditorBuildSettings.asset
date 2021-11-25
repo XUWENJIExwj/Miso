@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Kyo/GameMap.unity
     guid: baea1d7b9e24e9f4799eb24d93468874
+  - enabled: 1
+    path: Assets/Scenes/Rank.unity
+    guid: 4581eb80a0b349a49a6d4b8d84ed42c2
   m_configObjects: {}
