@@ -18,8 +18,7 @@ public class LogInManager : MonoBehaviour
 
     public GameObject login_check = null;
 
-    private GameObject guiTextLogIn;   // ログインテキスト
-    private GameObject guiTextSignUp;  // 新規登録テキスト
+    
 
     // ログイン画面のときtrue, 新規登録画面のときfalse
     private bool isLogIn;
@@ -37,23 +36,22 @@ public class LogInManager : MonoBehaviour
 
     public bool sceneLoaded = false;
 
+    public GameObject Rank_Canv;
+    public GameObject Login_Canv;
+
     void Start()
     {
 
         FindObjectOfType<UserAuth>().logOut();
 
-        // ゲームオブジェクトを検索し取得する
-        guiTextLogIn = GameObject.Find("GUITextLogIn");
-        guiTextSignUp = GameObject.Find("GUITextSignUp");
 
         isLogIn = true;
-        guiTextSignUp.SetActive(false);
-        guiTextLogIn.SetActive(true);
         Bottun1.SetActive(true);
         Bottun2.SetActive(true);
         Bottun3.SetActive(false);
         Bottun1.SetActive(false);
-
+        Rank_Canv.SetActive(false);
+        Login_Canv.SetActive(true);
 
     }
 
@@ -149,7 +147,10 @@ public class LogInManager : MonoBehaviour
 
     public void Go_Rank()
     {
-        SceneManager.LoadScene("Rank");
+        Text error_text = login_check.GetComponent<Text>();
+        error_text.text = "";
+        Rank_Canv.SetActive(true);
+        Login_Canv.SetActive(false);
     }
 
 }

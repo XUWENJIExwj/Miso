@@ -8,6 +8,7 @@ public class LeaderBoardManager : MonoBehaviour
 
 	private LeaderBoard lBoard;
 	public GameObject[] top = new GameObject[5];
+	public GameObject Login_Canv;
 
 
 
@@ -39,8 +40,8 @@ public class LeaderBoardManager : MonoBehaviour
 
 	public void OnBack()
 	{
-
-		SceneManager.LoadScene("LogIn");
+		Login_Canv.SetActive(true);
+		gameObject.SetActive(false);
 	}
 
 }
