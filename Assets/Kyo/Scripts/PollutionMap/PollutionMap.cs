@@ -49,6 +49,14 @@ public class PollutionMap : Monosingleton<PollutionMap>
         }
     }
 
+    public void ResetPollutionLevel()
+    {
+        foreach (OceanParts part in parts)
+        {
+            part.ResetPollutionLevel();
+        }
+    }
+
     public void SetPollutionLevel(Oceans Ocean, OceanAreas Area, EventButton Event)
     {
         parts[(int)Ocean].SetPollutionLevel(Area, Event);

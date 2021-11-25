@@ -28,6 +28,14 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
         }
     }
 
+    public void ResetEvent()
+    {
+        foreach (EventButton eventButton in events)
+        {
+            eventButton.ResetEvent();
+        }
+    }
+
     public EventPreview GetEventPreview()
     {
         return eventPreview;

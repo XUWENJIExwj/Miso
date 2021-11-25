@@ -32,6 +32,14 @@ public class OceanParts : MonoBehaviour
         }
     }
 
+    public void ResetPollutionLevel()
+    {
+        foreach (OceanPart part in parts)
+        {
+            part.ResetPollutionLevel();
+        }
+    }
+
     public virtual void SetPollutionLevel(OceanAreas Area, EventButton Event)
     {
         parts[(int)Area].SetPollutionLevel(Event);

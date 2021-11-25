@@ -1839,6 +1839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC01
       objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2367,6 +2371,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: IN01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -3878,6 +3886,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: PC05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -5623,6 +5635,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -8053044046257761735, guid: 31a30d76c1a17a44ca705678ebb37e01, type: 3}
+    - target: {fileID: 7870805728666588080, guid: a17974a07c84e864ab8a366a3f16cc3d, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a17974a07c84e864ab8a366a3f16cc3d, type: 3}
 --- !u!1 &173219676
@@ -7707,6 +7723,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: PC03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Type
@@ -11437,6 +11457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AT05
       objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -12491,6 +12515,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: PC07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -17906,6 +17934,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC09
       objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -18199,6 +18231,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: IN02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -20735,6 +20771,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: PC02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -25197,6 +25237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AT03
       objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -26788,6 +26832,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: AT01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -37207,6 +37255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC06
       objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -37312,6 +37364,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: AT04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -37536,6 +37592,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: PC08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -38941,6 +39001,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: IN03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -41075,6 +41139,10 @@ PrefabInstance:
     - target: {fileID: 5411304761902749241, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Name
       value: AT02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
@@ -49317,6 +49385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC04
       objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -51198,6 +51270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AR01
       objectReference: {fileID: 0}
+    - target: {fileID: 5411304761902749245, guid: 5901370296c301042855bc842fbfd243, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5411304761902749247, guid: 5901370296c301042855bc842fbfd243, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -51308,5 +51384,9 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2613185710147509083, guid: 31a30d76c1a17a44ca705678ebb37e01, type: 3}
+    - target: {fileID: 7870805728666588080, guid: a17974a07c84e864ab8a366a3f16cc3d, type: 3}
+      propertyPath: level
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a17974a07c84e864ab8a366a3f16cc3d, type: 3}

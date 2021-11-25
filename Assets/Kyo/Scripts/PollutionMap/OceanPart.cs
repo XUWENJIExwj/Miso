@@ -8,15 +8,22 @@ using DG.Tweening;
 public class OceanPart : MonoBehaviour
 {
     [SerializeField] protected Image image = null;
-    [SerializeField] protected PollutionLevel level = PollutionLevel.Level_05;
+    [SerializeField] protected PollutionLevel level = PollutionLevel.None;
     [SerializeField] protected float fadeTime = 0.5f;
     [SerializeField] protected CleanupView prefab = null;
     [SerializeField] protected CleanupObserver observer = null;
 
     public virtual void Init(Oceans Ocean, OceanAreas Area)
     {
+        level = (PollutionLevel)Random.Range((int)PollutionLevel.Level_00, (int)PollutionLevel.None);
         image.color = GlobalInfo.instance.pollutionInfos[(int)level].color;
         observer.Init(Ocean, Area);
+    }
+
+    public virtual void ResetPollutionLevel()
+    {
+        level = (PollutionLevel)Random.Range((int)PollutionLevel.Level_00, (int)PollutionLevel.None);
+        image.DOColor(GlobalInfo.instance.pollutionInfos[(int)level].color, fadeTime);
     }
 
     public void SetPollutionLevel(EventButton Event)

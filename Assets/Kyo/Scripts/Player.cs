@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 [Serializable]
 public struct PlayerData
 {
+    public int courseCount;
+    public int courseResetCount;
     public AMASO[] amas;
     public AMAs ama;
     public EventButton basePoint;
@@ -29,17 +31,31 @@ public class Player : Monosingleton<Player>
     public void Init()
     {
         // ‰¼
+        playerData.courseCount = 0;
+        playerData.courseResetCount = 4;
         playerData.amas = new AMASO[(int)AMAs.Max];
         playerData.ama = AMAs.Max;
         playerData.basePoint = null;
         playerData.totalPoint = 0;
         playerData.currentPoint = 0;
-        playerData.encounter = 2;
-        playerData.encounterRatio = 2;
+        playerData.encounter = 1;
+        playerData.encounterRatio = 1;
 
         GlobalInfo.instance.playerData = playerData;
 
         gameObject.SetActive(false);
+    }
+
+    public void CompleteCourse()
+    {
+        ++playerData.courseCount;
+        GlobalInfo.instance.playerData = playerData;
+
+        if ((playerData.courseCount % playerData.courseResetCount) == 0)
+        {
+            EventButtonManager.instance.ResetEvent();
+            PollutionMap.instance.ResetPollutionLevel();
+        }
     }
 
     public void AddAMA(AMAs AMA)
@@ -226,6 +242,7 @@ public class Player : Monosingleton<Player>
             if (!currentEvent.IsBase())
             {
                 currentEvent.SetPollutionLevel();
+                currentEvent.CreateRandomEvent();
             }
 
             MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

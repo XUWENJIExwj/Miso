@@ -108,6 +108,7 @@ public class BaseEventUI : EventUI
         currentPoint = 0;
 
         Player.instance.ResetCurrentPoint();
+        Player.instance.CompleteCourse();
 
         eventSO.SetNextPhase(BaseEventPhase.Phase_End);
 

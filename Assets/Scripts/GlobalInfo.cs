@@ -77,8 +77,13 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
         }
         else
         {
-            return randomEventList[UnityEngine.Random.Range(0, randomEventList.Count)];
+            return CreateRandomEventSO();
         }
+    }
+
+    public EventSO CreateRandomEventSO()
+    {
+        return randomEventList[UnityEngine.Random.Range(0, randomEventList.Count)];
     }
 
     public int GetMaxAMAEnegry()

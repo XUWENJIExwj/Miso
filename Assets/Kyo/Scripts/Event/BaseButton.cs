@@ -21,6 +21,11 @@ public class BaseButton : EventButton
         eventSO = GlobalInfo.instance.CreateEventSO(baseIndex);
     }
 
+    public override void ResetEvent()
+    {
+        
+    }
+
     public override void OnClick()
     {
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

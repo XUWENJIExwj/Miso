@@ -50,6 +50,18 @@ public class EventButton : Button
         gameObject.SetActive(false);
     }
 
+    public virtual void ResetEvent()
+    {
+        eventSO = GlobalInfo.instance.CreateEventSO();
+        image.sprite = eventSO.icon;
+    }
+
+    public void CreateRandomEvent()
+    {
+        eventSO = GlobalInfo.instance.CreateRandomEventSO();
+        image.sprite = eventSO.icon;
+    }
+
     public void Move(Vector2 Offset)
     {
         transform.localPosition += new Vector3(Offset.x, Offset.y, 0.0f);

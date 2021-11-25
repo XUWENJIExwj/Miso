@@ -5,43 +5,60 @@ using DG.Tweening;
 
 public class SplitOceanPart : OceanPart
 {
-    static private int point = 0;
-    static private bool resultAdded = false;
+    static private bool onSynchro = false;
+    static private int synchroPoint = 0;
+    static private PollutionLevel synchroLevel = PollutionLevel.None;
 
     public override void Init(Oceans Ocean, OceanAreas Area)
     {
         base.Init(Ocean, Area);
 
-        point = 0;
+        synchroPoint = 0;
+    }
+
+    public override void ResetPollutionLevel()
+    {
+        if (onSynchro)
+        {
+            level = synchroLevel;
+            onSynchro = false;
+        }
+        else
+        {
+            level = (PollutionLevel)Random.Range((int)PollutionLevel.Level_00, (int)PollutionLevel.None);
+            synchroLevel = level;
+            onSynchro = true;
+        }
+        image.DOColor(GlobalInfo.instance.pollutionInfos[(int)synchroLevel].color, fadeTime);
     }
 
     public override void AddResult()
     {
-        if (resultAdded)
+        if (onSynchro)
         {
-            resultAdded = false;
+            onSynchro = false;
         }
         else
         {
             observer.AddResult();
-            resultAdded = true;
+            onSynchro = true;
         }
         observer.ResetObserver();
     }
 
     public override int AddCleanupPoint(EventButton Event)
     {
-        if (point == 0)
+        if (synchroPoint == 0)
         {
-            point = HelperFunction.RandomPointRange(GlobalInfo.instance.pollutionInfos[(int)level].pointRange);
-            return point;
+            synchroPoint = HelperFunction.RandomPointRange(GlobalInfo.instance.pollutionInfos[(int)level].pointRange);
+            return synchroPoint;
         }
         else
         {
-            ShowCleanupView(point, Event);
-            Player.instance.AddPoint(point);
-            int retPoint = point;
-            point = 0;
+            ShowCleanupView(synchroPoint, Event);
+            Player.instance.AddPoint(synchroPoint);
+            int retPoint = synchroPoint;
+            synchroPoint = 0;
             return retPoint;
         }
     }
