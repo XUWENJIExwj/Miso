@@ -17217,6 +17217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c6487e071c5ae45889bcbb76828479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveButton: {fileID: 1058802417}
   routePoints: []
   next: 1
   prefab: {fileID: 2352686182858951869, guid: ee4eb5239f97a7543aaf5fe8ac1460ff, type: 3}

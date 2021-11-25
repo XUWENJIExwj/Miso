@@ -207,6 +207,7 @@ public class Player : Monosingleton<Player>
     {
         Vector2 offset = new Vector2(transform.localPosition.x, 0.0f);
         float time = Mathf.Abs(offset.x * 0.005f);
+        time = Mathf.Min(time, 1.0f);
         tweener = transform.DOLocalMoveX(0.0f, time);
         tweener.SetEase(Ease.Linear);
         tweener.OnComplete(() => { RouteManager.instance.MovePath(); });
