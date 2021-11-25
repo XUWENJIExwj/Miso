@@ -149,7 +149,10 @@ public class BaseButton : EventButton
         // RouteSelectの時、EventButtonのSizeを拡大する
         else if (logic.isRouteSelect())
         {
-            ShowEventPreview();
+            if (Player.instance.GetCurrentBase() != this)
+            {
+                ShowEventPreview();
+            }
         }
     }
 
@@ -166,7 +169,10 @@ public class BaseButton : EventButton
         // RouteSelectの時、選択されなかった場合、EventButtonのSizeを縮小する
         else if (logic.isRouteSelect())
         {
-            EndEventPreview();
+            if (Player.instance.GetCurrentBase() != this)
+            {
+                EndEventPreview();
+            }
         }
     }
 

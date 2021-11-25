@@ -74,7 +74,7 @@ public class EventButton : Button
     {
         Tweener tweener = transform.DOLocalMoveX(transform.localPosition.x - Offset.x, Time);
         tweener.SetEase(Ease.Linear);
-        tweener.OnComplete(() => { FixPostion(); });
+        tweener.OnUpdate(() => { FixPostion(); });
     }
 
     // 画面外になったら、ループさせる

@@ -90,5 +90,10 @@ namespace EventScriptableObject
         {
 
         }
+
+        public virtual void StartAutoPlay()
+        {
+
+        }
     }
 }

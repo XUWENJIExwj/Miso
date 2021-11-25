@@ -29,12 +29,20 @@ public class PlayerButton : Button
     // Mouse‚ªButton‚Ìã‚É“ü‚é
     public override void OnPointerEnter(PointerEventData E)
     {
-        Player.instance.GetCurrentBase().OnPointerEnter(E);
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+        if (logic.isRouteSelect())
+        {
+            Player.instance.GetCurrentBase().ShowEventPreview();
+        }
     }
 
     // Mouse‚ªButton‚Ìã‚©‚ç—£‚ê‚é
     public override void OnPointerExit(PointerEventData E)
     {
-        Player.instance.GetCurrentBase().OnPointerExit(E);
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+        if (logic.isRouteSelect())
+        {
+            Player.instance.GetCurrentBase().EndEventPreview();
+        }
     }
 }

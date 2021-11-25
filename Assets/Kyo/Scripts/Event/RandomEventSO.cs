@@ -72,6 +72,7 @@ namespace EventScriptableObject
         public override void ResetEventSO()
         {
             point = 0;
+            autoPlay = false;
 
             SetNextPhase(RandomEventPhase.Phase_None);
         }
@@ -130,6 +131,7 @@ namespace EventScriptableObject
                 ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, ui.ReportFrame.color.a);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.ReportFrame.color.a);
 
+                StartAutoPlay();
                 SetNextPhase(RandomEventPhase.Phase_Ending);
             });
 
@@ -148,6 +150,7 @@ namespace EventScriptableObject
                 ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, 1.0f);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 1.0f);
 
+                StartAutoPlay();
                 SetNextPhase(RandomEventPhase.Phase_Ending);
             }
         }
@@ -155,7 +158,7 @@ namespace EventScriptableObject
         public override void Ending()
         {
             // ‰¼
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || autoPlay)
             {
                 AddResult();
                 ResetEventSO();
@@ -166,6 +169,13 @@ namespace EventScriptableObject
         public void Through()
         {
             RouteManager.instance.MovePath();
+        }
+
+        public override void StartAutoPlay()
+        {
+            RandomEventUI eventUI = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>();
+            eventUI.StopAllCoroutines();
+            eventUI.StartCoroutine(AutoPlay());
         }
     }
 }

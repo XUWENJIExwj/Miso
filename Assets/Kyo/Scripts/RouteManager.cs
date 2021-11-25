@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RouteManager : Monosingleton<RouteManager>
 {
+    [SerializeField] private Button moveButton = null;
     [SerializeField] private List<EventButton> routePoints = null;
     [SerializeField] private int next = 1;
     [SerializeField] private LineRenderer prefab = null;
@@ -17,6 +19,12 @@ public class RouteManager : Monosingleton<RouteManager>
         routes = new List<LineRenderer>();
         next = 1;
         AddRoute();
+        ActiveMoveButton(false);
+    }
+
+    public void ActiveMoveButton(bool Active)
+    {
+        moveButton.gameObject.SetActive(Active);
     }
 
     public void AddRoute()
@@ -36,6 +44,7 @@ public class RouteManager : Monosingleton<RouteManager>
     {
         routePoints.Add(Player.instance.GetCurrentBase());
         DrawRoute();
+        ActiveMoveButton(true);
     }
 
     public void AddRoutePoint(EventButton Point)
@@ -128,6 +137,8 @@ public class RouteManager : Monosingleton<RouteManager>
 
         if (routePlanned && logic.isRouteSelect())
         {
+            ActiveMoveButton(false);
+
             FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
             Player.instance.SetNewBase(routePoints[routePoints.Count - 1]);
             Player.instance.ResetEncounter();
@@ -136,8 +147,8 @@ public class RouteManager : Monosingleton<RouteManager>
                 routePoints[0].DoScaleDown();
             }
             Player.instance.SetCurrentEvent(routePoints[0]);
-
-            MovePath();
+            Player.instance.FixPostionBeforeMove();
+            logic.SetNextSate(MainGameState.RouteMove);
         }
     }
 

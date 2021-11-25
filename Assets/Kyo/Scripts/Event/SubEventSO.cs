@@ -1,5 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
+using System.Collections;
 
 namespace EventScriptableObject
 {
@@ -20,6 +22,7 @@ namespace EventScriptableObject
         public float[] bonusRatio = new float[] { 1.0f, 1.2f }; // ëäê´ÅFïÅí ÅAó«Ç¢
         [SerializeField] private SubEventPhase subEventPhase = SubEventPhase.Phase_None;
         public float frameFadeTime = 0.8f;
+        public bool autoPlay = false;
         private Tweener tweener = null;
 
         protected override void Init()
@@ -73,6 +76,7 @@ namespace EventScriptableObject
         public override void ResetEventSO()
         {
             point = 0;
+            autoPlay = false;
 
             SetNextPhase(SubEventPhase.Phase_None);
         }
@@ -134,6 +138,7 @@ namespace EventScriptableObject
                 ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, ui.ReportFrame.color.a);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.ReportFrame.color.a);
 
+                StartAutoPlay();
                 SetNextPhase(SubEventPhase.Phase_Ending);
             });
 
@@ -152,6 +157,7 @@ namespace EventScriptableObject
                 ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, 1.0f);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 1.0f);
 
+                StartAutoPlay();
                 SetNextPhase(SubEventPhase.Phase_Ending);
             }
         }
@@ -159,12 +165,32 @@ namespace EventScriptableObject
         public virtual void Ending()
         {
             // âº
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || autoPlay)
             {
                 AddResult();
                 ResetEventSO();
                 RouteManager.instance.MovePath();
             }
+        }
+
+        public override void StartAutoPlay()
+        {
+            SubEventUI eventUI = EventUIManager.instance.GetCurrentEventUI<SubEventUI>();
+            eventUI.StopAllCoroutines();
+            eventUI.StartCoroutine(AutoPlay());
+        }
+
+        public IEnumerator AutoPlay(float WaitTime = 1.0f)
+        {
+            float timeCount = 0.0f;
+
+            while (timeCount < WaitTime)
+            {
+                yield return new WaitForEndOfFrame();
+                timeCount += Time.deltaTime;
+            }
+
+            autoPlay = true;
         }
     }
 }

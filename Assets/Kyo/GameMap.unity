@@ -24321,14 +24321,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
+    courseCount: 0
+    courseResetCount: 2
     amas: []
     ama: 0
     basePoint: {fileID: 0}
     totalPoint: 0
     currentPoint: 0
-    encounter: 0
-    encounterRatio: 0
+    encounter: 10
+    encounterRatio: 10
   currentEvent: {fileID: 0}
+  iconOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1018336825
 MonoBehaviour:
   m_ObjectHideFlags: 0

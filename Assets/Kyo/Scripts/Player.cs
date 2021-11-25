@@ -25,21 +25,18 @@ public class Player : Monosingleton<Player>
 {
     [SerializeField] private PlayerData playerData;
     [SerializeField] private EventButton currentEvent = null;
+    [SerializeField] private Vector3 iconOffset = Vector3.zero;
     private Tween tweener = null;
 
     // PlayerData
     public void Init()
     {
         // ‰¼
-        playerData.courseCount = 0;
-        playerData.courseResetCount = 4;
         playerData.amas = new AMASO[(int)AMAs.Max];
         playerData.ama = AMAs.Max;
         playerData.basePoint = null;
         playerData.totalPoint = 0;
         playerData.currentPoint = 0;
-        playerData.encounter = 1;
-        playerData.encounterRatio = 1;
 
         GlobalInfo.instance.playerData = playerData;
 
@@ -118,7 +115,7 @@ public class Player : Monosingleton<Player>
         gameObject.SetActive(true);
         playerData.basePoint = Base;
         playerData.basePoint.SetEventButtonColor(Color.red);
-        transform.localPosition = playerData.basePoint.transform.localPosition;
+        transform.localPosition = playerData.basePoint.transform.localPosition + iconOffset;
 
         SetCurrentAMA(Base.GetAMA());
 
@@ -185,7 +182,7 @@ public class Player : Monosingleton<Player>
 
     public void ResetEncounter()
     {
-        playerData.encounter = 2;
+        playerData.encounter = 10;
 
         // ‰¼
         GlobalInfo.instance.playerData = playerData;
@@ -193,7 +190,7 @@ public class Player : Monosingleton<Player>
 
     public bool Encounter()
     {
-        if (UnityEngine.Random.Range(0, 10) <= playerData.encounter)
+        if (UnityEngine.Random.Range(0, 100) <= playerData.encounter)
         {
             ResetEncounter();
             return true;
@@ -206,6 +203,25 @@ public class Player : Monosingleton<Player>
     }
 
     // PlayerMove
+    public void FixPostionBeforeMove()
+    {
+        Vector2 offset = new Vector2(transform.localPosition.x, 0.0f);
+        float time = Mathf.Abs(offset.x * 0.005f);
+        tweener = transform.DOLocalMoveX(0.0f, time);
+        tweener.SetEase(Ease.Linear);
+        tweener.OnComplete(() => { RouteManager.instance.MovePath(); });
+        tweener.OnUpdate(() => { RouteManager.instance.DrawRoute(); });
+
+        PollutionMap.instance.MovePath(offset, time);
+        EventButtonManager.instance.MovePath(offset, time);
+
+        offset /= GlobalInfo.instance.mapSize;
+        MapScroll.instance.MovePath(offset, time);
+        GridScroll.instance.MovePath(offset, time);
+
+        Timer.instance.ShowTimer();
+    }
+
     public void Move(Vector2 Offset)
     {
         transform.localPosition += new Vector3(Offset.x, Offset.y, 0.0f);
