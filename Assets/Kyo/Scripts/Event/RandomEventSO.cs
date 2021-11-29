@@ -30,7 +30,7 @@ namespace EventScriptableObject
         {
             SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
             ui.Title.text = eventTitle;
-            ui.Summary.text = eventSummary;
+            //ui.Summary.text = eventSummary;
 
             tweener = ui.TitleFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
             {
@@ -160,6 +160,9 @@ namespace EventScriptableObject
             // ‰¼
             if (Input.GetMouseButtonDown(0) || autoPlay)
             {
+                RandomEventUI eventUI = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>();
+                eventUI.StopAllCoroutines();
+
                 AddResult();
                 ResetEventSO();
                 RouteManager.instance.MovePath();

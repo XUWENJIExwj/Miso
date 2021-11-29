@@ -167,6 +167,8 @@ namespace EventScriptableObject
             // ‰¼
             if (Input.GetMouseButtonDown(0) || autoPlay)
             {
+                SubEventUI eventUI = EventUIManager.instance.GetCurrentEventUI<SubEventUI>();
+                eventUI.StopAllCoroutines();
                 AddResult();
                 ResetEventSO();
                 RouteManager.instance.MovePath();
