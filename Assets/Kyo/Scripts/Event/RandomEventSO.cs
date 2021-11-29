@@ -35,13 +35,13 @@ namespace EventScriptableObject
             tweener = ui.TitleFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
             {
                 ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, ui.TitleFrame.color.a);
-                ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, ui.TitleFrame.color.a);
-                ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, ui.TitleFrame.color.a);
+                //ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, ui.TitleFrame.color.a);
+                //ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, ui.TitleFrame.color.a);
             }).OnComplete(() =>
             {
                 ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, ui.TitleFrame.color.a);
-                ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, ui.TitleFrame.color.a);
-                ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, ui.TitleFrame.color.a);
+                //ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, ui.TitleFrame.color.a);
+                //ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, ui.TitleFrame.color.a);
                 SetNextPhase(RandomEventPhase.Phase_Report);
             });
 
@@ -107,8 +107,8 @@ namespace EventScriptableObject
                 SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
                 ui.TitleFrame.color = HelperFunction.ChangeAlpha(ui.TitleFrame.color, 1.0f);
                 ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, 1.0f);
-                ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, 1.0f);
-                ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 1.0f);
+                //ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, 1.0f);
+                //ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 1.0f);
                 SetNextPhase(RandomEventPhase.Phase_Report);
             }
         }
