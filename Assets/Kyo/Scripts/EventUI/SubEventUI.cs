@@ -16,7 +16,7 @@ public struct SubEventUIElement
     public Image ReportFrame;
     public TMP_Text Report;
     public Image PointText;
-    public TMP_Text Point;
+    public Text Point;
 }
 
 public class SubEventUI : EventUI

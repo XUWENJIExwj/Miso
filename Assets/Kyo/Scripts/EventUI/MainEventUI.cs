@@ -16,7 +16,8 @@ public struct MainEventUIElement
     public Image TalkFrame;
     public TMP_Text Name;
     public TMP_Text Talk;
-    public TMP_Text Point;
+    public Image PointText;
+    public Text Point;
     public GameObject OptionParent;
     public Button[] Options;
 }
@@ -56,7 +57,8 @@ public class MainEventUI : EventUI
         ui.Name.text = "";
         ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, 0.0f);
         ui.Talk.text = "";
-        ui.Point.color = HelperFunction.ChangeAlpha(ui.Talk.color, 0.0f);
+        ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, 0.0f);
+        ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 0.0f);
         ui.Point.text = "";
         ui.OptionParent.SetActive(false);
     }

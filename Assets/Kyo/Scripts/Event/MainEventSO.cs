@@ -234,7 +234,7 @@ namespace EventScriptableObject
         public override void SetPointText()
         {
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
-            ui.Point.text = "Point: " + point.ToString("+#;-#;0");
+            ui.Point.text = point.ToString("+#;-#;0");
         }
 
         public void SetNextPhase(MainEventPhase Phase)
@@ -581,9 +581,11 @@ namespace EventScriptableObject
                 yield return new WaitForSeconds(printInterval);
             }
 
-            tweener = ui.Point.DOFade(1.0f, frameFadeTime);
+            tweener = ui.PointText.DOFade(1.0f, frameFadeTime);
+            tweener.OnUpdate(() => { ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.PointText.color.a); });
             tweener.OnComplete(() => 
             {
+                ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.PointText.color.a);
                 onPrint = false;
                 ++progress.textIndex;
                 SetNextPhase(Phase);
@@ -619,6 +621,7 @@ namespace EventScriptableObject
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Talk.text = Text;
+            ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, 1.0f);
             ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 1.0f);
 
             onPrint = false;

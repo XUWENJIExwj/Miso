@@ -14,7 +14,7 @@ public class BaseEventUI : EventUI
     [SerializeField] private Queue<Result> results = null;
     [SerializeField] private Result currentResult = null;
     [SerializeField] private int resultCount = 0;
-    [SerializeField] private TMP_Text pointText = null;
+    [SerializeField] private Text pointText = null;
     [SerializeField] private int currentPoint = 0;
     [SerializeField] private float fadeTime = 0.3f;
 

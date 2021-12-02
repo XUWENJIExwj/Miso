@@ -9,7 +9,7 @@ public class FuelGauge : Monosingleton<FuelGauge>
 {
     [SerializeField] private Image bg = null;
     [SerializeField] private Image gauge = null;
-    [SerializeField] private TMP_Text valueText = null;
+    [SerializeField] private Text valueText = null;
     [SerializeField] private int currentValue = 0;
     [SerializeField] private int targetValue = 0;
     [SerializeField] private float valueInterval = 0.02f;

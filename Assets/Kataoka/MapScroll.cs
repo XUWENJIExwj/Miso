@@ -14,30 +14,30 @@ public struct UVScrollProperty
 
 public class MapScroll : Monosingleton<MapScroll>
 {
-    [SerializeField] private RectTransform[] rectTransform = null;
-    [SerializeField] private Image[] image = null;
+    [SerializeField] private RectTransform[] rectTransforms = null;
+    [SerializeField] private Image[] images = null;
     [SerializeField] private UVScrollProperty uv;
     [SerializeField] private float scrollSpeed = 2.0f;
     [SerializeField] private bool onDrag = true;
 
     public override void InitAwake()
     {
-        for (int i = 0; i < rectTransform.Length; ++i)
+        for (int i = 0; i < rectTransforms.Length; ++i)
         {
             // Œ»Ý‚ÌScreenSize‚É‡‚í‚¹‚ÄAMap‚ÌƒTƒCƒY‚ð”ä—á“I‚ÉŠg‘åk¬
-            rectTransform[i].sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransform[i].sizeDelta.y * rectTransform[i].sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
+            rectTransforms[i].sizeDelta = new Vector2(GlobalInfo.instance.refScreenSize.y / rectTransforms[i].sizeDelta.y * rectTransforms[i].sizeDelta.x, GlobalInfo.instance.refScreenSize.y);
 
             // Šg‘åk¬‚Ì‰Šú‰»
-            image[i].material.SetVector("_Tiling", uv.Tiling);
+            images[i].material.SetVector("_Tiling", uv.Tiling);
 
             // UVScroll‚Ì‰Šú‰»
-            image[i].material.SetVector("_Offset", uv.Offset);
+            images[i].material.SetVector("_Offset", uv.Offset);
         }
     }
 
     public void Init()
     {
-        GlobalInfo.instance.SetMapSize(rectTransform[0].sizeDelta);
+        GlobalInfo.instance.SetMapSize(rectTransforms[0].sizeDelta);
     }
 
     public void OnDrag()
@@ -60,15 +60,20 @@ public class MapScroll : Monosingleton<MapScroll>
     public void Move(Vector2 Offset)
     {
         uv.Offset -= Offset;
-        image[0].material.SetVector("_Offset", uv.Offset);
-        image[1].material.SetVector("_Offset", uv.Offset);
+        foreach (Image image in images)
+        {
+            image.material.SetVector("_Offset", uv.Offset);
+        }
     }
 
     public void MovePath(Vector2 Offset, float Time)
     {
         uv.Offset += Offset;
-        image[0].material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
-        image[1].material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
+        foreach (Image image in images)
+        {
+            image.material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
+        }
+
     }
 
     public void SetOnDrag(bool OnDrag)
