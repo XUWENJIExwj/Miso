@@ -14,15 +14,11 @@ public class EventButton : Button
     [SerializeField] protected EventSO eventSO = null;
     [SerializeField] protected Oceans ocean = Oceans.None;
     [SerializeField] protected OceanAreas oceanArea = OceanAreas.None;
-    static protected Vector2 size = new Vector2(30.0f, 30.0f);
+    [SerializeField] protected Vector2 size = new Vector2(30.0f, 30.0f);
     static Vector2 maxSize = Vector2.zero;
 
     public void Init(Oceans Ocean, OceanAreas OceanArea)
     {
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        maxSize.x = Mathf.Max(maxSize.x, rectTransform.sizeDelta.x);
-        maxSize.y = Mathf.Max(maxSize.y, rectTransform.sizeDelta.y);
-
         SetOceanInfo(Ocean, OceanArea);
         CreateEvent();
     }
@@ -46,20 +42,36 @@ public class EventButton : Button
     public virtual void CreateEvent()
     {
         eventSO = GlobalInfo.instance.CreateEventSO();
-        image.sprite = eventSO.icon;
+        image.sprite = eventSO.icons[0];
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.sizeDelta = eventSO.Resize();
+        size = rectTransform.sizeDelta;
+
+        maxSize.x = Mathf.Max(maxSize.x, rectTransform.sizeDelta.x);
+        maxSize.y = Mathf.Max(maxSize.y, rectTransform.sizeDelta.y);
+
         gameObject.SetActive(false);
     }
 
     public virtual void ResetEvent()
     {
         eventSO = GlobalInfo.instance.CreateEventSO();
-        image.sprite = eventSO.icon;
+        image.sprite = eventSO.icons[0];
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.sizeDelta = eventSO.Resize();
+        size = rectTransform.sizeDelta;
     }
 
     public void CreateRandomEvent()
     {
         eventSO = GlobalInfo.instance.CreateRandomEventSO();
-        image.sprite = eventSO.icon;
+        image.sprite = eventSO.icons[0];
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.sizeDelta = eventSO.Resize();
+        size = rectTransform.sizeDelta;
     }
 
     public void Move(Vector2 Offset)
@@ -247,12 +259,22 @@ public class EventButton : Button
             SetSelected(true);
             RouteManager.instance.AddRoutePoint(this);
             eventPreview.SetMoveability("ˆÚ“®: ‘I‘ð’†");
+
+            if (eventSO.IsRandomEvent())
+            {
+                image.sprite = eventSO.icons[1];
+            }
         }
         else
         {
             SetSelected(false);
             RouteManager.instance.RemoveRoutePoints(this);
             eventPreview.SetMoveability("ˆÚ“®: ‰Â");
+
+            if (eventSO.IsRandomEvent())
+            {
+                image.sprite = eventSO.icons[0];
+            }
         }
     }
 

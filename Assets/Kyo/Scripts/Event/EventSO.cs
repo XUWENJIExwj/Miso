@@ -19,7 +19,7 @@ namespace EventScriptableObject
     {
         [Header("Common")]
         public int id;
-        public Sprite icon;
+        public Sprite[] icons;
         [ReadOnly] public EventSOType type = EventSOType.None;
         static public string[] typeDesc = { "メインイベント", "サブイベント", "ランダムイベント", "ベース", "" };
         [ReadOnly] public string typeText = typeDesc[(int)EventSOType.None];
@@ -78,7 +78,7 @@ namespace EventScriptableObject
 
         public virtual void SetPointText()
         {
-            
+
         }
 
         public bool IsRandomEvent()
@@ -94,6 +94,23 @@ namespace EventScriptableObject
         public virtual void StartAutoPlay()
         {
 
+        }
+
+        public Vector2 Resize()
+        {
+            if (type == EventSOType.MainEvent)
+            {
+                return new Vector2(16.9f, 53.9f);
+            }
+            else if (type == EventSOType.SubEvent)
+            {
+                return new Vector2(34.1f, 53.8f);
+            }
+            //else if (type == EventSOType.RandomEvent)
+            else
+            {
+                return new Vector2(35.0f, 35.0f);
+            }
         }
     }
 }

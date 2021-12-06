@@ -33,7 +33,7 @@ public class CleanupView : MonoBehaviour
         ui.point.text = "Point: " + Point.ToString("+#;-#;0");
 
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(AnimateCleanupView(1.0f, fadeInTime));
+        sequence.Append(AnimateCleanupView(50.0f / 255.0f, fadeInTime));
         sequence.Append(AnimateCleanupView(0.0f, fadeOutTime));
         sequence.Insert(0.0f, transform.DOLocalMove(transform.localPosition + endOffset, fadeInTime + fadeOutTime).SetEase(Ease.Linear));
         sequence.OnComplete(() => { Destroy(gameObject); });
@@ -50,7 +50,7 @@ public class CleanupView : MonoBehaviour
 
     public void UpdateChildrenAlpha()
     {
-        ui.title.color = HelperFunction.ChangeAlpha(ui.title.color, ui.frame.color.a);
-        ui.point.color = HelperFunction.ChangeAlpha(ui.point.color, ui.frame.color.a);
+        ui.title.color = HelperFunction.ChangeAlpha(ui.title.color, ui.frame.color.a / (50.0f / 255.0f));
+        ui.point.color = HelperFunction.ChangeAlpha(ui.point.color, ui.frame.color.a / (50.0f / 255.0f));
     }
 }

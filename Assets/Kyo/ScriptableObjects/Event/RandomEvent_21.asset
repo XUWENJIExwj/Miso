@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: RandomEvent_21
   m_EditorClassIdentifier: 
   id: 21
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icons:
+  - {fileID: 5398932546919475803, guid: b926b3a6f12f78d419d1f1e75b58160b, type: 3}
+  - {fileID: -3494330029110744728, guid: b5550543569782f4a82ed163a01ddde2, type: 3}
   type: 2
   typeText: "\u30E9\u30F3\u30C0\u30E0\u30A4\u30D9\u30F3\u30C8"
   eventTitle: "\u30A2\u30C8\u30E9\u30F3\u30C6\u30A3\u30B9\u304C\u6D77\u4E0A\u306B\u51FA\u73FE"
@@ -29,4 +31,5 @@ MonoBehaviour:
   - 1.2
   subEventPhase: 4
   frameFadeTime: 0.8
+  autoPlay: 0
   randomEventPhase: 4

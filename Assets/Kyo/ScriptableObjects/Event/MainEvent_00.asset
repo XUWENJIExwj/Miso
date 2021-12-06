@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MainEvent_00
   m_EditorClassIdentifier: 
   id: 0
-  icon: {fileID: 21300000, guid: 9e69d6a5205990741902a262e9560bf1, type: 3}
+  icons:
+  - {fileID: -6544882227645325185, guid: 6b80440655d320641a1c44cd60076806, type: 3}
   type: 0
   typeText: "\u30E1\u30A4\u30F3\u30A4\u30D9\u30F3\u30C8"
   eventTitle: "\u6F01\u8239\u884C\u65B9\u4E0D\u660E\u8ABF\u67FB"
@@ -29,6 +30,7 @@ MonoBehaviour:
   - 1.2
   subEventPhase: 2
   frameFadeTime: 0.8
+  autoPlay: 0
   reports:
   - type: 3
     expression: 0

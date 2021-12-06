@@ -26,6 +26,7 @@ public enum AMAs
 public class AMASO : ScriptableObject
 {
     public string ama;
+    public Sprite icon;
     [TextArea(5, 20)] public string nature;
     public AMATypes type = AMATypes.Type_None;
     static public string[] features = { "‚Å‚«‚é–‚ª‘½‚¢", "‰˜õò‰»", "‘«‚Í‚â‚¢", "" };

@@ -14,6 +14,7 @@ public struct MainEventUIElement
     public TMP_Text Summary;
     public Image Character;
     public Image TalkFrame;
+    public Image NameFrame;
     public TMP_Text Name;
     public TMP_Text Talk;
     public Image PointText;
@@ -53,6 +54,7 @@ public class MainEventUI : EventUI
         ui.Summary.text = "";
         ui.Character.color = HelperFunction.ChangeAlpha(ui.Character.color, 0.0f);
         ui.TalkFrame.color = HelperFunction.ChangeAlpha(ui.TalkFrame.color, 0.0f);
+        ui.NameFrame.color = HelperFunction.ChangeAlpha(ui.NameFrame.color, 0.0f);
         ui.Name.color = HelperFunction.ChangeAlpha(ui.Name.color, 0.0f);
         ui.Name.text = "";
         ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, 0.0f);

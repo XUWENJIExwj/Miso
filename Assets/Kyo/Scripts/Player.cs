@@ -24,6 +24,7 @@ public struct PlayerData
 public class Player : Monosingleton<Player>
 {
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private Image amaIcon = null;
     [SerializeField] private EventButton currentEvent = null;
     [SerializeField] private Vector3 iconOffset = Vector3.zero;
     private Tween tweener = null;
@@ -60,6 +61,7 @@ public class Player : Monosingleton<Player>
         if (playerData.amas[(int)AMA]) return;
 
         playerData.amas[(int)AMA] = GlobalInfo.instance.amaList[(int)AMA];
+        SetCurrentAMA(AMA);
 
         // ‰¼
         GlobalInfo.instance.playerData = playerData;
@@ -68,6 +70,7 @@ public class Player : Monosingleton<Player>
     public void SetCurrentAMA(AMAs AMA)
     {
         playerData.ama = AMA;
+        amaIcon.sprite = GlobalInfo.instance.amaList[(int)AMA].icon;
     }
 
     public AMAs GetCurrentAMA()

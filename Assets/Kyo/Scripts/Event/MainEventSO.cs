@@ -163,10 +163,12 @@ namespace EventScriptableObject
                 {
                     tweener = ui.TalkFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
                     {
+                        ui.NameFrame.color = HelperFunction.ChangeAlpha(ui.NameFrame.color, ui.TalkFrame.color.a);
                         ui.Name.color = HelperFunction.ChangeAlpha(ui.Name.color, ui.TalkFrame.color.a);
                         ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, ui.TalkFrame.color.a);
                     }).OnComplete(() =>
                     {
+                        ui.NameFrame.color = HelperFunction.ChangeAlpha(ui.NameFrame.color, ui.TalkFrame.color.a);
                         ui.Name.color = HelperFunction.ChangeAlpha(ui.Name.color, ui.TalkFrame.color.a);
                         ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, ui.TalkFrame.color.a);
                         ui.Name.text = ChangeCharacterName(reports[progress.characterIndex]);
@@ -256,6 +258,7 @@ namespace EventScriptableObject
                 ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 1.0f);
                 ChangeCharacterSpriteFromDictionary(ref ui.Character, reports[progress.characterIndex].type, reports[progress.characterIndex].expression);
                 ui.TalkFrame.color = HelperFunction.ChangeAlpha(ui.TalkFrame.color, 1.0f);
+                ui.NameFrame.color = HelperFunction.ChangeAlpha(ui.NameFrame.color, 1.0f);
                 ui.Name.color = HelperFunction.ChangeAlpha(ui.Name.color, 1.0f);
                 ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, 1.0f);
                 ui.Name.text = ChangeCharacterName(reports[progress.characterIndex]);
