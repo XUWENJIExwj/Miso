@@ -112,7 +112,7 @@ namespace EventScriptableObject
             }
             else
             {
-                return new Vector2(84.5f, 95.5f);
+                return new Vector2(63.375f, 71.625f);
             }
         }
     }

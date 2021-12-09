@@ -14,7 +14,7 @@ public class BaseButton : EventButton
     public override void Init(Oceans Ocean, OceanAreas OceanArea)
     {
         base.Init(Ocean, OceanArea);
-        size = new Vector2(84.5f, 95.5f);
+        size = new Vector2(63.375f, 71.625f);
     }
 
     public override void SetPollutionLevel()

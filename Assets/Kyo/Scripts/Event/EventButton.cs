@@ -14,7 +14,7 @@ public class EventButton : Button
     [SerializeField] protected EventSO eventSO = null;
     [SerializeField] protected Oceans ocean = Oceans.None;
     [SerializeField] protected OceanAreas oceanArea = OceanAreas.None;
-    [SerializeField] protected Vector2 size = new Vector2(30.0f, 30.0f);
+    [SerializeField] protected Vector2 size = Vector2.zero;
     static protected Vector2 maxSize = Vector2.zero;
 
     public virtual void Init(Oceans Ocean, OceanAreas OceanArea)
