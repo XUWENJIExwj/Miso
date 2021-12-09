@@ -19,6 +19,11 @@ public class DictionaryManager : Monosingleton<DictionaryManager>
     }
 
     // IllustrationDictionary
+    public Sprite GetTargetIllustration(CharacterTypes CharacterType, ExpressionTypes ExpressionType)
+    {
+        return illustrationDictionary.GetSprite(CharacterType, ExpressionType);
+    }
+
     public Sprite GetTargetIllustration(MainEventCharacterTypes CharacterType, ExpressionTypes ExpressionType)
     {
         return illustrationDictionary.GetTargetSprite(CharacterType, ExpressionType);

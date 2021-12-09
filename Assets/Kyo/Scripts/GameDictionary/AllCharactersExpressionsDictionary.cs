@@ -90,7 +90,7 @@ public class AllCharactersExpressionsDictionary : MonoBehaviour
         return (CharacterTypes)CharacterType;
     }
 
-    private Sprite GetSprite(CharacterTypes CharacterType, ExpressionTypes ExpressionType)
+    public Sprite GetSprite(CharacterTypes CharacterType, ExpressionTypes ExpressionType)
     {
         return characterDictionary[CharacterType].GetSprite(ExpressionType);
     }

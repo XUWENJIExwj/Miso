@@ -137,21 +137,7 @@ public class BaseButton : EventButton
     // BaseSelect
     public void OnBaseSelect()
     {
-        // Player‚Ì‰ŠúˆÊ’u
-        Player.instance.SetFirstBase(this);
-        Player.instance.AddAMA(((BaseEventSO)eventSO).ama);
-
-        // Event‚Ì‰Šú‰»
-        EventButtonManager.instance.CreateEvents();
-
-        // Player‚ÌBase‚ğStartPoint‚É“o˜^
-        RouteManager.instance.SetStartPoint();
-
-        //FuelGauge.instance.ResetMaxValue();
-
-        // ‰¼
-        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
-        logic.SetNextSate(MainGameState.RouteSelectPre);
+        BaseConfirmView.instance.ActiveConfirmView(this);
     }
 
     // Mouse‚ªButton‚Ìã‚É“ü‚é

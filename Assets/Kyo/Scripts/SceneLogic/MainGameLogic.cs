@@ -6,6 +6,7 @@ using DG.Tweening;
 public enum MainGameState
 {
     BaseSelect,
+    BaseConfirm,
     RouteSelectPre,
     RouteSelect,
     RouteMove,
@@ -26,6 +27,7 @@ public class MainGameLogic : BaseSceneLogic
         EventButtonManager.instance.Init();
         Player.instance.Init();
         EventUIManager.instance.Init();
+        BaseConfirmView.instance.Init();
         FuelGauge.instance.Init();
         Timer.instance.Init();
     }
@@ -36,6 +38,9 @@ public class MainGameLogic : BaseSceneLogic
         {
             case MainGameState.BaseSelect:
                 BaseSelect();
+                break;
+            case MainGameState.BaseConfirm:
+                BaseConfirm();
                 break;
             case MainGameState.RouteSelectPre:
                 RouteSelectPre();
@@ -60,6 +65,11 @@ public class MainGameLogic : BaseSceneLogic
     void BaseSelect()
     {
         MapController();
+    }
+
+    void BaseConfirm()
+    {
+
     }
 
     void RouteSelectPre()

@@ -39,4 +39,9 @@ public class AMASO : ScriptableObject
     {
         feature = features[(int)type];
     }
+
+    static public  CharacterTypes ConvertAMAsToCharacterTypes(AMAs AMA)
+    {
+        return (CharacterTypes)(AMA + 3);
+    }
 }
