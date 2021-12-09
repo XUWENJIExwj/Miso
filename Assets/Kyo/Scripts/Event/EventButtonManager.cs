@@ -9,11 +9,13 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
     [SerializeField] private BaseEventPreview baseEventPreview = null;
     [SerializeField] private OceanEventButtons[] oceanEventButtons = null;
     [SerializeField] private List<EventButton> events = null;
+    [SerializeField] private List<EventButton> mainEvents = null;
 
     public override void InitAwake()
     {
         oceanEventButtons = GetComponentsInChildren<OceanEventButtons>();
         events = new List<EventButton>();
+        mainEvents = new List<EventButton>();
     }
 
     public void Init()
@@ -28,8 +30,17 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
         }
     }
 
-    public void ResetEvent()
+    public void CreateEvents()
     {
+        foreach (EventButton eventButton in events)
+        {
+            eventButton.CreateEvent();
+        }
+    }
+
+    public void ResetEvents()
+    {
+        mainEvents.Clear();
         foreach (EventButton eventButton in events)
         {
             eventButton.ResetEvent();
@@ -67,6 +78,19 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
         foreach (EventButton eventButton in events)
         {
             eventButton.gameObject.SetActive(true);
+        }
+    }
+
+    public void AddMainEvent(EventButton Event)
+    {
+        mainEvents.Add(Event);
+    }
+
+    public void LinkMainEventsToAMA(AMAs AMA)
+    {
+        foreach (EventButton button in mainEvents)
+        {
+
         }
     }
 }

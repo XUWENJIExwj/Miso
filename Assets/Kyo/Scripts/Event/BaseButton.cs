@@ -11,14 +11,29 @@ public class BaseButton : EventButton
 {
     [SerializeField] private BaseIndex baseIndex = BaseIndex.None;
 
+    public override void Init(Oceans Ocean, OceanAreas OceanArea)
+    {
+        base.Init(Ocean, OceanArea);
+        size = new Vector2(84.5f, 95.5f);
+    }
+
     public override void SetPollutionLevel()
     {
         
     }
 
-    public override void CreateEvent()
+    public override void CreateBaseEvent()
     {
         eventSO = GlobalInfo.instance.CreateEventSO(baseIndex);
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        maxSize.x = Mathf.Max(maxSize.x, rectTransform.sizeDelta.x);
+        maxSize.y = Mathf.Max(maxSize.y, rectTransform.sizeDelta.y);
+    }
+
+    public override void CreateEvent()
+    {
+        
     }
 
     public override void ResetEvent()
@@ -125,6 +140,9 @@ public class BaseButton : EventButton
         // Player‚Ì‰ŠúˆÊ’u
         Player.instance.SetFirstBase(this);
         Player.instance.AddAMA(((BaseEventSO)eventSO).ama);
+
+        // Event‚Ì‰Šú‰»
+        EventButtonManager.instance.CreateEvents();
 
         // Player‚ÌBase‚ğStartPoint‚É“o˜^
         RouteManager.instance.SetStartPoint();

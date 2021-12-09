@@ -15,12 +15,12 @@ public class EventButton : Button
     [SerializeField] protected Oceans ocean = Oceans.None;
     [SerializeField] protected OceanAreas oceanArea = OceanAreas.None;
     [SerializeField] protected Vector2 size = new Vector2(30.0f, 30.0f);
-    static Vector2 maxSize = Vector2.zero;
+    static protected Vector2 maxSize = Vector2.zero;
 
-    public void Init(Oceans Ocean, OceanAreas OceanArea)
+    public virtual void Init(Oceans Ocean, OceanAreas OceanArea)
     {
         SetOceanInfo(Ocean, OceanArea);
-        CreateEvent();
+        CreateBaseEvent();
     }
 
     static public Vector2 GetMaxSize()
@@ -39,6 +39,11 @@ public class EventButton : Button
         PollutionMap.instance.SetPollutionLevel(ocean, oceanArea, this);
     }
 
+    public virtual void CreateBaseEvent()
+    {
+        gameObject.SetActive(false);
+    }
+
     public virtual void CreateEvent()
     {
         eventSO = GlobalInfo.instance.CreateEventSO();
@@ -51,7 +56,10 @@ public class EventButton : Button
         maxSize.x = Mathf.Max(maxSize.x, rectTransform.sizeDelta.x);
         maxSize.y = Mathf.Max(maxSize.y, rectTransform.sizeDelta.y);
 
-        gameObject.SetActive(false);
+        if (eventSO.type == EventSOType.MainEvent)
+        {
+            EventButtonManager.instance.AddMainEvent(this);
+        }
     }
 
     public virtual void ResetEvent()
@@ -62,6 +70,11 @@ public class EventButton : Button
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = eventSO.Resize();
         size = rectTransform.sizeDelta;
+
+        if (eventSO.type == EventSOType.MainEvent)
+        {
+            EventButtonManager.instance.AddMainEvent(this);
+        }
     }
 
     public void CreateRandomEvent()
@@ -72,6 +85,11 @@ public class EventButton : Button
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = eventSO.Resize();
         size = rectTransform.sizeDelta;
+    }
+
+    public void LinkMainEventToAMA(AMAs AMA)
+    {
+
     }
 
     public void Move(Vector2 Offset)

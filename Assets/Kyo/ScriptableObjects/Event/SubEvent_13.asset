@@ -17,14 +17,14 @@ MonoBehaviour:
   - {fileID: 7291564152576792378, guid: d4c6a1a38e435514aaf5874394b9c2b8, type: 3}
   type: 1
   typeText: "\u30B5\u30D6\u30A4\u30D9\u30F3\u30C8"
-  eventTitle: "AMA\u904B\u9001"
-  amaType: 0
+  eventTitle: "\u4E0D\u5BE9\u8239\u306E\u884C\u65B9"
+  amaType: 2
   pointRange:
     min: 900
     max: 1100
   point: 0
-  eventSummary: "\u30E1\u30F3\u30C6\u30CA\u30F3\u30B9\u304C\u5FC5\u8981\u306AAMA\u3092\u6307\u5B9A\u3055\u308C\u305F\u5834\u6240\u306B\u904B\u3076"
-  eventReport: "\u8F38\u9001\u5B8C\u4E86\u3057\u307E\u3057\u305F\uFF01"
+  eventSummary: "\u4E0D\u5BE9\u8239\u3092\u8FFD\u8DE1\u3057\u5BC6\u8F38\u7D44\u7E54\u3092\u898B\u3064\u3051\u3066\u901A\u5831\u3057\u305F"
+  eventReport: "\u4EFB\u52D9\u5B8C\u4E86\u3057\u307E\u3057\u305F\uFF01"
   bonusRatio:
   - 1
   - 1.2

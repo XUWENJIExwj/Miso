@@ -51,7 +51,7 @@ public class Player : Monosingleton<Player>
 
         if ((playerData.courseCount % playerData.courseResetCount) == 0)
         {
-            EventButtonManager.instance.ResetEvent();
+            EventButtonManager.instance.ResetEvents();
             PollutionMap.instance.ResetPollutionLevel();
         }
     }

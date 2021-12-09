@@ -17,5 +17,5 @@ MonoBehaviour:
   nature: "\u4E0D\u601D\u8B70\u306A\u96F0\u56F2\u6C17\u3001\u7121\u53E3\u3001\u5B9F\u306F\u7167\u308C\u5C4B\u3055\u3093"
   type: 1
   feature: "\u6C5A\u67D3\u6D44\u5316"
-  timePerGrid: 30
+  timePerGrid: 1
   energy: 20

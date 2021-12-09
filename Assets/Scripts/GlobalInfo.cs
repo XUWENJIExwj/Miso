@@ -13,6 +13,12 @@ public enum CanvasType
     Max,
 }
 
+[Serializable]
+public struct AMAMainEvents
+{
+    public List<MainEventSO> mainEvents;
+}
+
 public class GlobalInfo : Monosingleton<GlobalInfo>
 {
     public Vector2 refScreenSize = new Vector2(1080.0f, 1920.0f); // 参照画面サイズ
@@ -21,7 +27,8 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public Vector2 halfMapSize = new Vector2(1280.0f, 960.0f);
     public List<AMASO> amaList = null;
     public List<BaseEventSO> baseList = null;
-    public List<MainEventSO> mainEventList = null;
+    //public List<MainEventSO> mainEventList = null;
+    public AMAMainEvents[] mainEventLists;
     public List<SubEventSO> subEventList = null;
     public List<RandomEventSO> randomEventList = null;
     public float[] eventRatio = new float[] { 0.2f, 0.3f, 0.5f };
@@ -69,7 +76,10 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
         float ratio = UnityEngine.Random.Range(0.0f, 1.0f);
         if (ratio < eventRatio[(int)EventSOType.MainEvent])
         {
-            return mainEventList[UnityEngine.Random.Range(0, mainEventList.Count)];
+            int amaIndex = (int)Player.instance.GetCurrentAMA();
+            int eventIndex = UnityEngine.Random.Range(0, mainEventLists[amaIndex].mainEvents.Count);
+            return mainEventLists[amaIndex].mainEvents[eventIndex];
+            //return mainEventList[UnityEngine.Random.Range(0, mainEventList.Count)];
         }
         else if (ratio < eventRatio[(int)EventSOType.MainEvent] + eventRatio[(int)EventSOType.SubEvent])
         {

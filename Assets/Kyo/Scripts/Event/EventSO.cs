@@ -57,16 +57,16 @@ namespace EventScriptableObject
 
         }
 
-        public void SetPoint()
+        public void SetPoint(JudgementType Judgement = JudgementType.None)
         {
-            ComputePoint();
+            ComputePoint(Judgement);
             CheckBouns();
             SetPointText();
 
             Player.instance.AddPoint(point);
         }
 
-        public virtual void ComputePoint()
+        public virtual void ComputePoint(JudgementType Judgement)
         {
             point = HelperFunction.RandomPointRange(pointRange);
         }
@@ -106,10 +106,13 @@ namespace EventScriptableObject
             {
                 return new Vector2(34.1f, 53.8f);
             }
-            //else if (type == EventSOType.RandomEvent)
-            else
+            else if (type == EventSOType.RandomEvent)
             {
                 return new Vector2(35.0f, 35.0f);
+            }
+            else
+            {
+                return new Vector2(84.5f, 95.5f);
             }
         }
     }

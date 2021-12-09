@@ -24,6 +24,7 @@ namespace EventScriptableObject
         Failed,
         Succeeded,
         Special,
+        None,
     }
 
     [Serializable]
@@ -40,7 +41,6 @@ namespace EventScriptableObject
     {
         public JudgementType type;
         [TextArea(5, 20)] public string endingText;
-        public PointRange point;
     }
 
     [Serializable]
@@ -87,6 +87,7 @@ namespace EventScriptableObject
     public class MainEventSO : SubEventSO
     {
         [Header("MainEvent")]
+        public PointRange[] endingPoints;
         public CharacterText[] reports;
         public MainEventOption[] optionFirst;
         public MainEventOptionNext[] optionNext;
@@ -106,21 +107,13 @@ namespace EventScriptableObject
 
         public override void MakePointRange()
         {
-
-            int[] minPoints = new int[]
+            pointRange.min = int.MaxValue;
+            pointRange.max = int.MinValue;
+            for (int i = 0; i < endingPoints.Length; ++i)
             {
-                optionSecond[0].options[0].ending[0].point.min, optionSecond[0].options[1].ending[0].point.min,
-                optionSecond[1].options[0].ending[0].point.min, optionSecond[1].options[1].ending[0].point.min,
-            };
-
-            int[] maxPoints = new int[]
-            {
-                optionSecond[0].options[0].ending[0].point.max, optionSecond[0].options[1].ending[0].point.max,
-                optionSecond[1].options[0].ending[0].point.max, optionSecond[1].options[1].ending[0].point.max,
-            };
-
-            pointRange.min = Mathf.Min(minPoints);
-            pointRange.max = Mathf.Max(maxPoints);
+                pointRange.min = Mathf.Min(pointRange.min, endingPoints[i].min);
+                pointRange.max = Mathf.Max(pointRange.max, endingPoints[i].max);
+            }
         }
 
         public override void EventStart()
@@ -226,11 +219,11 @@ namespace EventScriptableObject
             EventUIManager.instance.AddResult(this);
         }
 
-        public override void ComputePoint()
+        public override void ComputePoint(JudgementType Judgement)
         {
-            pointRange.min = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].point.min;
-            pointRange.max = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].point.max;
-            base.ComputePoint();
+            pointRange.min = endingPoints[(int)Judgement].min;
+            pointRange.max = endingPoints[(int)Judgement].max;
+            base.ComputePoint(Judgement);
         }
 
         public override void SetPointText()
@@ -356,9 +349,9 @@ namespace EventScriptableObject
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Summary.text = optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].type.ToString();
             ChangeCharacterSpriteFromDictionary(ref ui.Character, MainEventCharacterTypes.None, ExpressionTypes.None);
-            ui.Name.text = "";
+            ui.Name.text = "エンディング";
 
-            SetPoint();
+            SetPoint(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].type);
             SetNextPhase(MainEventPhase.Phase_Ending);
             StartCoroutinePrintEndingText(optionSecond[progress.optionRouteFirst].options[progress.optionRouteSecond].ending[0].endingText, mainEventPhase);
         }
@@ -496,7 +489,15 @@ namespace EventScriptableObject
         // CharacterNameを切り替える処理
         public string ChangeCharacterName(CharacterText Character)
         {
-            if (Character.type == MainEventCharacterTypes.AMA)
+            if (Character.type == MainEventCharacterTypes.Player)
+            {
+                return "司令官";
+            }
+            else if (Character.type == MainEventCharacterTypes.Aside)
+            {
+                return "ナレーション";
+            }
+            else if (Character.type == MainEventCharacterTypes.AMA)
             {
                 return Player.instance.GetCurrentAMASO().ama;
             }
