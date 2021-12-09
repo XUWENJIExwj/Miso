@@ -27,6 +27,7 @@ public class Player : Monosingleton<Player>
     [SerializeField] private Image amaIcon = null;
     [SerializeField] private EventButton currentEvent = null;
     [SerializeField] private Vector3 iconOffset = Vector3.zero;
+    [SerializeField] private bool mainEventPlayed = false;
     private Tween tweener = null;
 
     // PlayerData
@@ -46,6 +47,8 @@ public class Player : Monosingleton<Player>
 
     public void CompleteCourse()
     {
+        mainEventPlayed = false;
+        RouteManager.instance.ResetMainEventStoredFlag();
         ++playerData.courseCount;
         GlobalInfo.instance.playerData = playerData;
 
@@ -106,6 +109,15 @@ public class Player : Monosingleton<Player>
     public void SetCurrentEvent(EventButton Event)
     {
         currentEvent = Event;
+    }
+
+    public void ResetCurrentEvent()
+    {
+        if (!currentEvent.IsBase())
+        {
+            currentEvent.SetPollutionLevel();
+            currentEvent.CreateRandomEvent();
+        }
     }
 
     public EventButton GetCurrentEvent()
@@ -205,6 +217,16 @@ public class Player : Monosingleton<Player>
         return false;
     }
 
+    public void SetMainEventPlayedFlag()
+    {
+        mainEventPlayed = true;
+    }
+
+    public bool MainEventPlayed()
+    {
+        return mainEventPlayed;
+    }
+
     // PlayerMove
     public void FixPostionBeforeMove()
     {
@@ -259,11 +281,7 @@ public class Player : Monosingleton<Player>
 
         if (nextPoint)
         {
-            if (!currentEvent.IsBase())
-            {
-                currentEvent.SetPollutionLevel();
-                currentEvent.CreateRandomEvent();
-            }
+            ResetCurrentEvent();
 
             MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
             logic.SetNextSate(MainGameState.RouteMove);

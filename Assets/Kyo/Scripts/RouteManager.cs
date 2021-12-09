@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EventScriptableObject;
 
 public class RouteManager : Monosingleton<RouteManager>
 {
@@ -12,6 +13,7 @@ public class RouteManager : Monosingleton<RouteManager>
     [SerializeField] private List<LineRenderer> routes = null;
     [SerializeField] private float lineWidth = 0.035f;
     [SerializeField] private bool routePlanned = false;
+    [SerializeField] private bool mainEventStored = false;
 
     public override void InitAwake()
     {
@@ -50,8 +52,27 @@ public class RouteManager : Monosingleton<RouteManager>
     public void AddRoutePoint(EventButton Point)
     {
         routePoints.Add(Point);
+        CheckStoredMainEvent(Point);
         DrawRoute();
         FuelGauge.instance.ReduceValueOnRouteSelect();
+    }
+
+    public void ResetMainEventStoredFlag()
+    {
+        mainEventStored = false;
+    }
+
+    public void CheckStoredMainEvent(EventButton Point)
+    {
+        if (Point.GetEventSO<MainEventSO>() && !mainEventStored)
+        {
+            mainEventStored = true;
+        }
+    }
+
+    public bool MainEventStored()
+    {
+        return mainEventStored;
     }
 
     public void RemoveRoutePoints(EventButton Point)

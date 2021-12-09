@@ -17,6 +17,8 @@ public class EventButton : Button
     [SerializeField] protected Vector2 size = Vector2.zero;
     static protected Vector2 maxSize = Vector2.zero;
 
+    protected Tweener tweener = null;
+
     public virtual void Init(Oceans Ocean, OceanAreas OceanArea)
     {
         SetOceanInfo(Ocean, OceanArea);
@@ -67,9 +69,7 @@ public class EventButton : Button
         eventSO = GlobalInfo.instance.CreateEventSO();
         image.sprite = eventSO.icons[0];
 
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.sizeDelta = eventSO.Resize();
-        size = rectTransform.sizeDelta;
+        Resize();
 
         if (eventSO.type == EventSOType.MainEvent)
         {
@@ -79,9 +79,25 @@ public class EventButton : Button
 
     public void CreateRandomEvent()
     {
+        if (tweener.IsActive())
+        {
+            tweener.OnComplete(() => { CreateRandomEventSO(); });
+        }
+        else
+        {
+            CreateRandomEventSO();
+        }
+    }
+
+    public void CreateRandomEventSO()
+    {
         eventSO = GlobalInfo.instance.CreateRandomEventSO();
         image.sprite = eventSO.icons[0];
+        Resize();
+    }
 
+    public void Resize()
+    {
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = eventSO.Resize();
         size = rectTransform.sizeDelta;
@@ -129,14 +145,14 @@ public class EventButton : Button
     public void DoScaleUp(float MaxScale = 1.5f, float Time = 0.5f)
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.DOSizeDelta(size * MaxScale, Time);
+        tweener = rectTransform.DOSizeDelta(size * MaxScale, Time);
     }
 
     // 縮小
     public void DoScaleDown(float MinScale = 1.0f, float Time = 0.5f)
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.DOSizeDelta(size * MinScale, Time);
+        tweener = rectTransform.DOSizeDelta(size * MinScale, Time);
     }
 
     public T GetEventSO<T>()
@@ -250,6 +266,11 @@ public class EventButton : Button
                     eventPreview.AddMoveability("不");
                 }
                 eventPreview.AddMoveability("可");
+
+                if (RouteManager.instance.MainEventStored() && eventSO.IsMainEvent())
+                {
+                    eventPreview.AddMoveability("\n（イベント発生なし）");
+                }
             }
         }
     }
@@ -289,7 +310,11 @@ public class EventButton : Button
             RouteManager.instance.RemoveRoutePoints(this);
             eventPreview.SetMoveability("移動: 可");
 
-            if (eventSO.IsRandomEvent())
+            if (RouteManager.instance.MainEventStored() && eventSO.IsMainEvent())
+            {
+                eventPreview.AddMoveability("\n（イベント発生なし）");
+            }
+            else if (eventSO.IsRandomEvent())
             {
                 image.sprite = eventSO.icons[0];
             }

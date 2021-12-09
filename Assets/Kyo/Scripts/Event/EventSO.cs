@@ -81,6 +81,11 @@ namespace EventScriptableObject
 
         }
 
+        public bool IsMainEvent()
+        {
+            return type == EventSOType.MainEvent;
+        }
+
         public bool IsRandomEvent()
         {
             return type == EventSOType.RandomEvent;
@@ -89,6 +94,11 @@ namespace EventScriptableObject
         public virtual void MakePointRange()
         {
 
+        }
+
+        public void Through()
+        {
+            RouteManager.instance.MovePath();
         }
 
         public virtual void StartAutoPlay()

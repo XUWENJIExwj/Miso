@@ -169,11 +169,6 @@ namespace EventScriptableObject
             }
         }
 
-        public void Through()
-        {
-            RouteManager.instance.MovePath();
-        }
-
         public override void StartAutoPlay()
         {
             RandomEventUI eventUI = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>();

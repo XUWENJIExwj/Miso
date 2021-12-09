@@ -456,10 +456,18 @@ namespace EventScriptableObject
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.OptionParent.SetActive(false);
-            ChangeCharacterSpriteFromDictionary(ref ui.Character, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].type, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].expression);
-            ui.Name.text = ChangeCharacterName(optionFirst[progress.optionRouteFirst].character[progress.characterIndex]);
 
-            StartCoroutinePrintCharacterText(optionFirst[progress.optionRouteFirst].character[progress.characterIndex], mainEventPhase);
+            if (optionFirst[progress.optionRouteFirst].character.Length > 0)
+            {
+                ChangeCharacterSpriteFromDictionary(ref ui.Character, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].type, optionFirst[progress.optionRouteFirst].character[progress.characterIndex].expression);
+                ui.Name.text = ChangeCharacterName(optionFirst[progress.optionRouteFirst].character[progress.characterIndex]);
+
+                StartCoroutinePrintCharacterText(optionFirst[progress.optionRouteFirst].character[progress.characterIndex], mainEventPhase);
+            }
+            else
+            {
+                NextPhase();
+            }
         }
 
         // “ñ”Ô–Ú‚Ì‘I‘ðˆ—
@@ -562,6 +570,8 @@ namespace EventScriptableObject
             {
                 i = CheckNewExpression(Character, i);
 
+                if (i >= Character.texts[progress.textIndex].Length) break;
+
                 ui.Talk.text += Character.texts[progress.textIndex][i];
                 yield return new WaitForSeconds(printInterval);
             }
@@ -605,6 +615,8 @@ namespace EventScriptableObject
             for (int i = 0; i < Character.texts[progress.textIndex].Length; ++i)
             {
                 i = CheckNewExpression(Character, i);
+
+                if (i >= Character.texts[progress.textIndex].Length) break;
 
                 ui.Talk.text += Character.texts[progress.textIndex][i];
             }

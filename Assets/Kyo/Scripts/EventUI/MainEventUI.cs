@@ -30,9 +30,17 @@ public class MainEventUI : EventUI
 
     public override void EventPlayPre(EventButton Event)
     {
-        gameObject.SetActive(true);
-        eventSO = Event.GetEventSO<MainEventSO>();
-        eventSO.EventStart();
+        if (Player.instance.MainEventPlayed())
+        {
+            eventSO.Through();
+        }
+        else
+        {
+            Player.instance.SetMainEventPlayedFlag();
+            gameObject.SetActive(true);
+            eventSO = Event.GetEventSO<MainEventSO>();
+            eventSO.EventStart();
+        }
     }
 
     public override void EventPlay()
