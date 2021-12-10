@@ -20,6 +20,7 @@ public struct AMAInfo
 public class BaseConfirmView : Monosingleton<BaseConfirmView>
 {
     [SerializeField] private BaseButton baseSelected = null;
+    [SerializeField] private TMP_Text baseName = null;
     [SerializeField] private AMAInfo amaInfo;
 
     public void Init()
@@ -30,6 +31,7 @@ public class BaseConfirmView : Monosingleton<BaseConfirmView>
     public void ActiveConfirmView(BaseButton Base)
     {
         baseSelected = Base;
+        baseName.text = baseSelected.GetBaseName();
         InitAMAInfo();
 
         gameObject.SetActive(true);
@@ -56,7 +58,7 @@ public class BaseConfirmView : Monosingleton<BaseConfirmView>
     {
         // Player‚Ì‰ŠúˆÊ’u
         Player.instance.SetFirstBase(baseSelected);
-        Player.instance.AddAMA(baseSelected.GetAMA());
+        Player.instance.AddAMA(baseSelected.GetAMA(), true);
 
         // Event‚Ì‰Šú‰»
         EventButtonManager.instance.CreateEvents();

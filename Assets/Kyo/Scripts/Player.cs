@@ -13,7 +13,7 @@ public struct PlayerData
     public int courseResetCount;
     public AMASO[] amas;
     public AMAs ama;
-    public EventButton basePoint;
+    public BaseButton basePoint;
     public int totalPoint;
     public int currentPoint;
     public int encounter;
@@ -28,6 +28,8 @@ public class Player : Monosingleton<Player>
     [SerializeField] private EventButton currentEvent = null;
     [SerializeField] private Vector3 iconOffset = Vector3.zero;
     [SerializeField] private bool mainEventPlayed = false;
+    [SerializeField] private AMAs newAMA = AMAs.Max;
+
     private Tween tweener = null;
 
     // PlayerData
@@ -45,6 +47,11 @@ public class Player : Monosingleton<Player>
         gameObject.SetActive(false);
     }
 
+    public void ActiveSwitchView()
+    {
+        AMASwitchView.instance.ActiveSwitchView(playerData);
+    }
+
     public void CompleteCourse()
     {
         mainEventPlayed = false;
@@ -59,12 +66,29 @@ public class Player : Monosingleton<Player>
         }
     }
 
-    public void AddAMA(AMAs AMA)
+    public void ActiveNewAMAView()
+    {
+        if (newAMA < AMAs.Max)
+        {
+            NewAMAView.instance.ActiveNewAMAView(newAMA);
+            newAMA = AMAs.Max;
+        }
+    }
+
+    public void AddAMA(AMAs AMA, bool Setting = false)
     {
         if (playerData.amas[(int)AMA]) return;
 
         playerData.amas[(int)AMA] = GlobalInfo.instance.amaList[(int)AMA];
-        SetCurrentAMA(AMA);
+
+        if (Setting)
+        {
+            SetCurrentAMA(AMA);
+        }
+        else
+        {
+            newAMA = AMA;
+        }
 
         // ‰¼
         GlobalInfo.instance.playerData = playerData;
@@ -81,7 +105,7 @@ public class Player : Monosingleton<Player>
         return playerData.ama;
     }
 
-    public bool CheckUnlockedAMAs(AMAs AMA)
+    public bool CheckUnlockedAMA(AMAs AMA)
     {
         return playerData.amas[(int)AMA] != null;
     }
@@ -138,11 +162,13 @@ public class Player : Monosingleton<Player>
         GlobalInfo.instance.playerData = playerData;
     }
 
-    public void SetNewBase(EventButton Base)
+    public void SetNewBase(BaseButton Base)
     {
         playerData.basePoint.SetEventButtonColor(Color.white);
         playerData.basePoint = Base;
         playerData.basePoint.SetEventButtonColor(Color.red);
+
+        AddAMA(Base.GetAMA());
 
         // ‰¼
         GlobalInfo.instance.playerData = playerData;
@@ -313,6 +339,10 @@ public class Player : Monosingleton<Player>
                 Timer.instance.HideTimer();
                 logic.SetNextSate(MainGameState.EventPlayPre);
             });
+        }
+        else
+        {
+            ActiveNewAMAView();
         }
     }
 

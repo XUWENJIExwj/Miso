@@ -90,7 +90,7 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
     {
         foreach (EventButton button in mainEvents)
         {
-
+            button.LinkMainEventToAMA(AMA);
         }
     }
 }

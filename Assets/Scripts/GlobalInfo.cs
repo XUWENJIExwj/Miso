@@ -27,7 +27,6 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     public Vector2 halfMapSize = new Vector2(1280.0f, 960.0f);
     public List<AMASO> amaList = null;
     public List<BaseEventSO> baseList = null;
-    //public List<MainEventSO> mainEventList = null;
     public AMAMainEvents[] mainEventLists;
     public List<SubEventSO> subEventList = null;
     public List<RandomEventSO> randomEventList = null;
@@ -39,6 +38,11 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     {
         // CanvasType数だけメモリ確保
         canvases = new Canvas[(int)CanvasType.Max];
+
+        foreach (AMASO ama in amaList)
+        {
+            ama.ResetNewFlag();
+        }
     }
 
     // 参照画面サイズのアスペクト比の取得
@@ -79,7 +83,6 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
             int amaIndex = (int)Player.instance.GetCurrentAMA();
             int eventIndex = UnityEngine.Random.Range(0, mainEventLists[amaIndex].mainEvents.Count);
             return mainEventLists[amaIndex].mainEvents[eventIndex];
-            //return mainEventList[UnityEngine.Random.Range(0, mainEventList.Count)];
         }
         else if (ratio < eventRatio[(int)EventSOType.MainEvent] + eventRatio[(int)EventSOType.SubEvent])
         {

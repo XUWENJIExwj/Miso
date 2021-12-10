@@ -7,6 +7,7 @@ using EventScriptableObject;
 public class RouteManager : Monosingleton<RouteManager>
 {
     [SerializeField] private Button moveButton = null;
+    [SerializeField] private Button switchButton = null;
     [SerializeField] private List<EventButton> routePoints = null;
     [SerializeField] private int next = 1;
     [SerializeField] private LineRenderer prefab = null;
@@ -27,6 +28,7 @@ public class RouteManager : Monosingleton<RouteManager>
     public void ActiveMoveButton(bool Active)
     {
         moveButton.gameObject.SetActive(Active);
+        switchButton.gameObject.SetActive(Active);
     }
 
     public void AddRoute()
@@ -161,7 +163,7 @@ public class RouteManager : Monosingleton<RouteManager>
             ActiveMoveButton(false);
 
             FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
-            Player.instance.SetNewBase(routePoints[routePoints.Count - 1]);
+            Player.instance.SetNewBase((BaseButton)routePoints[routePoints.Count - 1]);
             Player.instance.ResetEncounter();
             if (!routePoints[0].IsCurrentBase())
             {

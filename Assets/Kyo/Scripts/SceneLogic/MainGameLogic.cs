@@ -9,6 +9,9 @@ public enum MainGameState
     BaseConfirm,
     RouteSelectPre,
     RouteSelect,
+    NewAMAPre,
+    NewAMA,
+    AMASwitch,
     RouteMove,
     EventPlayPre,
     EventPlay,
@@ -25,9 +28,11 @@ public class MainGameLogic : BaseSceneLogic
         GridScroll.instance.Init();
         PollutionMap.instance.Init();
         EventButtonManager.instance.Init();
+        NewAMAView.instance.Init();
         Player.instance.Init();
         EventUIManager.instance.Init();
         BaseConfirmView.instance.Init();
+        AMASwitchView.instance.Init();
         FuelGauge.instance.Init();
         Timer.instance.Init();
     }
@@ -47,6 +52,15 @@ public class MainGameLogic : BaseSceneLogic
                 break;
             case MainGameState.RouteSelect:
                 RouteSelect();
+                break;
+            case MainGameState.NewAMAPre:
+                NewAMAPre();
+                break;
+            case MainGameState.NewAMA:
+                NewAMA();
+                break;
+            case MainGameState.AMASwitch:
+                AMASwitch();
                 break;
             case MainGameState.RouteMove:
                 RouteMove();
@@ -83,6 +97,21 @@ public class MainGameLogic : BaseSceneLogic
     void RouteSelect()
     {
         MapController();
+    }
+
+    void NewAMAPre()
+    {
+        
+    }
+
+    void NewAMA()
+    {
+        NewAMAView.instance.EndNewAMAView();
+    }
+
+    void AMASwitch()
+    {
+
     }
 
     void RouteMove()

@@ -105,7 +105,7 @@ public class EventButton : Button
 
     public void LinkMainEventToAMA(AMAs AMA)
     {
-
+        eventSO = GlobalInfo.instance.mainEventLists[(int)AMA].mainEvents[eventSO.id];
     }
 
     public void Move(Vector2 Offset)

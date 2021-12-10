@@ -64,10 +64,10 @@ public class BaseButton : EventButton
         eventPreview.SetPosition(transform.localPosition);
         eventPreview.SetEventDesc(eventSO.eventTitle);
         eventPreview.SetMoveability("ˆÚ“®: ");
-        //eventPreview.SetAMASprite(Sprite AMA) Base—p‚ÌAMASprite«‘‚ğ—pˆÓ‚·‚é
+        eventPreview.SetAMASprite(GlobalInfo.instance.amaList[(int)((BaseEventSO)eventSO).ama].icon);
         eventPreview.SetAMAType(DictionaryManager.instance.GetAMAType(eventSO.amaType));
         eventPreview.SetGot("–¢Šl“¾");
-        if (Player.instance.CheckUnlockedAMAs(((BaseEventSO)eventSO).ama))
+        if (Player.instance.CheckUnlockedAMA(((BaseEventSO)eventSO).ama))
         {
             eventPreview.SetGot("Šl“¾Ï‚İ");
         }
@@ -178,6 +178,11 @@ public class BaseButton : EventButton
                 EndEventPreview();
             }
         }
+    }
+
+    public string GetBaseName()
+    {
+        return ((BaseEventSO)eventSO).eventTitle;
     }
 
     public AMAs GetAMA()
