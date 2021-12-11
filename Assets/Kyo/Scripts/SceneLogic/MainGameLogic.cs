@@ -12,6 +12,7 @@ public enum MainGameState
     NewAMAPre,
     NewAMA,
     AMASwitch,
+    Achievement,
     RouteMove,
     EventPlayPre,
     EventPlay,
@@ -33,6 +34,7 @@ public class MainGameLogic : BaseSceneLogic
         EventUIManager.instance.Init();
         BaseConfirmView.instance.Init();
         AMASwitchView.instance.Init();
+        AchievementView.instance.Init();
         FuelGauge.instance.Init();
         Timer.instance.Init();
     }
@@ -61,6 +63,9 @@ public class MainGameLogic : BaseSceneLogic
                 break;
             case MainGameState.AMASwitch:
                 AMASwitch();
+                break;
+            case MainGameState.Achievement:
+                Achievement();
                 break;
             case MainGameState.RouteMove:
                 RouteMove();
@@ -110,6 +115,11 @@ public class MainGameLogic : BaseSceneLogic
     }
 
     void AMASwitch()
+    {
+
+    }
+
+    void Achievement()
     {
 
     }

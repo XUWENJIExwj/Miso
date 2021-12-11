@@ -7,6 +7,65 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 [Serializable]
+public struct EventAchievements
+{
+    public bool[] completed;
+
+    public void Init(int Count)
+    {
+        completed = new bool[Count];
+        for (int i = 0; i < completed.Length; ++i)
+        {
+            completed[i] = false;
+        }
+    }
+
+    public float Progress()
+    {
+        int count = 0;
+        foreach(bool c in completed)
+        {
+            if (c) ++count;
+        }
+        return (float)count / completed.Length;
+    }
+}
+
+[Serializable]
+public struct AchievementProgress
+{
+    public EventAchievements[] main;
+    public EventAchievements sub;
+    public EventAchievements random;
+
+    public void Init()
+    {
+        InitMainEventAchievements();
+        InitSubEventAchievements();
+        InitRandomEventAchievements();
+    }
+
+    private void InitMainEventAchievements()
+    {
+        main = new EventAchievements[GlobalInfo.instance.amaList.Count];
+        for (int i = 0; i < main.Length; ++i)
+        {
+            main[i].Init(GlobalInfo.instance.mainEventLists[i].mainEvents.Count);
+        }
+    }
+
+    private void InitSubEventAchievements()
+    {
+        sub.Init(GlobalInfo.instance.subEventList.Count);
+    }
+
+    private void InitRandomEventAchievements()
+    {
+        random.Init(GlobalInfo.instance.randomEventList.Count);
+    }
+}
+
+[Serializable]
 public struct PlayerData
 {
     public int courseCount;
@@ -18,6 +77,7 @@ public struct PlayerData
     public int currentPoint;
     public int encounter;
     public int encounterRatio;
+    public AchievementProgress achievements;
 }
 
 [Serializable]
@@ -26,8 +86,8 @@ public class Player : Monosingleton<Player>
     [SerializeField] private PlayerData playerData;
     [SerializeField] private Image amaIcon = null;
     [SerializeField] private EventButton currentEvent = null;
-    [SerializeField] private Vector3 iconOffset = Vector3.zero;
     [SerializeField] private bool mainEventPlayed = false;
+    [SerializeField] private Vector3 iconOffset = Vector3.zero;
     [SerializeField] private AMAs newAMA = AMAs.Max;
 
     private Tween tweener = null;
@@ -41,10 +101,31 @@ public class Player : Monosingleton<Player>
         playerData.basePoint = null;
         playerData.totalPoint = 0;
         playerData.currentPoint = 0;
+        playerData.achievements.Init();
 
         GlobalInfo.instance.playerData = playerData;
 
         gameObject.SetActive(false);
+    }
+
+    public PlayerData GetPlayerData()
+    {
+        return playerData;
+    }
+
+    public void SetMainEventCompleted(int ID)
+    {
+        playerData.achievements.main[(int)GetCurrentAMA()].completed[ID] = true;
+    }
+
+    public void SetSubEventCompleted(int ID)
+    {
+        playerData.achievements.sub.completed[ID] = true;
+    }
+
+    public void SetRandomEventCompleted(int ID)
+    {
+        playerData.achievements.random.completed[ID] = true;
     }
 
     public void ActiveSwitchView()
@@ -140,7 +221,11 @@ public class Player : Monosingleton<Player>
         if (!currentEvent.IsBase())
         {
             currentEvent.SetPollutionLevel();
-            currentEvent.CreateRandomEvent();
+
+            if (!currentEvent.IsMainEvent() || !mainEventPlayed)
+            {
+                currentEvent.CreateRandomEvent();
+            }
         }
     }
 

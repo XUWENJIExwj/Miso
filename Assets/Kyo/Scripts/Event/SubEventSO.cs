@@ -19,6 +19,7 @@ namespace EventScriptableObject
     {
         [TextArea(5, 20)] public string eventSummary;
         [TextArea(5, 20)] public string eventReport;
+        public Sprite achievement = null;
         public float[] bonusRatio = new float[] { 1.0f, 1.2f }; // ëäê´ÅFïÅí ÅAó«Ç¢
         [SerializeField] private SubEventPhase subEventPhase = SubEventPhase.Phase_None;
         public float frameFadeTime = 0.8f;
@@ -171,6 +172,7 @@ namespace EventScriptableObject
                 eventUI.StopAllCoroutines();
                 AddResult();
                 ResetEventSO();
+                Player.instance.SetSubEventCompleted(id);
                 RouteManager.instance.MovePath();
             }
         }

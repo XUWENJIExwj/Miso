@@ -8,6 +8,7 @@ public class RouteManager : Monosingleton<RouteManager>
 {
     [SerializeField] private Button moveButton = null;
     [SerializeField] private Button switchButton = null;
+    [SerializeField] private Button achievementButton = null;
     [SerializeField] private List<EventButton> routePoints = null;
     [SerializeField] private int next = 1;
     [SerializeField] private LineRenderer prefab = null;
@@ -29,6 +30,7 @@ public class RouteManager : Monosingleton<RouteManager>
     {
         moveButton.gameObject.SetActive(Active);
         switchButton.gameObject.SetActive(Active);
+        achievementButton.gameObject.SetActive(Active);
     }
 
     public void AddRoute()

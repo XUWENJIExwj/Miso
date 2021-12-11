@@ -187,6 +187,11 @@ public class EventButton : Button
         return eventSO.type == EventSOType.Base;
     }
 
+    public bool IsMainEvent()
+    {
+        return eventSO.type == EventSOType.MainEvent;
+    }
+
     public bool IsCurrentBase()
     {
         return Player.instance.GetCurrentBase() == this;

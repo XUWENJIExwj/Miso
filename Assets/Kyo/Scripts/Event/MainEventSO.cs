@@ -369,7 +369,9 @@ namespace EventScriptableObject
                 {
                     AddResult();
                     ResetEventSO();
+                    Player.instance.SetMainEventCompleted(id);
                     RouteManager.instance.MovePath();
+                    Player.instance.SetMainEventPlayedFlag();
                 }
             }
         }

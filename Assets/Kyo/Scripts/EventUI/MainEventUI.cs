@@ -36,7 +36,6 @@ public class MainEventUI : EventUI
         }
         else
         {
-            Player.instance.SetMainEventPlayedFlag();
             gameObject.SetActive(true);
             eventSO = Event.GetEventSO<MainEventSO>();
             eventSO.EventStart();

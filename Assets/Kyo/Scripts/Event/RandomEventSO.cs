@@ -165,6 +165,7 @@ namespace EventScriptableObject
 
                 AddResult();
                 ResetEventSO();
+                Player.instance.SetRandomEventCompleted(id);
                 RouteManager.instance.MovePath();
             }
         }
