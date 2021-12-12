@@ -31,6 +31,12 @@ public class SingleSubEventAchievementButtonEditor : ButtonEditor
         EditorGUILayout.PropertyField(id);
         EditorGUILayout.PropertyField(titleFrame);
         EditorGUILayout.PropertyField(title);
+        AddPropertyField();
         serializedObject.ApplyModifiedProperties();
+    }
+
+    public virtual void AddPropertyField()
+    {
+        
     }
 }

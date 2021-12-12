@@ -24,7 +24,7 @@ public class SingleSubEventAchievementButton : Button
         titleFrame.gameObject.SetActive(false);
     }
 
-    public virtual void SetAchievementInfo(AMAs AMA = AMAs.Max)
+    public virtual void SetAchievementInfo(AMAs AMA)
     {
         if (eventSO && Player.instance.GetPlayerData().achievements.sub.completed[eventSO.id])
         {

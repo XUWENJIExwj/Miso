@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SingleRandomEventAchievementButton : SingleSubEventAchievementButton
 {
-    public override void SetAchievementInfo(AMAs AMA = AMAs.Max)
+    public override void SetAchievementInfo(AMAs AMA)
     {
         if (eventSO && Player.instance.GetPlayerData().achievements.random.completed[eventSO.id])
         {

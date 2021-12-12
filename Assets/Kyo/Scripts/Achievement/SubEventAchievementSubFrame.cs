@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SubEventAchievementSubFrame : MonoBehaviour
 {
-    [SerializeField] private SingleSubEventAchievementButton[] achievements = null;
+    [SerializeField] protected SingleSubEventAchievementButton[] achievements = null;
 
-    public void Init(int LineIndex)
+    public virtual void Init(int LineIndex, AMAs AMA = AMAs.Max)
     {
         for (int i = 0; i < achievements.Length; ++i)
         {
@@ -23,11 +23,11 @@ public class SubEventAchievementSubFrame : MonoBehaviour
         }
     }
 
-    public virtual void SetAchivementsInfo()
+    public void SetAchivementsInfo(AMAs AMA = AMAs.Max)
     {
         foreach (SingleSubEventAchievementButton achievement in achievements)
         {
-            achievement.SetAchievementInfo();
+            achievement.SetAchievementInfo(AMA);
         }
     }
 
