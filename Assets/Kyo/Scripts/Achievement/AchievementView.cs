@@ -68,6 +68,7 @@ public class AchievementView : Monosingleton<AchievementView>
     [SerializeField] private ScrollRect view = null;
     [SerializeField] private SubEventAchievementFrame[] prefabs = null; // 0: Main, 1: Sub, 2: Random
     [SerializeField] private List<SubEventAchievementFrame> frames = null;
+    [SerializeField] private Sprite[] metalFrames = null;
 
     public void Init()
     {
@@ -129,5 +130,15 @@ public class AchievementView : Monosingleton<AchievementView>
         logic.SetNextSate(MainGameState.RouteSelect);
 
         gameObject.SetActive(false);
+    }
+
+    public Sprite[] GetMetalFrames()
+    {
+        return metalFrames;
+    }
+
+    public Sprite GetMetalFrame(int Index)
+    {
+        return metalFrames[Index];
     }
 }

@@ -20,17 +20,19 @@ MonoBehaviour:
   eventTitle: "\u767D\u9BE8\u8ABF\u67FB\u4F9D\u983C"
   amaType: 3
   pointRange:
-    min: 900
-    max: 2500
+    min: 5000
+    max: 25000
   point: 0
   eventSummary: "\u91CE\u653E\u3057\u767D\u9BE8\u306E\u73FE\u72B6\u3092\u8ABF\u67FB\u3059\u308B\u4F9D\u983C\u3067\u3059\u3002"
   eventReport: 
+  achievement: {fileID: 0}
   bonusRatio:
   - 1
   - 1.2
   subEventPhase: 4
   frameFadeTime: 0.8
   autoPlay: 0
+  ama: 0
   endingPoints:
   - min: 5000
     max: 6000
@@ -167,7 +169,6 @@ MonoBehaviour:
       ending:
       - type: 0
         endingText: "\u300E\u672C\u5F53\u306B\u30C0\u30E1\u3067\u3059\u3001\u307B\u3093\u307E\u306B\u3001\u30DE\u30B8\u3067\u3059\u3088\u300F"
-  judgement: 0
   mainEventPhase: 6
   progress:
     optionRouteFirst: 0
