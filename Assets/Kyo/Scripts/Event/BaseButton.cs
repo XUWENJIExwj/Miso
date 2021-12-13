@@ -14,7 +14,6 @@ public class BaseButton : EventButton
     public override void Init(Oceans Ocean, OceanAreas OceanArea)
     {
         base.Init(Ocean, OceanArea);
-        size = new Vector2(63.375f, 71.625f);
     }
 
     public override void SetPollutionLevel()
@@ -25,8 +24,11 @@ public class BaseButton : EventButton
     public override void CreateBaseEvent()
     {
         eventSO = GlobalInfo.instance.CreateEventSO(baseIndex);
+        image.sprite = eventSO.icons[0];
+        size = new Vector2(90.0f, 90.0f);
 
         RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.sizeDelta = size;
         maxSize.x = Mathf.Max(maxSize.x, rectTransform.sizeDelta.x);
         maxSize.y = Mathf.Max(maxSize.y, rectTransform.sizeDelta.y);
     }

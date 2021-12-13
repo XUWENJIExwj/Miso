@@ -6,12 +6,12 @@ namespace EventScriptableObject
 {
     public enum BaseIndex
     {
-        AR_02_Base,
-        AT_01_Base,
-        PC_01_Base,
-        PC_05_Base,
-        PC_07_Base,
-        IN_02_Base,
+        AR_02_Base, // 北極海ベース
+        AT_01_Base, // ジブラルタルベース
+        PC_01_Base, // 東シナ海ベース
+        PC_05_Base, // パナマベース
+        PC_07_Base, // ポリネシアベース
+        IN_02_Base, // モザンビークベース
         None,
     }
 

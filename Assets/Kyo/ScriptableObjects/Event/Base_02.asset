@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28012044ae5738d4996d810d8da67c57, type: 3}
   m_Name: Base_02
   m_EditorClassIdentifier: 
-  id: 3
+  id: 2
   icons:
-  - {fileID: 21300000, guid: afeee585829a1e74ca1a7c4286d6056d, type: 3}
+  - {fileID: 21300000, guid: 65695e2dff392094db1e47f0dfed4fab, type: 3}
   type: 3
   typeText: "\u30D9\u30FC\u30B9"
   eventTitle: "\u6771\u30B7\u30CA\u6D77\u30D9\u30FC\u30B9"
