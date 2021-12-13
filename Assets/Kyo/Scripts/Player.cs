@@ -7,65 +7,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 [Serializable]
-public struct EventAchievements
-{
-    public bool[] completed;
-
-    public void Init(int Count)
-    {
-        completed = new bool[Count];
-        for (int i = 0; i < completed.Length; ++i)
-        {
-            completed[i] = false;
-        }
-    }
-
-    public float Progress()
-    {
-        int count = 0;
-        foreach(bool c in completed)
-        {
-            if (c) ++count;
-        }
-        return (float)count / completed.Length;
-    }
-}
-
-[Serializable]
-public struct AchievementProgress
-{
-    public EventAchievements[] main;
-    public EventAchievements sub;
-    public EventAchievements random;
-
-    public void Init()
-    {
-        InitMainEventAchievements();
-        InitSubEventAchievements();
-        InitRandomEventAchievements();
-    }
-
-    private void InitMainEventAchievements()
-    {
-        main = new EventAchievements[GlobalInfo.instance.amaList.Count];
-        for (int i = 0; i < main.Length; ++i)
-        {
-            main[i].Init(GlobalInfo.instance.mainEventLists[i].mainEvents.Count);
-        }
-    }
-
-    private void InitSubEventAchievements()
-    {
-        sub.Init(GlobalInfo.instance.subEventList.Count);
-    }
-
-    private void InitRandomEventAchievements()
-    {
-        random.Init(GlobalInfo.instance.randomEventList.Count);
-    }
-}
-
-[Serializable]
 public struct PlayerData
 {
     public int courseCount;
@@ -78,6 +19,7 @@ public struct PlayerData
     public int encounter;
     public int encounterRatio;
     public AchievementProgress achievements;
+    public bool tutorial;
 }
 
 [Serializable]
@@ -102,6 +44,7 @@ public class Player : Monosingleton<Player>
         playerData.totalPoint = 0;
         playerData.currentPoint = 0;
         playerData.achievements.Init();
+        playerData.tutorial = true;
 
         GlobalInfo.instance.playerData = playerData;
 
@@ -111,6 +54,11 @@ public class Player : Monosingleton<Player>
     public PlayerData GetPlayerData()
     {
         return playerData;
+    }
+
+    public void SetTutorialFlag()
+    {
+        playerData.tutorial = false;
     }
 
     public void SetMainEventCompleted(int ID)

@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public enum MainGameState
 {
+    Tutorial,
     BaseSelect,
     BaseConfirm,
     RouteSelectPre,
@@ -20,7 +21,7 @@ public enum MainGameState
 
 public class MainGameLogic : BaseSceneLogic
 {
-    [SerializeField] private MainGameState state = MainGameState.BaseSelect;
+    [SerializeField] private MainGameState state = MainGameState.Tutorial;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class MainGameLogic : BaseSceneLogic
         EventButtonManager.instance.Init();
         NewAMAView.instance.Init();
         Player.instance.Init();
+        TutorialView.instance.Init();
         EventUIManager.instance.Init();
         BaseConfirmView.instance.Init();
         AMASwitchView.instance.Init();
@@ -43,6 +45,9 @@ public class MainGameLogic : BaseSceneLogic
     {
         switch (state)
         {
+            case MainGameState.Tutorial:
+                Tutorial();
+                break;
             case MainGameState.BaseSelect:
                 BaseSelect();
                 break;
@@ -79,6 +84,11 @@ public class MainGameLogic : BaseSceneLogic
             default:
                 break;
         }
+    }
+
+    void Tutorial()
+    {
+        
     }
 
     void BaseSelect()
