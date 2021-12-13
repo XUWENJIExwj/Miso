@@ -25,12 +25,14 @@ MonoBehaviour:
   point: 0
   eventSummary: "\u9023\u7D61\u304C\u9014\u7D76\u3057\u305F\u6F01\u8239\u306E\u901A\u5831\u767A\u751F\u3002TS\u5404\u54E1\u306B\u901A\u9054\u3001\u5BFE\u51E6\u304A\u9858\u3044\u3044\u305F\u3057\u307E\u3059\u3002"
   eventReport: 
+  achievement: {fileID: 0}
   bonusRatio:
   - 1
   - 1.2
   subEventPhase: 4
   frameFadeTime: 0.8
   autoPlay: 0
+  ama: 3
   endingPoints:
   - min: 5000
     max: 6000

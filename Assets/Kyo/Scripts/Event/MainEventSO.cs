@@ -87,6 +87,7 @@ namespace EventScriptableObject
     public class MainEventSO : SubEventSO
     {
         [Header("MainEvent")]
+        public AMAs ama = AMAs.Max;
         public PointRange[] endingPoints;
         public CharacterText[] reports;
         public MainEventOption[] optionFirst;

@@ -10,6 +10,7 @@ public class SingleSubEventAchievementButton : Button
 {
     [SerializeField] protected SubEventSO eventSO = null;
     [SerializeField] protected Image icon = null;
+    [SerializeField] protected AchievementMetalFrame iconFrame = null;
     [SerializeField] protected TMP_Text id = null;
     [SerializeField] protected Image titleFrame = null;
     [SerializeField] protected TMP_Text title = null;
@@ -19,6 +20,7 @@ public class SingleSubEventAchievementButton : Button
         eventSO = Event;
         icon.sprite = eventSO.achievement;
         icon.color = Color.grey;
+        iconFrame.SetColor(Color.grey);
         id.text = "No." + (eventSO.id + 1).ToString("00");
         title.text = eventSO.eventTitle;
         titleFrame.gameObject.SetActive(false);
@@ -28,6 +30,7 @@ public class SingleSubEventAchievementButton : Button
     {
         interactable = false;
         icon.color = HelperFunction.ChangeAlpha(icon.color, 0.0f);
+        iconFrame.Hide();
         id.color = HelperFunction.ChangeAlpha(id.color, 0.0f);
         titleFrame.gameObject.SetActive(false);
     }
@@ -39,10 +42,12 @@ public class SingleSubEventAchievementButton : Button
             if (Player.instance.GetPlayerData().achievements.sub.completed[eventSO.id])
             {
                 icon.color = Color.white;
+                iconFrame.SetColor(Color.white);
             }
             else
             {
                 icon.color = Color.grey;
+                iconFrame.SetColor(Color.grey);
             }
         }
     }
@@ -58,6 +63,8 @@ public class SingleSubEventAchievementButton : Button
         if (eventSO)
         {
             PlaySE();
+            StartAnimateMetalFrame();
+
             titleFrame.gameObject.SetActive(true);
         }
     }
@@ -67,7 +74,24 @@ public class SingleSubEventAchievementButton : Button
     {
         if (eventSO)
         {
+            StopAnimateMetalFrame();
             titleFrame.gameObject.SetActive(false);
+        }
+    }
+
+    public virtual void StartAnimateMetalFrame()
+    {
+        if (Player.instance.GetPlayerData().achievements.sub.completed[eventSO.id])
+        {
+            iconFrame.StartAnimateFrame();
+        }
+    }
+
+    public virtual void StopAnimateMetalFrame()
+    {
+        if (Player.instance.GetPlayerData().achievements.sub.completed[eventSO.id])
+        {
+            iconFrame.StopAnimateFrame();
         }
     }
 }
