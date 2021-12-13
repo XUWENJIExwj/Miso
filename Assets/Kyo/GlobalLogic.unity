@@ -218,21 +218,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97cfe08f865ed02458f7f95749e0db96, type: 2}
   - {fileID: 11400000, guid: 1bda9bb035285af4dae510ecad4ce4d3, type: 2}
   - {fileID: 11400000, guid: d1e93fbcd66b3f84497f5f5191cf0c6e, type: 2}
-  - {fileID: 11400000, guid: 96573c38610545c4580c7842db5ffb9d, type: 2}
-  - {fileID: 11400000, guid: 6eacac9f523b6c24eac7f99c91a9d953, type: 2}
-  - {fileID: 11400000, guid: 4ccdc07f6594bc244977f6bfd888e01e, type: 2}
-  - {fileID: 11400000, guid: de9c1dcea180d844787c92f03114d185, type: 2}
-  - {fileID: 11400000, guid: 58ae214e0ec1bbb4fb9c2d33b25f8a30, type: 2}
-  - {fileID: 11400000, guid: dcfe7f975ea29064aae29707c83a5faf, type: 2}
-  - {fileID: 11400000, guid: dda6cbff481ac9b4397e88bceb0d841a, type: 2}
-  - {fileID: 11400000, guid: 35aadb1bab8644345bf5bbdc5c2703cf, type: 2}
   - {fileID: 11400000, guid: b63f7bb116a28944fb978acdcd1a71d5, type: 2}
   - {fileID: 11400000, guid: ca2e38121f0619c4bbc47d97e7f7ea6e, type: 2}
   - {fileID: 11400000, guid: 5ed00b0bb11f04b43aca37b919b7fc6c, type: 2}
   - {fileID: 11400000, guid: 9e54bd183e0ac3448bfb2954551d4238, type: 2}
-  - {fileID: 11400000, guid: 2c797ee0a95da4f4d860bd71a0d26e9c, type: 2}
+  - {fileID: 11400000, guid: 96573c38610545c4580c7842db5ffb9d, type: 2}
+  - {fileID: 11400000, guid: 6eacac9f523b6c24eac7f99c91a9d953, type: 2}
+  - {fileID: 11400000, guid: 4ccdc07f6594bc244977f6bfd888e01e, type: 2}
+  - {fileID: 11400000, guid: 58ae214e0ec1bbb4fb9c2d33b25f8a30, type: 2}
+  - {fileID: 11400000, guid: dcfe7f975ea29064aae29707c83a5faf, type: 2}
+  - {fileID: 11400000, guid: dda6cbff481ac9b4397e88bceb0d841a, type: 2}
   - {fileID: 11400000, guid: 4183e1b5e9220264897a182faff3a8c1, type: 2}
-  - {fileID: 11400000, guid: 913ff5dbe1e920e43a25d188370c6be8, type: 2}
   eventRatio:
   - 0.1
   - 0.2
@@ -272,6 +268,13 @@ MonoBehaviour:
     currentPoint: 0
     encounter: 0
     encounterRatio: 0
+    achievements:
+      main: []
+      sub:
+        completed: 
+      random:
+        completed: 
+    tutorial: 0
 --- !u!4 &784785529
 Transform:
   m_ObjectHideFlags: 0

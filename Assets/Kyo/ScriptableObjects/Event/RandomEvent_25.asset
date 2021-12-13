@@ -18,14 +18,15 @@ MonoBehaviour:
   - {fileID: -3494330029110744728, guid: b5550543569782f4a82ed163a01ddde2, type: 3}
   type: 2
   typeText: "\u30E9\u30F3\u30C0\u30E0\u30A4\u30D9\u30F3\u30C8"
-  eventTitle: "\u7A7A\u304B\u3089\u4F55\u304B\u964D\u3063\u3066\u304F\u308B"
+  eventTitle: "\u98DB\u884C\u6A5F\u304C\u589C\u843D\u3057\u305F"
   amaType: 3
   pointRange:
-    min: 200
-    max: 200
+    min: 400
+    max: 400
   point: 0
-  eventSummary: "\u7A7A\u304B\u3089\u4F55\u304B\u964D\u3063\u3066\u304D\u305F"
-  eventReport: "\u304B\u3082\u3081\u3060\u3063\u305F"
+  eventSummary: "\u99C6\u3051\u3064\u3051\u3066\u307F\u305F"
+  eventReport: "\u4E57\u54E1\u3092\u3092\u6551\u52A9\u3057\u305F"
+  achievement: {fileID: 21300000, guid: 8399b4052372bba4eb0f8849fc358ef7, type: 3}
   bonusRatio:
   - 1
   - 1.2

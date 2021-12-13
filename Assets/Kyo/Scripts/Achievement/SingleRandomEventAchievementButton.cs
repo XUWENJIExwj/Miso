@@ -6,13 +6,16 @@ public class SingleRandomEventAchievementButton : SingleSubEventAchievementButto
 {
     public override void SetAchievementInfo(AMAs AMA)
     {
-        if (eventSO && Player.instance.GetPlayerData().achievements.random.completed[eventSO.id])
+        if (eventSO)
         {
-            icon.color = Color.white;
-        }
-        else
-        {
-            icon.color = Color.grey;
+            if (Player.instance.GetPlayerData().achievements.random.completed[eventSO.id])
+            {
+                icon.color = Color.white;
+            }
+            else
+            {
+                icon.color = Color.grey;
+            }
         }
     }
 }

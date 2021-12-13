@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainEventAchievementSubFrame : SubEventAchievementSubFrame
 {
@@ -16,7 +17,7 @@ public class MainEventAchievementSubFrame : SubEventAchievementSubFrame
             }
             else
             {
-                achievements[i].gameObject.SetActive(false);
+                achievements[i].Hide();
             }
         }
     }

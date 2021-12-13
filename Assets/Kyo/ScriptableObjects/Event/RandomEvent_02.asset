@@ -26,6 +26,7 @@ MonoBehaviour:
   point: 0
   eventSummary: "\u5F7C\u3089\u3092\u52A9\u3051\u306B\u884C\u304D\u307E\u3057\u305F"
   eventReport: "\u8CC7\u6E90\u3092\u6D88\u8CBB\u3057\u305F"
+  achievement: {fileID: 21300000, guid: 6f9300b8205fb88478fff104964e9973, type: 3}
   bonusRatio:
   - 1
   - 1.2

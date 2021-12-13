@@ -24,23 +24,44 @@ public class SingleSubEventAchievementButton : Button
         titleFrame.gameObject.SetActive(false);
     }
 
+    public void Hide()
+    {
+        interactable = false;
+        icon.color = HelperFunction.ChangeAlpha(icon.color, 0.0f);
+        id.color = HelperFunction.ChangeAlpha(id.color, 0.0f);
+        titleFrame.gameObject.SetActive(false);
+    }
+
     public virtual void SetAchievementInfo(AMAs AMA)
     {
-        if (eventSO && Player.instance.GetPlayerData().achievements.sub.completed[eventSO.id])
+        if (eventSO)
         {
-            icon.color = Color.white;
+            if (Player.instance.GetPlayerData().achievements.sub.completed[eventSO.id])
+            {
+                icon.color = Color.white;
+            }
+            else
+            {
+                icon.color = Color.grey;
+            }
         }
     }
 
     // MouseÇ™ButtonÇÃè„Ç…ì¸ÇÈéû
     public override void OnPointerEnter(PointerEventData E)
     {
-        titleFrame.gameObject.SetActive(true);
+        if (eventSO)
+        {
+            titleFrame.gameObject.SetActive(true);
+        }
     }
 
     // MouseÇ™ButtonÇÃè„Ç©ÇÁó£ÇÍÇÈéû
     public override void OnPointerExit(PointerEventData E)
     {
-        titleFrame.gameObject.SetActive(false);
+        if (eventSO)
+        {
+            titleFrame.gameObject.SetActive(false);
+        }
     }
 }
