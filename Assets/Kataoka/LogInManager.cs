@@ -100,7 +100,7 @@ public class LogInManager : MonoBehaviour
         {
             if (!sceneLoaded)
             {
-                SceneManager.LoadScene("GlobalLogic");
+                LogicManager.instance.GameStart();
                 sceneLoaded = true;
             }
         }

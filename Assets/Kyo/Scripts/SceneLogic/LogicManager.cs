@@ -18,7 +18,14 @@ public class LogicManager : Monosingleton<LogicManager>
 
     public override void InitAwake()
     {
-        Test();
+        if (onTest)
+        {
+            SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
+        }
+        else
+        {
+            SceneManager.LoadScene("LogIn", LoadSceneMode.Additive);
+        }
     }
 
     void Update()
@@ -31,26 +38,6 @@ public class LogicManager : Monosingleton<LogicManager>
         if (sceneLogic)
         {
             sceneLogic.UpdateScene();
-        }
-    }
-
-    private void Test()
-    {
-        if (!onTest)
-        {
-            switch(scene)
-            {
-                case SceneType.LoginScene:
-                    break;
-                case SceneType.TitleScene:
-                    SceneManager.LoadScene("TitleScene", LoadSceneMode.Additive);
-                    break;
-                case SceneType.MainGameScene:
-                    SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
-                    break;
-                default:
-                    break;
-            }
         }
     }
 
@@ -68,5 +55,11 @@ public class LogicManager : Monosingleton<LogicManager>
 
         Debug.Log("Žæ“¾‚µ‚æ‚¤‚Æ‚·‚éŒ^‚Æˆá‚¤!");
         return (T)(object)null;
+    }
+
+    public void GameStart()
+    {
+        SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("LogIn");
     }
 }

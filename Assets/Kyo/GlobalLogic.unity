@@ -192,16 +192,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d9566656232e274b9cb04c17d43a319, type: 2}
   - {fileID: 11400000, guid: 8dca1382a8a9bb747acb4dff84510a03, type: 2}
   - {fileID: 11400000, guid: 52bac376092b9174db5f83fc4875e745, type: 2}
-  - {fileID: 11400000, guid: 73e22ea364ec1ca47acd99b392eb8f6d, type: 2}
   - {fileID: 11400000, guid: bacd1080fa460b04894f1b739a8068e2, type: 2}
   - {fileID: 11400000, guid: d31d1a2bcf719454592bd2fc2f7d4e67, type: 2}
   - {fileID: 11400000, guid: 2366b7304bdc43545b8f4f88b40a1ba6, type: 2}
   - {fileID: 11400000, guid: b6b1d39458735cd4da0b6a97d2050dc1, type: 2}
   - {fileID: 11400000, guid: 839a1d3980a09c440a4b4a0daeb41ca6, type: 2}
   - {fileID: 11400000, guid: 935a1fc3806c6644eafe1300686fdff4, type: 2}
+  - {fileID: 11400000, guid: 1d1627dd903a3d648b49bd9bb5739f91, type: 2}
   - {fileID: 11400000, guid: 3d59d840f8243d443af7ca41b3cf4e81, type: 2}
   - {fileID: 11400000, guid: 1d5e4d48ab7b6724eaf2125cf786e97e, type: 2}
-  - {fileID: 11400000, guid: b0b0f3c1bb95c3d478f87a46d63cc294, type: 2}
+  - {fileID: 11400000, guid: 79b86682f31dc13439a905bfc58bab74, type: 2}
   randomEventList:
   - {fileID: 11400000, guid: 519a72b39cef5dd41badd7d99ceb5e33, type: 2}
   - {fileID: 11400000, guid: 874c54a91fee26042a49fb1f15d8ea51, type: 2}
@@ -218,17 +218,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97cfe08f865ed02458f7f95749e0db96, type: 2}
   - {fileID: 11400000, guid: 1bda9bb035285af4dae510ecad4ce4d3, type: 2}
   - {fileID: 11400000, guid: d1e93fbcd66b3f84497f5f5191cf0c6e, type: 2}
+  - {fileID: 11400000, guid: b63f7bb116a28944fb978acdcd1a71d5, type: 2}
+  - {fileID: 11400000, guid: ca2e38121f0619c4bbc47d97e7f7ea6e, type: 2}
+  - {fileID: 11400000, guid: 5ed00b0bb11f04b43aca37b919b7fc6c, type: 2}
+  - {fileID: 11400000, guid: 9e54bd183e0ac3448bfb2954551d4238, type: 2}
   - {fileID: 11400000, guid: 96573c38610545c4580c7842db5ffb9d, type: 2}
   - {fileID: 11400000, guid: 6eacac9f523b6c24eac7f99c91a9d953, type: 2}
   - {fileID: 11400000, guid: 4ccdc07f6594bc244977f6bfd888e01e, type: 2}
-  - {fileID: 11400000, guid: de9c1dcea180d844787c92f03114d185, type: 2}
   - {fileID: 11400000, guid: 58ae214e0ec1bbb4fb9c2d33b25f8a30, type: 2}
   - {fileID: 11400000, guid: dcfe7f975ea29064aae29707c83a5faf, type: 2}
   - {fileID: 11400000, guid: dda6cbff481ac9b4397e88bceb0d841a, type: 2}
-  - {fileID: 11400000, guid: 35aadb1bab8644345bf5bbdc5c2703cf, type: 2}
-  - {fileID: 11400000, guid: ca2e38121f0619c4bbc47d97e7f7ea6e, type: 2}
-  - {fileID: 11400000, guid: b63f7bb116a28944fb978acdcd1a71d5, type: 2}
-  - {fileID: 11400000, guid: 5ed00b0bb11f04b43aca37b919b7fc6c, type: 2}
+  - {fileID: 11400000, guid: 4183e1b5e9220264897a182faff3a8c1, type: 2}
   eventRatio:
   - 0.1
   - 0.2
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 2
-  onTest: 1
+  onTest: 0
   sceneLogic: {fileID: 0}
 --- !u!4 &1312915223
 Transform:
