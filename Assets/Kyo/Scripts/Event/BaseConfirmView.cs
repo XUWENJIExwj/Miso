@@ -56,6 +56,8 @@ public class BaseConfirmView : Monosingleton<BaseConfirmView>
 
     public void BaseConfirm()
     {
+        SoundManager.instance.SE_Tap();
+
         // Player‚Ì‰ŠúˆÊ’u
         Player.instance.SetFirstBase(baseSelected);
         Player.instance.AddAMA(baseSelected.GetAMA(), true);
@@ -78,6 +80,8 @@ public class BaseConfirmView : Monosingleton<BaseConfirmView>
 
     public void BaseCancel()
     {
+        SoundManager.instance.SE_Tap();
+
         baseSelected.DoScaleDown();
         baseSelected = null;
 

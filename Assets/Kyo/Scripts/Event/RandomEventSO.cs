@@ -28,6 +28,8 @@ namespace EventScriptableObject
 
         public override void EventStart()
         {
+            SoundManager.instance.SE_SubEvent();
+
             SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
             ui.Title.text = eventTitle;
             //ui.Summary.text = eventSummary;
@@ -102,6 +104,8 @@ namespace EventScriptableObject
         {
             if (Input.GetMouseButtonDown(0))
             {
+                SoundManager.instance.SE_Tap();
+
                 tweener.Kill();
 
                 SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
@@ -142,6 +146,8 @@ namespace EventScriptableObject
         {
             if (Input.GetMouseButtonDown(0))
             {
+                SoundManager.instance.SE_Tap();
+
                 tweener.Kill();
 
                 SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
@@ -160,6 +166,8 @@ namespace EventScriptableObject
             // ‰¼
             if (Input.GetMouseButtonDown(0) || autoPlay)
             {
+                SoundManager.instance.SE_Tap();
+
                 RandomEventUI eventUI = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>();
                 eventUI.StopAllCoroutines();
 

@@ -18,4 +18,9 @@ public class SingleMainEventAchievementButton : SingleSubEventAchievementButton
             }
         }
     }
+
+    public override void PlaySE()
+    {
+        SoundManager.instance.SE_MainEvent();
+    }
 }

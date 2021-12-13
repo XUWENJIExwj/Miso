@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Monosingleton<SoundManager>
 {
 
     public AudioClip[] clips;
     AudioSource audios;
 
-    void Start()
+    public void Init()
     {
         audios = GetComponent<AudioSource>();
     }
@@ -43,8 +43,18 @@ public class SoundManager : MonoBehaviour
     //会話時
     public void SE_Talk()
     {
-        audios.PlayOneShot(clips[5]);
+        audios.clip = clips[5];
+        audios.loop = true;
+        audios.Play();
+        
     }
+
+    public void SE_StopTalk()
+    {
+        audios.loop = false;
+        audios.Stop();
+    }
+
     //リザルト画面の表示時
     public void SE_Result1()
     {

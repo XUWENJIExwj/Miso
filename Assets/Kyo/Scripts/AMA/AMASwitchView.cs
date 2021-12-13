@@ -18,6 +18,8 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
 
     public void ActiveSwitchView(PlayerData Data)
     {
+        SoundManager.instance.SE_Tap();
+
         playerData = Data;
         baseName.text = playerData.basePoint.GetBaseName();
         currentAMA = playerData.ama;
@@ -48,6 +50,8 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
 
     public void AMAConfirm()
     {
+        SoundManager.instance.SE_Tap();
+
         Player.instance.SetCurrentAMA(currentAMA);
         EventButtonManager.instance.LinkMainEventsToAMA(currentAMA);
 
@@ -59,6 +63,8 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
 
     public void AMACancel()
     {
+        SoundManager.instance.SE_Tap();
+
         currentAMA = playerData.ama;
 
         // ‰¼
@@ -69,6 +75,8 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
 
     public void SwitchAMA(int Offset)
     {
+        SoundManager.instance.SE_Tap();
+
         CheckUnlockedAMA(Offset);
         SetAMAInfo();
     }

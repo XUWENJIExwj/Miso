@@ -43,6 +43,8 @@ public class BaseButton : EventButton
 
     public override void OnClick()
     {
+        SoundManager.instance.SE_Route();
+
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
 
         // State‚²‚Æ‚Ìˆ—

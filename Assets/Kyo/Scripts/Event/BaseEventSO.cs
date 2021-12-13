@@ -35,6 +35,8 @@ namespace EventScriptableObject
 
         public override void EventStart()
         {
+            SoundManager.instance.SE_Result1();
+
             PollutionMap.instance.AddResult();
 
             BaseEventUI eventUI = EventUIManager.instance.GetCurrentEventUI<BaseEventUI>();

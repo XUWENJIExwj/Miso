@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeBGM : MonoBehaviour
+public class ChangeBGM : Monosingleton<ChangeBGM>
 {
     // Start is called before the first frame update
     public AudioClip[] clips;
     AudioSource audios;
 
-    void Start()
+    public void Init()
     {
         audios = GetComponent<AudioSource>();
     }

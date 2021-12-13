@@ -20,12 +20,24 @@ public class LogicManager : Monosingleton<LogicManager>
     {
         if (onTest)
         {
-            SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
+            //SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
         }
         else
         {
             SceneManager.LoadScene("LogIn", LoadSceneMode.Additive);
         }
+    }
+
+    public void Start()
+    {
+        InitSound();
+        ChangeBGM.instance.BGM_Route();
+    }
+
+    public void InitSound()
+    {
+        ChangeBGM.instance.Init();
+        SoundManager.instance.Init();
     }
 
     void Update()

@@ -24,6 +24,8 @@ public class CleanupView : MonoBehaviour
 
     public void ShowCleanupView(int Point, EventButton Event)
     {
+        SoundManager.instance.SE_Clean();
+
         transform.localPosition = Event.transform.localPosition + startOffset;
 
         ui.frame.color = HelperFunction.ChangeAlpha(ui.frame.color, 0.0f);

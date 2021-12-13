@@ -158,6 +158,9 @@ public class RouteManager : Monosingleton<RouteManager>
     // Routeã‚ÌˆÚ“®ŠJn
     public void StartMovePath()
     {
+        SoundManager.instance.SE_Go();
+        ChangeBGM.instance.BGM_Move();
+
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
 
         if (routePlanned && logic.isRouteSelect())
@@ -201,6 +204,8 @@ public class RouteManager : Monosingleton<RouteManager>
 
     public void ResetRoute()
     {
+        ChangeBGM.instance.BGM_Route();
+
         next = 1;
         routePoints.Clear();
         routePlanned = false;

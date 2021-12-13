@@ -60,6 +60,8 @@ public class BaseEventUI : EventUI
     {
         if (results.Count > 0)
         {
+            SoundManager.instance.SE_Result2();
+
             if (resultCount - results.Count >= 4)
             {
                 resultView.verticalScrollbar.value -= 1.0f / (resultCount - 4);
@@ -78,6 +80,8 @@ public class BaseEventUI : EventUI
     // Resultの出現（アニメーションなし）
     public void ShowResult()
     {
+        SoundManager.instance.SE_Tap();
+
         StopAllCoroutines();
 
         if (currentResult)
@@ -104,8 +108,11 @@ public class BaseEventUI : EventUI
             return;
         }
 
+        SoundManager.instance.SE_Tap();
+
         resultCount = 0;
         currentPoint = 0;
+        resultView.verticalScrollbar.value = 1.0f;
 
         Player.instance.ResetCurrentPoint();
         Player.instance.CompleteCourse();

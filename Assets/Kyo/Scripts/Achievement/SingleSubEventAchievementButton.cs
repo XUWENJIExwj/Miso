@@ -47,11 +47,17 @@ public class SingleSubEventAchievementButton : Button
         }
     }
 
+    public virtual void PlaySE()
+    {
+        SoundManager.instance.SE_SubEvent();
+    }
+
     // Mouse‚ªButton‚Ìã‚É“ü‚é
     public override void OnPointerEnter(PointerEventData E)
     {
         if (eventSO)
         {
+            PlaySE();
             titleFrame.gameObject.SetActive(true);
         }
     }

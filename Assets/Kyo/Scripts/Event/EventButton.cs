@@ -174,6 +174,8 @@ public class EventButton : Button
     // ƒNƒŠƒbƒN‚Ìˆ—
     public virtual void OnClick()
     {
+        SoundManager.instance.SE_Route();
+
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
 
         if (logic.isRouteSelect())

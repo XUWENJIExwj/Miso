@@ -118,6 +118,8 @@ namespace EventScriptableObject
 
         public override void EventStart()
         {
+            SoundManager.instance.SE_MainEvent();
+
             // 動的にOnClickのイベントを変更できるように
             // 必要なイベントを予め設定しておく
             if (onClickFirst == null)
@@ -243,6 +245,8 @@ namespace EventScriptableObject
             // MainEventの各要素の出現のアニメーションを止めて、Phase_Reportへ突入
             if (Input.GetMouseButtonDown(0))
             {
+                SoundManager.instance.SE_Tap();
+
                 tweener.Kill();
 
                 MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
@@ -452,6 +456,8 @@ namespace EventScriptableObject
         // 一番目の選択処理
         public void OnClickFirst(int OptionRoute)
         {
+            SoundManager.instance.SE_Tap();
+
             progress.optionRouteFirst = OptionRoute;
             progress.characterIndex = 0;
             progress.textIndex = 0;
@@ -475,6 +481,8 @@ namespace EventScriptableObject
         // 二番目の選択処理
         public void OnClickSecond(int OptionRoute)
         {
+            SoundManager.instance.SE_Tap();
+
             progress.optionRouteSecond = OptionRoute;
             progress.characterIndex = 0;
             progress.textIndex = 0;
@@ -550,6 +558,9 @@ namespace EventScriptableObject
         // Textの文字送りアニメーションのCoroutineをストップ
         public void StopAllCoroutinePrintEndingText(string Text, MainEventPhase Phase)
         {
+            SoundManager.instance.SE_Tap();
+            SoundManager.instance.SE_StopTalk();
+
             EventUIManager.instance.StopAllCoroutines();
             StopPrintEndingText(Text, Phase);
         }
@@ -557,6 +568,8 @@ namespace EventScriptableObject
         // CharacterTextの文字送りアニメーションのCoroutine
         public IEnumerator StartPrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
+            SoundManager.instance.SE_Talk();
+
             onPrint = true;
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
@@ -579,6 +592,8 @@ namespace EventScriptableObject
             }
 
             onPrint = false;
+
+            SoundManager.instance.SE_StopTalk();
             ++progress.textIndex;
             SetNextPhase(Phase);
         }
@@ -586,6 +601,8 @@ namespace EventScriptableObject
         // Textの文字送りアニメーションのCoroutine
         public IEnumerator StartPrintEndingText(string Text, MainEventPhase Phase)
         {
+            SoundManager.instance.SE_Talk();
+
             onPrint = true;
 
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
@@ -596,6 +613,8 @@ namespace EventScriptableObject
                 ui.Talk.text += item;
                 yield return new WaitForSeconds(printInterval);
             }
+
+            SoundManager.instance.SE_StopTalk();
 
             tweener = ui.PointText.DOFade(1.0f, frameFadeTime);
             tweener.OnUpdate(() => { ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.PointText.color.a); });
@@ -611,6 +630,9 @@ namespace EventScriptableObject
         // CharacterTextの文字送りアニメーションのCoroutineの中止処理
         public void StopPrintCharacterText(CharacterText Character, MainEventPhase Phase)
         {
+            SoundManager.instance.SE_StopTalk();
+            SoundManager.instance.SE_Tap();
+
             MainEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<MainEventUI>().GetEventUIElement();
             ui.Talk.text = "";
 
@@ -632,6 +654,9 @@ namespace EventScriptableObject
         // Textの文字送りアニメーションのCoroutineの中止処理
         public void StopPrintEndingText(string Text, MainEventPhase Phase)
         {
+            SoundManager.instance.SE_StopTalk();
+            SoundManager.instance.SE_Tap();
+
             if (tweener.IsActive())
             {
                 tweener.Kill();

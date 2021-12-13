@@ -56,6 +56,8 @@ public class TutorialView : Monosingleton<TutorialView>
 
     public void TurnPage(int Offset)
     {
+        SoundManager.instance.SE_Tap();
+
         int nextPage = FixPage(Offset);
         pages[currentPage].TurnPage(pages[nextPage]);
         currentPage = nextPage;
@@ -84,6 +86,8 @@ public class TutorialView : Monosingleton<TutorialView>
 
     public void EndTutorialView()
     {
+        SoundManager.instance.SE_Tap();
+
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
         logic.SetNextSate(MainGameState.BaseSelect);

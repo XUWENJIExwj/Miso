@@ -106,6 +106,8 @@ public class AchievementView : Monosingleton<AchievementView>
 
     public void ActiveAchievementView()
     {
+        SoundManager.instance.SE_Tap();
+
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
         logic.SetNextSate(MainGameState.Achievement);
@@ -120,6 +122,8 @@ public class AchievementView : Monosingleton<AchievementView>
 
     public void EndAchievementView()
     {
+        SoundManager.instance.SE_Tap();
+
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
         logic.SetNextSate(MainGameState.RouteSelect);
