@@ -30,7 +30,7 @@ public class SingleMainEventAchievementButton : SingleSubEventAchievementButton
     public override void StartAnimateMetalFrame()
     {
         MainEventSO main = (MainEventSO)eventSO;
-        //if (Player.instance.GetPlayerData().achievements.main[(int)main.ama].completed[main.id])
+        if (Player.instance.GetPlayerData().achievements.main[(int)main.ama].completed[main.id])
         {
             iconFrame.StartAnimateFrame();
         }
@@ -39,7 +39,7 @@ public class SingleMainEventAchievementButton : SingleSubEventAchievementButton
     public override void StopAnimateMetalFrame()
     {
         MainEventSO main = (MainEventSO)eventSO;
-        //if (Player.instance.GetPlayerData().achievements.main[(int)main.ama].completed[main.id])
+        if (Player.instance.GetPlayerData().achievements.main[(int)main.ama].completed[main.id])
         {
             iconFrame.StopAnimateFrame();
         }

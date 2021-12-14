@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class AMASwitchView : Monosingleton<AMASwitchView>
 {
     [SerializeField] private PlayerData playerData;
-    [SerializeField] private TMP_Text baseName = null;
+    [SerializeField] private Text baseName = null;
     [SerializeField] private AMAInfo amaInfo;
-    [SerializeField] private TMP_Text newFlag = null;
+    [SerializeField] private Text newFlag = null;
     [SerializeField] private AMAs currentAMA = AMAs.Max;
 
     public void Init()

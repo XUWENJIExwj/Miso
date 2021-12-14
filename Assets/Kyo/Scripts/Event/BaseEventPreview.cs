@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class BaseEventPreview : EventPreview
 {
     [SerializeField] private Image ama;
-    [SerializeField] private TMP_Text got;
+    [SerializeField] private Text got;
 
     public void SetAMASprite(Sprite AMA)
     {
@@ -25,6 +24,6 @@ public class BaseEventPreview : EventPreview
         moveability.text = "";
         amaType.text = "";
         got.text = "";
-        //ama.sprite = null;
+        ama.sprite = null;
     }
 }

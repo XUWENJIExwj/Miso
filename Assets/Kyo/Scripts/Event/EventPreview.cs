@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class EventPreview : MonoBehaviour
 {
     [SerializeField] protected Vector3 offset = Vector3.zero;
     [SerializeField] private Vector3 fixOffset = Vector3.zero;
-    [SerializeField] protected TMP_Text eventDesc = null;
-    [SerializeField] protected TMP_Text moveability = null;
-    [SerializeField] protected TMP_Text amaType = null;
-    [SerializeField] private TMP_Text pointRange = null;
+    [SerializeField] protected Text eventDesc = null;
+    [SerializeField] protected Text moveability = null;
+    [SerializeField] protected Text amaType = null;
+    [SerializeField] private Text pointRange = null;
 
     public void Init()
     {

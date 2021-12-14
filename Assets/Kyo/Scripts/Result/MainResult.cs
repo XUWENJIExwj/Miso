@@ -11,7 +11,7 @@ using DG.Tweening;
 public class MainResultObject : ResultObject
 {
     public Image endingFrame = null;
-    public TMP_Text endingText = null;
+    public TextOutline endingText = null;
 }
 
 public class MainResult : Result
@@ -21,12 +21,12 @@ public class MainResult : Result
     public override void Init(EventSO Event)
     {
         MainEventSO eventSO = (MainEventSO)Event;
-        result.eventName.text = eventSO.eventTitle + DictionaryManager.instance.GetJudgement(eventSO.GetJudgement());
-        result.endingText.text = eventSO.GetEnding();
+        result.eventName.SetText(eventSO.eventTitle + DictionaryManager.instance.GetJudgement(eventSO.GetJudgement()));
+        result.endingText.SetText(eventSO.GetEnding());
         result.resultFrame.color = HelperFunction.ChangeAlpha(result.resultFrame.color, 0.0f);
-        result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, 0.0f);
+        result.eventName.SetAlpha(0.0f);
         result.endingFrame.color = HelperFunction.ChangeAlpha(result.endingFrame.color, 0.0f);
-        result.endingText.color = HelperFunction.ChangeAlpha(result.endingText.color, 0.0f);
+        result.endingText.SetAlpha(0.0f);
 
         point = eventSO.point;
     }
@@ -34,16 +34,16 @@ public class MainResult : Result
     public override void Appear()
     {
         tweener = result.resultFrame.DOFade(1.0f, fadeTime);
-        tweener.OnUpdate(() => { result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, result.resultFrame.color.a); });
+        tweener.OnUpdate(() => { result.eventName.SetAlpha(result.resultFrame.color.a); });
         tweener.OnComplete(() =>
         {
-            result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, result.resultFrame.color.a);
+            result.eventName.SetAlpha(result.resultFrame.color.a);
 
             tweener = result.endingFrame.DOFade(1.0f, fadeTime);
-            tweener.OnUpdate(() => { result.endingText.color = HelperFunction.ChangeAlpha(result.endingText.color, result.endingFrame.color.a); });
+            tweener.OnUpdate(() => { result.endingText.SetAlpha(result.endingFrame.color.a); });
             tweener.OnComplete(() =>
             {
-                result.endingText.color = HelperFunction.ChangeAlpha(result.endingText.color, result.endingFrame.color.a);
+                result.endingText.SetAlpha(result.endingFrame.color.a);
                 AppearNext();
             });
         });
@@ -54,8 +54,8 @@ public class MainResult : Result
         KillTweener();
 
         result.resultFrame.color = HelperFunction.ChangeAlpha(result.resultFrame.color, 1.0f);
-        result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, 1.0f);
+        result.eventName.SetAlpha(1.0f);
         result.endingFrame.color = HelperFunction.ChangeAlpha(result.endingFrame.color, 1.0f);
-        result.endingText.color = HelperFunction.ChangeAlpha(result.endingText.color, 1.0f);
+        result.endingText.SetAlpha(1.0f);
     }
 }

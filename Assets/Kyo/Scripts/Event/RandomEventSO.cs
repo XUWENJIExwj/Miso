@@ -31,17 +31,17 @@ namespace EventScriptableObject
             SoundManager.instance.SE_SubEvent();
 
             SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
-            ui.Title.text = eventTitle;
+            ui.Title.SetText(eventTitle);
             //ui.Summary.text = eventSummary;
 
             tweener = ui.TitleFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
             {
-                ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, ui.TitleFrame.color.a);
+                ui.Title.SetAlpha(ui.TitleFrame.color.a);
                 //ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, ui.TitleFrame.color.a);
                 //ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, ui.TitleFrame.color.a);
             }).OnComplete(() =>
             {
-                ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, ui.TitleFrame.color.a);
+                ui.Title.SetAlpha(ui.TitleFrame.color.a);
                 //ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, ui.TitleFrame.color.a);
                 //ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, ui.TitleFrame.color.a);
                 SetNextPhase(RandomEventPhase.Phase_Report);
@@ -110,7 +110,7 @@ namespace EventScriptableObject
 
                 SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
                 ui.TitleFrame.color = HelperFunction.ChangeAlpha(ui.TitleFrame.color, 1.0f);
-                ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, 1.0f);
+                ui.Title.SetAlpha(1.0f);
                 //ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, 1.0f);
                 //ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 1.0f);
                 SetNextPhase(RandomEventPhase.Phase_Report);
@@ -120,18 +120,18 @@ namespace EventScriptableObject
         public override void Report()
         {
             SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
-            ui.Report.text = eventReport;
+            ui.Report.SetText(eventReport);
 
             SetPoint();
 
             tweener = ui.ReportFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
             {
-                ui.Report.color = HelperFunction.ChangeAlpha(ui.Report.color, ui.ReportFrame.color.a);
+                ui.Report.SetAlpha(ui.ReportFrame.color.a);
                 ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, ui.ReportFrame.color.a);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.ReportFrame.color.a);
             }).OnComplete(() =>
             {
-                ui.Report.color = HelperFunction.ChangeAlpha(ui.Report.color, ui.ReportFrame.color.a);
+                ui.Report.SetAlpha(ui.ReportFrame.color.a);
                 ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, ui.ReportFrame.color.a);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, ui.ReportFrame.color.a);
 
@@ -152,7 +152,7 @@ namespace EventScriptableObject
 
                 SubEventUIElement ui = EventUIManager.instance.GetCurrentEventUI<RandomEventUI>().GetEventUIElement();
                 ui.ReportFrame.color = HelperFunction.ChangeAlpha(ui.ReportFrame.color, 1.0f);
-                ui.Report.color = HelperFunction.ChangeAlpha(ui.Report.color, 1.0f);
+                ui.Report.SetAlpha(1.0f);
                 ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, 1.0f);
                 ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 1.0f);
 

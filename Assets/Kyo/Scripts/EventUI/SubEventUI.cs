@@ -10,11 +10,11 @@ using TMPro;
 public struct SubEventUIElement
 {
     public Image TitleFrame;
-    public TMP_Text Title;
+    public TextOutline Title;
     public Image SummaryFrame;
-    public TMP_Text Summary;
+    public TextOutline Summary;
     public Image ReportFrame;
-    public TMP_Text Report;
+    public TextOutline Report;
     public Image PointText;
     public Text Point;
 }
@@ -44,14 +44,14 @@ public class SubEventUI : EventUI
     public void OnEnable()
     {
         ui.TitleFrame.color = HelperFunction.ChangeAlpha(ui.TitleFrame.color, 0.0f);
-        ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, 0.0f);
-        ui.Title.text = "";
+        ui.Title.SetAlpha(0.0f);
+        ui.Title.SetText("");
         ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, 0.0f);
-        ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 0.0f);
-        ui.Summary.text = "";
+        ui.Summary.SetAlpha(0.0f);
+        ui.Summary.SetText("");
         ui.ReportFrame.color = HelperFunction.ChangeAlpha(ui.ReportFrame.color, 0.0f);
-        ui.Report.color = HelperFunction.ChangeAlpha(ui.Report.color, 0.0f);
-        ui.Report.text = "";
+        ui.Report.SetAlpha(0.0f);
+        ui.Report.SetText("");
         ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, 0.0f);
         ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 0.0f);
         ui.Point.text = "";

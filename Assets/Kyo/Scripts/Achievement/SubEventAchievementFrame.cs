@@ -1,10 +1,10 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SubEventAchievementFrame : MonoBehaviour
 {
-    [SerializeField] protected TMP_Text eventType = null;
-    [SerializeField] protected TMP_Text progress = null;
+    [SerializeField] protected Text eventType = null;
+    [SerializeField] protected Text progress = null;
     [SerializeField] protected SubEventAchievementSubFrame prefab = null;
     [SerializeField] protected SubEventAchievementSubFrame[] frames = null;
 

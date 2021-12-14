@@ -10,17 +10,17 @@ using UnityEngine.UI;
 public struct AMAInfo
 {
     public Image image;
-    public TMP_Text name;
-    public TMP_Text type;
-    public TMP_Text speed;
-    public TMP_Text energy;
-    public TMP_Text nature;
+    public Text name;
+    public Text type;
+    public Text speed;
+    public Text energy;
+    public Text nature;
 }
 
 public class BaseConfirmView : Monosingleton<BaseConfirmView>
 {
     [SerializeField] private BaseButton baseSelected = null;
-    [SerializeField] private TMP_Text baseName = null;
+    [SerializeField] private Text baseName = null;
     [SerializeField] private AMAInfo amaInfo;
 
     public void Init()

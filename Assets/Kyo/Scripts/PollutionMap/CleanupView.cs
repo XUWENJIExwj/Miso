@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System;
 using DG.Tweening;
 
@@ -10,8 +9,8 @@ using DG.Tweening;
 public struct CleanupViewUIElement
 {
     public Image frame;
-    public TMP_Text title;
-    public TMP_Text point;
+    public TextOutline title;
+    public TextOutline point;
 }
 
 public class CleanupView : MonoBehaviour
@@ -29,10 +28,10 @@ public class CleanupView : MonoBehaviour
         transform.localPosition = Event.transform.localPosition + startOffset;
 
         ui.frame.color = HelperFunction.ChangeAlpha(ui.frame.color, 0.0f);
-        ui.title.color = HelperFunction.ChangeAlpha(ui.title.color, 0.0f);
-        ui.title.text = "エリア浄化";
-        ui.point.color = HelperFunction.ChangeAlpha(ui.point.color, 0.0f);
-        ui.point.text = "Point: " + Point.ToString("+#;-#;0");
+        ui.title.SetAlpha(0.0f);
+        ui.title.SetText("エリア浄化");
+        ui.point.SetAlpha(0.0f);
+        ui.point.SetText("Point: " + Point.ToString("+#;-#;0"));
 
         Sequence sequence = DOTween.Sequence();
         sequence.Append(AnimateCleanupView(50.0f / 255.0f, fadeInTime));
@@ -52,7 +51,7 @@ public class CleanupView : MonoBehaviour
 
     public void UpdateChildrenAlpha()
     {
-        ui.title.color = HelperFunction.ChangeAlpha(ui.title.color, ui.frame.color.a / (50.0f / 255.0f));
-        ui.point.color = HelperFunction.ChangeAlpha(ui.point.color, ui.frame.color.a / (50.0f / 255.0f));
+        ui.title.SetAlpha(ui.frame.color.a / (50.0f / 255.0f));
+        ui.point.SetAlpha(ui.frame.color.a / (50.0f / 255.0f));
     }
 }

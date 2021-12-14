@@ -10,13 +10,14 @@ using System;
 public struct MainEventUIElement
 {
     public Image TitleFrame;
-    public TMP_Text Title;
-    public TMP_Text Summary;
+    public TextOutline Title;
+    public Image SummaryFrame;
+    public TextOutline Summary;
     public Image Character;
     public Image TalkFrame;
     public Image NameFrame;
-    public TMP_Text Name;
-    public TMP_Text Talk;
+    public TextOutline Name;
+    public TextOutline Talk;
     public Image PointText;
     public Text Point;
     public GameObject OptionParent;
@@ -55,17 +56,18 @@ public class MainEventUI : EventUI
     public void OnEnable()
     {
         ui.TitleFrame.color = HelperFunction.ChangeAlpha(ui.TitleFrame.color, 0.0f);
-        ui.Title.color = HelperFunction.ChangeAlpha(ui.Title.color, 0.0f);
-        ui.Title.text = "";
-        ui.Summary.color = HelperFunction.ChangeAlpha(ui.Summary.color, 0.0f);
-        ui.Summary.text = "";
+        ui.Title.SetAlpha(0.0f);
+        ui.Title.SetText("");
+        ui.SummaryFrame.color = HelperFunction.ChangeAlpha(ui.SummaryFrame.color, 0.0f);
+        ui.Summary.SetAlpha(0.0f);
+        ui.Summary.SetText("");
         ui.Character.color = HelperFunction.ChangeAlpha(ui.Character.color, 0.0f);
         ui.TalkFrame.color = HelperFunction.ChangeAlpha(ui.TalkFrame.color, 0.0f);
         ui.NameFrame.color = HelperFunction.ChangeAlpha(ui.NameFrame.color, 0.0f);
-        ui.Name.color = HelperFunction.ChangeAlpha(ui.Name.color, 0.0f);
-        ui.Name.text = "";
-        ui.Talk.color = HelperFunction.ChangeAlpha(ui.Talk.color, 0.0f);
-        ui.Talk.text = "";
+        ui.Name.SetAlpha(0.0f);
+        ui.Name.SetText("");
+        ui.Talk.SetAlpha(0.0f);
+        ui.Talk.SetText("");
         ui.PointText.color = HelperFunction.ChangeAlpha(ui.PointText.color, 0.0f);
         ui.Point.color = HelperFunction.ChangeAlpha(ui.Point.color, 0.0f);
         ui.Point.text = "";

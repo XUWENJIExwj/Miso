@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
 
 public class NewAMAView : Monosingleton<NewAMAView>
 {
     [SerializeField] private Image frame = null;
     [SerializeField] private Image ama = null;
-    [SerializeField] private TMP_Text newText = null;
+    [SerializeField] private Text newText = null;
     [SerializeField] private float fadeTime = 0.5f;
 
     public void Init()

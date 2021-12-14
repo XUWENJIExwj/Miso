@@ -11,9 +11,9 @@ public class SingleSubEventAchievementButton : Button
     [SerializeField] protected SubEventSO eventSO = null;
     [SerializeField] protected Image icon = null;
     [SerializeField] protected AchievementMetalFrame iconFrame = null;
-    [SerializeField] protected TMP_Text id = null;
+    [SerializeField] protected Text id = null;
     [SerializeField] protected Image titleFrame = null;
-    [SerializeField] protected TMP_Text title = null;
+    [SerializeField] protected Text title = null;
 
     public void Init(SubEventSO Event)
     {

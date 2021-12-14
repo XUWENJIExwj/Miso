@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class CircleOutline : BaseMeshEffect
 {
     [SerializeField]
-    private Color m_EffectColor = new Color(0f, 0f, 0f, 0.5f);
+    private Color m_EffectColor = new Color(0f, 0f, 0f, 1.0f);
 
     [SerializeField]
     private float m_EffectDistance = 1.0f;
@@ -75,5 +75,10 @@ public class CircleOutline : BaseMeshEffect
     public void SetEffectColor(Color EffectColor)
     {
         m_EffectColor = EffectColor;
+    }
+
+    public void SetEffectAlpha(float Alpha)
+    {
+        m_EffectColor = HelperFunction.ChangeAlpha(m_EffectColor, Alpha);
     }
 }

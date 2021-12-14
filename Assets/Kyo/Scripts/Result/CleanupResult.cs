@@ -9,9 +9,9 @@ public class CleanupResult : Result
 
     public override void Init(CleanupObserver Observer)
     {
-        result.eventName.text = Observer.CleanupResultText();
+        result.eventName.SetText(Observer.CleanupResultText());
         result.resultFrame.color = HelperFunction.ChangeAlpha(result.resultFrame.color, 0.0f);
-        result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, 0.0f);
+        result.eventName.SetAlpha(0.0f);
 
         point = Observer.GetPoint();
     }
@@ -19,10 +19,10 @@ public class CleanupResult : Result
     public override void Appear()
     {
         tweener = result.resultFrame.DOFade(1.0f, fadeTime);
-        tweener.OnUpdate(() => { result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, result.resultFrame.color.a); });
+        tweener.OnUpdate(() => { result.eventName.SetAlpha(result.resultFrame.color.a); });
         tweener.OnComplete(() =>
         {
-            result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, result.resultFrame.color.a);
+            result.eventName.SetAlpha(result.resultFrame.color.a);
             AppearNext();
         });
     }
@@ -32,6 +32,6 @@ public class CleanupResult : Result
         KillTweener();
 
         result.resultFrame.color = HelperFunction.ChangeAlpha(result.resultFrame.color, 1.0f);
-        result.eventName.color = HelperFunction.ChangeAlpha(result.eventName.color, 1.0f);
+        result.eventName.SetAlpha(1.0f);
     }
 }
