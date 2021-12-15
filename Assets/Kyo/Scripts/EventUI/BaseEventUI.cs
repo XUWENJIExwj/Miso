@@ -116,7 +116,7 @@ public class BaseEventUI : EventUI
 
         Player.instance.ResetCurrentPoint();
         Player.instance.CompleteCourse();
-        RouteManager.instance.ActiveMoveButton(true);
+        RouteManager.instance.ActiveButtons(true);
 
         eventSO.SetNextPhase(BaseEventPhase.Phase_End);
 

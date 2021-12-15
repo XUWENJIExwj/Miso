@@ -207,6 +207,18 @@ public class EventButton : Button
     public void SetSelected(bool Selected)
     {
         isSelected = Selected;
+
+        if (eventSO.IsRandomEvent())
+        {
+            if (isSelected)
+            {
+                image.sprite = eventSO.icons[1];
+            }
+            else
+            {
+                image.sprite = eventSO.icons[0];
+            }
+        }
     }
 
     public bool GetSelected()

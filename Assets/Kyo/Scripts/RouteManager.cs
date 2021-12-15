@@ -24,9 +24,10 @@ public class RouteManager : Monosingleton<RouteManager>
         next = 1;
         AddRoute();
         ActiveMoveButton(false);
+        ActiveButtons(false);
     }
 
-    public void ActiveMoveButton(bool Active)
+    public void ActiveButtons(bool Active)
     {
         moveButton.gameObject.SetActive(Active);
         switchButton.gameObject.SetActive(Active);
@@ -50,7 +51,7 @@ public class RouteManager : Monosingleton<RouteManager>
     {
         routePoints.Add(Player.instance.GetCurrentBase());
         DrawRoute();
-        ActiveMoveButton(true);
+        ActiveButtons(true);
     }
 
     public void AddRoutePoint(EventButton Point)
@@ -81,6 +82,8 @@ public class RouteManager : Monosingleton<RouteManager>
 
     public void RemoveRoutePoints(EventButton Point)
     {
+        ActiveMoveButton(false);
+
         int index = routePoints.FindIndex(1, routePoints.Count - 1, (EventButton routePoint) => routePoint == Point);
         for (int i = index + 1; i < routePoints.Count; ++i)
         {
@@ -138,6 +141,7 @@ public class RouteManager : Monosingleton<RouteManager>
     public void SetRoutePlanned(bool Planned)
     {
         routePlanned = Planned;
+        moveButton.interactable = Planned;
     }
 
     public EventButton GetPreviousRoutePoint()
@@ -156,6 +160,11 @@ public class RouteManager : Monosingleton<RouteManager>
     }
 
     // Routeè„ÇÃà⁄ìÆäJén
+    public void ActiveMoveButton(bool Active)
+    {
+        moveButton.interactable = Active;
+    }
+
     public void StartMovePath()
     {
         SoundManager.instance.SE_Go();
@@ -166,6 +175,7 @@ public class RouteManager : Monosingleton<RouteManager>
         if (routePlanned && logic.isRouteSelect())
         {
             ActiveMoveButton(false);
+            ActiveButtons(false);
 
             FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
             Player.instance.SetNewBase((BaseButton)routePoints[routePoints.Count - 1]);
