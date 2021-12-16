@@ -69,9 +69,20 @@ public class LogicManager : Monosingleton<LogicManager>
         return (T)(object)null;
     }
 
+    public void ToStartGame()
+    {
+        StartCoroutine(WaitLoadSaveData());
+    }
+
     public void GameStart()
     {
         SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("LogIn");
+    }
+
+    public IEnumerator WaitLoadSaveData()
+    {
+        yield return new WaitUntil(() => Score.instance.ComleteFetch());
+        GameStart();
     }
 }

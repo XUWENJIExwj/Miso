@@ -20,6 +20,7 @@ public class UserAuth : MonoBehaviour
             if (e == null)
             {
                 currentPlayerName = id;
+                Score.instance.Init();
             }
             else
             {
@@ -45,6 +46,7 @@ public class UserAuth : MonoBehaviour
             if (e == null)
             {
                 currentPlayerName = id;
+                Score.instance.Init();
             }
             
             else

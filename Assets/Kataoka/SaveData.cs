@@ -11,11 +11,16 @@ namespace NCMB
         public string savedata { get; set; }
         public string name { get; private set; }
 
+        public bool completeFetch = false;
+        public bool newUser = false;
+
         // コンストラクタ -----------------------------------
         public SaveData(string _savedata, string _name)
         {
             savedata = _savedata;
             name = _name;
+            completeFetch = false;
+            newUser = false;
         }
 
         // サーバーにセーブデータを保存 -------------------------
@@ -53,16 +58,23 @@ namespace NCMB
                         obj["Name"] = name;
                         obj["Data"] = "";
                         obj.SaveAsync();
-                        savedata = "";
+                        savedata = null;
+                        newUser = true;
                     }
                     // ハイスコアが登録済みだったら
                     else
                     {
                         savedata = System.Convert.ToString(objList[0]["Data"]);
                     }
+
+                    completeFetch = true;
                 }
             });
         }
 
+        public bool CompleteFetch()
+        {
+            return completeFetch;
+        }
     }
 }

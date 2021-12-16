@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Score : MonoBehaviour
+public class Score : Monosingleton<Score>
 {
     
     private int score;
@@ -17,7 +17,7 @@ public class Score : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Init()
     {
         Initialize();
 
@@ -59,7 +59,7 @@ public class Score : MonoBehaviour
 
     }
 
-    public void Save()
+    public void Save(PlayerData Data)
     {
         // ログイン画面経由せず、MainGameに入ると、highScoreがnullのままなので
         if (highScore != null)
@@ -71,7 +71,7 @@ public class Score : MonoBehaviour
                 highScore.save();
             }
             //現在のプレイヤーデータを保存
-            saveData.savedata = JsonUtility.ToJson(Player.instance.GetPlayerData());
+            saveData.savedata = JsonUtility.ToJson(Data);
             saveData.save();
             // ゲーム開始前の状態に戻す
             Initialize();
@@ -89,20 +89,32 @@ public class Score : MonoBehaviour
         // ログイン画面経由せず、MainGameに入ると、highScoreがnullのままなので
         if (saveData != null)
         {
-            if (highScore.score != 0)
+            //if (highScore.score != 0)
+            //{
+            //    saveData.fetch();
+            //    json = saveData.savedata;
+            //    playerSave = JsonUtility.FromJson<PlayerData>(json);
+            //    // ゲーム開始前の状態に戻す
+            //    Initialize();
+            //}
+            //else
+            //{
+            //    Save();
+            //}
+
+            if (saveData.newUser)
             {
-                saveData.fetch();
-                json = saveData.savedata;
-                playerSave = JsonUtility.FromJson<PlayerData>(json);
-                // ゲーム開始前の状態に戻す
-                Initialize();
+                CreateNewSaveData();
             }
             else
             {
-                Save();
+                playerSave = JsonUtility.FromJson<PlayerData>(saveData.savedata);
             }
             
-
+        }
+        else
+        {
+            CreateNewSaveData();
         }
     }
 
@@ -110,5 +122,16 @@ public class Score : MonoBehaviour
     {
         Load();
         return playerSave;
+    }
+
+    public bool ComleteFetch()
+    {
+        return saveData.CompleteFetch();
+    }
+
+    public void CreateNewSaveData()
+    {
+        playerSave.Init();
+        Save(playerSave);
     }
 }

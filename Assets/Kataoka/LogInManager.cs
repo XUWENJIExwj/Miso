@@ -100,12 +100,12 @@ public class LogInManager : MonoBehaviour
         {
             if (!sceneLoaded)
             {
-                LogicManager.instance.GameStart();
+                LogicManager.instance.ToStartGame();
                 sceneLoaded = true;
             }
         }
     
-}
+    }
 
 
     public void IdReflect()

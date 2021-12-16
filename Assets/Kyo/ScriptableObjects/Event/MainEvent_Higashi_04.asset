@@ -32,7 +32,7 @@ MonoBehaviour:
   subEventPhase: 4
   frameFadeTime: 0.8
   autoPlay: 0
-  ama: 6
+  ama: 0
   endingPoints:
   - min: 5000
     max: 6000

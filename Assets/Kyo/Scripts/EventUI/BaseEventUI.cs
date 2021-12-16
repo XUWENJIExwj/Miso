@@ -122,7 +122,7 @@ public class BaseEventUI : EventUI
 
         // DataBase“o˜^
         //Player.instance.GetTotalPoint();
-        FindObjectOfType<Score>().Save();
+        Score.instance.Save(Player.instance.GetPlayerData());
     }
 
     public bool ConfirmButtonPointerEnter()

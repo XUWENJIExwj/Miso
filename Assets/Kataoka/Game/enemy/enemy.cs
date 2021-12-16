@@ -29,7 +29,7 @@ public class enemy : MonoBehaviour
         {
             FindObjectOfType<enemypr>().DestroyObj();
             gameOver = true;
-            FindObjectOfType<Score>().Save();
+            //FindObjectOfType<Score>().Save();
 
         }
         
