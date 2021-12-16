@@ -471,8 +471,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f02710ac0ed24524b9a74662fa8b7327, type: 2}
     - {fileID: 11400000, guid: 0de1bcaa5d171844a8c7cb45aa10454d, type: 2}
   - mainEvents: []
-  - mainEvents:
-    - {fileID: 11400000, guid: c5b4c84a10b2a9d4395c521d909a5f18, type: 2}
+  - mainEvents: []
   - mainEvents:
     - {fileID: 11400000, guid: e67411b48e5d3714ea4d1a2e811a3e0a, type: 2}
     - {fileID: 11400000, guid: b7693ec31558ae142be0380c168c733d, type: 2}
