@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using System;
-using EventScriptableObject;
+using UnityEngine;
 
 public enum Oceans
 {
@@ -46,7 +42,7 @@ public struct PollutionMapData
 public class PollutionMap : Monosingleton<PollutionMap>
 {
     [SerializeField] private OceanParts[] parts = null;
-    [SerializeField] private PollutionMapData pollutionMapData;
+    [SerializeField] private PollutionMapData pollutionMapData = new PollutionMapData();
 
     public void Init()
     {
@@ -55,6 +51,7 @@ public class PollutionMap : Monosingleton<PollutionMap>
         for (int i = 0; i < parts.Length; ++i)
         {
             parts[i].Init((Oceans)i);
+
         }
 
         Player.instance.SetPollutionMapData(pollutionMapData);

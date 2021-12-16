@@ -44,6 +44,8 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
             events.AddRange(oceanEventButtons[i].GetEventButtons());
         }
 
+        CreateEvents();
+
         eventDatas.Init(events.Count);
     }
 
@@ -58,12 +60,25 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
             events.AddRange(oceanEventButtons[i].GetEventButtons());
         }
 
-        for (int i = 0; i < events.Count; ++i)
+        if (Data.datas.Length > 0)
         {
-            events[i].Load(Data.datas[i]);
-        }
+            for (int i = 0; i < events.Count; ++i)
+            {
+                events[i].Load(Data.datas[i]);
+            }
 
-        eventDatas = Data;
+            eventDatas = Data;
+        }
+        else
+        {
+            for (int i = 0; i < oceanEventButtons.Length; ++i)
+            {
+                oceanEventButtons[i].Init();
+            }
+            CreateEvents();
+
+            eventDatas.Init(events.Count);
+        }
     }
 
     public void CreateEvents()

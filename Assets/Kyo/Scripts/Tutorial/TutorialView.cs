@@ -76,7 +76,7 @@ public class TutorialView : Monosingleton<TutorialView>
         SoundManager.instance.SE_Tap();
 
         Player.instance.SetTutorialFlag();
-        Score.instance.Save(Player.instance.GetPlayerData());
+        Player.instance.Save();
 
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

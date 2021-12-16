@@ -46,14 +46,17 @@ public class EventButton : Button
         {
             eventSO = GlobalInfo.instance.mainEventLists[(int)Data.ama].mainEvents[Data.eventID];
             EventButtonManager.instance.AddMainEvent(this);
+            gameObject.SetActive(false);
         }
         else if (Data.type == EventSOType.SubEvent)
         {
             eventSO = GlobalInfo.instance.subEventList[Data.eventID];
+            gameObject.SetActive(false);
         }
         else if (Data.type == EventSOType.RandomEvent)
         {
             eventSO = GlobalInfo.instance.randomEventList[Data.eventID];
+            gameObject.SetActive(false);
         }
         else
         {

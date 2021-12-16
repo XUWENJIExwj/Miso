@@ -100,6 +100,11 @@ public class OceanParts : MonoBehaviour
         }
     }
 
+    public OceanPart[] GetOceanPart()
+    {
+        return parts;
+    }
+
     public OceanPartsData GetOceanPartsData()
     {
         for (int i = 0; i < parts.Length; ++i)

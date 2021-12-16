@@ -14,7 +14,6 @@ public struct PlayerData
     public int courseResetCount;
     public AMASO[] amas;
     public AMAs ama;
-    //public BaseButton basePoint;
     public int baseIndex;
     public int totalPoint;
     public int currentPoint;
@@ -110,7 +109,14 @@ public class Player : Monosingleton<Player>
 
     public void Save()
     {
-        playerData.baseIndex = currentBase.GetEventSO<BaseEventSO>().id;
+        if (currentBase)
+        {
+            playerData.baseIndex = currentBase.GetEventSO<BaseEventSO>().id;
+        }
+        else
+        {
+            playerData.baseIndex = -1;
+        }
         playerData.position = transform.localPosition;
         playerData.mapUVOffset = MapScroll.instance.GetUVOffset();
         playerData.gridUVOffset = GridScroll.instance.GetUVOffset();
