@@ -633,6 +633,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3107820617432285968, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3107820617432285968, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6515860489023038849, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
       propertyPath: m_Text
       value: 
@@ -669,6 +677,14 @@ PrefabInstance:
       propertyPath: Login_Canv
       value: 
       objectReference: {fileID: 2127960254}
+    - target: {fileID: 6515860489783081528, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 631123291}
+    - target: {fileID: 6515860489783081528, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6515860489783081529, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -752,6 +768,14 @@ PrefabInstance:
     - target: {fileID: 6515860489783081529, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515860489798183203, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -158
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515860490572833565, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -284
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b944c473c91c824f9c3999c513ca184, type: 3}
