@@ -89,28 +89,21 @@ public class Score : Monosingleton<Score>
         // ログイン画面経由せず、MainGameに入ると、highScoreがnullのままなので
         if (saveData != null)
         {
-            //if (highScore.score != 0)
-            //{
-            //    saveData.fetch();
-            //    json = saveData.savedata;
-            //    playerSave = JsonUtility.FromJson<PlayerData>(json);
-            //    // ゲーム開始前の状態に戻す
-            //    Initialize();
-            //}
-            //else
-            //{
-            //    Save();
-            //}
-
             if (saveData.newUser)
             {
                 CreateNewSaveData();
             }
             else
             {
-                playerSave = JsonUtility.FromJson<PlayerData>(saveData.savedata);
-            }
-            
+                if (saveData.savedata == null || saveData.savedata == "")
+                {
+                    CreateNewSaveData();
+                }
+                else
+                {
+                    playerSave = JsonUtility.FromJson<PlayerData>(saveData.savedata);
+                }
+            } 
         }
         else
         {
