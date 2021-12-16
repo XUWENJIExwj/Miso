@@ -28,7 +28,7 @@ public class LeaderBoardManager : MonoBehaviour
 				// 取得したトップ5ランキングを表示
 				for (int i = 0; i < lBoard.topRankers.Count; ++i)
 				{
-					top[i].GetComponent<UnityEngine.UI.Text>().text = i + 1 + ". " + lBoard.topRankers[i].print();
+					top[i].GetComponent<UnityEngine.UI.Text>().text = lBoard.topRankers[i].print();
 				}
 
 			}
