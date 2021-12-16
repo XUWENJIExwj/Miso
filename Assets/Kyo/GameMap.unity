@@ -26574,7 +26574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
-    courseCount: 1
+    courseCount: 0
     courseResetCount: 2
     amas: []
     ama: 0
@@ -26595,6 +26595,7 @@ MonoBehaviour:
   mainEventPlayed: 0
   iconOffset: {x: 0, y: 0, z: 0}
   newAMA: 6
+  score: {fileID: 358351222}
 --- !u!114 &1018336825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35328,6 +35329,18 @@ MonoBehaviour:
       - m_Target: {fileID: 841038716}
         m_TargetAssemblyTypeName: TutorialView, Assembly-CSharp
         m_MethodName: EndTutorialView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 358351222}
+        m_TargetAssemblyTypeName: Score, Assembly-CSharp
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

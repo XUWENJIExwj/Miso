@@ -16,11 +16,8 @@ public class LogicManager : Monosingleton<LogicManager>
     [SerializeField] bool onTest = true;
     [SerializeField] BaseSceneLogic sceneLogic = null;
 
-    public void Start()
+    public override void InitAwake()
     {
-        InitSound();
-        ChangeBGM.instance.BGM_Route();
-
         if (onTest)
         {
             //SceneManager.LoadScene("GameMap", LoadSceneMode.Additive);
@@ -29,6 +26,12 @@ public class LogicManager : Monosingleton<LogicManager>
         {
             SceneManager.LoadScene("LogIn", LoadSceneMode.Additive);
         }
+    }
+
+    public void Start()
+    {
+        InitSound();
+        ChangeBGM.instance.BGM_Route();
     }
 
     public void InitSound()

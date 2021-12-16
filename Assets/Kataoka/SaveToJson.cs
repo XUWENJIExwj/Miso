@@ -5,15 +5,16 @@ using System.IO;
 using UnityEngine;
 using NCMB;
 
-public class SaveToJson : Monosingleton<SaveToJson>
+public class SaveToJson : MonoBehaviour
 {
-    private int score;
     private string json;
     private NCMB.SaveData saveData = null;
     //保存したプレイヤーデータを移す場所
-    private PlayerData playerSave = new PlayerData();
+    PlayerData playerSave = new PlayerData();
 
-    public void Init()
+
+    // Start is called before the first frame update
+    void Start()
     {
         Initialize();
 
@@ -39,7 +40,7 @@ public class SaveToJson : Monosingleton<SaveToJson>
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            Save(Player.instance.GetPlayerData());
+            Save();
         }
 
         if (Input.GetKey(KeyCode.Return))
@@ -52,13 +53,13 @@ public class SaveToJson : Monosingleton<SaveToJson>
     }
 
     //
-    public void Save(PlayerData SaveData)
+    public void Save()
     {
         // ログイン画面経由せず、MainGameに入ると、SaveDataがnullのままなので
         if (saveData != null)
         {
             //現在のプレイヤーデータを保存
-            saveData.savedata = JsonUtility.ToJson(SaveData);
+            saveData.savedata = JsonUtility.ToJson(Player.instance.GetPlayerData());
             saveData.save();
             // ゲーム開始前の状態に戻す
             Initialize();
@@ -66,32 +67,25 @@ public class SaveToJson : Monosingleton<SaveToJson>
         }
     }
 
-    public bool Load()
+    public void Load()
     {
         // ログイン画面経由せず、MainGameに入ると、highScoreがnullのままなので
         if (saveData != null)
         {
-            saveData.fetch();
-            json = saveData.savedata;
-            playerSave = JsonUtility.FromJson<PlayerData>(json);
-            // ゲーム開始前の状態に戻す
-            Initialize();
-            return true;
+           
+               
+                saveData.fetch();
+                json = saveData.savedata;
+                playerSave = JsonUtility.FromJson<PlayerData>(json);
+                // ゲーム開始前の状態に戻す
+                Initialize();
+           
         }
-        return false;
     }
 
     public PlayerData GetSaveData()
     {
-        if (Load())
-        {
-            return playerSave;
-        }
-        else
-        {
-            PlayerData playerData = new PlayerData();
-            playerData.Init();
-            return playerData;
-        }
+        Load();
+        return playerSave;
     }
 }

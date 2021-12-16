@@ -48,12 +48,14 @@ public class Player : Monosingleton<Player>
     [SerializeField] private AMAs newAMA = AMAs.Max;
 
     private Tween tweener = null;
-
-    // PlayerData
-    public void Init()
+    [SerializeField]
+    private Score score;
+   // PlayerData
+   public void Init()
     {
         // ‰¼
-        playerData = SaveToJson.instance.GetSaveData();
+        //playerData = SaveToJson.instance.GetSaveData();
+        playerData = score.GetSaveData();
 
         GlobalInfo.instance.playerData = playerData;
 
