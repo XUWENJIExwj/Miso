@@ -34,16 +34,29 @@ public class MainGameLogic : BaseSceneLogic
             PollutionMap.instance.Init();
             EventButtonManager.instance.Init();
             Player.instance.Init();
-            TutorialView.instance.Init();
-            Timer.instance.Init();
-
-            NewAMAView.instance.Init(); //1
-            EventUIManager.instance.Init(); //1
-            BaseConfirmView.instance.Init(); //1
-            AMASwitchView.instance.Init(); //1
-            AchievementView.instance.Init(); //1
-            FuelGauge.instance.Init(); //1
         }
+        else
+        {
+            SetNextSate(MainGameState.RouteSelect);
+
+            PlayerData playerData = Score.instance.GetSaveData();
+            MapScroll.instance.Load(playerData.mapUVOffset);
+            GridScroll.instance.Load(playerData.gridUVOffset);
+            PollutionMap.instance.Load(playerData.pollutionMapData);
+            EventButtonManager.instance.Load(playerData.eventData);
+            Player.instance.Load(playerData);
+        }
+
+        TutorialView.instance.Init();
+        Timer.instance.Init();
+        NewAMAView.instance.Init();
+        EventUIManager.instance.Init();
+        BaseConfirmView.instance.Init();
+        AMASwitchView.instance.Init();
+        AchievementView.instance.Init();
+        FuelGauge.instance.Init();
+
+        Player.instance.SetMainGameState();
     }
 
     public override void UpdateScene()

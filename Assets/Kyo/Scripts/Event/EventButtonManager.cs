@@ -2,6 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EventScriptableObject;
+using System;
+
+[Serializable]
+public struct AllEventButtonsData
+{
+    public EventButtonData[] datas;
+
+    public void Init(int Count)
+    {
+        datas = new EventButtonData[Count];
+    }
+}
 
 public class EventButtonManager : Monosingleton<EventButtonManager>
 {
@@ -10,12 +22,15 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
     [SerializeField] private OceanEventButtons[] oceanEventButtons = null;
     [SerializeField] private List<EventButton> events = null;
     [SerializeField] private List<EventButton> mainEvents = null;
+    [SerializeField] private EventButton[] baseEvents = null;
+    [SerializeField] private AllEventButtonsData eventDatas;
 
     public override void InitAwake()
     {
         oceanEventButtons = GetComponentsInChildren<OceanEventButtons>();
         events = new List<EventButton>();
         mainEvents = new List<EventButton>();
+        baseEvents = new BaseButton[GlobalInfo.instance.baseList.Count];
     }
 
     public void Init()
@@ -23,11 +38,32 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
         eventPreview.Init();
         baseEventPreview.Init();
 
-        foreach (OceanEventButtons oceanEventButton in oceanEventButtons)
+        for (int i = 0; i < oceanEventButtons.Length; ++i)
         {
-            oceanEventButton.Init();
-            events.AddRange(oceanEventButton.GetEventButtons());
+            oceanEventButtons[i].Init();
+            events.AddRange(oceanEventButtons[i].GetEventButtons());
         }
+
+        eventDatas.Init(events.Count);
+    }
+
+    public void Load(AllEventButtonsData Data)
+    {
+        eventPreview.Init();
+        baseEventPreview.Init();
+
+        for (int i = 0; i < oceanEventButtons.Length; ++i)
+        {
+            oceanEventButtons[i].Load();
+            events.AddRange(oceanEventButtons[i].GetEventButtons());
+        }
+
+        for (int i = 0; i < events.Count; ++i)
+        {
+            events[i].Load(Data.datas[i]);
+        }
+
+        eventDatas = Data;
     }
 
     public void CreateEvents()
@@ -86,11 +122,30 @@ public class EventButtonManager : Monosingleton<EventButtonManager>
         mainEvents.Add(Event);
     }
 
+    public void AddBaseEvent(EventButton Event)
+    {
+        baseEvents[Event.GetEventSO<BaseEventSO>().id] = Event;
+    }
+
+    public BaseButton GetBaseEventButton(int Index)
+    {
+        return (BaseButton)baseEvents[Index];
+    }
+
     public void LinkMainEventsToAMA(AMAs AMA)
     {
         foreach (EventButton button in mainEvents)
         {
             button.LinkMainEventToAMA(AMA);
         }
+    }
+
+    public AllEventButtonsData GetAllEventButtonsData()
+    {
+        for (int i = 0; i< events.Count; ++i)
+        {
+            eventDatas.datas[i] = events[i].GetEventData();
+        }
+        return eventDatas;
     }
 }

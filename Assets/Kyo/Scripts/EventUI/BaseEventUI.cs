@@ -121,8 +121,7 @@ public class BaseEventUI : EventUI
         eventSO.SetNextPhase(BaseEventPhase.Phase_End);
 
         // DataBase“o˜^
-        //Player.instance.GetTotalPoint();
-        Score.instance.Save(Player.instance.GetPlayerData());
+        Player.instance.Save();
     }
 
     public bool ConfirmButtonPointerEnter()

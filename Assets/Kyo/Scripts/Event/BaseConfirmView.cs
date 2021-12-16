@@ -72,6 +72,8 @@ public class BaseConfirmView : Monosingleton<BaseConfirmView>
 
         baseSelected = null;
 
+        Player.instance.Save();
+
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
         logic.SetNextSate(MainGameState.RouteSelectPre);

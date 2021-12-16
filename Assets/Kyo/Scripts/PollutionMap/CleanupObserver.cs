@@ -21,6 +21,16 @@ public class CleanupObserver : MonoBehaviour
         point = 0;
     }
 
+    public void Load(Oceans Ocean, OceanAreas Area, PollutionLevel Level)
+    {
+        ocean = Ocean;
+        area = Area;
+        startLevel = Level;
+        endLevel = Level;
+        hasCleaned = false;
+        point = 0;
+    }
+
     public void AddResult()
     {
         if (hasCleaned)

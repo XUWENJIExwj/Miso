@@ -21,7 +21,7 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
         SoundManager.instance.SE_Tap();
 
         playerData = Data;
-        baseName.text = playerData.basePoint.GetBaseName();
+        baseName.text = ((BaseButton)Player.instance.GetCurrentBase()).GetBaseName();
         currentAMA = playerData.ama;
 
         SetAMAInfo();
@@ -58,6 +58,7 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
             FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
             EventButtonManager.instance.LinkMainEventsToAMA(currentAMA);
             RouteManager.instance.RemoveRoutePointsWhenSwitchAMA();
+            Player.instance.Save();
         }
 
         // ‰¼

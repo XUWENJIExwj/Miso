@@ -25,12 +25,14 @@ public class BaseButton : EventButton
     {
         eventSO = GlobalInfo.instance.CreateEventSO(baseIndex);
         image.sprite = eventSO.icons[0];
-        size = new Vector2(90.0f, 90.0f);
+        size = eventSO.Resize();
 
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = size;
         maxSize.x = Mathf.Max(maxSize.x, rectTransform.sizeDelta.x);
         maxSize.y = Mathf.Max(maxSize.y, rectTransform.sizeDelta.y);
+
+        EventButtonManager.instance.AddBaseEvent(this);
     }
 
     public override void CreateEvent()

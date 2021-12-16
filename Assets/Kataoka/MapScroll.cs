@@ -40,6 +40,16 @@ public class MapScroll : Monosingleton<MapScroll>
         GlobalInfo.instance.SetMapSize(rectTransforms[0].sizeDelta);
     }
 
+    public void Load(Vector2 Offset)
+    {
+        Init();
+        uv.Offset = Offset;
+        foreach (Image image in images)
+        {
+            image.material.SetVector("_Offset", uv.Offset);
+        }
+    }
+
     public void OnDrag()
     {
         if (Input.GetMouseButton(0) && onDrag)
@@ -64,7 +74,6 @@ public class MapScroll : Monosingleton<MapScroll>
         {
             image.material.SetVector("_Offset", uv.Offset);
         }
-        Player.instance.SetMapUVOffset(uv.Offset);
     }
 
     public void MovePath(Vector2 Offset, float Time)
@@ -74,11 +83,15 @@ public class MapScroll : Monosingleton<MapScroll>
         {
             image.material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
         }
-        Player.instance.SetMapUVOffset(uv.Offset);
     }
 
     public void SetOnDrag(bool OnDrag)
     {
         onDrag = OnDrag;
+    }
+
+    public Vector2 GetUVOffset()
+    {
+        return uv.Offset;
     }
 }

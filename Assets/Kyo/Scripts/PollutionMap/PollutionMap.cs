@@ -32,36 +32,56 @@ public struct PollutionLevelInfo
     public PointRange pointRange;
 }
 
+[Serializable]
+public struct PollutionMapData
+{
+    public OceanPartsData[] datas;
+
+    public void Init(int Count)
+    {
+        datas = new OceanPartsData[Count];
+    }
+}
+
 public class PollutionMap : Monosingleton<PollutionMap>
 {
     [SerializeField] private OceanParts[] parts = null;
-
-    public override void InitAwake()
-    {
-        
-    }
+    [SerializeField] private PollutionMapData pollutionMapData;
 
     public void Init()
     {
+        pollutionMapData.Init(parts.Length);
+
         for (int i = 0; i < parts.Length; ++i)
         {
             parts[i].Init((Oceans)i);
         }
+
+        Player.instance.SetPollutionMapData(pollutionMapData);
     }
 
-    public void Load(PollutionLevel Level)
+    public void Load(PollutionMapData Data)
     {
-        for (int i = 0; i < parts.Length; ++i)
+        if (Data.datas != null)
         {
-            parts[i].Load((Oceans)i, Level);
+            for (int i = 0; i < parts.Length; ++i)
+            {
+                parts[i].Load((Oceans)i, Data.datas[i]);
+            }
+
+            pollutionMapData = Data;
+        }
+        else
+        {
+            Init();
         }
     }
 
     public void ResetPollutionLevel()
     {
-        foreach (OceanParts part in parts)
+        for (int i = 0; i < parts.Length; ++i)
         {
-            part.ResetPollutionLevel();
+            parts[i].ResetPollutionLevel();
         }
     }
 
@@ -80,17 +100,26 @@ public class PollutionMap : Monosingleton<PollutionMap>
 
     public void Move(Vector2 Offset)
     {
-        foreach (OceanParts part in parts)
+        for (int i = 0; i < parts.Length; ++i)
         {
-            part.Move(Offset);
+            parts[i].Move( Offset);
         }
     }
 
     public void MovePath(Vector2 Offset, float Time)
     {
-        foreach (OceanParts part in parts)
+        for (int i = 0; i < parts.Length; ++i)
         {
-            part.MovePath(Offset, Time);
+            parts[i].MovePath(Offset, Time);
         }
+    }
+
+    public PollutionMapData GetPollutionMapData()
+    {
+        for (int i = 0; i < parts.Length; ++i)
+        {
+            pollutionMapData.datas[i] = parts[i].GetOceanPartsData();
+        }
+        return pollutionMapData;
     }
 }

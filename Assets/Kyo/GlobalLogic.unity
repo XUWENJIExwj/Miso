@@ -608,7 +608,7 @@ MonoBehaviour:
     courseResetCount: 0
     amas: []
     ama: 0
-    basePoint: {fileID: 0}
+    baseIndex: 0
     totalPoint: 0
     currentPoint: 0
     encounter: 0
@@ -620,6 +620,11 @@ MonoBehaviour:
       random:
         completed: 
     tutorial: 0
+    position: {x: 0, y: 0, z: 0}
+    mapUVOffset: {x: 0, y: 0}
+    gridUVOffset: {x: 0, y: 0}
+    eventData:
+      datas: []
 --- !u!4 &784785529
 Transform:
   m_ObjectHideFlags: 0

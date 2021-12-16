@@ -16,9 +16,9 @@ public class SplitOceanPart : OceanPart
         synchroPoint = 0;
     }
 
-    public override void Load(Oceans Ocean, OceanAreas Area, PollutionLevel Level)
+    public override void Load(Oceans Ocean, OceanAreas Area, OceanPartData Data)
     {
-        base.Load(Ocean, Area, Level);
+        base.Load(Ocean, Area, Data);
 
         synchroPoint = 0;
     }

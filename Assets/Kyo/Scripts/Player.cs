@@ -5,6 +5,7 @@ using DG.Tweening;
 using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using EventScriptableObject;
 
 [Serializable]
 public struct PlayerData
@@ -13,15 +14,19 @@ public struct PlayerData
     public int courseResetCount;
     public AMASO[] amas;
     public AMAs ama;
-    public BaseButton basePoint;
+    //public BaseButton basePoint;
+    public int baseIndex;
     public int totalPoint;
     public int currentPoint;
     public int encounter;
     public int encounterRatio;
     public AchievementProgress achievements;
     public bool tutorial;
+    public Vector3 position;
     public Vector2 mapUVOffset;
     public Vector2 gridUVOffset;
+    public PollutionMapData pollutionMapData;
+    public AllEventButtonsData eventData;
 
     public void Init()
     {
@@ -29,7 +34,8 @@ public struct PlayerData
         courseResetCount = 2;
         amas = new AMASO[(int)AMAs.Max];
         ama = AMAs.Max;
-        basePoint = null;
+        //basePoint = null;
+        baseIndex = -1;
         totalPoint = 0;
         currentPoint = 0;
         encounter = 10;
@@ -38,16 +44,6 @@ public struct PlayerData
         tutorial = true;
         mapUVOffset = new Vector2(0.0f, 0.00156f);
         gridUVOffset = new Vector2(0.5f, 0.5f);
-    }
-
-    public void SetMapUVOffset(Vector2 Offset)
-    {
-        mapUVOffset = Offset;
-    }
-
-    public void SetGridUVOffset(Vector2 Offset)
-    {
-        gridUVOffset = Offset;
     }
 }
 
@@ -60,6 +56,7 @@ public class Player : Monosingleton<Player>
     [SerializeField] private bool mainEventPlayed = false;
     [SerializeField] private Vector3 iconOffset = Vector3.zero;
     [SerializeField] private AMAs newAMA = AMAs.Max;
+    [SerializeField] private BaseButton currentBase = null;
 
     private Tween tweener = null;
 
@@ -69,9 +66,58 @@ public class Player : Monosingleton<Player>
         // âº
         playerData = Score.instance.GetSaveData();
 
+        //playerData.pollutionMapData = PollutionMap.instance.GetPollutionMapData();
+        //playerData.eventData = EventButtonManager.instance.GetAllEventButtonsData();
+
         GlobalInfo.instance.playerData = playerData;
 
         gameObject.SetActive(false);
+    }
+
+    public void SetMainGameState()
+    {
+        // âº
+        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
+
+        if (playerData.tutorial)
+        {
+            logic.SetNextSate(MainGameState.Tutorial);
+        }
+        else if (playerData.baseIndex >= 0)
+        {
+            // PlayerÇÃèâä˙à íu
+            AMAs work = playerData.ama;
+            SetFirstBase(EventButtonManager.instance.GetBaseEventButton(playerData.baseIndex));
+            SetCurrentAMA(work);
+
+            // PlayerÇÃBaseÇStartPointÇ…ìoò^
+            RouteManager.instance.SetStartPoint();
+            logic.SetNextSate(MainGameState.RouteSelectPre);
+        }
+        else
+        {
+            logic.SetNextSate(MainGameState.BaseSelect);
+        }
+    }
+
+    public void Load(PlayerData Data)
+    {
+        playerData = Data;
+        transform.localPosition = Data.position;
+
+        gameObject.SetActive(false);
+    }
+
+    public void Save()
+    {
+        playerData.baseIndex = currentBase.GetEventSO<BaseEventSO>().id;
+        playerData.position = transform.localPosition;
+        playerData.mapUVOffset = MapScroll.instance.GetUVOffset();
+        playerData.gridUVOffset = GridScroll.instance.GetUVOffset();
+        playerData.pollutionMapData = PollutionMap.instance.GetPollutionMapData();
+        playerData.eventData = EventButtonManager.instance.GetAllEventButtonsData();
+
+        Score.instance.Save(playerData);
     }
 
     public PlayerData GetPlayerData()
@@ -84,14 +130,14 @@ public class Player : Monosingleton<Player>
         playerData.tutorial = false;
     }
 
-    public void SetMapUVOffset(Vector2 Offset)
+    public void SetPollutionMapData(PollutionMapData Data)
     {
-        playerData.SetMapUVOffset(Offset);
+        playerData.pollutionMapData = Data;
     }
 
-    public void SetGridUVOffset(Vector2 Offset)
+    public void SetAllEventButtonsData(AllEventButtonsData Data)
     {
-        playerData.SetGridUVOffset(Offset);
+        playerData.eventData = Data;
     }
 
     public void SetMainEventCompleted(int ID)
@@ -218,9 +264,9 @@ public class Player : Monosingleton<Player>
     public void SetFirstBase(BaseButton Base)
     {
         gameObject.SetActive(true);
-        playerData.basePoint = Base;
-        playerData.basePoint.SetEventButtonColor(Color.red);
-        transform.localPosition = playerData.basePoint.transform.localPosition + iconOffset;
+        currentBase = Base;
+        currentBase.SetEventButtonColor(Color.red);
+        transform.localPosition = currentBase.transform.localPosition + iconOffset;
 
         SetCurrentAMA(Base.GetAMA());
 
@@ -230,9 +276,9 @@ public class Player : Monosingleton<Player>
 
     public void SetNewBase(BaseButton Base)
     {
-        playerData.basePoint.SetEventButtonColor(Color.white);
-        playerData.basePoint = Base;
-        playerData.basePoint.SetEventButtonColor(Color.red);
+        currentBase.SetEventButtonColor(Color.white);
+        currentBase = Base;
+        currentBase.SetEventButtonColor(Color.red);
 
         AddAMA(Base.GetAMA());
 
@@ -242,12 +288,12 @@ public class Player : Monosingleton<Player>
 
     public EventButton GetCurrentBase()
     {
-        return playerData.basePoint;
+        return currentBase;
     }
 
     public Vector3 CurrentBasePosition()
     {
-        return playerData.basePoint.transform.localPosition;
+        return currentBase.transform.localPosition;
     }
 
     public void AddTotalPoint(int Point)

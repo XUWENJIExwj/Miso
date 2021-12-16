@@ -19,6 +19,12 @@ public class OceanEventButtons : MonoBehaviour
         }
     }
 
+    public void Load()
+    {
+        eventButtons = new List<EventButton>();
+        eventButtons.AddRange(GetComponentsInChildren<EventButton>());
+    }
+
     public List<EventButton> GetEventButtons()
     {
         return eventButtons;

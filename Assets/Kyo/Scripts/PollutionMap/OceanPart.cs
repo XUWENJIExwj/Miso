@@ -10,6 +10,12 @@ public struct OceanPartData
 {
     public PollutionLevel level;
     public Vector3 position;
+
+    public void Init()
+    {
+        level = PollutionLevel.None;
+        position = Vector3.zero;
+    }
 }
 
 [RequireComponent(typeof(CleanupObserver))]
@@ -20,7 +26,7 @@ public class OceanPart : MonoBehaviour
     [SerializeField] protected float fadeTime = 0.5f;
     [SerializeField] protected CleanupView prefab = null;
     [SerializeField] protected CleanupObserver observer = null;
-    [SerializeField] protected OceanPartData oceanPartData;
+    //[SerializeField] protected OceanPartData oceanPartData;
 
     public virtual void Init(Oceans Ocean, OceanAreas Area)
     {
@@ -29,11 +35,12 @@ public class OceanPart : MonoBehaviour
         observer.Init(Ocean, Area);
     }
 
-    public virtual void Load(Oceans Ocean, OceanAreas Area, PollutionLevel Level)
+    public virtual void Load(Oceans Ocean, OceanAreas Area, OceanPartData Data)
     {
-        level = Level;
+        level = Data.level;
         image.color = GlobalInfo.instance.pollutionInfos[(int)level].color;
-        observer.Init(Ocean, Area);
+        observer.Load(Ocean, Area, level);
+        transform.localPosition = Data.position;
     }
 
     public virtual void ResetPollutionLevel()
@@ -90,8 +97,6 @@ public class OceanPart : MonoBehaviour
 
         // 画面外になったら、ループさせる
         FixPostion();
-
-        
     }
 
     public void MovePath(Vector2 Offset, float Time)
@@ -121,6 +126,9 @@ public class OceanPart : MonoBehaviour
 
     public OceanPartData GetOceanPartData()
     {
-        return oceanPartData;
+        OceanPartData data;
+        data.level = level;
+        data.position = transform.position;
+        return data;
     }
 }

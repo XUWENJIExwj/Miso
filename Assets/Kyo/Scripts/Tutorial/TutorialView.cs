@@ -16,19 +16,6 @@ public class TutorialView : Monosingleton<TutorialView>
         CreatePages();
 
         gameObject.SetActive(Player.instance.GetPlayerData().tutorial);
-
-        // ‰¼
-        MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();
-
-        if (gameObject.activeSelf)
-        {
-            logic.SetNextSate(MainGameState.Tutorial);
-            Player.instance.SetTutorialFlag();
-        }
-        else
-        {
-            logic.SetNextSate(MainGameState.BaseSelect);
-        }
     }
 
     private void CreatePages()
@@ -87,6 +74,9 @@ public class TutorialView : Monosingleton<TutorialView>
     public void EndTutorialView()
     {
         SoundManager.instance.SE_Tap();
+
+        Player.instance.SetTutorialFlag();
+        Score.instance.Save(Player.instance.GetPlayerData());
 
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

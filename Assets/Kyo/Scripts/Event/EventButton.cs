@@ -6,6 +6,18 @@ using UnityEngine.EventSystems;
 using EventScriptableObject;
 using TMPro;
 using DG.Tweening;
+using System;
+
+[Serializable]
+public struct EventButtonData
+{
+    public Oceans ocean;
+    public OceanAreas oceanArea;
+    public EventSOType type;
+    public int eventID;
+    public AMAs ama;
+    public Vector3 position;
+}
 
 public class EventButton : Button
 {
@@ -23,6 +35,61 @@ public class EventButton : Button
     {
         SetOceanInfo(Ocean, OceanArea);
         CreateBaseEvent();
+    }
+
+    public void Load(EventButtonData Data)
+    {
+        ocean = Data.ocean;
+        oceanArea = Data.oceanArea;
+        
+        if (Data.type == EventSOType.MainEvent)
+        {
+            eventSO = GlobalInfo.instance.mainEventLists[(int)Data.ama].mainEvents[Data.eventID];
+            EventButtonManager.instance.AddMainEvent(this);
+        }
+        else if (Data.type == EventSOType.SubEvent)
+        {
+            eventSO = GlobalInfo.instance.subEventList[Data.eventID];
+        }
+        else if (Data.type == EventSOType.RandomEvent)
+        {
+            eventSO = GlobalInfo.instance.randomEventList[Data.eventID];
+        }
+        else
+        {
+            eventSO = GlobalInfo.instance.baseList[Data.eventID];
+            EventButtonManager.instance.AddBaseEvent(this);
+        }
+
+        transform.localPosition = Data.position;
+
+        image.sprite = eventSO.icons[0];
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.sizeDelta = eventSO.Resize();
+        size = rectTransform.sizeDelta;
+
+        maxSize.x = Mathf.Max(maxSize.x, rectTransform.sizeDelta.x);
+        maxSize.y = Mathf.Max(maxSize.y, rectTransform.sizeDelta.y);
+    }
+
+    public EventButtonData GetEventData()
+    {
+        EventButtonData data;
+        data.ocean = ocean;
+        data.oceanArea = oceanArea;
+        data.type = eventSO.type;
+        data.eventID = eventSO.id;
+        if (eventSO.type == EventSOType.MainEvent)
+        {
+            data.ama = ((MainEventSO)eventSO).ama;
+        }
+        else
+        {
+            data.ama = AMAs.Max;
+        }
+        data.position = transform.localPosition;
+        return data;
     }
 
     static public Vector2 GetMaxSize()
