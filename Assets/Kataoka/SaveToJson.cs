@@ -83,6 +83,7 @@ public class SaveToJson : MonoBehaviour
 
     public PlayerData GetSaveData()
     {
+        Load();
         return playerSave;
     }
 }
