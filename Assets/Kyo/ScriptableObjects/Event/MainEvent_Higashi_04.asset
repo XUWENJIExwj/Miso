@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MainEvent_Higashi_04
   m_EditorClassIdentifier: 
   id: 4
-  icons: []
+  icons:
+  - {fileID: -6544882227645325185, guid: 6b80440655d320641a1c44cd60076806, type: 3}
   type: 0
   typeText: "\u30E1\u30A4\u30F3\u30A4\u30D9\u30F3\u30C8"
   eventTitle: "\u5EA7\u7901\u8239\u96E2\u7901\u4EFB\u52D9"
