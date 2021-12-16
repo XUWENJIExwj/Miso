@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9cdbc976ab6a54781eb22afc5d1fe2, type: 3}
+  m_Name: MainEvent_Arctic_03
+  m_EditorClassIdentifier: 
+  id: 3
+  icons:
+  - {fileID: -6544882227645325185, guid: 6b80440655d320641a1c44cd60076806, type: 3}
+  type: 0
+  typeText: "\u30E1\u30A4\u30F3\u30A4\u30D9\u30F3\u30C8"
+  eventTitle: 
+  amaType: 2
+  pointRange:
+    min: 0
+    max: 0
+  point: 0
+  eventSummary: 
+  eventReport: 
+  achievement: {fileID: 21300000, guid: 0d262ecddd61c0d41a4bae44eaddcce5, type: 3}
+  bonusRatio:
+  - 1
+  - 1.2
+  subEventPhase: 4
+  frameFadeTime: 0.8
+  autoPlay: 0
+  ama: 2
+  endingPoints:
+  - min: 5000
+    max: 6000
+  - min: 10000
+    max: 12000
+  - min: 20000
+    max: 25000
+  reports: []
+  optionFirst: []
+  optionNext: []
+  optionSecond: []
+  mainEventPhase: 6
+  progress:
+    optionRouteFirst: 0
+    optionRouteSecond: 0
+    characterIndex: 0
+    textIndex: 0
+  printInterval: 0.1
+  onPrint: 0

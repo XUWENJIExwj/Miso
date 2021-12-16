@@ -520,7 +520,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b7693ec31558ae142be0380c168c733d, type: 2}
     - {fileID: 11400000, guid: 9be540459034ea742add432b17fcbd11, type: 2}
     - {fileID: 11400000, guid: b992d7801dc6dde4a8512eabaa252b3f, type: 2}
-  - mainEvents: []
+    - {fileID: 11400000, guid: 4be40c7abef069142826bba3887c3a2d, type: 2}
+  - mainEvents:
+    - {fileID: 11400000, guid: c178764ac9880df48a645102d9fbdba0, type: 2}
+    - {fileID: 11400000, guid: a363c00da8c21cf46bf4ca9b4bd09117, type: 2}
+    - {fileID: 11400000, guid: 8b3d0066babd4a54694a3a0b849ffe7b, type: 2}
+    - {fileID: 11400000, guid: c796bf97786a21d4f8a162ea7995320e, type: 2}
+    - {fileID: 11400000, guid: ab2c2e39d96543543b891398e59da0c9, type: 2}
   - mainEvents: []
   subEventList:
   - {fileID: 11400000, guid: e0b50603f3e1bac4b98ccf5e5666f12d, type: 2}
@@ -658,7 +664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 2
-  onTest: 0
+  onTest: 1
   sceneLogic: {fileID: 0}
 --- !u!4 &1312915223
 Transform:

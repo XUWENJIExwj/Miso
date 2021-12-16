@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002833ec740ec6e49932921c1b7a7632, type: 3}
+  m_Name: SubEvent_16
+  m_EditorClassIdentifier: 
+  id: 16
+  icons:
+  - {fileID: 7291564152576792378, guid: d4c6a1a38e435514aaf5874394b9c2b8, type: 3}
+  type: 1
+  typeText: "\u30B5\u30D6\u30A4\u30D9\u30F3\u30C8"
+  eventTitle: "\u30A6\u30DF\u30AC\u30E1\u306E\u751F\u614B\u8ABF\u67FB"
+  amaType: 1
+  pointRange:
+    min: 900
+    max: 1200
+  point: 0
+  eventSummary: "\u30A6\u30DF\u30AC\u30E1\u306E\u751F\u614B\u7CFB\u3092\u8ABF\u67FB\u3057\u3066\u304F\u3060\u3055\u3044"
+  eventReport: "\u4EFB\u52D9\u5B8C\u4E86\u3057\u307E\u3057\u305F"
+  achievement: {fileID: 21300000, guid: 436a575f0a240164b866876c4cd46928, type: 3}
+  bonusRatio:
+  - 1
+  - 1.2
+  subEventPhase: 4
+  frameFadeTime: 0.8
+  autoPlay: 0

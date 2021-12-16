@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40ddcc2d01c80e4cb0b5fa41407b20c, type: 3}
+  m_Name: RandomEvent_05
+  m_EditorClassIdentifier: 
+  id: 5
+  icons:
+  - {fileID: 5398932546919475803, guid: b926b3a6f12f78d419d1f1e75b58160b, type: 3}
+  - {fileID: -3494330029110744728, guid: b5550543569782f4a82ed163a01ddde2, type: 3}
+  type: 2
+  typeText: "\u30E9\u30F3\u30C0\u30E0\u30A4\u30D9\u30F3\u30C8"
+  eventTitle: "\u9727\u304C\u767A\u751F"
+  amaType: 3
+  pointRange:
+    min: -400
+    max: -400
+  point: 0
+  eventSummary: "\u9727\u306E\u4E2D\u3067\u65B9\u5411\u3092\u898B\u5931\u3044\u3001\u4E0D\u5FC5\u8981\u306A\u8CC7\u6E90\u3092\u6D88\u8017\u3057\u305F"
+  eventReport: "\u8CC7\u6E90\u306E\u4F59\u5206\u306A\u6D88\u8CBB"
+  achievement: {fileID: 21300000, guid: 15ab2efc18b5d3b40ac9ca6ca0a21dfd, type: 3}
+  bonusRatio:
+  - 1
+  - 1.2
+  subEventPhase: 2
+  frameFadeTime: 0.8
+  autoPlay: 0
+  randomEventPhase: 4
