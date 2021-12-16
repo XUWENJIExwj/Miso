@@ -136,6 +136,7 @@ public class Player : Monosingleton<Player>
     {
         playerData.ama = AMA;
         amaIcon.sprite = GlobalInfo.instance.amaList[(int)AMA].icon;
+        FuelGauge.instance.ResetValuesWithAnimation(GlobalInfo.instance.amaList[(int)AMA].energy);
     }
 
     public AMAs GetCurrentAMA()
