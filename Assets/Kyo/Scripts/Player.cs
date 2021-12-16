@@ -20,6 +20,21 @@ public struct PlayerData
     public int encounterRatio;
     public AchievementProgress achievements;
     public bool tutorial;
+
+    public void Init()
+    {
+        courseCount = 0;
+        courseResetCount = 2;
+        amas = new AMASO[(int)AMAs.Max];
+        ama = AMAs.Max;
+        basePoint = null;
+        totalPoint = 0;
+        currentPoint = 0;
+        encounter = 10;
+        encounterRatio = 10;
+        achievements.Init();
+        tutorial = true;
+    }
 }
 
 [Serializable]
@@ -38,13 +53,7 @@ public class Player : Monosingleton<Player>
     public void Init()
     {
         // ‰¼
-        playerData.amas = new AMASO[(int)AMAs.Max];
-        playerData.ama = AMAs.Max;
-        playerData.basePoint = null;
-        playerData.totalPoint = 0;
-        playerData.currentPoint = 0;
-        playerData.achievements.Init();
-        playerData.tutorial = true;
+        playerData = SaveToJson.instance.GetSaveData();
 
         GlobalInfo.instance.playerData = playerData;
 

@@ -5,17 +5,15 @@ using System.IO;
 using UnityEngine;
 using NCMB;
 
-public class SaveToJson : MonoBehaviour
+public class SaveToJson : Monosingleton<SaveToJson>
 {
     private int score;
     private string json;
     private NCMB.SaveData saveData = null;
     //保存したプレイヤーデータを移す場所
-    PlayerData playerSave = new PlayerData();
+    private PlayerData playerSave = new PlayerData();
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void Init()
     {
         Initialize();
 
@@ -41,7 +39,7 @@ public class SaveToJson : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            Save();
+            Save(Player.instance.GetPlayerData());
         }
 
         if (Input.GetKey(KeyCode.Return))
@@ -54,13 +52,13 @@ public class SaveToJson : MonoBehaviour
     }
 
     //
-    public void Save()
+    public void Save(PlayerData SaveData)
     {
         // ログイン画面経由せず、MainGameに入ると、SaveDataがnullのままなので
         if (saveData != null)
         {
             //現在のプレイヤーデータを保存
-            saveData.savedata = JsonUtility.ToJson(Player.instance.GetPlayerData());
+            saveData.savedata = JsonUtility.ToJson(SaveData);
             saveData.save();
             // ゲーム開始前の状態に戻す
             Initialize();
@@ -68,7 +66,7 @@ public class SaveToJson : MonoBehaviour
         }
     }
 
-    public void Load()
+    public bool Load()
     {
         // ログイン画面経由せず、MainGameに入ると、highScoreがnullのままなので
         if (saveData != null)
@@ -78,12 +76,22 @@ public class SaveToJson : MonoBehaviour
             playerSave = JsonUtility.FromJson<PlayerData>(json);
             // ゲーム開始前の状態に戻す
             Initialize();
+            return true;
         }
+        return false;
     }
 
     public PlayerData GetSaveData()
     {
-        Load();
-        return playerSave;
+        if (Load())
+        {
+            return playerSave;
+        }
+        else
+        {
+            PlayerData playerData = new PlayerData();
+            playerData.Init();
+            return playerData;
+        }
     }
 }

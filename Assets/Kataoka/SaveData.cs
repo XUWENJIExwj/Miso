@@ -53,7 +53,10 @@ namespace NCMB
                         obj["Name"] = name;
                         obj["Data"] = "";
                         obj.SaveAsync();
-                        savedata = "";
+                        PlayerData playerData = new PlayerData();
+                        playerData.Init();
+                        savedata = JsonUtility.ToJson(playerData);
+                        SaveToJson.instance.Save(playerData);
                     }
                     // ハイスコアが登録済みだったら
                     else
@@ -64,6 +67,5 @@ namespace NCMB
                 }
             });
         }
-
     }
 }

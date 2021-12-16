@@ -105,7 +105,15 @@ public class EventButton : Button
 
     public void LinkMainEventToAMA(AMAs AMA)
     {
-        eventSO = GlobalInfo.instance.mainEventLists[(int)AMA].mainEvents[eventSO.id];
+        // ‰¼
+        if (eventSO.id < GlobalInfo.instance.mainEventLists[(int)AMA].mainEvents.Count)
+        {
+            eventSO = GlobalInfo.instance.mainEventLists[(int)AMA].mainEvents[eventSO.id];
+        }
+        else
+        {
+            CreateRandomEventSO();
+        }
     }
 
     public void Move(Vector2 Offset)
