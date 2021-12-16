@@ -52,9 +52,13 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
     {
         SoundManager.instance.SE_Tap();
 
-        Player.instance.SetCurrentAMA(currentAMA);
-        FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
-        EventButtonManager.instance.LinkMainEventsToAMA(currentAMA);
+        if (currentAMA != Player.instance.GetCurrentAMA())
+        {
+            Player.instance.SetCurrentAMA(currentAMA);
+            FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
+            EventButtonManager.instance.LinkMainEventsToAMA(currentAMA);
+            RouteManager.instance.RemoveRoutePointsWhenSwitchAMA();
+        }
 
         // ‰¼
         MainGameLogic logic = LogicManager.instance.GetSceneLogic<MainGameLogic>();

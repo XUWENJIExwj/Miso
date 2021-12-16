@@ -20,6 +20,8 @@ public struct PlayerData
     public int encounterRatio;
     public AchievementProgress achievements;
     public bool tutorial;
+    public Vector2 mapUVOffset;
+    public Vector2 gridUVOffset;
 
     public void Init()
     {
@@ -34,6 +36,18 @@ public struct PlayerData
         encounterRatio = 10;
         achievements.Init();
         tutorial = true;
+        mapUVOffset = new Vector2(0.0f, 0.00156f);
+        gridUVOffset = new Vector2(0.5f, 0.5f);
+    }
+
+    public void SetMapUVOffset(Vector2 Offset)
+    {
+        mapUVOffset = Offset;
+    }
+
+    public void SetGridUVOffset(Vector2 Offset)
+    {
+        gridUVOffset = Offset;
     }
 }
 
@@ -68,6 +82,16 @@ public class Player : Monosingleton<Player>
     public void SetTutorialFlag()
     {
         playerData.tutorial = false;
+    }
+
+    public void SetMapUVOffset(Vector2 Offset)
+    {
+        playerData.SetMapUVOffset(Offset);
+    }
+
+    public void SetGridUVOffset(Vector2 Offset)
+    {
+        playerData.SetGridUVOffset(Offset);
     }
 
     public void SetMainEventCompleted(int ID)

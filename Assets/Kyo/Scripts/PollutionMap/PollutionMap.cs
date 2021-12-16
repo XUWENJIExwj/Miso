@@ -49,6 +49,14 @@ public class PollutionMap : Monosingleton<PollutionMap>
         }
     }
 
+    public void Load(PollutionLevel Level)
+    {
+        for (int i = 0; i < parts.Length; ++i)
+        {
+            parts[i].Load((Oceans)i, Level);
+        }
+    }
+
     public void ResetPollutionLevel()
     {
         foreach (OceanParts part in parts)

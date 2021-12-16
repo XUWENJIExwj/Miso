@@ -16,6 +16,13 @@ public class SplitOceanPart : OceanPart
         synchroPoint = 0;
     }
 
+    public override void Load(Oceans Ocean, OceanAreas Area, PollutionLevel Level)
+    {
+        base.Load(Ocean, Area, Level);
+
+        synchroPoint = 0;
+    }
+
     public override void ResetPollutionLevel()
     {
         if (onSynchro)

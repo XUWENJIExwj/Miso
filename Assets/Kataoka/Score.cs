@@ -75,12 +75,12 @@ public class Score : Monosingleton<Score>
             saveData.save();
             // ゲーム開始前の状態に戻す
             Initialize();
-            // ハイスコアを保存する（ただし記録の更新があったときだけ）
-            //if (isNewRecord)
-            //    highScore.save();
+            //// ハイスコアを保存する（ただし記録の更新があったときだけ）
+            ////if (isNewRecord)
+            ////    highScore.save();
 
-            // ゲーム開始前の状態に戻す
-            Initialize();
+            //// ゲーム開始前の状態に戻す
+            //Initialize();
         }
     }
 
@@ -126,5 +126,10 @@ public class Score : Monosingleton<Score>
     {
         playerSave.Init();
         Save(playerSave);
+    }
+
+    public bool IsNewUser()
+    {
+        return saveData.IsNewUser();
     }
 }

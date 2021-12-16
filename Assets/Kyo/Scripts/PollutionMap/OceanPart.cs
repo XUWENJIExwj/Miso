@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
+
+[Serializable]
+public struct OceanPartData
+{
+    public PollutionLevel level;
+    public Vector3 position;
+}
 
 [RequireComponent(typeof(CleanupObserver))]
 public class OceanPart : MonoBehaviour
@@ -12,17 +20,25 @@ public class OceanPart : MonoBehaviour
     [SerializeField] protected float fadeTime = 0.5f;
     [SerializeField] protected CleanupView prefab = null;
     [SerializeField] protected CleanupObserver observer = null;
+    [SerializeField] protected OceanPartData oceanPartData;
 
     public virtual void Init(Oceans Ocean, OceanAreas Area)
     {
-        level = (PollutionLevel)Random.Range((int)PollutionLevel.Level_00, (int)PollutionLevel.None);
+        level = (PollutionLevel)UnityEngine.Random.Range((int)PollutionLevel.Level_00, (int)PollutionLevel.None);
+        image.color = GlobalInfo.instance.pollutionInfos[(int)level].color;
+        observer.Init(Ocean, Area);
+    }
+
+    public virtual void Load(Oceans Ocean, OceanAreas Area, PollutionLevel Level)
+    {
+        level = Level;
         image.color = GlobalInfo.instance.pollutionInfos[(int)level].color;
         observer.Init(Ocean, Area);
     }
 
     public virtual void ResetPollutionLevel()
     {
-        level = (PollutionLevel)Random.Range((int)PollutionLevel.Level_00, (int)PollutionLevel.None);
+        level = (PollutionLevel)UnityEngine.Random.Range((int)PollutionLevel.Level_00, (int)PollutionLevel.None);
         image.DOColor(GlobalInfo.instance.pollutionInfos[(int)level].color, fadeTime);
     }
 
@@ -74,6 +90,8 @@ public class OceanPart : MonoBehaviour
 
         // 画面外になったら、ループさせる
         FixPostion();
+
+        
     }
 
     public void MovePath(Vector2 Offset, float Time)
@@ -99,5 +117,10 @@ public class OceanPart : MonoBehaviour
         }
 
         transform.localPosition = fixPos;
+    }
+
+    public OceanPartData GetOceanPartData()
+    {
+        return oceanPartData;
     }
 }

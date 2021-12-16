@@ -76,5 +76,10 @@ namespace NCMB
         {
             return completeFetch;
         }
+
+        public bool IsNewUser()
+        {
+            return newUser;
+        }
     }
 }

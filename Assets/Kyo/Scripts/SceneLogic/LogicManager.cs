@@ -85,4 +85,9 @@ public class LogicManager : Monosingleton<LogicManager>
         yield return new WaitUntil(() => Score.instance.ComleteFetch());
         GameStart();
     }
+
+    public bool OnTest()
+    {
+        return onTest;
+    }
 }

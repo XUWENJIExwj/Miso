@@ -103,6 +103,18 @@ public class RouteManager : Monosingleton<RouteManager>
         routePlanned = false;
     }
 
+    public void RemoveRoutePointsWhenSwitchAMA()
+    {
+        for (int i = routePoints.Count - 1; i > 0; --i)
+        {
+            routePoints[i].DoScaleDown();
+            routePoints[i].SetSelected(false);
+            routePoints.RemoveAt(i);
+        }
+        DrawRoute();
+        routePlanned = false;
+    }
+
     public void DrawRoute()
     {
         int i;

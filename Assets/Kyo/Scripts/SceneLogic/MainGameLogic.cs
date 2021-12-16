@@ -26,19 +26,24 @@ public class MainGameLogic : BaseSceneLogic
     void Start()
     {
         DOTween.SetTweensCapacity(1000, 50);
-        MapScroll.instance.Init();
-        GridScroll.instance.Init();
-        PollutionMap.instance.Init();
-        EventButtonManager.instance.Init();
-        NewAMAView.instance.Init();
-        Player.instance.Init();
-        TutorialView.instance.Init();
-        EventUIManager.instance.Init();
-        BaseConfirmView.instance.Init();
-        AMASwitchView.instance.Init();
-        AchievementView.instance.Init();
-        FuelGauge.instance.Init();
-        Timer.instance.Init();
+
+        if (LogicManager.instance.OnTest() || Score.instance.IsNewUser())
+        {
+            MapScroll.instance.Init();
+            GridScroll.instance.Init();
+            PollutionMap.instance.Init();
+            EventButtonManager.instance.Init();
+            Player.instance.Init();
+            TutorialView.instance.Init();
+            Timer.instance.Init();
+
+            NewAMAView.instance.Init(); //1
+            EventUIManager.instance.Init(); //1
+            BaseConfirmView.instance.Init(); //1
+            AMASwitchView.instance.Init(); //1
+            AchievementView.instance.Init(); //1
+            FuelGauge.instance.Init(); //1
+        }
     }
 
     public override void UpdateScene()

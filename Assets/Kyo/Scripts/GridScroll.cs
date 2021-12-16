@@ -29,6 +29,7 @@ public class GridScroll : Monosingleton<GridScroll>
         Vector2 offset = Offset * uv.Tiling;
         uv.Offset -= offset;
         image.material.SetVector("_Offset", uv.Offset);
+        Player.instance.SetGridUVOffset(uv.Offset);
     }
 
     public void MovePath(Vector2 Offset, float Time)
@@ -36,6 +37,7 @@ public class GridScroll : Monosingleton<GridScroll>
         Vector2 offset = Offset * uv.Tiling;
         uv.Offset += offset;
         image.material.DOVector(uv.Offset, "_Offset", Time).SetEase(Ease.Linear);
+        Player.instance.SetGridUVOffset(uv.Offset);
     }
 
     // Inspectorにある属性を編集するとEditorに反映してくれるコールバック

@@ -32,6 +32,16 @@ public class OceanParts : MonoBehaviour
         }
     }
 
+    public void Load(Oceans Ocean, PollutionLevel Level)
+    {
+        parts = GetComponentsInChildren<OceanPart>();
+
+        for (int i = 0; i < parts.Length; ++i)
+        {
+            parts[i].Load(Ocean, (OceanAreas)i, Level);
+        }
+    }
+
     public void ResetPollutionLevel()
     {
         foreach (OceanPart part in parts)
