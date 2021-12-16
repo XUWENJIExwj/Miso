@@ -18,7 +18,6 @@ public class LogicManager : Monosingleton<LogicManager>
 
     public void Start()
     {
-        SaveToJson.instance.Init();
         InitSound();
         ChangeBGM.instance.BGM_Route();
 

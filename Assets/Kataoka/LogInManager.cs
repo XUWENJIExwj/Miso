@@ -44,7 +44,7 @@ public class LogInManager : MonoBehaviour
 
         FindObjectOfType<UserAuth>().logOut();
 
-
+        SaveToJson.instance.Init();
         isLogIn = true;
         Bottun1.SetActive(true);
         Bottun2.SetActive(true);
