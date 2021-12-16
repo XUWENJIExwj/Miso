@@ -53,6 +53,7 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
         SoundManager.instance.SE_Tap();
 
         Player.instance.SetCurrentAMA(currentAMA);
+        FuelGauge.instance.ResetValuesWithAnimation(Player.instance.GetCurrentAMAEnergy());
         EventButtonManager.instance.LinkMainEventsToAMA(currentAMA);
 
         // ‰¼

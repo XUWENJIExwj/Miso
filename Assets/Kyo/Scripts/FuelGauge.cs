@@ -67,6 +67,7 @@ public class FuelGauge : Monosingleton<FuelGauge>
 
         if (coroutine == null)
         {
+            //gameObject.SetActive(true);
             coroutine = StartCoroutine(AnimateFuelGauge());
         }
     }
