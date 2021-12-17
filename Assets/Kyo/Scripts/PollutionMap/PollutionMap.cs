@@ -53,13 +53,11 @@ public class PollutionMap : Monosingleton<PollutionMap>
             parts[i].Init((Oceans)i);
 
         }
-
-        Player.instance.SetPollutionMapData(pollutionMapData);
     }
 
     public void Load(PollutionMapData Data)
     {
-        if (Data.datas != null)
+        if (Data.datas.Length > 0)
         {
             for (int i = 0; i < parts.Length; ++i)
             {

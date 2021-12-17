@@ -38,11 +38,6 @@ public class GlobalInfo : Monosingleton<GlobalInfo>
     {
         // CanvasType数だけメモリ確保
         canvases = new Canvas[(int)CanvasType.Max];
-
-        foreach (AMASO ama in amaList)
-        {
-            ama.ResetNewFlag();
-        }
     }
 
     // 参照画面サイズのアスペクト比の取得

@@ -19,6 +19,7 @@ public enum OceanAreas
     None,
 }
 
+[Serializable]
 public struct OceanPartsData
 {
     public OceanPartData[] datas;

@@ -26,7 +26,6 @@ public enum AMAs
 public class AMASO : ScriptableObject
 {
     public string ama;
-    public bool newFlag = true;
     public Sprite icon;
     [TextArea(5, 20)] public string nature;
     public AMATypes type = AMATypes.Type_None;
@@ -34,11 +33,6 @@ public class AMASO : ScriptableObject
     [ReadOnly] public string feature = features[(int)AMATypes.Type_None];
     public float timePerGrid;
     public int energy;
-
-    public void ResetNewFlag()
-    {
-        newFlag = true;
-    }
 
     // Inspectorにある属性を編集するとEditorに反映してくれるコールバック
     void OnValidate()

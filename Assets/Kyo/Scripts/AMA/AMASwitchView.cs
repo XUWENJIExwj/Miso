@@ -2,6 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
+[Serializable]
+public struct AMANewFlags
+{
+    public bool[] newAMA;
+
+    public void Init()
+    {
+        newAMA = new bool[GlobalInfo.instance.amaList.Count];
+
+        for (int i = 0; i < newAMA.Length; ++i)
+        {
+            newAMA[i] = true;
+        }
+    }
+}
 
 public class AMASwitchView : Monosingleton<AMASwitchView>
 {
@@ -44,8 +61,10 @@ public class AMASwitchView : Monosingleton<AMASwitchView>
         amaInfo.energy.text = ama.energy.ToString() + "É}ÉX";
         amaInfo.nature.text = ama.nature;
 
-        newFlag.gameObject.SetActive(ama.newFlag);
-        ama.newFlag = false;
+        newFlag.gameObject.SetActive(Player.instance.GetAMANewFlag(currentAMA));
+        Player.instance.SetAMANewFlag(currentAMA);
+
+        Player.instance.Save();
     }
 
     public void AMAConfirm()

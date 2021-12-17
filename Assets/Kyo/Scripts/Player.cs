@@ -14,6 +14,7 @@ public struct PlayerData
     public int courseResetCount;
     public AMASO[] amas;
     public AMAs ama;
+    public AMANewFlags newFlags;
     public int baseIndex;
     public int totalPoint;
     public int currentPoint;
@@ -33,7 +34,7 @@ public struct PlayerData
         courseResetCount = 2;
         amas = new AMASO[(int)AMAs.Max];
         ama = AMAs.Max;
-        //basePoint = null;
+        newFlags.Init();
         baseIndex = -1;
         totalPoint = 0;
         currentPoint = 0;
@@ -64,9 +65,6 @@ public class Player : Monosingleton<Player>
     {
         // ‰¼
         playerData = Score.instance.GetSaveData();
-
-        //playerData.pollutionMapData = PollutionMap.instance.GetPollutionMapData();
-        //playerData.eventData = EventButtonManager.instance.GetAllEventButtonsData();
 
         GlobalInfo.instance.playerData = playerData;
 
@@ -136,14 +134,14 @@ public class Player : Monosingleton<Player>
         playerData.tutorial = false;
     }
 
-    public void SetPollutionMapData(PollutionMapData Data)
+    public bool GetAMANewFlag(AMAs AMA)
     {
-        playerData.pollutionMapData = Data;
+        return playerData.newFlags.newAMA[(int)AMA];
     }
 
-    public void SetAllEventButtonsData(AllEventButtonsData Data)
+    public void SetAMANewFlag(AMAs AMA)
     {
-        playerData.eventData = Data;
+        playerData.newFlags.newAMA[(int)AMA] = false;
     }
 
     public void SetMainEventCompleted(int ID)

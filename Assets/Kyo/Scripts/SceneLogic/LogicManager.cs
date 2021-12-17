@@ -82,8 +82,8 @@ public class LogicManager : Monosingleton<LogicManager>
 
     public IEnumerator WaitLoadSaveData()
     {
-        yield return new WaitForSeconds(5.0f);
-        //yield return new WaitUntil(() => Score.instance.ComleteFetch());
+        //yield return new WaitForSeconds(5.0f);
+        yield return new WaitUntil(() => Score.instance.ComleteFetch());
         GameStart();
     }
 
