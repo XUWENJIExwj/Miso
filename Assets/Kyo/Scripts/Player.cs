@@ -269,7 +269,7 @@ public class Player : Monosingleton<Player>
     {
         gameObject.SetActive(true);
         currentBase = Base;
-        currentBase.SetEventButtonColor(Color.red);
+        currentBase.SetEventButtonColor(new Color(59.0f / 255.0f, 79.0f / 255.0f, 201.0f / 255.0f, 1.0f));
         transform.localPosition = currentBase.transform.localPosition + iconOffset;
 
         SetCurrentAMA(Base.GetAMA());
@@ -282,7 +282,7 @@ public class Player : Monosingleton<Player>
     {
         currentBase.SetEventButtonColor(Color.white);
         currentBase = Base;
-        currentBase.SetEventButtonColor(Color.red);
+        currentBase.SetEventButtonColor(new Color(59.0f / 255.0f, 79.0f / 255.0f, 201.0f / 255.0f, 1.0f));
 
         AddAMA(Base.GetAMA());
 

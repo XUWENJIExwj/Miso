@@ -39,6 +39,7 @@ public class TutorialView : Monosingleton<TutorialView>
         page.Init(sprites[PageIndex]);
         page.name = "Page" + PageIndex.ToString("00");
         pages.Add(page);
+        page.transform.SetSiblingIndex(PageIndex);
     }
 
     public void TurnPage(int Offset)
