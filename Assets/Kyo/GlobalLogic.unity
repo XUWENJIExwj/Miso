@@ -608,6 +608,8 @@ MonoBehaviour:
     courseResetCount: 0
     amas: []
     ama: 0
+    newFlags:
+      newAMA: 
     baseIndex: 0
     totalPoint: 0
     currentPoint: 0
@@ -623,6 +625,8 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     mapUVOffset: {x: 0, y: 0}
     gridUVOffset: {x: 0, y: 0}
+    pollutionMapData:
+      datas: []
     eventData:
       datas: []
 --- !u!4 &784785529

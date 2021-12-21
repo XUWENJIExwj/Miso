@@ -145,6 +145,7 @@ namespace EventScriptableObject
             ui.Summary.SetText(eventSummary);
             ChangeCharacterSpriteFromDictionary(ref ui.Character, reports[progress.characterIndex].type, reports[progress.characterIndex].expression);
             ui.Character.color = HelperFunction.ChangeAlpha(ui.Character.color, 0.0f);
+            ui.Character.transform.localPosition = Player.instance.GetCurrentAMASO().mainOffset;
 
             tweener = ui.TitleFrame.DOFade(1.0f, frameFadeTime).OnUpdate(() =>
             {

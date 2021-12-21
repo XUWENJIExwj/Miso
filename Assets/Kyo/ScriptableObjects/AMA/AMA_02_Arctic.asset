@@ -19,3 +19,5 @@ MonoBehaviour:
   feature: "\u6C5A\u67D3\u6D44\u5316"
   timePerGrid: 1
   energy: 20
+  baseOffset: {x: 0, y: -178}
+  mainOffset: {x: 50, y: -330}

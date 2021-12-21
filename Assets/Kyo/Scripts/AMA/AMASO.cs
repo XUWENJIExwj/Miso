@@ -33,6 +33,8 @@ public class AMASO : ScriptableObject
     [ReadOnly] public string feature = features[(int)AMATypes.Type_None];
     public float timePerGrid;
     public int energy;
+    public Vector2 baseOffset = Vector2.zero;
+    public Vector2 mainOffset = Vector2.zero;
 
     // Inspectorにある属性を編集するとEditorに反映してくれるコールバック
     void OnValidate()

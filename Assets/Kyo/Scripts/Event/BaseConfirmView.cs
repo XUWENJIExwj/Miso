@@ -47,6 +47,7 @@ public class BaseConfirmView : Monosingleton<BaseConfirmView>
         CharacterTypes characterTypes = AMASO.ConvertAMAsToCharacterTypes(amaIndex);
         AMASO ama = GlobalInfo.instance.amaList[(int)amaIndex];
         amaInfo.image.sprite = DictionaryManager.instance.GetTargetIllustration(characterTypes, ExpressionTypes.Normal);
+        amaInfo.image.transform.localPosition = ama.baseOffset;
         amaInfo.name.text = ama.ama;
         amaInfo.type.text = DictionaryManager.instance.GetAMAType(ama.type);
         amaInfo.speed.text = ama.timePerGrid.ToString() + "s/É}ÉX";
