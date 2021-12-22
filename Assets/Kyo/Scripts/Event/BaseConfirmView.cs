@@ -62,6 +62,7 @@ public class BaseConfirmView : Monosingleton<BaseConfirmView>
         // Player‚Ì‰ŠúˆÊ’u
         Player.instance.SetFirstBase(baseSelected);
         Player.instance.AddAMA(baseSelected.GetAMA(), true);
+        EventButtonManager.instance.LinkMainEventsToAMA(baseSelected.GetAMA());
 
         // Player‚ÌBase‚ğStartPoint‚É“o˜^
         RouteManager.instance.SetStartPoint();

@@ -18,10 +18,10 @@ MonoBehaviour:
   type: 3
   typeText: "\u30D9\u30FC\u30B9"
   eventTitle: "\u30E2\u30B6\u30F3\u30D3\u30FC\u30AF\u30D9\u30FC\u30B9"
-  amaType: 1
+  amaType: 2
   pointRange:
     min: 0
     max: 0
   point: 0
-  ama: 0
+  ama: 5
   baseEventPhase: 2

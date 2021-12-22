@@ -18,7 +18,7 @@ MonoBehaviour:
   type: 0
   typeText: "\u30E1\u30A4\u30F3\u30A4\u30D9\u30F3\u30C8"
   eventTitle: "\u5EA7\u7901\u8239\u96E2\u7901\u4EFB\u52D9"
-  amaType: 1
+  amaType: 0
   pointRange:
     min: 0
     max: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
         name: 
         texts:
         - "\u627F\u77E5\u3057\u305F\u3002\uFF08\u60AA\uFF09\u672C\u5F53\u306B\u5FC3\u914D\u304B\u3051\u308B\u304A\u5144\u3061\u3083\u3093\u3084\u306A\u3041\u3002"
-      - type: 0
+      - type: 2
         expression: 0
         name: 
         texts:

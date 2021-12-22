@@ -23,5 +23,5 @@ MonoBehaviour:
     min: 0
     max: 0
   point: 0
-  ama: 0
+  ama: 2
   baseEventPhase: 2
