@@ -128,7 +128,7 @@ public class OceanPart : MonoBehaviour
     {
         OceanPartData data;
         data.level = level;
-        data.position = transform.position;
+        data.position = transform.localPosition;
         return data;
     }
 }
