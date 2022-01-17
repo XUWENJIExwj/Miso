@@ -17,7 +17,7 @@ MonoBehaviour:
   nature: "\u512A\u96C5\u306A\u558B\u308A\u65B9\u3001\u6BD2\u820C\u3001\u4E16\u8A71\u3092\u713C\u304F\u30BF\u30A4\u30D7"
   type: 2
   feature: "\u8DB3\u306F\u3084\u3044"
-  timePerGrid: 1
+  timePerGrid: 25
   energy: 24
   baseOffset: {x: 0, y: -40}
   mainOffset: {x: 50, y: -360}
